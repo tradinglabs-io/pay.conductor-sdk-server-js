@@ -6,10 +6,10 @@
     }
   ],
   "webhooks": {
-    "Atualização do Pedido": {
+    "Order Update": {
       "post": {
         "requestBody": {
-          "description": "Disparado quando o status de um pedido é alterado.",
+          "description": "Triggered when the status of an order is changed.",
           "content": {
             "application/json": {
               "schema": {
@@ -17,7 +17,7 @@
                 "properties": {
                   "event": {
                     "default": "OrderCreated",
-                    "description": "Nome do evento do webhook",
+                    "description": "Webhook event name",
                     "examples": [
                       "OrderCreated",
                       "OrderCompleted"
@@ -36,7 +36,7 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "description": "ID do pedido no sistema",
+                        "description": "Order ID in the system",
                         "examples": [
                           "ord_abc123"
                         ],
@@ -45,9 +45,9 @@
                       "externalId": {
                         "anyOf": [
                           {
-                            "description": "ID externo do pedido (fornecido pela sua integração)",
+                            "description": "External order ID (provided by your integration)",
                             "examples": [
-                              "pedido_123"
+                              "order_123"
                             ],
                             "type": "string"
                           },
@@ -57,7 +57,7 @@
                         ]
                       },
                       "externalIntegrationKey": {
-                        "description": "Provedor utilizada para processar o pedido",
+                        "description": "Provider used to process the order",
                         "examples": [
                           "PagarMe",
                           "Stripe"
@@ -67,9 +67,9 @@
                       "externalIntegrationId": {
                         "anyOf": [
                           {
-                            "description": "ID do pedido no provedor de pagamento",
+                            "description": "Order ID in the payment provider",
                             "examples": [
-                              "pedido_123"
+                              "order_123"
                             ],
                             "type": "string"
                           },
@@ -79,32 +79,32 @@
                         ]
                       },
                       "amount": {
-                        "description": "Valor total do pedido",
+                        "description": "Total order amount",
                         "examples": [
                           150.45
                         ],
                         "type": "number"
                       },
                       "costFee": {
-                        "description": "Taxa de custo aplicada ao pedido",
+                        "description": "Cost fee applied to the order",
                         "examples": [
                           4.5
                         ],
                         "type": "number"
                       },
                       "pix": {
-                        "description": "Dados do PIX",
+                        "description": "PIX data",
                         "type": "object",
                         "properties": {
                           "copyAndPasteCode": {
-                            "description": "Código copia e cola do PIX",
+                            "description": "PIX copy and paste code",
                             "examples": [
                               "00020126580014br.gov.bcb.pix..."
                             ],
                             "type": "string"
                           },
                           "qrCodeUrl": {
-                            "description": "URL da imagem do QR Code PIX",
+                            "description": "PIX QR Code image URL",
                             "examples": [
                               "https://example.com/qrcode.png"
                             ],
@@ -114,7 +114,7 @@
                             "nullable": true,
                             "anyOf": [
                               {
-                                "description": "E2E ID do PIX",
+                                "description": "PIX E2E ID",
                                 "examples": [
                                   "E2EID1234567890"
                                 ],
@@ -136,21 +136,21 @@
                         "type": "object",
                         "properties": {
                           "barCode": {
-                            "description": "Código de barras do boleto",
+                            "description": "Bank slip bar code",
                             "examples": [
                               "34191790010104351004791020150008291070026000"
                             ],
                             "type": "string"
                           },
                           "digitableLine": {
-                            "description": "Linha digitável do boleto",
+                            "description": "Bank slip digitable line",
                             "examples": [
                               "34191.79001 01043.510047 91020.150008 2 91070026000"
                             ],
                             "type": "string"
                           },
                           "pdfUrl": {
-                            "description": "URL do PDF do boleto",
+                            "description": "Bank slip PDF URL",
                             "examples": [
                               "https://example.com/boleto.pdf"
                             ],
@@ -166,7 +166,7 @@
                         "type": "object",
                         "properties": {
                           "paymentUrl": {
-                            "description": "URL de pagamento NuPay",
+                            "description": "NuPay payment URL",
                             "examples": [
                               "https://nupay.com.br/payment/123456"
                             ],
@@ -181,14 +181,14 @@
                         "type": "object",
                         "properties": {
                           "copyAndPasteCode": {
-                            "description": "Código copia e cola do PicPay",
+                            "description": "PicPay copy and paste code",
                             "examples": [
-                              "picpay.me/loja/abc123"
+                              "picpay.me/store/abc123"
                             ],
                             "type": "string"
                           },
                           "qrCodeUrl": {
-                            "description": "URL da imagem do QR Code PicPay",
+                            "description": "PicPay QR Code image URL",
                             "examples": [
                               "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
                             ],
@@ -204,7 +204,7 @@
                         "type": "object",
                         "properties": {
                           "authorizationCode": {
-                            "description": "Código de autorização da transação",
+                            "description": "Transaction authorization code",
                             "examples": [
                               "123456"
                             ],
@@ -213,7 +213,7 @@
                         }
                       },
                       "status": {
-                        "description": "Status do pedido",
+                        "description": "Order status",
                         "examples": [
                           "Pending",
                           "Completed"
@@ -258,7 +258,7 @@
                         ]
                       },
                       "paymentMethod": {
-                        "description": "Método de pagamento utilizado no pedido",
+                        "description": "Payment method used in the order",
                         "examples": [
                           "Pix",
                           "CreditCard"
@@ -313,7 +313,7 @@
                       "payedAt": {
                         "anyOf": [
                           {
-                            "description": "Data e hora em que o pedido foi pago (ISO 8601)",
+                            "description": "Date and time when the order was paid (ISO 8601)",
                             "examples": [
                               "2024-01-01T12:00:00Z"
                             ],
@@ -327,7 +327,7 @@
                       "errorCode": {
                         "anyOf": [
                           {
-                            "description": "Código de erro, se houver",
+                            "description": "Error code, if any",
                             "examples": [
                               "INSUFFICIENT_FUNDS"
                             ],
@@ -341,9 +341,9 @@
                       "errorMessage": {
                         "anyOf": [
                           {
-                            "description": "Mensagem de erro, se houver",
+                            "description": "Error message, if any",
                             "examples": [
-                              "Saldo insuficiente"
+                              "Insufficient funds"
                             ],
                             "type": "string"
                           },
@@ -360,7 +360,7 @@
                             "externalId": {
                               "anyOf": [
                                 {
-                                  "description": "ID externo do item",
+                                  "description": "External item ID",
                                   "examples": [
                                     "prod_123"
                                   ],
@@ -372,42 +372,42 @@
                               ]
                             },
                             "id": {
-                              "description": "ID do item no pedido",
+                              "description": "Item ID in the order",
                               "examples": [
                                 "item_abc123"
                               ],
                               "type": "string"
                             },
                             "name": {
-                              "description": "Nome do produto/serviço",
+                              "description": "Product/service name",
                               "examples": [
-                                "Camisa Polo"
+                                "Polo Shirt"
                               ],
                               "type": "string"
                             },
                             "qty": {
-                              "description": "Quantidade",
+                              "description": "Quantity",
                               "examples": [
                                 2
                               ],
                               "type": "number"
                             },
                             "totalAmount": {
-                              "description": "Valor total do item (quantidade × preço unitário)",
+                              "description": "Total item amount (quantity × unit price)",
                               "examples": [
                                 200
                               ],
                               "type": "number"
                             },
                             "totalNetAmount": {
-                              "description": "Valor líquido total do item",
+                              "description": "Total net amount of the item",
                               "examples": [
                                 180
                               ],
                               "type": "number"
                             },
                             "unityPrice": {
-                              "description": "Preço unitário",
+                              "description": "Unit price",
                               "examples": [
                                 100
                               ],
@@ -432,7 +432,7 @@
                             "type": "object",
                             "properties": {
                               "sessionId": {
-                                "description": "ID da sessão de checkout associada ao pedido",
+                                "description": "ID of the checkout session associated with the order",
                                 "type": "string"
                               }
                             },
@@ -473,10 +473,10 @@
         }
       }
     },
-    "Atualização do Saque": {
+    "Withdraw Update": {
       "post": {
         "requestBody": {
-          "description": "Disparado quando o status de um saque é alterado.",
+          "description": "Triggered when the status of a withdrawal is changed.",
           "content": {
             "application/json": {
               "schema": {
@@ -484,7 +484,7 @@
                 "properties": {
                   "event": {
                     "default": "WithdrawCreated",
-                    "description": "Nome do evento do webhook",
+                    "description": "Webhook event name",
                     "examples": [
                       "WithdrawCreated",
                       "WithdrawCompleted"
@@ -501,7 +501,7 @@
                     "type": "object",
                     "properties": {
                       "id": {
-                        "description": "Identificador único do saque",
+                        "description": "Unique withdrawal identifier",
                         "examples": [
                           "wd_1234567890"
                         ],
@@ -511,7 +511,7 @@
                         "nullable": true,
                         "anyOf": [
                           {
-                            "description": "ID do saque no sistema no seu sistema",
+                            "description": "Withdrawal ID in your system",
                             "examples": [
                               "external_withdraw_123"
                             ],
@@ -523,7 +523,7 @@
                         ]
                       },
                       "externalIntegrationKey": {
-                        "description": "Chave do provedor utilizado para o saque",
+                        "description": "Provider key used for the withdrawal",
                         "examples": [
                           "PagarMe",
                           "Asaas"
@@ -533,7 +533,7 @@
                       "externalIntegrationId": {
                         "anyOf": [
                           {
-                            "description": "ID do saque no provedor de pagamento",
+                            "description": "Withdrawal ID in the payment provider",
                             "examples": [
                               "withdraw_123"
                             ],
@@ -545,7 +545,7 @@
                         ]
                       },
                       "costFee": {
-                        "description": "Taxa de custo aplicada ao saque",
+                        "description": "Cost fee applied to the withdrawal",
                         "examples": [
                           4.5
                         ],
@@ -553,7 +553,7 @@
                       },
                       "status": {
                         "default": "Pending",
-                        "description": "Status do saque",
+                        "description": "Withdrawal status",
                         "examples": [
                           "Pending",
                           "Completed"
@@ -569,7 +569,7 @@
                       "errorCode": {
                         "anyOf": [
                           {
-                            "description": "Código do erro, se houver",
+                            "description": "Error code, if any",
                             "examples": [
                               "insufficient_funds",
                               "invalid_account"
@@ -587,10 +587,10 @@
                             "type": "null"
                           },
                           {
-                            "description": "Mensagem descritiva do erro, se houver",
+                            "description": "Descriptive error message, if any",
                             "examples": [
-                              "Saldo insuficiente para completar o saque",
-                              "Conta bancária inválida"
+                              "Insufficient balance to complete withdrawal",
+                              "Invalid bank account"
                             ],
                             "type": "string"
                           }
@@ -602,13 +602,13 @@
                             "type": "null"
                           },
                           {
-                            "description": "Data e hora em que o saque foi pago (formato ISO 8601)",
+                            "description": "Date and time when the withdrawal was paid (ISO 8601 format)",
                             "examples": [
                               "2024-01-01T12:00:00Z"
                             ],
                             "anyOf": [
                               {
-                                "description": "Data e hora em que o saque foi pago (formato ISO 8601)",
+                                "description": "Date and time when the withdrawal was paid (ISO 8601 format)",
                                 "examples": [
                                   "2024-01-01T12:00:00Z"
                                 ],
@@ -633,14 +633,14 @@
                         "type": "object",
                         "properties": {
                           "id": {
-                            "description": "Identificador único da conta de pagamento",
+                            "description": "Unique payment account identifier",
                             "examples": [
                               "pa_1234567890"
                             ],
                             "type": "string"
                           },
                           "ownerDocument": {
-                            "description": "Documento do titular da conta (CPF ou CNPJ)",
+                            "description": "Account holder document (CPF or CNPJ)",
                             "examples": [
                               "12345678909",
                               "12345678000195"
@@ -649,24 +649,24 @@
                             "type": "string"
                           },
                           "ownerName": {
-                            "description": "Nome do titular da conta",
+                            "description": "Account holder name",
                             "examples": [
-                              "João da Silva",
-                              "Empresa XYZ Ltda"
+                              "John Doe",
+                              "Company XYZ Ltda"
                             ],
                             "type": "string"
                           },
                           "pixKey": {
-                            "description": "Chave PIX utilizada para o saque",
+                            "description": "PIX key used for the withdrawal",
                             "examples": [
-                              "joao@example.com",
+                              "john@example.com",
                               "11999999999"
                             ],
                             "type": "string"
                           },
                           "pixType": {
                             "default": "Cpf",
-                            "description": "Tipo da chave PIX",
+                            "description": "PIX key type",
                             "examples": [
                               "Email",
                               "Cpf"
@@ -719,7 +719,7 @@
   "components": {
     "securitySchemes": {
       "basicAuth": {
-        "description": "Use o formato Authorization: Basic base64('secret:')",
+        "description": "Use the format Authorization: Basic base64('client_id:client_secret')",
         "scheme": "basic",
         "type": "http"
       }
@@ -728,7 +728,7 @@
   },
   "info": {
     "title": "PayConductor API",
-    "description": "# Introdução\n\nEsta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.\n\n<br />\n\n<br />\n\n----\n\n<br />\n\n\n# Autenticação\n\nA API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.\n\n<br />\n\n## Obtendo Credenciais\n\n1. Acesse o painel administrativo do PayConductor\n2. Navegue até **Configurações > API Keys**\n3. Gere um novo par de credenciais (Client ID e Client Secret)\n4. Guarde o Client Secret em local seguro - ele não será exibido novamente\n\n<br />\n\n## Formato de Autenticação\n\nAs credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:\n\n```\nAuthorization: Basic base64(client_id:client_secret)\n```\n\n<br />\n\n## Exemplo em Node.js\n\n```javascript\nconst clientId = 'seu_client_id';\nconst clientSecret = 'seu_client_secret';\n\n// Codifica as credenciais em Base64\nconst credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');\n\nconst response = await fetch('https://api.payconductor.com/api/v1/orders', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Basic ${credentials}`,\n    'Content-Type': 'application/json'\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n```\n\n<br />\n\n## Erros de Autenticação\n\n| Código | Descrição |\n|--------|-----------|\n| `401`  | Credenciais inválidas ou ausentes |\n| `403`  | Credenciais válidas, mas sem permissão para o recurso |\n| `429`  | Muitas requisições (rate limit excedido) |\n\n### Exemplo de resposta de erro\n\n```json\n{\n  \"error\": {\n    \"code\": \"UNAUTHORIZED\",\n    \"message\": \"Invalid credentials\",\n    \"details\": \"The provided client ID or secret is incorrect\"\n  }\n}\n```",
+    "description": "PayConductor API Documentation.\n\nThis documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.\n\n<br />\n\n<br />\n\n----\n\n<br />\n\n\n# Authentication\n\nPayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.\n\n<br />\n\n## Getting Credentials\n\n1. Access the PayConductor admin panel\n2. Navigate to **Settings > API Keys**\n3. Generate a new credentials pair (Client ID and Client Secret)\n4. Store the Client Secret in a secure location - it will not be displayed again\n\n<br />\n\n## Authentication Format\n\nCredentials must be sent in the `Authorization` header using the Basic scheme:\n\n```\nAuthorization: Basic base64(client_id:client_secret)\n```\n\n<br />\n\n## Node.js Example\n\n```javascript\nconst clientId = 'your_client_id';\nconst clientSecret = 'your_client_secret';\n\n// Encode credentials in Base64\nconst credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');\n\nconst response = await fetch('https://api.payconductor.com/api/v1/orders', {\n  method: 'GET',\n  headers: {\n    'Authorization': `Basic ${credentials}`,\n    'Content-Type': 'application/json'\n  }\n});\n\nconst data = await response.json();\nconsole.log(data);\n```\n\n<br />\n\n## Authentication Errors\n\n| Code | Description |\n|------|-------------|\n| `401` | Invalid or missing credentials |\n| `403` | Valid credentials but no permission for the resource |\n| `429` | Too many requests (rate limit exceeded) |\n\n### Error Response Example\n\n```json\n{\n  \"error\": {\n    \"code\": \"UNAUTHORIZED\",\n    \"message\": \"Invalid credentials\",\n    \"details\": \"The provided client ID or secret is incorrect\"\n  }\n}\n```",
     "version": "1.0.0"
   },
   "security": [
@@ -738,22 +738,30 @@
   ],
   "tags": [
     {
-      "description": "Gere cobranças, consulte o status dos pedidos e gerencie reembolsos.",
-      "name": "Pedidos"
+      "description": "Manage charges, check order status, and handle refunds.",
+      "name": "Orders"
     },
     {
-      "description": "Inicie e monitore saques e transferências para suas contas externas.",
-      "name": "Saques e Transferências"
+      "description": "Initiate and monitor withdrawals and transfers to your external accounts.",
+      "name": "Withdrawals and Transfers"
+    },
+    {
+      "description": "Manage customers, create, update, delete and list customers.",
+      "name": "Customers"
+    },
+    {
+      "description": "Tokenize credit cards for future charges.",
+      "name": "Card Tokenization"
     }
   ],
   "paths": {
     "/orders/": {
       "post": {
         "tags": [
-          "Pedidos"
+          "Orders"
         ],
-        "description": "Crie um novo pedido para pagamento utilizando os dados fornecidos",
-        "summary": "Criar pedido",
+        "description": "Create a new order for payment using the provided data",
+        "summary": "Create order",
         "requestBody": {
           "content": {
             "application/json": {
@@ -761,31 +769,31 @@
                 "type": "object",
                 "properties": {
                   "chargeAmount": {
-                    "description": "Valor total a ser cobrado no pedido em valor flutuante",
+                    "description": "Total amount to be charged on the order in floating point value",
                     "examples": [
                       150
                     ],
                     "type": "number"
                   },
                   "clientIp": {
-                    "description": "Endereço IP do cliente",
+                    "description": "Client IP address",
                     "examples": [
                       "192.168.0.1"
                     ],
                     "type": "string"
                   },
                   "customer": {
-                    "description": "Schema para criação de um novo cliente",
-                    "title": "Cliente",
+                    "description": "Schema for creating a new customer",
+                    "title": "Customer",
                     "type": "object",
                     "properties": {
                       "address": {
-                        "description": "Schema para criação de um novo endereço",
-                        "title": "Endereço do cliente",
+                        "description": "Schema for creating a new address",
+                        "title": "Customer address",
                         "type": "object",
                         "properties": {
                           "city": {
-                            "description": "Nome da cidade",
+                            "description": "City name",
                             "examples": [
                               "São Paulo",
                               "Rio de Janeiro"
@@ -794,7 +802,7 @@
                           },
                           "country": {
                             "default": "BR",
-                            "description": "Código do país no formato ISO 3166-1 alpha-2",
+                            "description": "Country code in ISO 3166-1 alpha-2 format",
                             "examples": [
                               "BR",
                               "US"
@@ -804,15 +812,15 @@
                             "type": "string"
                           },
                           "neighborhood": {
-                            "description": "Nome do bairro",
+                            "description": "Neighborhood name",
                             "examples": [
-                              "Centro",
+                              "Downtown",
                               "Jardins"
                             ],
                             "type": "string"
                           },
                           "number": {
-                            "description": "Número do endereço",
+                            "description": "Address number",
                             "examples": [
                               "1000",
                               "150"
@@ -820,7 +828,7 @@
                             "type": "string"
                           },
                           "state": {
-                            "description": "Código do estado no formato ISO 3166-2",
+                            "description": "State code in ISO 3166-2 format",
                             "examples": [
                               "SP",
                               "RJ"
@@ -830,7 +838,7 @@
                             "type": "string"
                           },
                           "street": {
-                            "description": "Nome da rua",
+                            "description": "Street name",
                             "examples": [
                               "Av. Paulista",
                               "Rua das Flores"
@@ -838,7 +846,7 @@
                             "type": "string"
                           },
                           "zipCode": {
-                            "description": "CEP sem formatação",
+                            "description": "ZIP code without formatting",
                             "examples": [
                               "01311200",
                               "20040002"
@@ -857,7 +865,7 @@
                         ]
                       },
                       "documentNumber": {
-                        "description": "CPF ou CNPJ do cliente sem formatação",
+                        "description": "Customer CPF or CNPJ without formatting",
                         "examples": [
                           "12345678909",
                           "12345678000195"
@@ -873,22 +881,22 @@
                         ]
                       },
                       "email": {
-                        "description": "Email do cliente",
+                        "description": "Customer email",
                         "examples": [
-                          "cliente@example.com"
+                          "customer@example.com"
                         ],
                         "format": "email",
                         "type": "string"
                       },
                       "name": {
-                        "description": "Nome completo do cliente",
+                        "description": "Customer full name",
                         "examples": [
-                          "João da Silva"
+                          "John Doe"
                         ],
                         "type": "string"
                       },
                       "phoneNumber": {
-                        "description": "Número de telefone do cliente no formato +55 DD 9XXXXXXXX",
+                        "description": "Customer phone number in +55 DD 9XXXXXXXX format",
                         "examples": [
                           "+55 11 987654321"
                         ],
@@ -906,13 +914,13 @@
                   },
                   "discountAmount": {
                     "default": 0,
-                    "description": "Valor do desconto",
+                    "description": "Discount amount",
                     "type": "number"
                   },
                   "externalId": {
-                    "description": "ID da ordem no seu sistema",
+                    "description": "Order ID in your system",
                     "examples": [
-                      "seu_id_12345"
+                      "your_id_12345"
                     ],
                     "type": "string"
                   },
@@ -920,7 +928,7 @@
                     "type": "object",
                     "properties": {
                       "threatMetrixFingerprintId": {
-                        "description": "ID de fingerprint do ThreatMetrix para análise de fraude",
+                        "description": "ThreatMetrix fingerprint ID for fraud analysis",
                         "examples": [
                           "tmx_fingerprint_abc123"
                         ],
@@ -929,14 +937,14 @@
                     }
                   },
                   "items": {
-                    "description": "Lista de produtos ou serviços do pedido",
+                    "description": "List of products or services in the order",
                     "maxItems": 20,
                     "type": "array",
                     "items": {
                       "type": "object",
                       "properties": {
                         "id": {
-                          "description": "ID do produto ou serviço no seu sistema",
+                          "description": "Product or service ID in your system",
                           "examples": [
                             "prod_123",
                             "serv_456"
@@ -945,7 +953,7 @@
                         },
                         "isPhysical": {
                           "default": false,
-                          "description": "Define se o item é um produto físico ou um serviço",
+                          "description": "Defines if the item is a physical product or a service",
                           "examples": [
                             true,
                             false
@@ -953,22 +961,22 @@
                           "type": "boolean"
                         },
                         "name": {
-                          "description": "Nome do produto ou serviço",
+                          "description": "Product or service name",
                           "examples": [
-                            "Camisa Polo",
-                            "Prestação de Serviço"
+                            "Polo Shirt",
+                            "Service Payment"
                           ],
                           "type": "string"
                         },
                         "qty": {
-                          "description": "Quantidade do produto ou serviço",
+                          "description": "Quantity of the product or service",
                           "examples": [
                             1
                           ],
                           "type": "number"
                         },
                         "unitPrice": {
-                          "description": "Preço unitário",
+                          "description": "Unit price",
                           "examples": [
                             100
                           ],
@@ -985,12 +993,12 @@
                     }
                   },
                   "merchant": {
-                    "description": "Dados do merchant para pedido ou saque",
+                    "description": "Merchant data for order or withdrawal",
                     "title": "MerchantInput",
                     "type": "object",
                     "properties": {
                       "document": {
-                        "description": "CPF ou CNPJ do merchant sem formatação",
+                        "description": "Merchant CPF or CNPJ without formatting",
                         "examples": [
                           "12345678909",
                           "12345678000195"
@@ -999,7 +1007,7 @@
                         "type": "string"
                       },
                       "email": {
-                        "description": "Email do merchant",
+                        "description": "Merchant email",
                         "examples": [
                           "merchant@example.com"
                         ],
@@ -1007,9 +1015,9 @@
                         "type": "string"
                       },
                       "name": {
-                        "description": "Nome do merchant",
+                        "description": "Merchant name",
                         "examples": [
-                          "Loja do João"
+                          "John's Store"
                         ],
                         "maxLength": 255,
                         "minLength": 2,
@@ -1023,7 +1031,7 @@
                     ]
                   },
                   "payment": {
-                    "description": "Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)",
+                    "description": "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)",
                     "anyOf": [
                       {
                         "title": "Pix",
@@ -1035,7 +1043,7 @@
                           },
                           "expirationInSeconds": {
                             "default": 3600,
-                            "description": "Tempo de expiração do PIX em segundos",
+                            "description": "PIX expiration time in seconds",
                             "examples": [
                               3600,
                               86400
@@ -1049,7 +1057,7 @@
                               },
                               {
                                 "default": 3600,
-                                "description": "Tempo de expiração do PIX em segundos",
+                                "description": "PIX expiration time in seconds",
                                 "examples": [
                                   3600,
                                   86400
@@ -1065,7 +1073,7 @@
                         ]
                       },
                       {
-                        "title": "Cartão de crédito",
+                        "title": "Credit Card",
                         "type": "object",
                         "properties": {
                           "paymentMethod": {
@@ -1075,18 +1083,18 @@
                           "card": {
                             "anyOf": [
                               {
-                                "title": "Cartão tokenizado",
+                                "title": "Tokenized card",
                                 "type": "object",
                                 "properties": {
                                   "firstSixCardNumber": {
-                                    "description": "Primeiros 6 dígitos do cartão de crédito",
+                                    "description": "First 6 digits of the credit card",
                                     "examples": [
                                       "411111"
                                     ],
                                     "type": "string"
                                   },
                                   "token": {
-                                    "description": "Token do cartão de crédito gerado anteriormente",
+                                    "description": "Previously generated credit card token",
                                     "type": "string"
                                   }
                                 },
@@ -1095,11 +1103,11 @@
                                 ]
                               },
                               {
-                                "title": "Dados completos do cartão",
+                                "title": "Complete card data",
                                 "type": "object",
                                 "properties": {
                                   "cvv": {
-                                    "description": "Código de segurança do cartão (CVV)",
+                                    "description": "Card security code (CVV)",
                                     "examples": [
                                       "123",
                                       "1234"
@@ -1112,7 +1120,7 @@
                                     "type": "object",
                                     "properties": {
                                       "month": {
-                                        "description": "Mês de expiração do cartão",
+                                        "description": "Card expiration month",
                                         "examples": [
                                           1,
                                           12
@@ -1122,7 +1130,7 @@
                                         "type": "number"
                                       },
                                       "year": {
-                                        "description": "Ano de expiração do cartão",
+                                        "description": "Card expiration year",
                                         "examples": [
                                           2030
                                         ],
@@ -1137,14 +1145,14 @@
                                     ]
                                   },
                                   "holderName": {
-                                    "description": "Nome do titular do cartão",
+                                    "description": "Card holder name",
                                     "examples": [
-                                      "JOAO DA SILVA"
+                                      "JOHN DOE"
                                     ],
                                     "type": "string"
                                   },
                                   "number": {
-                                    "description": "Número do cartão de crédito",
+                                    "description": "Credit card number",
                                     "examples": [
                                       "4242424242424242"
                                     ],
@@ -1162,7 +1170,7 @@
                           },
                           "installments": {
                             "default": 1,
-                            "description": "Número de parcelas",
+                            "description": "Number of installments",
                             "maximum": 12,
                             "minimum": 1,
                             "anyOf": [
@@ -1173,7 +1181,7 @@
                               },
                               {
                                 "default": 1,
-                                "description": "Número de parcelas",
+                                "description": "Number of installments",
                                 "maximum": 12,
                                 "minimum": 1,
                                 "type": "integer"
@@ -1181,7 +1189,7 @@
                             ]
                           },
                           "softDescriptor": {
-                            "description": "Texto que aparecerá na fatura do cartão (soft descriptor)",
+                            "description": "Text that will appear on the card statement (soft descriptor)",
                             "minLength": 1,
                             "maxLength": 22,
                             "examples": [
@@ -1197,7 +1205,7 @@
                         ]
                       },
                       {
-                        "title": "Boleto",
+                        "title": "Bank Slip",
                         "type": "object",
                         "properties": {
                           "paymentMethod": {
@@ -1206,7 +1214,7 @@
                           },
                           "expirationInDays": {
                             "default": 7,
-                            "description": "Dias até o vencimento do boleto",
+                            "description": "Days until bank slip expires",
                             "examples": [
                               3,
                               7,
@@ -1221,7 +1229,7 @@
                               },
                               {
                                 "default": 7,
-                                "description": "Dias até o vencimento do boleto",
+                                "description": "Days until bank slip expires",
                                 "examples": [
                                   3,
                                   7,
@@ -1246,34 +1254,34 @@
                             "type": "string"
                           },
                           "nuPay": {
-                            "description": "Dados específicos para pagamento via NuPay",
+                            "description": "Specific data for NuPay payment",
                             "type": "object",
                             "properties": {
                               "cancelUrl": {
-                                "description": "URL de cancelamento do pagamento",
+                                "description": "Payment cancellation URL",
                                 "examples": [
                                   "https://example.com/cancel"
                                 ],
                                 "type": "string"
                               },
                               "merchantName": {
-                                "description": "Nome do comerciante",
+                                "description": "Merchant name",
                                 "examples": [
-                                  "Minha Loja"
+                                  "My Store"
                                 ],
                                 "type": "string"
                               },
                               "returnUrl": {
-                                "description": "URL de retorno após a conclusão do pagamento",
+                                "description": "Return URL after payment completion",
                                 "examples": [
                                   "https://example.com/success"
                                 ],
                                 "type": "string"
                               },
                               "storeName": {
-                                "description": "Nome da loja",
+                                "description": "Store name",
                                 "examples": [
-                                  "Filial Centro"
+                                  "Downtown Branch"
                                 ],
                                 "type": "string"
                               }
@@ -1306,7 +1314,7 @@
                     ]
                   },
                   "splitAmountTotal": {
-                    "description": "Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)",
+                    "description": "Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)",
                     "examples": [
                       50
                     ],
@@ -1314,26 +1322,26 @@
                     "type": "number"
                   },
                   "session": {
-                    "description": "Caso o externalSessionId ou sessionId sejam fornecidos e houver uma sessão existente, ela será atualizada com os novos dados. Caso contrário, uma nova sessão será criada.",
+                    "description": "If externalSessionId or sessionId is provided and an existing session exists, it will be updated with the new data. Otherwise, a new session will be created.",
                     "type": "object",
                     "properties": {
                       "expiresInMinutes": {
-                        "description": "Tempo em minutos para expiração da sessão do checkout",
+                        "description": "Time in minutes for checkout session expiration",
                         "default": 30,
                         "minimum": 15,
                         "type": "number"
                       },
                       "checkoutUrl": {
-                        "description": "URL do checkout para que possamos redirecionar",
+                        "description": "Checkout URL for redirection",
                         "regex": "^(https?:\\/\\/)(www\\.)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}([\\/\\w\\-._~:?#[\\]@!$&'()*+,;=%]*)?$",
                         "type": "string"
                       },
                       "sessionId": {
-                        "description": "Id gerado pelo nosso serviço para identificar a sessão de checkout",
+                        "description": "ID generated by our service to identify the checkout session",
                         "type": "string"
                       },
                       "externalSessionId": {
-                        "description": "Id da sessão de checkout gerado pelo lado do cliente. O id deve ser único para cada sessão de carrinho",
+                        "description": "Checkout session ID generated by the client side. The ID must be unique for each cart session",
                         "minLength": 16,
                         "type": "string"
                       }
@@ -1341,20 +1349,20 @@
                   },
                   "shippingFee": {
                     "default": 0,
-                    "description": "Valor do frete",
+                    "description": "Shipping fee",
                     "type": "number"
                   },
                   "taxFee": {
                     "default": 0,
-                    "description": "Taxas adicionais",
+                    "description": "Additional fees",
                     "type": "number"
                   },
                   "metadata": {
-                    "description": "Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves",
+                    "description": "Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters",
                     "type": "object",
                     "patternProperties": {
                       "^(.*)$": {
-                        "description": "Valor do metadado",
+                        "description": "Metadata value",
                         "examples": [
                           "merchant@gmail.com"
                         ],
@@ -1389,7 +1397,7 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "description": "ID do pedido no sistema",
+                      "description": "Order ID in the system",
                       "examples": [
                         "ord_abc123"
                       ],
@@ -1398,9 +1406,9 @@
                     "externalId": {
                       "anyOf": [
                         {
-                          "description": "ID externo do pedido (fornecido pela sua integração)",
+                          "description": "External order ID (provided by your integration)",
                           "examples": [
-                            "pedido_123"
+                            "order_123"
                           ],
                           "type": "string"
                         },
@@ -1410,7 +1418,7 @@
                       ]
                     },
                     "externalIntegrationKey": {
-                      "description": "Provedor utilizada para processar o pedido",
+                      "description": "Provider used to process the order",
                       "examples": [
                         "PagarMe",
                         "Stripe"
@@ -1420,9 +1428,9 @@
                     "externalIntegrationId": {
                       "anyOf": [
                         {
-                          "description": "ID do pedido no provedor de pagamento",
+                          "description": "Order ID in the payment provider",
                           "examples": [
-                            "pedido_123"
+                            "order_123"
                           ],
                           "type": "string"
                         },
@@ -1432,32 +1440,32 @@
                       ]
                     },
                     "amount": {
-                      "description": "Valor total do pedido",
+                      "description": "Total order amount",
                       "examples": [
                         150.45
                       ],
                       "type": "number"
                     },
                     "costFee": {
-                      "description": "Taxa de custo aplicada ao pedido",
+                      "description": "Cost fee applied to the order",
                       "examples": [
                         4.5
                       ],
                       "type": "number"
                     },
                     "pix": {
-                      "description": "Dados do PIX",
+                      "description": "PIX data",
                       "type": "object",
                       "properties": {
                         "copyAndPasteCode": {
-                          "description": "Código copia e cola do PIX",
+                          "description": "PIX copy and paste code",
                           "examples": [
                             "00020126580014br.gov.bcb.pix..."
                           ],
                           "type": "string"
                         },
                         "qrCodeUrl": {
-                          "description": "URL da imagem do QR Code PIX",
+                          "description": "PIX QR Code image URL",
                           "examples": [
                             "https://example.com/qrcode.png"
                           ],
@@ -1467,7 +1475,7 @@
                           "nullable": true,
                           "anyOf": [
                             {
-                              "description": "E2E ID do PIX",
+                              "description": "PIX E2E ID",
                               "examples": [
                                 "E2EID1234567890"
                               ],
@@ -1489,21 +1497,21 @@
                       "type": "object",
                       "properties": {
                         "barCode": {
-                          "description": "Código de barras do boleto",
+                          "description": "Bank slip bar code",
                           "examples": [
                             "34191790010104351004791020150008291070026000"
                           ],
                           "type": "string"
                         },
                         "digitableLine": {
-                          "description": "Linha digitável do boleto",
+                          "description": "Bank slip digitable line",
                           "examples": [
                             "34191.79001 01043.510047 91020.150008 2 91070026000"
                           ],
                           "type": "string"
                         },
                         "pdfUrl": {
-                          "description": "URL do PDF do boleto",
+                          "description": "Bank slip PDF URL",
                           "examples": [
                             "https://example.com/boleto.pdf"
                           ],
@@ -1519,7 +1527,7 @@
                       "type": "object",
                       "properties": {
                         "paymentUrl": {
-                          "description": "URL de pagamento NuPay",
+                          "description": "NuPay payment URL",
                           "examples": [
                             "https://nupay.com.br/payment/123456"
                           ],
@@ -1534,14 +1542,14 @@
                       "type": "object",
                       "properties": {
                         "copyAndPasteCode": {
-                          "description": "Código copia e cola do PicPay",
+                          "description": "PicPay copy and paste code",
                           "examples": [
-                            "picpay.me/loja/abc123"
+                            "picpay.me/store/abc123"
                           ],
                           "type": "string"
                         },
                         "qrCodeUrl": {
-                          "description": "URL da imagem do QR Code PicPay",
+                          "description": "PicPay QR Code image URL",
                           "examples": [
                             "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
                           ],
@@ -1557,7 +1565,7 @@
                       "type": "object",
                       "properties": {
                         "authorizationCode": {
-                          "description": "Código de autorização da transação",
+                          "description": "Transaction authorization code",
                           "examples": [
                             "123456"
                           ],
@@ -1598,7 +1606,7 @@
                     "payedAt": {
                       "anyOf": [
                         {
-                          "description": "Data e hora em que o pedido foi pago (ISO 8601)",
+                          "description": "Date and time when the order was paid (ISO 8601)",
                           "examples": [
                             "2024-01-01T12:00:00Z"
                           ],
@@ -1612,7 +1620,7 @@
                     "errorCode": {
                       "anyOf": [
                         {
-                          "description": "Código de erro, se houver",
+                          "description": "Error code, if any",
                           "examples": [
                             "INSUFFICIENT_FUNDS"
                           ],
@@ -1626,9 +1634,9 @@
                     "errorMessage": {
                       "anyOf": [
                         {
-                          "description": "Mensagem de erro, se houver",
+                          "description": "Error message, if any",
                           "examples": [
-                            "Saldo insuficiente"
+                            "Insufficient funds"
                           ],
                           "type": "string"
                         },
@@ -1645,7 +1653,7 @@
                           "externalId": {
                             "anyOf": [
                               {
-                                "description": "ID externo do item",
+                                "description": "External item ID",
                                 "examples": [
                                   "prod_123"
                                 ],
@@ -1657,42 +1665,42 @@
                             ]
                           },
                           "id": {
-                            "description": "ID do item no pedido",
+                            "description": "Item ID in the order",
                             "examples": [
                               "item_abc123"
                             ],
                             "type": "string"
                           },
                           "name": {
-                            "description": "Nome do produto/serviço",
+                            "description": "Product/service name",
                             "examples": [
-                              "Camisa Polo"
+                              "Polo Shirt"
                             ],
                             "type": "string"
                           },
                           "qty": {
-                            "description": "Quantidade",
+                            "description": "Quantity",
                             "examples": [
                               2
                             ],
                             "type": "number"
                           },
                           "totalAmount": {
-                            "description": "Valor total do item (quantidade × preço unitário)",
+                            "description": "Total item amount (quantity × unit price)",
                             "examples": [
                               200
                             ],
                             "type": "number"
                           },
                           "totalNetAmount": {
-                            "description": "Valor líquido total do item",
+                            "description": "Total net amount of the item",
                             "examples": [
                               180
                             ],
                             "type": "number"
                           },
                           "unityPrice": {
-                            "description": "Preço unitário",
+                            "description": "Unit price",
                             "examples": [
                               100
                             ],
@@ -1717,7 +1725,7 @@
                           "type": "object",
                           "properties": {
                             "sessionId": {
-                              "description": "ID da sessão de checkout associada ao pedido",
+                              "description": "ID of the checkout session associated with the order",
                               "type": "string"
                             }
                           },
@@ -1756,10 +1764,10 @@
       },
       "get": {
         "tags": [
-          "Pedidos"
+          "Orders"
         ],
-        "description": "Recupere uma lista de pedidos. Utilize os parâmetros de filtro de data e paginação para refinar os resultados conforme necessário.",
-        "summary": "Listar pedidos",
+        "description": "Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.",
+        "summary": "List orders",
         "parameters": [
           {
             "name": "period",
@@ -1767,7 +1775,7 @@
             "required": true,
             "schema": {
               "default": "Last7Days",
-              "description": "Período do filtro de datas",
+              "description": "Date filter period",
               "examples": [
                 "Last7Days"
               ],
@@ -1789,7 +1797,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)",
+              "description": "End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
               "examples": [
                 "2025-01-15T03:00:00Z"
               ],
@@ -1802,7 +1810,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)",
+              "description": "Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
               "examples": [
                 "2025-01-01T03:00:00Z"
               ],
@@ -1816,7 +1824,7 @@
             "required": true,
             "schema": {
               "default": 1,
-              "description": "Número da página",
+              "description": "Page number",
               "examples": [
                 1,
                 2,
@@ -1833,7 +1841,7 @@
             "required": true,
             "schema": {
               "default": 20,
-              "description": "Número de itens por página",
+              "description": "Number of items per page",
               "examples": [
                 10,
                 20,
@@ -1850,7 +1858,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "ID interno sendo do pedido ou do charge",
+              "description": "Internal ID of the order or charge",
               "type": "string"
             }
           },
@@ -1880,10 +1888,10 @@
     "/orders/{id}": {
       "get": {
         "tags": [
-          "Pedidos"
+          "Orders"
         ],
-        "description": "Localize os dados completos de um pedido buscando pelo nosso id",
-        "summary": "Buscar pelo ID",
+        "description": "Retrieve the complete data of an order by our ID",
+        "summary": "Get order by ID",
         "parameters": [
           {
             "name": "id",
@@ -1900,10 +1908,10 @@
     "/orders/{id}/refund": {
       "post": {
         "tags": [
-          "Pedidos"
+          "Orders"
         ],
-        "description": "Inicie um reembolso para o pedido especificado pelo ID.",
-        "summary": "Reembolsar pedido",
+        "description": "Initiate a refund for the order specified by ID.",
+        "summary": "Refund order",
         "parameters": [
           {
             "name": "id",
@@ -1920,10 +1928,10 @@
     "/withdraws/": {
       "post": {
         "tags": [
-          "Saques e Transferências"
+          "Withdrawals and Transfers"
         ],
-        "description": "Realiza um novo saque ou transferência para a conta de pagamento informada",
-        "summary": "Cria saque",
+        "description": "Create a new withdrawal or transfer to the provided payment account",
+        "summary": "Create withdrawal",
         "requestBody": {
           "content": {
             "application/json": {
@@ -1931,24 +1939,24 @@
                 "type": "object",
                 "properties": {
                   "amount": {
-                    "description": "Valor do saque em centavos",
+                    "description": "Withdrawal amount in cents",
                     "minimum": 1,
                     "type": "number"
                   },
                   "externalId": {
-                    "description": "ID do saque no seu sistema",
+                    "description": "Withdrawal ID in your system",
                     "examples": [
                       "external_withdraw_123"
                     ],
                     "type": "string"
                   },
                   "merchant": {
-                    "description": "Dados do merchant para pedido ou saque",
+                    "description": "Merchant data for order or withdrawal",
                     "title": "MerchantInput",
                     "type": "object",
                     "properties": {
                       "document": {
-                        "description": "CPF ou CNPJ do merchant sem formatação",
+                        "description": "Merchant CPF or CNPJ without formatting",
                         "examples": [
                           "12345678909",
                           "12345678000195"
@@ -1957,7 +1965,7 @@
                         "type": "string"
                       },
                       "email": {
-                        "description": "Email do merchant",
+                        "description": "Merchant email",
                         "examples": [
                           "merchant@example.com"
                         ],
@@ -1965,9 +1973,9 @@
                         "type": "string"
                       },
                       "name": {
-                        "description": "Nome do merchant",
+                        "description": "Merchant name",
                         "examples": [
-                          "Loja do João"
+                          "John's Store"
                         ],
                         "maxLength": 255,
                         "minLength": 2,
@@ -1984,11 +1992,11 @@
                     "type": "object",
                     "properties": {
                       "ownerDocument": {
-                        "description": "Documento do titular da conta (CPF ou CNPJ)",
+                        "description": "Account holder document (CPF or CNPJ)",
                         "type": "string"
                       },
                       "ownerName": {
-                        "description": "Nome do titular da conta",
+                        "description": "Account holder name",
                         "type": "string"
                       },
                       "pixKey": {
@@ -2019,8 +2027,7 @@
                 "required": [
                   "amount",
                   "payoutAccount"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           },
@@ -2035,7 +2042,7 @@
                   "type": "object",
                   "properties": {
                     "id": {
-                      "description": "Identificador único do saque",
+                      "description": "Unique withdrawal identifier",
                       "examples": [
                         "wd_1234567890"
                       ],
@@ -2045,7 +2052,7 @@
                       "nullable": true,
                       "anyOf": [
                         {
-                          "description": "ID do saque no sistema no seu sistema",
+                          "description": "Withdrawal ID in your system",
                           "examples": [
                             "external_withdraw_123"
                           ],
@@ -2057,7 +2064,7 @@
                       ]
                     },
                     "externalIntegrationKey": {
-                      "description": "Chave do provedor utilizado para o saque",
+                      "description": "Provider key used for the withdrawal",
                       "examples": [
                         "PagarMe",
                         "Asaas"
@@ -2067,7 +2074,7 @@
                     "externalIntegrationId": {
                       "anyOf": [
                         {
-                          "description": "ID do saque no provedor de pagamento",
+                          "description": "Withdrawal ID in the payment provider",
                           "examples": [
                             "withdraw_123"
                           ],
@@ -2079,7 +2086,7 @@
                       ]
                     },
                     "costFee": {
-                      "description": "Taxa de custo aplicada ao saque",
+                      "description": "Cost fee applied to the withdrawal",
                       "examples": [
                         4.5
                       ],
@@ -2087,7 +2094,7 @@
                     },
                     "status": {
                       "default": "Pending",
-                      "description": "Status do saque",
+                      "description": "Withdrawal status",
                       "examples": [
                         "Pending",
                         "Completed"
@@ -2103,7 +2110,7 @@
                     "errorCode": {
                       "anyOf": [
                         {
-                          "description": "Código do erro, se houver",
+                          "description": "Error code, if any",
                           "examples": [
                             "insufficient_funds",
                             "invalid_account"
@@ -2121,10 +2128,10 @@
                           "type": "null"
                         },
                         {
-                          "description": "Mensagem descritiva do erro, se houver",
+                          "description": "Descriptive error message, if any",
                           "examples": [
-                            "Saldo insuficiente para completar o saque",
-                            "Conta bancária inválida"
+                            "Insufficient balance to complete withdrawal",
+                            "Invalid bank account"
                           ],
                           "type": "string"
                         }
@@ -2136,13 +2143,13 @@
                           "type": "null"
                         },
                         {
-                          "description": "Data e hora em que o saque foi pago (formato ISO 8601)",
+                          "description": "Date and time when the withdrawal was paid (ISO 8601 format)",
                           "examples": [
                             "2024-01-01T12:00:00Z"
                           ],
                           "anyOf": [
                             {
-                              "description": "Data e hora em que o saque foi pago (formato ISO 8601)",
+                              "description": "Date and time when the withdrawal was paid (ISO 8601 format)",
                               "examples": [
                                 "2024-01-01T12:00:00Z"
                               ],
@@ -2167,14 +2174,14 @@
                       "type": "object",
                       "properties": {
                         "id": {
-                          "description": "Identificador único da conta de pagamento",
+                          "description": "Unique payment account identifier",
                           "examples": [
                             "pa_1234567890"
                           ],
                           "type": "string"
                         },
                         "ownerDocument": {
-                          "description": "Documento do titular da conta (CPF ou CNPJ)",
+                          "description": "Account holder document (CPF or CNPJ)",
                           "examples": [
                             "12345678909",
                             "12345678000195"
@@ -2183,24 +2190,24 @@
                           "type": "string"
                         },
                         "ownerName": {
-                          "description": "Nome do titular da conta",
+                          "description": "Account holder name",
                           "examples": [
-                            "João da Silva",
-                            "Empresa XYZ Ltda"
+                            "John Doe",
+                            "Company XYZ Ltda"
                           ],
                           "type": "string"
                         },
                         "pixKey": {
-                          "description": "Chave PIX utilizada para o saque",
+                          "description": "PIX key used for the withdrawal",
                           "examples": [
-                            "joao@example.com",
+                            "john@example.com",
                             "11999999999"
                           ],
                           "type": "string"
                         },
                         "pixType": {
                           "default": "Cpf",
-                          "description": "Tipo da chave PIX",
+                          "description": "PIX key type",
                           "examples": [
                             "Email",
                             "Cpf"
@@ -2236,8 +2243,7 @@
                     "payedAt",
                     "payoutAccount"
                   ],
-                  "noValidate": true,
-                  "additionalProperties": false
+                  "noValidate": true
                 }
               }
             }
@@ -2247,10 +2253,10 @@
       },
       "get": {
         "tags": [
-          "Saques e Transferências"
+          "Withdrawals and Transfers"
         ],
-        "description": "Retorna uma lista paginada de saques e transferências. Permite filtrar por data de criação ou buscar por ID (ID do saque, ID externo, ID da adquirente ou End2EndID)",
-        "summary": "Lista os saques",
+        "description": "Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)",
+        "summary": "List withdrawals",
         "parameters": [
           {
             "name": "period",
@@ -2258,7 +2264,7 @@
             "required": true,
             "schema": {
               "default": "Last7Days",
-              "description": "Período do filtro de datas",
+              "description": "Date filter period",
               "examples": [
                 "Last7Days"
               ],
@@ -2280,7 +2286,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)",
+              "description": "End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
               "examples": [
                 "2025-01-15T03:00:00Z"
               ],
@@ -2293,7 +2299,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)",
+              "description": "Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
               "examples": [
                 "2025-01-01T03:00:00Z"
               ],
@@ -2307,7 +2313,7 @@
             "required": true,
             "schema": {
               "default": 1,
-              "description": "Número da página",
+              "description": "Page number",
               "examples": [
                 1,
                 2,
@@ -2324,7 +2330,7 @@
             "required": true,
             "schema": {
               "default": 20,
-              "description": "Número de itens por página",
+              "description": "Number of items per page",
               "examples": [
                 10,
                 20,
@@ -2341,7 +2347,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "description": "ID de busca do saque (pode ser ID do saque, ID externo, ID da adquirente ou End2EndID)",
+              "description": "Withdrawal search ID (can be withdrawal ID, external ID, acquirer ID, or End2EndID)",
               "type": "string"
             }
           }
@@ -2352,10 +2358,10 @@
     "/withdraws/{id}": {
       "get": {
         "tags": [
-          "Saques e Transferências"
+          "Withdrawals and Transfers"
         ],
-        "description": "Retorna os detalhes de um saque ou transferência específico usando seu ID",
-        "summary": "Buscar pelo ID",
+        "description": "Returns the details of a specific withdrawal or transfer using its ID",
+        "summary": "Get withdrawal by ID",
         "parameters": [
           {
             "name": "id",
@@ -2367,6 +2373,738 @@
           }
         ],
         "operationId": "getWithdrawsById"
+      }
+    },
+    "/customers/": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "format": "email",
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "maxLength": 255,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "default": 1,
+              "description": "Page number",
+              "examples": [
+                1,
+                2,
+                3
+              ],
+              "minimum": 1,
+              "multipleOf": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "default": 20,
+              "description": "Number of items per page",
+              "examples": [
+                10,
+                20,
+                50
+              ],
+              "maximum": 100,
+              "minimum": 1,
+              "multipleOf": 1,
+              "type": "number"
+            }
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "default": "Last7Days",
+              "description": "Date filter period",
+              "examples": [
+                "Last7Days"
+              ],
+              "type": "string",
+              "enum": [
+                "Today",
+                "Yesterday",
+                "Last7Days",
+                "Last30Days",
+                "ThisMonth",
+                "LastMonth",
+                "ThisYear",
+                "Custom"
+              ]
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
+              "examples": [
+                "2025-01-15T03:00:00Z"
+              ],
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "description": "Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)",
+              "examples": [
+                "2025-01-01T03:00:00Z"
+              ],
+              "format": "date-time",
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getCustomers"
+      },
+      "post": {
+        "tags": [
+          "Customers"
+        ],
+        "requestBody": {
+          "description": "Schema for creating a new customer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Schema for creating a new customer",
+                "title": "Customer",
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "description": "Schema for creating a new address",
+                    "title": "Customer address",
+                    "type": "object",
+                    "properties": {
+                      "city": {
+                        "description": "City name",
+                        "examples": [
+                          "São Paulo",
+                          "Rio de Janeiro"
+                        ],
+                        "type": "string"
+                      },
+                      "country": {
+                        "default": "BR",
+                        "description": "Country code in ISO 3166-1 alpha-2 format",
+                        "examples": [
+                          "BR",
+                          "US"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "type": "string"
+                      },
+                      "neighborhood": {
+                        "description": "Neighborhood name",
+                        "examples": [
+                          "Downtown",
+                          "Jardins"
+                        ],
+                        "type": "string"
+                      },
+                      "number": {
+                        "description": "Address number",
+                        "examples": [
+                          "1000",
+                          "150"
+                        ],
+                        "type": "string"
+                      },
+                      "state": {
+                        "description": "State code in ISO 3166-2 format",
+                        "examples": [
+                          "SP",
+                          "RJ"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "type": "string"
+                      },
+                      "street": {
+                        "description": "Street name",
+                        "examples": [
+                          "Av. Paulista",
+                          "Rua das Flores"
+                        ],
+                        "type": "string"
+                      },
+                      "zipCode": {
+                        "description": "ZIP code without formatting",
+                        "examples": [
+                          "01311200",
+                          "20040002"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "city",
+                      "country",
+                      "neighborhood",
+                      "number",
+                      "state",
+                      "street",
+                      "zipCode"
+                    ]
+                  },
+                  "documentNumber": {
+                    "description": "Customer CPF or CNPJ without formatting",
+                    "examples": [
+                      "12345678909",
+                      "12345678000195"
+                    ],
+                    "pattern": "^\\d{11}$|^\\d{14}$",
+                    "type": "string"
+                  },
+                  "documentType": {
+                    "type": "string",
+                    "enum": [
+                      "Cpf",
+                      "Cnpj"
+                    ]
+                  },
+                  "email": {
+                    "description": "Customer email",
+                    "examples": [
+                      "customer@example.com"
+                    ],
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Customer full name",
+                    "examples": [
+                      "John Doe"
+                    ],
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "description": "Customer phone number in +55 DD 9XXXXXXXX format",
+                    "examples": [
+                      "+55 11 987654321"
+                    ],
+                    "error": "Invalid phone number format. Expected format: +55 DD 9XXXXXXXX",
+                    "pattern": "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "documentNumber",
+                  "documentType",
+                  "email",
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "postCustomers"
+      }
+    },
+    "/customers/{id}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "getCustomersById"
+      },
+      "patch": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Schema for creating a new customer",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Schema for creating a new customer",
+                "title": "Customer",
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "description": "Schema for creating a new address",
+                    "title": "Customer address",
+                    "type": "object",
+                    "properties": {
+                      "city": {
+                        "description": "City name",
+                        "examples": [
+                          "São Paulo",
+                          "Rio de Janeiro"
+                        ],
+                        "type": "string"
+                      },
+                      "country": {
+                        "default": "BR",
+                        "description": "Country code in ISO 3166-1 alpha-2 format",
+                        "examples": [
+                          "BR",
+                          "US"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "type": "string"
+                      },
+                      "neighborhood": {
+                        "description": "Neighborhood name",
+                        "examples": [
+                          "Downtown",
+                          "Jardins"
+                        ],
+                        "type": "string"
+                      },
+                      "number": {
+                        "description": "Address number",
+                        "examples": [
+                          "1000",
+                          "150"
+                        ],
+                        "type": "string"
+                      },
+                      "state": {
+                        "description": "State code in ISO 3166-2 format",
+                        "examples": [
+                          "SP",
+                          "RJ"
+                        ],
+                        "maxLength": 2,
+                        "minLength": 2,
+                        "type": "string"
+                      },
+                      "street": {
+                        "description": "Street name",
+                        "examples": [
+                          "Av. Paulista",
+                          "Rua das Flores"
+                        ],
+                        "type": "string"
+                      },
+                      "zipCode": {
+                        "description": "ZIP code without formatting",
+                        "examples": [
+                          "01311200",
+                          "20040002"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "city",
+                      "country",
+                      "neighborhood",
+                      "number",
+                      "state",
+                      "street",
+                      "zipCode"
+                    ]
+                  },
+                  "documentNumber": {
+                    "description": "Customer CPF or CNPJ without formatting",
+                    "examples": [
+                      "12345678909",
+                      "12345678000195"
+                    ],
+                    "pattern": "^\\d{11}$|^\\d{14}$",
+                    "type": "string"
+                  },
+                  "documentType": {
+                    "type": "string",
+                    "enum": [
+                      "Cpf",
+                      "Cnpj"
+                    ]
+                  },
+                  "email": {
+                    "description": "Customer email",
+                    "examples": [
+                      "customer@example.com"
+                    ],
+                    "format": "email",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "Customer full name",
+                    "examples": [
+                      "John Doe"
+                    ],
+                    "type": "string"
+                  },
+                  "phoneNumber": {
+                    "description": "Customer phone number in +55 DD 9XXXXXXXX format",
+                    "examples": [
+                      "+55 11 987654321"
+                    ],
+                    "error": "Invalid phone number format. Expected format: +55 DD 9XXXXXXXX",
+                    "pattern": "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "operationId": "patchCustomersById"
+      },
+      "delete": {
+        "tags": [
+          "Customers"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "operationId": "deleteCustomersById"
+      }
+    },
+    "/card-tokenization/": {
+      "post": {
+        "description": "Tokenize credit cards for future charges.",
+        "summary": "Tokenize card",
+        "tags": [
+          "Card Tokenization"
+        ],
+        "requestBody": {
+          "description": "Data for creating a customer card",
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Data for creating a customer card",
+                "type": "object",
+                "properties": {
+                  "card": {
+                    "title": "Complete card data",
+                    "type": "object",
+                    "properties": {
+                      "cvv": {
+                        "description": "Card security code (CVV)",
+                        "examples": [
+                          "123",
+                          "1234"
+                        ],
+                        "maxLength": 4,
+                        "minLength": 3,
+                        "type": "string"
+                      },
+                      "expiration": {
+                        "type": "object",
+                        "properties": {
+                          "month": {
+                            "description": "Card expiration month",
+                            "examples": [
+                              1,
+                              12
+                            ],
+                            "maximum": 12,
+                            "minimum": 1,
+                            "type": "number"
+                          },
+                          "year": {
+                            "description": "Card expiration year",
+                            "examples": [
+                              2030
+                            ],
+                            "maximum": 2046,
+                            "minimum": 2025,
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "month",
+                          "year"
+                        ]
+                      },
+                      "holderName": {
+                        "description": "Card holder name",
+                        "examples": [
+                          "JOHN DOE"
+                        ],
+                        "type": "string"
+                      },
+                      "number": {
+                        "description": "Credit card number",
+                        "examples": [
+                          "4242424242424242"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "cvv",
+                      "expiration",
+                      "holderName",
+                      "number"
+                    ]
+                  },
+                  "saveCard": {
+                    "description": "Indicates if the card should be saved for future use",
+                    "examples": [
+                      true,
+                      false
+                    ],
+                    "type": "boolean"
+                  },
+                  "customer": {
+                    "anyOf": [
+                      {
+                        "description": "Schema for creating a new customer",
+                        "title": "Customer",
+                        "type": "object",
+                        "properties": {
+                          "address": {
+                            "description": "Schema for creating a new address",
+                            "title": "Customer address",
+                            "type": "object",
+                            "properties": {
+                              "city": {
+                                "description": "City name",
+                                "examples": [
+                                  "São Paulo",
+                                  "Rio de Janeiro"
+                                ],
+                                "type": "string"
+                              },
+                              "country": {
+                                "default": "BR",
+                                "description": "Country code in ISO 3166-1 alpha-2 format",
+                                "examples": [
+                                  "BR",
+                                  "US"
+                                ],
+                                "maxLength": 2,
+                                "minLength": 2,
+                                "type": "string"
+                              },
+                              "neighborhood": {
+                                "description": "Neighborhood name",
+                                "examples": [
+                                  "Downtown",
+                                  "Jardins"
+                                ],
+                                "type": "string"
+                              },
+                              "number": {
+                                "description": "Address number",
+                                "examples": [
+                                  "1000",
+                                  "150"
+                                ],
+                                "type": "string"
+                              },
+                              "state": {
+                                "description": "State code in ISO 3166-2 format",
+                                "examples": [
+                                  "SP",
+                                  "RJ"
+                                ],
+                                "maxLength": 2,
+                                "minLength": 2,
+                                "type": "string"
+                              },
+                              "street": {
+                                "description": "Street name",
+                                "examples": [
+                                  "Av. Paulista",
+                                  "Rua das Flores"
+                                ],
+                                "type": "string"
+                              },
+                              "zipCode": {
+                                "description": "ZIP code without formatting",
+                                "examples": [
+                                  "01311200",
+                                  "20040002"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "required": [
+                              "city",
+                              "country",
+                              "neighborhood",
+                              "number",
+                              "state",
+                              "street",
+                              "zipCode"
+                            ]
+                          },
+                          "documentNumber": {
+                            "description": "Customer CPF or CNPJ without formatting",
+                            "examples": [
+                              "12345678909",
+                              "12345678000195"
+                            ],
+                            "pattern": "^\\d{11}$|^\\d{14}$",
+                            "type": "string"
+                          },
+                          "documentType": {
+                            "description": "Document type: Cpf or Cnpj",
+                            "examples": [
+                              "Cpf",
+                              "Cnpj"
+                            ],
+                            "anyOf": [
+                              {
+                                "const": "Cpf",
+                                "type": "string"
+                              },
+                              {
+                                "const": "Cnpj",
+                                "type": "string"
+                              }
+                            ]
+                          },
+                          "email": {
+                            "description": "Customer email",
+                            "examples": [
+                              "customer@example.com"
+                            ],
+                            "format": "email",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Customer full name",
+                            "examples": [
+                              "John Doe"
+                            ],
+                            "type": "string"
+                          },
+                          "phoneNumber": {
+                            "description": "Customer phone number in +55 DD 9XXXXXXXX format",
+                            "examples": [
+                              "+55 11 987654321"
+                            ],
+                            "error": "Invalid phone number format. Expected format: +55 DD 9XXXXXXXX",
+                            "pattern": "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "documentNumber",
+                          "documentType",
+                          "email",
+                          "name"
+                        ]
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "description": "ID do cliente existente",
+                            "examples": [
+                              "cmjizheco00002v6o7q72knwb"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "card",
+                  "saveCard",
+                  "customer"
+                ]
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Response for status 200",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customerId": {
+                      "description": "ID of the customer associated with the created card",
+                      "examples": [
+                        "cmjizheco00002v6o7q72knwb"
+                      ],
+                      "type": "string"
+                    },
+                    "token": {
+                      "description": "Token of the created card for future transactions",
+                      "examples": [
+                        "card_019b4cb6-bc0b-730b-81e2-5a9eaa22975a"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "customerId",
+                    "token"
+                  ],
+                  "noValidate": true
+                }
+              }
+            }
+          }
+        },
+        "operationId": "postCard-tokenization"
       }
     }
   }
