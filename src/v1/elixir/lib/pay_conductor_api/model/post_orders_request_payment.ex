@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.PostOrdersRequestPayment do
   @moduledoc """
-  Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+  Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
   """
 
   @derive JSON.Encoder
@@ -20,10 +20,10 @@ defmodule PayConductorAPI.Model.PostOrdersRequestPayment do
   @type t :: %__MODULE__{
     :paymentMethod => String.t,
     :expirationInSeconds => PayConductorAPI.Model.PixExpirationInSeconds.t | nil,
-    :card => PayConductorAPI.Model.CartODeCrDitoCard.t,
-    :installments => PayConductorAPI.Model.CartODeCrDitoInstallments.t,
+    :card => PayConductorAPI.Model.CreditCardCard.t,
+    :installments => PayConductorAPI.Model.CreditCardInstallments.t,
     :softDescriptor => String.t | nil,
-    :expirationInDays => PayConductorAPI.Model.BoletoExpirationInDays.t | nil,
+    :expirationInDays => PayConductorAPI.Model.BankSlipExpirationInDays.t | nil,
     :nuPay => PayConductorAPI.Model.NuPayNuPay.t
   }
 
@@ -32,9 +32,9 @@ defmodule PayConductorAPI.Model.PostOrdersRequestPayment do
   def decode(value) do
     value
      |> Deserializer.deserialize(:expirationInSeconds, :struct, PayConductorAPI.Model.PixExpirationInSeconds)
-     |> Deserializer.deserialize(:card, :struct, PayConductorAPI.Model.CartODeCrDitoCard)
-     |> Deserializer.deserialize(:installments, :struct, PayConductorAPI.Model.CartODeCrDitoInstallments)
-     |> Deserializer.deserialize(:expirationInDays, :struct, PayConductorAPI.Model.BoletoExpirationInDays)
+     |> Deserializer.deserialize(:card, :struct, PayConductorAPI.Model.CreditCardCard)
+     |> Deserializer.deserialize(:installments, :struct, PayConductorAPI.Model.CreditCardInstallments)
+     |> Deserializer.deserialize(:expirationInDays, :struct, PayConductorAPI.Model.BankSlipExpirationInDays)
      |> Deserializer.deserialize(:nuPay, :struct, PayConductorAPI.Model.NuPayNuPay)
   end
 end

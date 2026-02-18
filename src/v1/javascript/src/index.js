@@ -1,6 +1,6 @@
 /**
  * PayConductor API
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,22 +13,28 @@
 
 
 import ApiClient from './ApiClient';
-import Boleto from './model/Boleto';
-import BoletoExpirationInDays from './model/BoletoExpirationInDays';
-import CartODeCrDito from './model/CartODeCrDito';
-import CartODeCrDitoCard from './model/CartODeCrDitoCard';
-import CartODeCrDitoInstallments from './model/CartODeCrDitoInstallments';
-import CartOTokenizado from './model/CartOTokenizado';
-import Cliente from './model/Cliente';
-import DadosCompletosDoCartO from './model/DadosCompletosDoCartO';
-import DadosCompletosDoCartOExpiration from './model/DadosCompletosDoCartOExpiration';
-import EndereODoCliente from './model/EndereODoCliente';
+import BankSlip from './model/BankSlip';
+import BankSlipExpirationInDays from './model/BankSlipExpirationInDays';
+import CompleteCardData from './model/CompleteCardData';
+import CompleteCardDataExpiration from './model/CompleteCardDataExpiration';
+import CreditCard from './model/CreditCard';
+import CreditCardCard from './model/CreditCardCard';
+import CreditCardInstallments from './model/CreditCardInstallments';
+import Customer from './model/Customer';
+import Customer1 from './model/Customer1';
+import Customer2 from './model/Customer2';
+import Customer2DocumentType from './model/Customer2DocumentType';
+import CustomerAddress from './model/CustomerAddress';
 import MerchantInput from './model/MerchantInput';
 import NuPay from './model/NuPay';
 import NuPayNuPay from './model/NuPayNuPay';
 import PicPay from './model/PicPay';
 import Pix from './model/Pix';
 import PixExpirationInSeconds from './model/PixExpirationInSeconds';
+import PostCardTokenization200Response from './model/PostCardTokenization200Response';
+import PostCardTokenizationRequest from './model/PostCardTokenizationRequest';
+import PostCardTokenizationRequestCustomer from './model/PostCardTokenizationRequestCustomer';
+import PostCardTokenizationRequestCustomerAnyOf from './model/PostCardTokenizationRequestCustomerAnyOf';
 import PostOrders200Response from './model/PostOrders200Response';
 import PostOrders200ResponseBankSlip from './model/PostOrders200ResponseBankSlip';
 import PostOrders200ResponseCreditCard from './model/PostOrders200ResponseCreditCard';
@@ -47,12 +53,15 @@ import PostWithdraws200ResponsePayedAt from './model/PostWithdraws200ResponsePay
 import PostWithdraws200ResponsePayoutAccount from './model/PostWithdraws200ResponsePayoutAccount';
 import PostWithdrawsRequest from './model/PostWithdrawsRequest';
 import PostWithdrawsRequestPayoutAccount from './model/PostWithdrawsRequestPayoutAccount';
-import PedidosApi from './api/PedidosApi';
-import SaquesETransfernciasApi from './api/SaquesETransfernciasApi';
+import TokenizedCard from './model/TokenizedCard';
+import CardTokenizationApi from './api/CardTokenizationApi';
+import CustomersApi from './api/CustomersApi';
+import OrdersApi from './api/OrdersApi';
+import WithdrawalsAndTransfersApi from './api/WithdrawalsAndTransfersApi';
 
 
 /**
-* # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  &lt;br /&gt;  &lt;br /&gt;  ----  &lt;br /&gt;   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato &#x60;client:secret&#x60; codificado em Base64.  &lt;br /&gt;  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações &gt; API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  &lt;br /&gt;  ## Formato de Autenticação  As credenciais devem ser enviadas no header &#x60;Authorization&#x60; usando o esquema Basic:  &#x60;&#x60;&#x60; Authorization: Basic base64(client_id:client_secret) &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Exemplo em Node.js  &#x60;&#x60;&#x60;javascript const clientId &#x3D; &#39;seu_client_id&#39;; const clientSecret &#x3D; &#39;seu_client_secret&#39;;  // Codifica as credenciais em Base64 const credentials &#x3D; Buffer.from(&#x60;${clientId}:${clientSecret}&#x60;).toString(&#39;base64&#39;);  const response &#x3D; await fetch(&#39;https://api.payconductor.com/api/v1/orders&#39;, {   method: &#39;GET&#39;,   headers: {     &#39;Authorization&#39;: &#x60;Basic ${credentials}&#x60;,     &#39;Content-Type&#39;: &#39;application/json&#39;   } });  const data &#x3D; await response.json(); console.log(data); &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | &#x60;401&#x60;  | Credenciais inválidas ou ausentes | | &#x60;403&#x60;  | Credenciais válidas, mas sem permissão para o recurso | | &#x60;429&#x60;  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;UNAUTHORIZED\&quot;,     \&quot;message\&quot;: \&quot;Invalid credentials\&quot;,     \&quot;details\&quot;: \&quot;The provided client ID or secret is incorrect\&quot;   } } &#x60;&#x60;&#x60;.<br>
+* PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  &lt;br /&gt;  &lt;br /&gt;  ----  &lt;br /&gt;   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the &#x60;client:secret&#x60; format encoded in Base64.  &lt;br /&gt;  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings &gt; API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  &lt;br /&gt;  ## Authentication Format  Credentials must be sent in the &#x60;Authorization&#x60; header using the Basic scheme:  &#x60;&#x60;&#x60; Authorization: Basic base64(client_id:client_secret) &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Node.js Example  &#x60;&#x60;&#x60;javascript const clientId &#x3D; &#39;your_client_id&#39;; const clientSecret &#x3D; &#39;your_client_secret&#39;;  // Encode credentials in Base64 const credentials &#x3D; Buffer.from(&#x60;${clientId}:${clientSecret}&#x60;).toString(&#39;base64&#39;);  const response &#x3D; await fetch(&#39;https://api.payconductor.com/api/v1/orders&#39;, {   method: &#39;GET&#39;,   headers: {     &#39;Authorization&#39;: &#x60;Basic ${credentials}&#x60;,     &#39;Content-Type&#39;: &#39;application/json&#39;   } });  const data &#x3D; await response.json(); console.log(data); &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Authentication Errors  | Code | Description | |------|-------------| | &#x60;401&#x60; | Invalid or missing credentials | | &#x60;403&#x60; | Valid credentials but no permission for the resource | | &#x60;429&#x60; | Too many requests (rate limit exceeded) |  ### Error Response Example  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;UNAUTHORIZED\&quot;,     \&quot;message\&quot;: \&quot;Invalid credentials\&quot;,     \&quot;details\&quot;: \&quot;The provided client ID or secret is incorrect\&quot;   } } &#x60;&#x60;&#x60;.<br>
 * The <code>index</code> module provides access to constructors for all the classes which comprise the public API.
 * <p>
 * An AMD (recommended!) or CommonJS application will generally do something equivalent to the following:
@@ -90,64 +99,76 @@ export {
     ApiClient,
 
     /**
-     * The Boleto model constructor.
-     * @property {module:model/Boleto}
+     * The BankSlip model constructor.
+     * @property {module:model/BankSlip}
      */
-    Boleto,
+    BankSlip,
 
     /**
-     * The BoletoExpirationInDays model constructor.
-     * @property {module:model/BoletoExpirationInDays}
+     * The BankSlipExpirationInDays model constructor.
+     * @property {module:model/BankSlipExpirationInDays}
      */
-    BoletoExpirationInDays,
+    BankSlipExpirationInDays,
 
     /**
-     * The CartODeCrDito model constructor.
-     * @property {module:model/CartODeCrDito}
+     * The CompleteCardData model constructor.
+     * @property {module:model/CompleteCardData}
      */
-    CartODeCrDito,
+    CompleteCardData,
 
     /**
-     * The CartODeCrDitoCard model constructor.
-     * @property {module:model/CartODeCrDitoCard}
+     * The CompleteCardDataExpiration model constructor.
+     * @property {module:model/CompleteCardDataExpiration}
      */
-    CartODeCrDitoCard,
+    CompleteCardDataExpiration,
 
     /**
-     * The CartODeCrDitoInstallments model constructor.
-     * @property {module:model/CartODeCrDitoInstallments}
+     * The CreditCard model constructor.
+     * @property {module:model/CreditCard}
      */
-    CartODeCrDitoInstallments,
+    CreditCard,
 
     /**
-     * The CartOTokenizado model constructor.
-     * @property {module:model/CartOTokenizado}
+     * The CreditCardCard model constructor.
+     * @property {module:model/CreditCardCard}
      */
-    CartOTokenizado,
+    CreditCardCard,
 
     /**
-     * The Cliente model constructor.
-     * @property {module:model/Cliente}
+     * The CreditCardInstallments model constructor.
+     * @property {module:model/CreditCardInstallments}
      */
-    Cliente,
+    CreditCardInstallments,
 
     /**
-     * The DadosCompletosDoCartO model constructor.
-     * @property {module:model/DadosCompletosDoCartO}
+     * The Customer model constructor.
+     * @property {module:model/Customer}
      */
-    DadosCompletosDoCartO,
+    Customer,
 
     /**
-     * The DadosCompletosDoCartOExpiration model constructor.
-     * @property {module:model/DadosCompletosDoCartOExpiration}
+     * The Customer1 model constructor.
+     * @property {module:model/Customer1}
      */
-    DadosCompletosDoCartOExpiration,
+    Customer1,
 
     /**
-     * The EndereODoCliente model constructor.
-     * @property {module:model/EndereODoCliente}
+     * The Customer2 model constructor.
+     * @property {module:model/Customer2}
      */
-    EndereODoCliente,
+    Customer2,
+
+    /**
+     * The Customer2DocumentType model constructor.
+     * @property {module:model/Customer2DocumentType}
+     */
+    Customer2DocumentType,
+
+    /**
+     * The CustomerAddress model constructor.
+     * @property {module:model/CustomerAddress}
+     */
+    CustomerAddress,
 
     /**
      * The MerchantInput model constructor.
@@ -184,6 +205,30 @@ export {
      * @property {module:model/PixExpirationInSeconds}
      */
     PixExpirationInSeconds,
+
+    /**
+     * The PostCardTokenization200Response model constructor.
+     * @property {module:model/PostCardTokenization200Response}
+     */
+    PostCardTokenization200Response,
+
+    /**
+     * The PostCardTokenizationRequest model constructor.
+     * @property {module:model/PostCardTokenizationRequest}
+     */
+    PostCardTokenizationRequest,
+
+    /**
+     * The PostCardTokenizationRequestCustomer model constructor.
+     * @property {module:model/PostCardTokenizationRequestCustomer}
+     */
+    PostCardTokenizationRequestCustomer,
+
+    /**
+     * The PostCardTokenizationRequestCustomerAnyOf model constructor.
+     * @property {module:model/PostCardTokenizationRequestCustomerAnyOf}
+     */
+    PostCardTokenizationRequestCustomerAnyOf,
 
     /**
      * The PostOrders200Response model constructor.
@@ -294,14 +339,32 @@ export {
     PostWithdrawsRequestPayoutAccount,
 
     /**
-    * The PedidosApi service constructor.
-    * @property {module:api/PedidosApi}
-    */
-    PedidosApi,
+     * The TokenizedCard model constructor.
+     * @property {module:model/TokenizedCard}
+     */
+    TokenizedCard,
 
     /**
-    * The SaquesETransfernciasApi service constructor.
-    * @property {module:api/SaquesETransfernciasApi}
+    * The CardTokenizationApi service constructor.
+    * @property {module:api/CardTokenizationApi}
     */
-    SaquesETransfernciasApi
+    CardTokenizationApi,
+
+    /**
+    * The CustomersApi service constructor.
+    * @property {module:api/CustomersApi}
+    */
+    CustomersApi,
+
+    /**
+    * The OrdersApi service constructor.
+    * @property {module:api/OrdersApi}
+    */
+    OrdersApi,
+
+    /**
+    * The WithdrawalsAndTransfersApi service constructor.
+    * @property {module:api/WithdrawalsAndTransfersApi}
+    */
+    WithdrawalsAndTransfersApi
 };

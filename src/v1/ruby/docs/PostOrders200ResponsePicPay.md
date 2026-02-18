@@ -4,8 +4,8 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **copy_and_paste_code** | **String** | Código copia e cola do PicPay |  |
-| **qr_code_url** | **String** | URL da imagem do QR Code PicPay |  |
+| **copy_and_paste_code** | **String** | PicPay copy and paste code |  |
+| **qr_code_url** | **String** | PicPay QR Code image URL |  |
 
 ## Example
 

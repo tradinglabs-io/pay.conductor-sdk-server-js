@@ -22,13 +22,13 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param threatMetrixFingerprintId ID de fingerprint do ThreatMetrix para análise de fraude
+ * @param threatMetrixFingerprintId ThreatMetrix fingerprint ID for fraud analysis
  */
 
 
 data class PostOrdersRequestFingerprints (
 
-    /* ID de fingerprint do ThreatMetrix para análise de fraude */
+    /* ThreatMetrix fingerprint ID for fraud analysis */
     @Json(name = "threatMetrixFingerprintId")
     val threatMetrixFingerprintId: kotlin.String? = null
 

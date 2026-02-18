@@ -22,13 +22,13 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param paymentUrl URL de pagamento NuPay
+ * @param paymentUrl NuPay payment URL
  */
 
 
 data class PostOrders200ResponseNuPay (
 
-    /* URL de pagamento NuPay */
+    /* NuPay payment URL */
     @Json(name = "paymentUrl")
     val paymentUrl: kotlin.String
 

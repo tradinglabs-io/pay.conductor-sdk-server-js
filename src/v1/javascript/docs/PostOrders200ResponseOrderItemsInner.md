@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**externalId** | **String** | ID externo do item | 
-**id** | **String** | ID do item no pedido | 
-**name** | **String** | Nome do produto/serviço | 
-**qty** | **Number** | Quantidade | 
-**totalAmount** | **Number** | Valor total do item (quantidade × preço unitário) | 
-**totalNetAmount** | **Number** | Valor líquido total do item | 
-**unityPrice** | **Number** | Preço unitário | 
+**externalId** | **String** | External item ID | 
+**id** | **String** | Item ID in the order | 
+**name** | **String** | Product/service name | 
+**qty** | **Number** | Quantity | 
+**totalAmount** | **Number** | Total item amount (quantity × unit price) | 
+**totalNetAmount** | **Number** | Total net amount of the item | 
+**unityPrice** | **Number** | Unit price | 
 
 

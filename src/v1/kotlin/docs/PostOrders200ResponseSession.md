@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **sessionId** | **kotlin.String** | ID da sessão de checkout associada ao pedido |  |
+| **sessionId** | **kotlin.String** | ID of the checkout session associated with the order |  |
 
 
 

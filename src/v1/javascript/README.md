@@ -1,9 +1,9 @@
 # payconductor-sdk
 
 PayconductorSdk - JavaScript client for payconductor-sdk
-# Introdução
+PayConductor API Documentation.
 
-Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.
+This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.
 
 <br />
 
@@ -14,24 +14,24 @@ Esta documentação cobre todas as funcionalidades disponíveis na API RESTful d
 <br />
 
 
-# Autenticação
+# Authentication
 
-A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.
-
-<br />
-
-## Obtendo Credenciais
-
-1. Acesse o painel administrativo do PayConductor
-2. Navegue até **Configurações > API Keys**
-3. Gere um novo par de credenciais (Client ID e Client Secret)
-4. Guarde o Client Secret em local seguro - ele não será exibido novamente
+PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.
 
 <br />
 
-## Formato de Autenticação
+## Getting Credentials
 
-As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:
+1. Access the PayConductor admin panel
+2. Navigate to **Settings > API Keys**
+3. Generate a new credentials pair (Client ID and Client Secret)
+4. Store the Client Secret in a secure location - it will not be displayed again
+
+<br />
+
+## Authentication Format
+
+Credentials must be sent in the `Authorization` header using the Basic scheme:
 
 ```
 Authorization: Basic base64(client_id:client_secret)
@@ -39,13 +39,13 @@ Authorization: Basic base64(client_id:client_secret)
 
 <br />
 
-## Exemplo em Node.js
+## Node.js Example
 
 ```javascript
-const clientId = 'seu_client_id';
-const clientSecret = 'seu_client_secret';
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
 
-// Codifica as credenciais em Base64
+// Encode credentials in Base64
 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 const response = await fetch('https://api.payconductor.com/api/v1/orders', {
@@ -62,15 +62,15 @@ console.log(data);
 
 <br />
 
-## Erros de Autenticação
+## Authentication Errors
 
-| Código | Descrição |
-|--------|-----------|
-| `401`  | Credenciais inválidas ou ausentes |
-| `403`  | Credenciais válidas, mas sem permissão para o recurso |
-| `429`  | Muitas requisições (rate limit excedido) |
+| Code | Description |
+|------|-------------|
+| `401` | Invalid or missing credentials |
+| `403` | Valid credentials but no permission for the resource |
+| `429` | Too many requests (rate limit exceeded) |
 
-### Exemplo de resposta de erro
+### Error Response Example
 
 ```json
 {
@@ -186,24 +186,16 @@ var basicAuth = defaultClient.authentications['basicAuth'];
 basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
-var api = new PayconductorSdk.PedidosApi()
-var period = "'Last7Days'"; // {String} 
-var page = 1; // {Number} 
-var pageSize = 20; // {Number} 
-var opts = {
-  'endDate': new Date("2013-10-20T19:20:30+01:00"), // {Date} 
-  'startDate': new Date("2013-10-20T19:20:30+01:00"), // {Date} 
-  'id': "id_example", // {String} 
-  'status': "status_example" // {String} 
-};
+var api = new PayconductorSdk.CardTokenizationApi()
+var postCardTokenizationRequest = new PayconductorSdk.PostCardTokenizationRequest(); // {PostCardTokenizationRequest} Data for creating a customer card
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.getOrders(period, page, pageSize, opts, callback);
+api.postCardTokenization(postCardTokenizationRequest, callback);
 
 ```
 
@@ -213,33 +205,45 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PayconductorSdk.PedidosApi* | [**getOrders**](docs/PedidosApi.md#getOrders) | **GET** /orders/ | Listar pedidos
-*PayconductorSdk.PedidosApi* | [**getOrdersById**](docs/PedidosApi.md#getOrdersById) | **GET** /orders/{id} | Buscar pelo ID
-*PayconductorSdk.PedidosApi* | [**postOrders**](docs/PedidosApi.md#postOrders) | **POST** /orders/ | Criar pedido
-*PayconductorSdk.PedidosApi* | [**postOrdersByIdRefund**](docs/PedidosApi.md#postOrdersByIdRefund) | **POST** /orders/{id}/refund | Reembolsar pedido
-*PayconductorSdk.SaquesETransfernciasApi* | [**getWithdraws**](docs/SaquesETransfernciasApi.md#getWithdraws) | **GET** /withdraws/ | Lista os saques
-*PayconductorSdk.SaquesETransfernciasApi* | [**getWithdrawsById**](docs/SaquesETransfernciasApi.md#getWithdrawsById) | **GET** /withdraws/{id} | Buscar pelo ID
-*PayconductorSdk.SaquesETransfernciasApi* | [**postWithdraws**](docs/SaquesETransfernciasApi.md#postWithdraws) | **POST** /withdraws/ | Cria saque
+*PayconductorSdk.CardTokenizationApi* | [**postCardTokenization**](docs/CardTokenizationApi.md#postCardTokenization) | **POST** /card-tokenization/ | Tokenize card
+*PayconductorSdk.CustomersApi* | [**deleteCustomersById**](docs/CustomersApi.md#deleteCustomersById) | **DELETE** /customers/{id} | 
+*PayconductorSdk.CustomersApi* | [**getCustomers**](docs/CustomersApi.md#getCustomers) | **GET** /customers/ | 
+*PayconductorSdk.CustomersApi* | [**getCustomersById**](docs/CustomersApi.md#getCustomersById) | **GET** /customers/{id} | 
+*PayconductorSdk.CustomersApi* | [**patchCustomersById**](docs/CustomersApi.md#patchCustomersById) | **PATCH** /customers/{id} | 
+*PayconductorSdk.CustomersApi* | [**postCustomers**](docs/CustomersApi.md#postCustomers) | **POST** /customers/ | 
+*PayconductorSdk.OrdersApi* | [**getOrders**](docs/OrdersApi.md#getOrders) | **GET** /orders/ | List orders
+*PayconductorSdk.OrdersApi* | [**getOrdersById**](docs/OrdersApi.md#getOrdersById) | **GET** /orders/{id} | Get order by ID
+*PayconductorSdk.OrdersApi* | [**postOrders**](docs/OrdersApi.md#postOrders) | **POST** /orders/ | Create order
+*PayconductorSdk.OrdersApi* | [**postOrdersByIdRefund**](docs/OrdersApi.md#postOrdersByIdRefund) | **POST** /orders/{id}/refund | Refund order
+*PayconductorSdk.WithdrawalsAndTransfersApi* | [**getWithdraws**](docs/WithdrawalsAndTransfersApi.md#getWithdraws) | **GET** /withdraws/ | List withdrawals
+*PayconductorSdk.WithdrawalsAndTransfersApi* | [**getWithdrawsById**](docs/WithdrawalsAndTransfersApi.md#getWithdrawsById) | **GET** /withdraws/{id} | Get withdrawal by ID
+*PayconductorSdk.WithdrawalsAndTransfersApi* | [**postWithdraws**](docs/WithdrawalsAndTransfersApi.md#postWithdraws) | **POST** /withdraws/ | Create withdrawal
 
 
 ## Documentation for Models
 
- - [PayconductorSdk.Boleto](docs/Boleto.md)
- - [PayconductorSdk.BoletoExpirationInDays](docs/BoletoExpirationInDays.md)
- - [PayconductorSdk.CartODeCrDito](docs/CartODeCrDito.md)
- - [PayconductorSdk.CartODeCrDitoCard](docs/CartODeCrDitoCard.md)
- - [PayconductorSdk.CartODeCrDitoInstallments](docs/CartODeCrDitoInstallments.md)
- - [PayconductorSdk.CartOTokenizado](docs/CartOTokenizado.md)
- - [PayconductorSdk.Cliente](docs/Cliente.md)
- - [PayconductorSdk.DadosCompletosDoCartO](docs/DadosCompletosDoCartO.md)
- - [PayconductorSdk.DadosCompletosDoCartOExpiration](docs/DadosCompletosDoCartOExpiration.md)
- - [PayconductorSdk.EndereODoCliente](docs/EndereODoCliente.md)
+ - [PayconductorSdk.BankSlip](docs/BankSlip.md)
+ - [PayconductorSdk.BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
+ - [PayconductorSdk.CompleteCardData](docs/CompleteCardData.md)
+ - [PayconductorSdk.CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
+ - [PayconductorSdk.CreditCard](docs/CreditCard.md)
+ - [PayconductorSdk.CreditCardCard](docs/CreditCardCard.md)
+ - [PayconductorSdk.CreditCardInstallments](docs/CreditCardInstallments.md)
+ - [PayconductorSdk.Customer](docs/Customer.md)
+ - [PayconductorSdk.Customer1](docs/Customer1.md)
+ - [PayconductorSdk.Customer2](docs/Customer2.md)
+ - [PayconductorSdk.Customer2DocumentType](docs/Customer2DocumentType.md)
+ - [PayconductorSdk.CustomerAddress](docs/CustomerAddress.md)
  - [PayconductorSdk.MerchantInput](docs/MerchantInput.md)
  - [PayconductorSdk.NuPay](docs/NuPay.md)
  - [PayconductorSdk.NuPayNuPay](docs/NuPayNuPay.md)
  - [PayconductorSdk.PicPay](docs/PicPay.md)
  - [PayconductorSdk.Pix](docs/Pix.md)
  - [PayconductorSdk.PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
+ - [PayconductorSdk.PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
+ - [PayconductorSdk.PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
+ - [PayconductorSdk.PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
+ - [PayconductorSdk.PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
  - [PayconductorSdk.PostOrders200Response](docs/PostOrders200Response.md)
  - [PayconductorSdk.PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
  - [PayconductorSdk.PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
@@ -258,6 +262,7 @@ Class | Method | HTTP request | Description
  - [PayconductorSdk.PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
  - [PayconductorSdk.PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
  - [PayconductorSdk.PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
+ - [PayconductorSdk.TokenizedCard](docs/TokenizedCard.md)
 
 
 ## Documentation for Authorization

@@ -11,10 +11,10 @@ part 'post_orders200_response_session.g.dart';
 /// PostOrders200ResponseSession
 ///
 /// Properties:
-/// * [sessionId] - ID da sessão de checkout associada ao pedido
+/// * [sessionId] - ID of the checkout session associated with the order
 @BuiltValue()
 abstract class PostOrders200ResponseSession implements Built<PostOrders200ResponseSession, PostOrders200ResponseSessionBuilder> {
-  /// ID da sessão de checkout associada ao pedido
+  /// ID of the checkout session associated with the order
   @BuiltValueField(wireName: r'sessionId')
   String get sessionId;
 

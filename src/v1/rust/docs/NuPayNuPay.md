@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cancel_url** | **String** | URL de cancelamento do pagamento | 
-**merchant_name** | **String** | Nome do comerciante | 
-**return_url** | **String** | URL de retorno após a conclusão do pagamento | 
-**store_name** | Option<**String**> | Nome da loja | [optional]
+**cancel_url** | **String** | Payment cancellation URL | 
+**merchant_name** | **String** | Merchant name | 
+**return_url** | **String** | Return URL after payment completion | 
+**store_name** | Option<**String**> | Store name | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

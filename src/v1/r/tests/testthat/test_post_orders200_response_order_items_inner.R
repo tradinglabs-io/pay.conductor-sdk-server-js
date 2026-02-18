@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponseOrderItemsInner$new()
 
 test_that("externalId", {
   # tests for the property `externalId` (character)
-  # ID externo do item
+  # External item ID
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalId`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("externalId", {
 
 test_that("id", {
   # tests for the property `id` (character)
-  # ID do item no pedido
+  # Item ID in the order
 
   # uncomment below to test the property
   #expect_equal(model.instance$`id`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("id", {
 
 test_that("name", {
   # tests for the property `name` (character)
-  # Nome do produto/serviço
+  # Product/service name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`name`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("name", {
 
 test_that("qty", {
   # tests for the property `qty` (numeric)
-  # Quantidade
+  # Quantity
 
   # uncomment below to test the property
   #expect_equal(model.instance$`qty`, "EXPECTED_RESULT")
@@ -39,7 +39,7 @@ test_that("qty", {
 
 test_that("totalAmount", {
   # tests for the property `totalAmount` (numeric)
-  # Valor total do item (quantidade × preço unitário)
+  # Total item amount (quantity × unit price)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`totalAmount`, "EXPECTED_RESULT")
@@ -47,7 +47,7 @@ test_that("totalAmount", {
 
 test_that("totalNetAmount", {
   # tests for the property `totalNetAmount` (numeric)
-  # Valor líquido total do item
+  # Total net amount of the item
 
   # uncomment below to test the property
   #expect_equal(model.instance$`totalNetAmount`, "EXPECTED_RESULT")
@@ -55,7 +55,7 @@ test_that("totalNetAmount", {
 
 test_that("unityPrice", {
   # tests for the property `unityPrice` (numeric)
-  # Preço unitário
+  # Unit price
 
   # uncomment below to test the property
   #expect_equal(model.instance$`unityPrice`, "EXPECTED_RESULT")

@@ -22,8 +22,8 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param ownerDocument Documento do titular da conta (CPF ou CNPJ)
- * @param ownerName Nome do titular da conta
+ * @param ownerDocument Account holder document (CPF or CNPJ)
+ * @param ownerName Account holder name
  * @param pixKey PIX key for withdrawal
  * @param pixType PIX key type
  */
@@ -31,11 +31,11 @@ import com.squareup.moshi.JsonClass
 
 data class PostWithdrawsRequestPayoutAccount (
 
-    /* Documento do titular da conta (CPF ou CNPJ) */
+    /* Account holder document (CPF or CNPJ) */
     @Json(name = "ownerDocument")
     val ownerDocument: kotlin.String,
 
-    /* Nome do titular da conta */
+    /* Account holder name */
     @Json(name = "ownerName")
     val ownerName: kotlin.String,
 

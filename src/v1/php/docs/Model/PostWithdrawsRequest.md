@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** | Valor do saque em centavos |
-**external_id** | **string** | ID do saque no seu sistema | [optional]
+**amount** | **float** | Withdrawal amount in cents |
+**external_id** | **string** | Withdrawal ID in your system | [optional]
 **merchant** | [**\OpenAPI\Client\Model\MerchantInput**](MerchantInput.md) |  | [optional]
 **payout_account** | [**\OpenAPI\Client\Model\PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  |
 

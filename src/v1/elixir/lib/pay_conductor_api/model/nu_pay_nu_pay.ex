@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.NuPayNuPay do
   @moduledoc """
-  Dados específicos para pagamento via NuPay
+  Specific data for NuPay payment
   """
 
   @derive JSON.Encoder

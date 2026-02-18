@@ -7,7 +7,7 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponseCreditCard, () {
-    // Código de autorização da transação
+    // Transaction authorization code
     // String authorizationCode
     test('to test the property `authorizationCode`', () async {
       // TODO

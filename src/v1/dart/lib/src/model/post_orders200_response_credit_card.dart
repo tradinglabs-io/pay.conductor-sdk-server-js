@@ -11,10 +11,10 @@ part 'post_orders200_response_credit_card.g.dart';
 /// PostOrders200ResponseCreditCard
 ///
 /// Properties:
-/// * [authorizationCode] - Código de autorização da transação
+/// * [authorizationCode] - Transaction authorization code
 @BuiltValue()
 abstract class PostOrders200ResponseCreditCard implements Built<PostOrders200ResponseCreditCard, PostOrders200ResponseCreditCardBuilder> {
-  /// Código de autorização da transação
+  /// Transaction authorization code
   @BuiltValueField(wireName: r'authorizationCode')
   String? get authorizationCode;
 

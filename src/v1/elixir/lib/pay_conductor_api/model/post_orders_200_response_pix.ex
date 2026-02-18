@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.PostOrders200ResponsePix do
   @moduledoc """
-  Dados do PIX
+  PIX data
   """
 
   @derive JSON.Encoder

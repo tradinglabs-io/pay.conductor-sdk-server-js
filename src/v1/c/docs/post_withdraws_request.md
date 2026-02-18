@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **double** | Valor do saque em centavos | 
-**external_id** | **char \*** | ID do saque no seu sistema | [optional] 
+**amount** | **double** | Withdrawal amount in cents | 
+**external_id** | **char \*** | Withdrawal ID in your system | [optional] 
 **merchant** | [**merchant_input_t**](merchant_input.md) \* |  | [optional] 
 **payout_account** | [**post_withdraws_request_payout_account_t**](post_withdraws_request_payout_account.md) \* |  | 
 

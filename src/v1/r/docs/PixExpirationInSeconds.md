@@ -1,6 +1,6 @@
 # payconductor-sdk::PixExpirationInSeconds
 
-Tempo de expiração do PIX em segundos
+PIX expiration time in seconds
 
 ## Properties
 Name | Type | Description | Notes

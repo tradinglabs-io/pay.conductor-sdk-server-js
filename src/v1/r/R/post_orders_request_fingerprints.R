@@ -7,7 +7,7 @@
 #' @title PostOrdersRequestFingerprints
 #' @description PostOrdersRequestFingerprints Class
 #' @format An \code{R6Class} generator object
-#' @field threatMetrixFingerprintId ID de fingerprint do ThreatMetrix para análise de fraude character [optional]
+#' @field threatMetrixFingerprintId ThreatMetrix fingerprint ID for fraud analysis character [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -19,7 +19,7 @@ PostOrdersRequestFingerprints <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrdersRequestFingerprints class.
     #'
-    #' @param threatMetrixFingerprintId ID de fingerprint do ThreatMetrix para análise de fraude
+    #' @param threatMetrixFingerprintId ThreatMetrix fingerprint ID for fraud analysis
     #' @param ... Other optional arguments.
     initialize = function(`threatMetrixFingerprintId` = NULL, ...) {
       if (!is.null(`threatMetrixFingerprintId`)) {

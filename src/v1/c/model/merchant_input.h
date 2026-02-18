@@ -1,7 +1,7 @@
 /*
  * merchant_input.h
  *
- * Dados do merchant para pedido ou saque
+ * Merchant data for order or withdrawal
  */
 
 #ifndef _merchant_input_H_

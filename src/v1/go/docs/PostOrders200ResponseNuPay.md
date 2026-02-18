@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentUrl** | **string** | URL de pagamento NuPay | 
+**PaymentUrl** | **string** | NuPay payment URL | 
 
 ## Methods
 

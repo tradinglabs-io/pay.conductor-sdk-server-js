@@ -4,6 +4,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sessionId** | **character** | ID da sessão de checkout associada ao pedido | 
+**sessionId** | **character** | ID of the checkout session associated with the order | 
 
 

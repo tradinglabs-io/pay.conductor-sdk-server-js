@@ -2,9 +2,9 @@
 
 WWW::OpenAPIClient::Role - a Moose role for the PayConductor API
 
-# Introdução
+PayConductor API Documentation.
 
-Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.
+This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.
 
 <br />
 
@@ -15,24 +15,24 @@ Esta documentação cobre todas as funcionalidades disponíveis na API RESTful d
 <br />
 
 
-# Autenticação
+# Authentication
 
-A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.
-
-<br />
-
-## Obtendo Credenciais
-
-1. Acesse o painel administrativo do PayConductor
-2. Navegue até **Configurações > API Keys**
-3. Gere um novo par de credenciais (Client ID e Client Secret)
-4. Guarde o Client Secret em local seguro - ele não será exibido novamente
+PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.
 
 <br />
 
-## Formato de Autenticação
+## Getting Credentials
 
-As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:
+1. Access the PayConductor admin panel
+2. Navigate to **Settings > API Keys**
+3. Generate a new credentials pair (Client ID and Client Secret)
+4. Store the Client Secret in a secure location - it will not be displayed again
+
+<br />
+
+## Authentication Format
+
+Credentials must be sent in the `Authorization` header using the Basic scheme:
 
 ```
 Authorization: Basic base64(client_id:client_secret)
@@ -40,13 +40,13 @@ Authorization: Basic base64(client_id:client_secret)
 
 <br />
 
-## Exemplo em Node.js
+## Node.js Example
 
 ```javascript
-const clientId = 'seu_client_id';
-const clientSecret = 'seu_client_secret';
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
 
-// Codifica as credenciais em Base64
+// Encode credentials in Base64
 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 const response = await fetch('https://api.payconductor.com/api/v1/orders', {
@@ -63,15 +63,15 @@ console.log(data);
 
 <br />
 
-## Erros de Autenticação
+## Authentication Errors
 
-| Código | Descrição |
-|--------|-----------|
-| `401`  | Credenciais inválidas ou ausentes |
-| `403`  | Credenciais válidas, mas sem permissão para o recurso |
-| `429`  | Muitas requisições (rate limit excedido) |
+| Code | Description |
+|------|-------------|
+| `401` | Invalid or missing credentials |
+| `403` | Valid credentials but no permission for the resource |
+| `429` | Too many requests (rate limit exceeded) |
 
-### Exemplo de resposta de erro
+### Error Response Example
 
 ```json
 {
@@ -310,29 +310,37 @@ cpanm --quiet --no-interactive Class::Accessor Test::Exception Test::More Log::A
 
 To load the API packages:
 ```perl
-use WWW::OpenAPIClient::PedidosApi;
-use WWW::OpenAPIClient::SaquesETransfernciasApi;
+use WWW::OpenAPIClient::CardTokenizationApi;
+use WWW::OpenAPIClient::CustomersApi;
+use WWW::OpenAPIClient::OrdersApi;
+use WWW::OpenAPIClient::WithdrawalsAndTransfersApi;
 
 ```
 
 To load the models:
 ```perl
-use WWW::OpenAPIClient::Object::Boleto;
-use WWW::OpenAPIClient::Object::BoletoExpirationInDays;
-use WWW::OpenAPIClient::Object::CartODeCrDito;
-use WWW::OpenAPIClient::Object::CartODeCrDitoCard;
-use WWW::OpenAPIClient::Object::CartODeCrDitoInstallments;
-use WWW::OpenAPIClient::Object::CartOTokenizado;
-use WWW::OpenAPIClient::Object::Cliente;
-use WWW::OpenAPIClient::Object::DadosCompletosDoCartO;
-use WWW::OpenAPIClient::Object::DadosCompletosDoCartOExpiration;
-use WWW::OpenAPIClient::Object::EndereODoCliente;
+use WWW::OpenAPIClient::Object::BankSlip;
+use WWW::OpenAPIClient::Object::BankSlipExpirationInDays;
+use WWW::OpenAPIClient::Object::CompleteCardData;
+use WWW::OpenAPIClient::Object::CompleteCardDataExpiration;
+use WWW::OpenAPIClient::Object::CreditCard;
+use WWW::OpenAPIClient::Object::CreditCardCard;
+use WWW::OpenAPIClient::Object::CreditCardInstallments;
+use WWW::OpenAPIClient::Object::Customer;
+use WWW::OpenAPIClient::Object::Customer1;
+use WWW::OpenAPIClient::Object::Customer2;
+use WWW::OpenAPIClient::Object::Customer2DocumentType;
+use WWW::OpenAPIClient::Object::CustomerAddress;
 use WWW::OpenAPIClient::Object::MerchantInput;
 use WWW::OpenAPIClient::Object::NuPay;
 use WWW::OpenAPIClient::Object::NuPayNuPay;
 use WWW::OpenAPIClient::Object::PicPay;
 use WWW::OpenAPIClient::Object::Pix;
 use WWW::OpenAPIClient::Object::PixExpirationInSeconds;
+use WWW::OpenAPIClient::Object::PostCardTokenization200Response;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequest;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf;
 use WWW::OpenAPIClient::Object::PostOrders200Response;
 use WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip;
 use WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard;
@@ -351,6 +359,7 @@ use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayedAt;
 use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount;
 use WWW::OpenAPIClient::Object::PostWithdrawsRequest;
 use WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount;
+use WWW::OpenAPIClient::Object::TokenizedCard;
 
 ````
 
@@ -362,26 +371,34 @@ use lib 'lib';
 use strict;
 use warnings;
 # load the API package
-use WWW::OpenAPIClient::PedidosApi;
-use WWW::OpenAPIClient::SaquesETransfernciasApi;
+use WWW::OpenAPIClient::CardTokenizationApi;
+use WWW::OpenAPIClient::CustomersApi;
+use WWW::OpenAPIClient::OrdersApi;
+use WWW::OpenAPIClient::WithdrawalsAndTransfersApi;
 
 # load the models
-use WWW::OpenAPIClient::Object::Boleto;
-use WWW::OpenAPIClient::Object::BoletoExpirationInDays;
-use WWW::OpenAPIClient::Object::CartODeCrDito;
-use WWW::OpenAPIClient::Object::CartODeCrDitoCard;
-use WWW::OpenAPIClient::Object::CartODeCrDitoInstallments;
-use WWW::OpenAPIClient::Object::CartOTokenizado;
-use WWW::OpenAPIClient::Object::Cliente;
-use WWW::OpenAPIClient::Object::DadosCompletosDoCartO;
-use WWW::OpenAPIClient::Object::DadosCompletosDoCartOExpiration;
-use WWW::OpenAPIClient::Object::EndereODoCliente;
+use WWW::OpenAPIClient::Object::BankSlip;
+use WWW::OpenAPIClient::Object::BankSlipExpirationInDays;
+use WWW::OpenAPIClient::Object::CompleteCardData;
+use WWW::OpenAPIClient::Object::CompleteCardDataExpiration;
+use WWW::OpenAPIClient::Object::CreditCard;
+use WWW::OpenAPIClient::Object::CreditCardCard;
+use WWW::OpenAPIClient::Object::CreditCardInstallments;
+use WWW::OpenAPIClient::Object::Customer;
+use WWW::OpenAPIClient::Object::Customer1;
+use WWW::OpenAPIClient::Object::Customer2;
+use WWW::OpenAPIClient::Object::Customer2DocumentType;
+use WWW::OpenAPIClient::Object::CustomerAddress;
 use WWW::OpenAPIClient::Object::MerchantInput;
 use WWW::OpenAPIClient::Object::NuPay;
 use WWW::OpenAPIClient::Object::NuPayNuPay;
 use WWW::OpenAPIClient::Object::PicPay;
 use WWW::OpenAPIClient::Object::Pix;
 use WWW::OpenAPIClient::Object::PixExpirationInSeconds;
+use WWW::OpenAPIClient::Object::PostCardTokenization200Response;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequest;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer;
+use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf;
 use WWW::OpenAPIClient::Object::PostOrders200Response;
 use WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip;
 use WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard;
@@ -400,30 +417,26 @@ use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayedAt;
 use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount;
 use WWW::OpenAPIClient::Object::PostWithdrawsRequest;
 use WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount;
+use WWW::OpenAPIClient::Object::TokenizedCard;
 
 # for displaying the API response data
 use Data::Dumper;
 
 
-my $api_instance = WWW::OpenAPIClient::PedidosApi->new(
+my $api_instance = WWW::OpenAPIClient::CardTokenizationApi->new(
     # Configure HTTP basic authorization: basicAuth
     username => 'YOUR_USERNAME',
     password => 'YOUR_PASSWORD',
 );
 
-my $period = 'Last7Days'; # string | 
-my $page = 1; # double | 
-my $page_size = 20; # double | 
-my $end_date = DateTime->from_epoch(epoch => str2time('null')); # DATE_TIME | 
-my $start_date = DateTime->from_epoch(epoch => str2time('null')); # DATE_TIME | 
-my $id = "id_example"; # string | 
-my $status = "status_example"; # string | 
+my $post_card_tokenization_request = WWW::OpenAPIClient::Object::PostCardTokenizationRequest->new(); # PostCardTokenizationRequest | Data for creating a customer card
 
 eval {
-    $api_instance->get_orders(period => $period, page => $page, page_size => $page_size, end_date => $end_date, start_date => $start_date, id => $id, status => $status);
+    my $result = $api_instance->post_card_tokenization(post_card_tokenization_request => $post_card_tokenization_request);
+    print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling PedidosApi->get_orders: $@\n";
+    warn "Exception when calling CardTokenizationApi->post_card_tokenization: $@\n";
 }
 
 ```
@@ -434,32 +447,44 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PedidosApi* | [**get_orders**](docs/PedidosApi.md#get_orders) | **GET** /orders/ | Listar pedidos
-*PedidosApi* | [**get_orders_by_id**](docs/PedidosApi.md#get_orders_by_id) | **GET** /orders/{id} | Buscar pelo ID
-*PedidosApi* | [**post_orders**](docs/PedidosApi.md#post_orders) | **POST** /orders/ | Criar pedido
-*PedidosApi* | [**post_orders_by_id_refund**](docs/PedidosApi.md#post_orders_by_id_refund) | **POST** /orders/{id}/refund | Reembolsar pedido
-*SaquesETransfernciasApi* | [**get_withdraws**](docs/SaquesETransfernciasApi.md#get_withdraws) | **GET** /withdraws/ | Lista os saques
-*SaquesETransfernciasApi* | [**get_withdraws_by_id**](docs/SaquesETransfernciasApi.md#get_withdraws_by_id) | **GET** /withdraws/{id} | Buscar pelo ID
-*SaquesETransfernciasApi* | [**post_withdraws**](docs/SaquesETransfernciasApi.md#post_withdraws) | **POST** /withdraws/ | Cria saque
+*CardTokenizationApi* | [**post_card_tokenization**](docs/CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
+*CustomersApi* | [**delete_customers_by_id**](docs/CustomersApi.md#delete_customers_by_id) | **DELETE** /customers/{id} | 
+*CustomersApi* | [**get_customers**](docs/CustomersApi.md#get_customers) | **GET** /customers/ | 
+*CustomersApi* | [**get_customers_by_id**](docs/CustomersApi.md#get_customers_by_id) | **GET** /customers/{id} | 
+*CustomersApi* | [**patch_customers_by_id**](docs/CustomersApi.md#patch_customers_by_id) | **PATCH** /customers/{id} | 
+*CustomersApi* | [**post_customers**](docs/CustomersApi.md#post_customers) | **POST** /customers/ | 
+*OrdersApi* | [**get_orders**](docs/OrdersApi.md#get_orders) | **GET** /orders/ | List orders
+*OrdersApi* | [**get_orders_by_id**](docs/OrdersApi.md#get_orders_by_id) | **GET** /orders/{id} | Get order by ID
+*OrdersApi* | [**post_orders**](docs/OrdersApi.md#post_orders) | **POST** /orders/ | Create order
+*OrdersApi* | [**post_orders_by_id_refund**](docs/OrdersApi.md#post_orders_by_id_refund) | **POST** /orders/{id}/refund | Refund order
+*WithdrawalsAndTransfersApi* | [**get_withdraws**](docs/WithdrawalsAndTransfersApi.md#get_withdraws) | **GET** /withdraws/ | List withdrawals
+*WithdrawalsAndTransfersApi* | [**get_withdraws_by_id**](docs/WithdrawalsAndTransfersApi.md#get_withdraws_by_id) | **GET** /withdraws/{id} | Get withdrawal by ID
+*WithdrawalsAndTransfersApi* | [**post_withdraws**](docs/WithdrawalsAndTransfersApi.md#post_withdraws) | **POST** /withdraws/ | Create withdrawal
 
 
 # DOCUMENTATION FOR MODELS
- - [WWW::OpenAPIClient::Object::Boleto](docs/Boleto.md)
- - [WWW::OpenAPIClient::Object::BoletoExpirationInDays](docs/BoletoExpirationInDays.md)
- - [WWW::OpenAPIClient::Object::CartODeCrDito](docs/CartODeCrDito.md)
- - [WWW::OpenAPIClient::Object::CartODeCrDitoCard](docs/CartODeCrDitoCard.md)
- - [WWW::OpenAPIClient::Object::CartODeCrDitoInstallments](docs/CartODeCrDitoInstallments.md)
- - [WWW::OpenAPIClient::Object::CartOTokenizado](docs/CartOTokenizado.md)
- - [WWW::OpenAPIClient::Object::Cliente](docs/Cliente.md)
- - [WWW::OpenAPIClient::Object::DadosCompletosDoCartO](docs/DadosCompletosDoCartO.md)
- - [WWW::OpenAPIClient::Object::DadosCompletosDoCartOExpiration](docs/DadosCompletosDoCartOExpiration.md)
- - [WWW::OpenAPIClient::Object::EndereODoCliente](docs/EndereODoCliente.md)
+ - [WWW::OpenAPIClient::Object::BankSlip](docs/BankSlip.md)
+ - [WWW::OpenAPIClient::Object::BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
+ - [WWW::OpenAPIClient::Object::CompleteCardData](docs/CompleteCardData.md)
+ - [WWW::OpenAPIClient::Object::CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
+ - [WWW::OpenAPIClient::Object::CreditCard](docs/CreditCard.md)
+ - [WWW::OpenAPIClient::Object::CreditCardCard](docs/CreditCardCard.md)
+ - [WWW::OpenAPIClient::Object::CreditCardInstallments](docs/CreditCardInstallments.md)
+ - [WWW::OpenAPIClient::Object::Customer](docs/Customer.md)
+ - [WWW::OpenAPIClient::Object::Customer1](docs/Customer1.md)
+ - [WWW::OpenAPIClient::Object::Customer2](docs/Customer2.md)
+ - [WWW::OpenAPIClient::Object::Customer2DocumentType](docs/Customer2DocumentType.md)
+ - [WWW::OpenAPIClient::Object::CustomerAddress](docs/CustomerAddress.md)
  - [WWW::OpenAPIClient::Object::MerchantInput](docs/MerchantInput.md)
  - [WWW::OpenAPIClient::Object::NuPay](docs/NuPay.md)
  - [WWW::OpenAPIClient::Object::NuPayNuPay](docs/NuPayNuPay.md)
  - [WWW::OpenAPIClient::Object::PicPay](docs/PicPay.md)
  - [WWW::OpenAPIClient::Object::Pix](docs/Pix.md)
  - [WWW::OpenAPIClient::Object::PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
+ - [WWW::OpenAPIClient::Object::PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
+ - [WWW::OpenAPIClient::Object::PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
+ - [WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
+ - [WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
  - [WWW::OpenAPIClient::Object::PostOrders200Response](docs/PostOrders200Response.md)
  - [WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
  - [WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
@@ -478,6 +503,7 @@ Class | Method | HTTP request | Description
  - [WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
  - [WWW::OpenAPIClient::Object::PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
  - [WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
+ - [WWW::OpenAPIClient::Object::TokenizedCard](docs/TokenizedCard.md)
 
 
 # DOCUMENTATION FOR AUTHORIZATION

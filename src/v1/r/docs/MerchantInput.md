@@ -1,12 +1,12 @@
 # payconductor-sdk::MerchantInput
 
-Dados do merchant para pedido ou saque
+Merchant data for order or withdrawal
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | **character** | CPF ou CNPJ do merchant sem formatação | [Pattern: ^\\d{11}$|^\\d{14}$] 
-**email** | **character** | Email do merchant | 
-**name** | **character** | Nome do merchant | [Max. length: 255] [Min. length: 2] 
+**document** | **character** | Merchant CPF or CNPJ without formatting | [Pattern: ^\\d{11}$|^\\d{14}$] 
+**email** | **character** | Merchant email | 
+**name** | **character** | Merchant name | [Max. length: 255] [Min. length: 2] 
 
 

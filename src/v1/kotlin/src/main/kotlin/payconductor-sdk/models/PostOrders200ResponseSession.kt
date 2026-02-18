@@ -22,13 +22,13 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param sessionId ID da sessão de checkout associada ao pedido
+ * @param sessionId ID of the checkout session associated with the order
  */
 
 
 data class PostOrders200ResponseSession (
 
-    /* ID da sessão de checkout associada ao pedido */
+    /* ID of the checkout session associated with the order */
     @Json(name = "sessionId")
     val sessionId: kotlin.String
 

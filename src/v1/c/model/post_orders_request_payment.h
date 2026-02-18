@@ -1,7 +1,7 @@
 /*
  * post_orders_request_payment.h
  *
- * Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+ * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
  */
 
 #ifndef _post_orders_request_payment_H_
@@ -15,11 +15,11 @@
 
 typedef struct post_orders_request_payment_t post_orders_request_payment_t;
 
-#include "boleto.h"
-#include "boleto_expiration_in_days.h"
-#include "cart_o_de_cr_dito.h"
-#include "cart_o_de_cr_dito_card.h"
-#include "cart_o_de_cr_dito_installments.h"
+#include "bank_slip.h"
+#include "bank_slip_expiration_in_days.h"
+#include "credit_card.h"
+#include "credit_card_card.h"
+#include "credit_card_installments.h"
 #include "nu_pay.h"
 #include "nu_pay_nu_pay.h"
 #include "pic_pay.h"
@@ -31,10 +31,10 @@ typedef struct post_orders_request_payment_t post_orders_request_payment_t;
 typedef struct post_orders_request_payment_t {
     char *payment_method; // string
     struct pix_expiration_in_seconds_t *expiration_in_seconds; //model
-    struct cart_o_de_cr_dito_card_t *card; //model
-    struct cart_o_de_cr_dito_installments_t *installments; //model
+    struct credit_card_card_t *card; //model
+    struct credit_card_installments_t *installments; //model
     char *soft_descriptor; // string
-    struct boleto_expiration_in_days_t *expiration_in_days; //model
+    struct bank_slip_expiration_in_days_t *expiration_in_days; //model
     struct nu_pay_nu_pay_t *nu_pay; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -43,10 +43,10 @@ typedef struct post_orders_request_payment_t {
 __attribute__((deprecated)) post_orders_request_payment_t *post_orders_request_payment_create(
     char *payment_method,
     pix_expiration_in_seconds_t *expiration_in_seconds,
-    cart_o_de_cr_dito_card_t *card,
-    cart_o_de_cr_dito_installments_t *installments,
+    credit_card_card_t *card,
+    credit_card_installments_t *installments,
     char *soft_descriptor,
-    boleto_expiration_in_days_t *expiration_in_days,
+    bank_slip_expiration_in_days_t *expiration_in_days,
     nu_pay_nu_pay_t *nu_pay
 );
 

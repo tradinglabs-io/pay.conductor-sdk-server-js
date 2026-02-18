@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**owner_document** | **str** | Documento do titular da conta (CPF ou CNPJ) | 
-**owner_name** | **str** | Nome do titular da conta | 
+**owner_document** | **str** | Account holder document (CPF or CNPJ) | 
+**owner_name** | **str** | Account holder name | 
 **pix_key** | **str** | PIX key for withdrawal | 
 **pix_type** | **str** | PIX key type | [default to 'Cnpj']
 

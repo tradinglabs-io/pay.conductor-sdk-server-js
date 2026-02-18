@@ -7,12 +7,12 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **String** | ID do pedido no sistema |  |
-|**externalId** | **String** | ID externo do pedido (fornecido pela sua integração) |  |
-|**externalIntegrationKey** | **String** | Provedor utilizada para processar o pedido |  |
-|**externalIntegrationId** | **String** | ID do pedido no provedor de pagamento |  |
-|**amount** | **BigDecimal** | Valor total do pedido |  |
-|**costFee** | **BigDecimal** | Taxa de custo aplicada ao pedido |  |
+|**id** | **String** | Order ID in the system |  |
+|**externalId** | **String** | External order ID (provided by your integration) |  |
+|**externalIntegrationKey** | **String** | Provider used to process the order |  |
+|**externalIntegrationId** | **String** | Order ID in the payment provider |  |
+|**amount** | **BigDecimal** | Total order amount |  |
+|**costFee** | **BigDecimal** | Cost fee applied to the order |  |
 |**pix** | [**PostOrders200ResponsePix**](PostOrders200ResponsePix.md) |  |  [optional] |
 |**bankSlip** | [**PostOrders200ResponseBankSlip**](PostOrders200ResponseBankSlip.md) |  |  [optional] |
 |**nuPay** | [**PostOrders200ResponseNuPay**](PostOrders200ResponseNuPay.md) |  |  [optional] |
@@ -20,9 +20,9 @@
 |**creditCard** | [**PostOrders200ResponseCreditCard**](PostOrders200ResponseCreditCard.md) |  |  [optional] |
 |**status** | [**StatusEnum**](#StatusEnum) |  |  |
 |**paymentMethod** | [**PaymentMethodEnum**](#PaymentMethodEnum) |  |  |
-|**payedAt** | **String** | Data e hora em que o pedido foi pago (ISO 8601) |  |
-|**errorCode** | **String** | Código de erro, se houver |  |
-|**errorMessage** | **String** | Mensagem de erro, se houver |  |
+|**payedAt** | **String** | Date and time when the order was paid (ISO 8601) |  |
+|**errorCode** | **String** | Error code, if any |  |
+|**errorMessage** | **String** | Error message, if any |  |
 |**orderItems** | [**List&lt;PostOrders200ResponseOrderItemsInner&gt;**](PostOrders200ResponseOrderItemsInner.md) |  |  |
 |**session** | [**PostOrders200ResponseSession**](PostOrders200ResponseSession.md) |  |  [optional] |
 

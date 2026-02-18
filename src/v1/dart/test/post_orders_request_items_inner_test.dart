@@ -7,31 +7,31 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrdersRequestItemsInner, () {
-    // ID do produto ou serviço no seu sistema
+    // Product or service ID in your system
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // Define se o item é um produto físico ou um serviço
+    // Defines if the item is a physical product or a service
     // bool isPhysical (default value: false)
     test('to test the property `isPhysical`', () async {
       // TODO
     });
 
-    // Nome do produto ou serviço
+    // Product or service name
     // String name
     test('to test the property `name`', () async {
       // TODO
     });
 
-    // Quantidade do produto ou serviço
+    // Quantity of the product or service
     // num qty
     test('to test the property `qty`', () async {
       // TODO
     });
 
-    // Preço unitário
+    // Unit price
     // num unitPrice
     test('to test the property `unitPrice`', () async {
       // TODO

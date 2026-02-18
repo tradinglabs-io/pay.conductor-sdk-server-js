@@ -16,21 +16,21 @@ PostOrdersRequestPayment <- R6::R6Class(
     #' @field actual_type the type of the object stored in this instance.
     actual_type = NULL,
     #' @field any_of  a list of object types defined in the anyOf schema.
-    any_of = list("Boleto", "CartODeCrDito", "NuPay", "PicPay", "Pix"),
+    any_of = list("BankSlip", "CreditCard", "NuPay", "PicPay", "Pix"),
 
     #' @description
     #' Initialize a new PostOrdersRequestPayment.
     #'
-    #' @param instance an instance of the object defined in the anyOf schemas: "Boleto", "CartODeCrDito", "NuPay", "PicPay", "Pix"
+    #' @param instance an instance of the object defined in the anyOf schemas: "BankSlip", "CreditCard", "NuPay", "PicPay", "Pix"
     initialize = function(instance = NULL) {
       if (is.null(instance)) {
         # do nothing
-      } else if (get(class(instance)[[1]], pos = -1)$classname ==  "Boleto") {
+      } else if (get(class(instance)[[1]], pos = -1)$classname ==  "BankSlip") {
         self$actual_instance <- instance
-        self$actual_type <- "Boleto"
-      } else if (get(class(instance)[[1]], pos = -1)$classname ==  "CartODeCrDito") {
+        self$actual_type <- "BankSlip"
+      } else if (get(class(instance)[[1]], pos = -1)$classname ==  "CreditCard") {
         self$actual_instance <- instance
-        self$actual_type <- "CartODeCrDito"
+        self$actual_type <- "CreditCard"
       } else if (get(class(instance)[[1]], pos = -1)$classname ==  "NuPay") {
         self$actual_instance <- instance
         self$actual_type <- "NuPay"
@@ -41,7 +41,7 @@ PostOrdersRequestPayment <- R6::R6Class(
         self$actual_instance <- instance
         self$actual_type <- "Pix"
       } else {
-        stop(paste("Failed to initialize PostOrdersRequestPayment with anyOf schemas Boleto, CartODeCrDito, NuPay, PicPay, Pix. Provided class name: ",
+        stop(paste("Failed to initialize PostOrdersRequestPayment with anyOf schemas BankSlip, CreditCard, NuPay, PicPay, Pix. Provided class name: ",
                    get(class(instance)[[1]], pos = -1)$classname))
       }
     },
@@ -80,32 +80,32 @@ PostOrdersRequestPayment <- R6::R6Class(
         error_messages <- append(error_messages, `Pix_result`["message"])
       }
 
-      `CartODeCrDito_result` <- tryCatch({
-          `CartODeCrDito`$public_methods$validateJSON(input)
-          `CartODeCrDito_instance` <- `CartODeCrDito`$new()
-          self$actual_instance <- `CartODeCrDito_instance`$fromJSON(input)
-          self$actual_type <- "CartODeCrDito"
+      `CreditCard_result` <- tryCatch({
+          `CreditCard`$public_methods$validateJSON(input)
+          `CreditCard_instance` <- `CreditCard`$new()
+          self$actual_instance <- `CreditCard_instance`$fromJSON(input)
+          self$actual_type <- "CreditCard"
           return(self)
         },
         error = function(err) err
       )
 
-      if (!is.null(`CartODeCrDito_result`["error"])) {
-        error_messages <- append(error_messages, `CartODeCrDito_result`["message"])
+      if (!is.null(`CreditCard_result`["error"])) {
+        error_messages <- append(error_messages, `CreditCard_result`["message"])
       }
 
-      `Boleto_result` <- tryCatch({
-          `Boleto`$public_methods$validateJSON(input)
-          `Boleto_instance` <- `Boleto`$new()
-          self$actual_instance <- `Boleto_instance`$fromJSON(input)
-          self$actual_type <- "Boleto"
+      `BankSlip_result` <- tryCatch({
+          `BankSlip`$public_methods$validateJSON(input)
+          `BankSlip_instance` <- `BankSlip`$new()
+          self$actual_instance <- `BankSlip_instance`$fromJSON(input)
+          self$actual_type <- "BankSlip"
           return(self)
         },
         error = function(err) err
       )
 
-      if (!is.null(`Boleto_result`["error"])) {
-        error_messages <- append(error_messages, `Boleto_result`["message"])
+      if (!is.null(`BankSlip_result`["error"])) {
+        error_messages <- append(error_messages, `BankSlip_result`["message"])
       }
 
       `NuPay_result` <- tryCatch({
@@ -137,7 +137,7 @@ PostOrdersRequestPayment <- R6::R6Class(
       }
 
       # no match
-      stop(paste("No match found when deserializing the input into PostOrdersRequestPayment with anyOf schemas Boleto, CartODeCrDito, NuPay, PicPay, Pix. Details: >>",
+      stop(paste("No match found when deserializing the input into PostOrdersRequestPayment with anyOf schemas BankSlip, CreditCard, NuPay, PicPay, Pix. Details: >>",
                  paste(error_messages, collapse = " >> ")))
     },
 

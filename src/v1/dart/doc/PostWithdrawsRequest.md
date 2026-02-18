@@ -8,8 +8,8 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **num** | Valor do saque em centavos | 
-**externalId** | **String** | ID do saque no seu sistema | [optional] 
+**amount** | **num** | Withdrawal amount in cents | 
+**externalId** | **String** | Withdrawal ID in your system | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payoutAccount** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  | 
 

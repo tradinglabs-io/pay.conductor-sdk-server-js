@@ -4,9 +4,9 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **copy_and_paste_code** | **String** | Código copia e cola do PIX |  |
-| **qr_code_url** | **String** | URL da imagem do QR Code PIX |  |
-| **end_to_end_id** | **String** | E2E ID do PIX |  |
+| **copy_and_paste_code** | **String** | PIX copy and paste code |  |
+| **qr_code_url** | **String** | PIX QR Code image URL |  |
+| **end_to_end_id** | **String** | PIX E2E ID |  |
 
 ## Example
 

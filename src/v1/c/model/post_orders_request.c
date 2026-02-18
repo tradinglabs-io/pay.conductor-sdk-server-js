@@ -8,7 +8,7 @@
 static post_orders_request_t *post_orders_request_create_internal(
     double charge_amount,
     char *client_ip,
-    cliente_t *customer,
+    customer_t *customer,
     double discount_amount,
     char *external_id,
     post_orders_request_fingerprints_t *fingerprints,
@@ -47,7 +47,7 @@ static post_orders_request_t *post_orders_request_create_internal(
 __attribute__((deprecated)) post_orders_request_t *post_orders_request_create(
     double charge_amount,
     char *client_ip,
-    cliente_t *customer,
+    customer_t *customer,
     double discount_amount,
     char *external_id,
     post_orders_request_fingerprints_t *fingerprints,
@@ -92,7 +92,7 @@ void post_orders_request_free(post_orders_request_t *post_orders_request) {
         post_orders_request->client_ip = NULL;
     }
     if (post_orders_request->customer) {
-        cliente_free(post_orders_request->customer);
+        customer_free(post_orders_request->customer);
         post_orders_request->customer = NULL;
     }
     if (post_orders_request->external_id) {
@@ -154,7 +154,7 @@ cJSON *post_orders_request_convertToJSON(post_orders_request_t *post_orders_requ
     if (!post_orders_request->customer) {
         goto fail;
     }
-    cJSON *customer_local_JSON = cliente_convertToJSON(post_orders_request->customer);
+    cJSON *customer_local_JSON = customer_convertToJSON(post_orders_request->customer);
     if(customer_local_JSON == NULL) {
     goto fail; //model
     }
@@ -306,7 +306,7 @@ post_orders_request_t *post_orders_request_parseFromJSON(cJSON *post_orders_requ
     post_orders_request_t *post_orders_request_local_var = NULL;
 
     // define the local variable for post_orders_request->customer
-    cliente_t *customer_local_nonprim = NULL;
+    customer_t *customer_local_nonprim = NULL;
 
     // define the local variable for post_orders_request->fingerprints
     post_orders_request_fingerprints_t *fingerprints_local_nonprim = NULL;
@@ -363,7 +363,7 @@ post_orders_request_t *post_orders_request_parseFromJSON(cJSON *post_orders_requ
     }
 
     
-    customer_local_nonprim = cliente_parseFromJSON(customer); //nonprimitive
+    customer_local_nonprim = customer_parseFromJSON(customer); //nonprimitive
 
     // post_orders_request->discount_amount
     cJSON *discount_amount = cJSON_GetObjectItemCaseSensitive(post_orders_requestJSON, "discountAmount");
@@ -531,7 +531,7 @@ post_orders_request_t *post_orders_request_parseFromJSON(cJSON *post_orders_requ
     return post_orders_request_local_var;
 end:
     if (customer_local_nonprim) {
-        cliente_free(customer_local_nonprim);
+        customer_free(customer_local_nonprim);
         customer_local_nonprim = NULL;
     }
     if (fingerprints_local_nonprim) {

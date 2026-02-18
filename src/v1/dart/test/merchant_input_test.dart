@@ -7,19 +7,19 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(MerchantInput, () {
-    // CPF ou CNPJ do merchant sem formatação
+    // Merchant CPF or CNPJ without formatting
     // String document
     test('to test the property `document`', () async {
       // TODO
     });
 
-    // Email do merchant
+    // Merchant email
     // String email
     test('to test the property `email`', () async {
       // TODO
     });
 
-    // Nome do merchant
+    // Merchant name
     // String name
     test('to test the property `name`', () async {
       // TODO

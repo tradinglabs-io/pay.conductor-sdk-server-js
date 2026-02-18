@@ -8,20 +8,20 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chargeAmount** | **num** | Valor total a ser cobrado no pedido em valor flutuante | 
-**clientIp** | **String** | Endereço IP do cliente | 
-**customer** | [**Cliente**](Cliente.md) |  | 
-**discountAmount** | **num** | Valor do desconto | [default to 0]
-**externalId** | **String** | ID da ordem no seu sistema | 
+**chargeAmount** | **num** | Total amount to be charged on the order in floating point value | 
+**clientIp** | **String** | Client IP address | 
+**customer** | [**Customer**](Customer.md) |  | 
+**discountAmount** | **num** | Discount amount | [default to 0]
+**externalId** | **String** | Order ID in your system | 
 **fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  | [optional] 
-**items** | [**BuiltList&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido | [optional] 
+**items** | [**BuiltList&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | List of products or services in the order | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  | 
-**splitAmountTotal** | **num** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) | [optional] 
+**splitAmountTotal** | **num** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) | [optional] 
 **session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  | [optional] 
-**shippingFee** | **num** | Valor do frete | [default to 0]
-**taxFee** | **num** | Taxas adicionais | [default to 0]
-**metadata** | [**JsonObject**](.md) | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves | [optional] 
+**shippingFee** | **num** | Shipping fee | [default to 0]
+**taxFee** | **num** | Additional fees | [default to 0]
+**metadata** | [**JsonObject**](.md) | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

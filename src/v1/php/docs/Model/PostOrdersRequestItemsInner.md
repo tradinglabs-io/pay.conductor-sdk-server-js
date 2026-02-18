@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | ID do produto ou serviço no seu sistema |
-**is_physical** | **bool** | Define se o item é um produto físico ou um serviço | [default to false]
-**name** | **string** | Nome do produto ou serviço |
-**qty** | **float** | Quantidade do produto ou serviço |
-**unit_price** | **float** | Preço unitário |
+**id** | **string** | Product or service ID in your system |
+**is_physical** | **bool** | Defines if the item is a physical product or a service | [default to false]
+**name** | **string** | Product or service name |
+**qty** | **float** | Quantity of the product or service |
+**unit_price** | **float** | Unit price |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

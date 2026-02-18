@@ -4,9 +4,9 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **barCode** | **kotlin.String** | Código de barras do boleto |  |
-| **digitableLine** | **kotlin.String** | Linha digitável do boleto |  |
-| **pdfUrl** | **kotlin.String** | URL do PDF do boleto |  [optional] |
+| **barCode** | **kotlin.String** | Bank slip bar code |  |
+| **digitableLine** | **kotlin.String** | Bank slip digitable line |  |
+| **pdfUrl** | **kotlin.String** | Bank slip PDF URL |  [optional] |
 
 
 

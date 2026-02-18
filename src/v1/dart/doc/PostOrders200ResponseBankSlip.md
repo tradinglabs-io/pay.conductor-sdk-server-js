@@ -8,9 +8,9 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**barCode** | **String** | Código de barras do boleto | 
-**digitableLine** | **String** | Linha digitável do boleto | 
-**pdfUrl** | **String** | URL do PDF do boleto | [optional] 
+**barCode** | **String** | Bank slip bar code | 
+**digitableLine** | **String** | Bank slip digitable line | 
+**pdfUrl** | **String** | Bank slip PDF URL | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

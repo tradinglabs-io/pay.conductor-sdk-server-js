@@ -1,6 +1,6 @@
 /*
  * PayConductor API
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -51,7 +51,7 @@ import org.openapitools.client.JSON;
 /**
  * PostWithdrawsRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-18T14:44:19.268927700-03:00[America/Bahia]", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-18T15:58:14.340077800-03:00[America/Bahia]", comments = "Generator version: 7.20.0")
 public class PostWithdrawsRequest {
   public static final String SERIALIZED_NAME_AMOUNT = "amount";
   @SerializedName(SERIALIZED_NAME_AMOUNT)
@@ -82,7 +82,7 @@ public class PostWithdrawsRequest {
   }
 
   /**
-   * Valor do saque em centavos
+   * Withdrawal amount in cents
    * minimum: 1
    * @return amount
    */
@@ -102,7 +102,7 @@ public class PostWithdrawsRequest {
   }
 
   /**
-   * ID do saque no seu sistema
+   * Withdrawal ID in your system
    * @return externalId
    */
   @javax.annotation.Nullable

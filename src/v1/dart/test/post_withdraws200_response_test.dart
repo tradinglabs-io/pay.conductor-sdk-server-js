@@ -7,49 +7,49 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostWithdraws200Response, () {
-    // Identificador único do saque
+    // Unique withdrawal identifier
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // ID do saque no sistema no seu sistema
+    // Withdrawal ID in your system
     // String externalId
     test('to test the property `externalId`', () async {
       // TODO
     });
 
-    // Chave do provedor utilizado para o saque
+    // Provider key used for the withdrawal
     // String externalIntegrationKey
     test('to test the property `externalIntegrationKey`', () async {
       // TODO
     });
 
-    // ID do saque no provedor de pagamento
+    // Withdrawal ID in the payment provider
     // String externalIntegrationId
     test('to test the property `externalIntegrationId`', () async {
       // TODO
     });
 
-    // Taxa de custo aplicada ao saque
+    // Cost fee applied to the withdrawal
     // num costFee
     test('to test the property `costFee`', () async {
       // TODO
     });
 
-    // Status do saque
+    // Withdrawal status
     // String status (default value: 'Pending')
     test('to test the property `status`', () async {
       // TODO
     });
 
-    // Código do erro, se houver
+    // Error code, if any
     // String errorCode
     test('to test the property `errorCode`', () async {
       // TODO
     });
 
-    // Mensagem descritiva do erro, se houver
+    // Descriptive error message, if any
     // String errorMessage
     test('to test the property `errorMessage`', () async {
       // TODO

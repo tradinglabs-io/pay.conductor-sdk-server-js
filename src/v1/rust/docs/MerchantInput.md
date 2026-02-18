@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | **String** | CPF ou CNPJ do merchant sem formatação | 
-**email** | **String** | Email do merchant | 
-**name** | **String** | Nome do merchant | 
+**document** | **String** | Merchant CPF or CNPJ without formatting | 
+**email** | **String** | Merchant email | 
+**name** | **String** | Merchant name | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

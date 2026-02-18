@@ -4,10 +4,10 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **cancelUrl** | **kotlin.String** | URL de cancelamento do pagamento |  |
-| **merchantName** | **kotlin.String** | Nome do comerciante |  |
-| **returnUrl** | **kotlin.String** | URL de retorno após a conclusão do pagamento |  |
-| **storeName** | **kotlin.String** | Nome da loja |  [optional] |
+| **cancelUrl** | **kotlin.String** | Payment cancellation URL |  |
+| **merchantName** | **kotlin.String** | Merchant name |  |
+| **returnUrl** | **kotlin.String** | Return URL after payment completion |  |
+| **storeName** | **kotlin.String** | Store name |  [optional] |
 
 
 

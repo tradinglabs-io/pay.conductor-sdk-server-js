@@ -7,20 +7,20 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**chargeAmount** | **BigDecimal** | Valor total a ser cobrado no pedido em valor flutuante |  |
-|**clientIp** | **String** | Endereço IP do cliente |  |
-|**customer** | [**Cliente**](Cliente.md) |  |  |
-|**discountAmount** | **BigDecimal** | Valor do desconto |  |
-|**externalId** | **String** | ID da ordem no seu sistema |  |
+|**chargeAmount** | **BigDecimal** | Total amount to be charged on the order in floating point value |  |
+|**clientIp** | **String** | Client IP address |  |
+|**customer** | [**Customer**](Customer.md) |  |  |
+|**discountAmount** | **BigDecimal** | Discount amount |  |
+|**externalId** | **String** | Order ID in your system |  |
 |**fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  |  [optional] |
-|**items** | [**List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido |  [optional] |
+|**items** | [**List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | List of products or services in the order |  [optional] |
 |**merchant** | [**MerchantInput**](MerchantInput.md) |  |  [optional] |
 |**payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  |  |
-|**splitAmountTotal** | **BigDecimal** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) |  [optional] |
+|**splitAmountTotal** | **BigDecimal** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) |  [optional] |
 |**session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  |  [optional] |
-|**shippingFee** | **BigDecimal** | Valor do frete |  |
-|**taxFee** | **BigDecimal** | Taxas adicionais |  |
-|**metadata** | **Object** | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves |  [optional] |
+|**shippingFee** | **BigDecimal** | Shipping fee |  |
+|**taxFee** | **BigDecimal** | Additional fees |  |
+|**metadata** | **Object** | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters |  [optional] |
 
 
 

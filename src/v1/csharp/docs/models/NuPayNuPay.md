@@ -1,14 +1,14 @@
 # payconductor-sdk.Model.NuPayNuPay
-Dados específicos para pagamento via NuPay
+Specific data for NuPay payment
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CancelUrl** | **string** | URL de cancelamento do pagamento | 
-**MerchantName** | **string** | Nome do comerciante | 
-**ReturnUrl** | **string** | URL de retorno após a conclusão do pagamento | 
-**StoreName** | **string** | Nome da loja | [optional] 
+**CancelUrl** | **string** | Payment cancellation URL | 
+**MerchantName** | **string** | Merchant name | 
+**ReturnUrl** | **string** | Return URL after payment completion | 
+**StoreName** | **string** | Store name | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

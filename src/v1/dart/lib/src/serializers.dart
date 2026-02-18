@@ -14,22 +14,28 @@ import 'package:built_value/iso_8601_date_time_serializer.dart';
 import 'package:openapi/src/date_serializer.dart';
 import 'package:openapi/src/model/date.dart';
 
-import 'package:openapi/src/model/boleto.dart';
-import 'package:openapi/src/model/boleto_expiration_in_days.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito_card.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito_installments.dart';
-import 'package:openapi/src/model/cart_o_tokenizado.dart';
-import 'package:openapi/src/model/cliente.dart';
-import 'package:openapi/src/model/dados_completos_do_cart_o.dart';
-import 'package:openapi/src/model/dados_completos_do_cart_o_expiration.dart';
-import 'package:openapi/src/model/endere_odo_cliente.dart';
+import 'package:openapi/src/model/bank_slip.dart';
+import 'package:openapi/src/model/bank_slip_expiration_in_days.dart';
+import 'package:openapi/src/model/complete_card_data.dart';
+import 'package:openapi/src/model/complete_card_data_expiration.dart';
+import 'package:openapi/src/model/credit_card.dart';
+import 'package:openapi/src/model/credit_card_card.dart';
+import 'package:openapi/src/model/credit_card_installments.dart';
+import 'package:openapi/src/model/customer.dart';
+import 'package:openapi/src/model/customer1.dart';
+import 'package:openapi/src/model/customer2.dart';
+import 'package:openapi/src/model/customer2_document_type.dart';
+import 'package:openapi/src/model/customer_address.dart';
 import 'package:openapi/src/model/merchant_input.dart';
 import 'package:openapi/src/model/nu_pay.dart';
 import 'package:openapi/src/model/nu_pay_nu_pay.dart';
 import 'package:openapi/src/model/pic_pay.dart';
 import 'package:openapi/src/model/pix.dart';
 import 'package:openapi/src/model/pix_expiration_in_seconds.dart';
+import 'package:openapi/src/model/post_card_tokenization200_response.dart';
+import 'package:openapi/src/model/post_card_tokenization_request.dart';
+import 'package:openapi/src/model/post_card_tokenization_request_customer.dart';
+import 'package:openapi/src/model/post_card_tokenization_request_customer_any_of.dart';
 import 'package:openapi/src/model/post_orders200_response.dart';
 import 'package:openapi/src/model/post_orders200_response_bank_slip.dart';
 import 'package:openapi/src/model/post_orders200_response_credit_card.dart';
@@ -48,26 +54,33 @@ import 'package:openapi/src/model/post_withdraws200_response_payed_at.dart';
 import 'package:openapi/src/model/post_withdraws200_response_payout_account.dart';
 import 'package:openapi/src/model/post_withdraws_request.dart';
 import 'package:openapi/src/model/post_withdraws_request_payout_account.dart';
+import 'package:openapi/src/model/tokenized_card.dart';
 
 part 'serializers.g.dart';
 
 @SerializersFor([
-  Boleto,
-  BoletoExpirationInDays,
-  CartODeCrDito,
-  CartODeCrDitoCard,
-  CartODeCrDitoInstallments,
-  CartOTokenizado,
-  Cliente,
-  DadosCompletosDoCartO,
-  DadosCompletosDoCartOExpiration,
-  EndereODoCliente,
+  BankSlip,
+  BankSlipExpirationInDays,
+  CompleteCardData,
+  CompleteCardDataExpiration,
+  CreditCard,
+  CreditCardCard,
+  CreditCardInstallments,
+  Customer,
+  Customer1,
+  Customer2,
+  Customer2DocumentType,
+  CustomerAddress,
   MerchantInput,
   NuPay,
   NuPayNuPay,
   PicPay,
   Pix,
   PixExpirationInSeconds,
+  PostCardTokenization200Response,
+  PostCardTokenizationRequest,
+  PostCardTokenizationRequestCustomer,
+  PostCardTokenizationRequestCustomerAnyOf,
   PostOrders200Response,
   PostOrders200ResponseBankSlip,
   PostOrders200ResponseCreditCard,
@@ -86,6 +99,7 @@ part 'serializers.g.dart';
   PostWithdraws200ResponsePayoutAccount,
   PostWithdrawsRequest,
   PostWithdrawsRequestPayoutAccount,
+  TokenizedCard,
 ])
 Serializers serializers = (_$serializers.toBuilder()
       ..add(const OneOfSerializer())

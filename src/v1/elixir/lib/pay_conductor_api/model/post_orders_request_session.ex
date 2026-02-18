@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.PostOrdersRequestSession do
   @moduledoc """
-  Caso o externalSessionId ou sessionId sejam fornecidos e houver uma sessão existente, ela será atualizada com os novos dados. Caso contrário, uma nova sessão será criada.
+  If externalSessionId or sessionId is provided and an existing session exists, it will be updated with the new data. Otherwise, a new session will be created.
   """
 
   @derive JSON.Encoder

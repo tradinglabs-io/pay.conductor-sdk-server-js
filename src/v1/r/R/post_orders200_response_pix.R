@@ -1,15 +1,15 @@
 #' Create a new PostOrders200ResponsePix
 #'
 #' @description
-#' Dados do PIX
+#' PIX data
 #'
 #' @docType class
 #' @title PostOrders200ResponsePix
 #' @description PostOrders200ResponsePix Class
 #' @format An \code{R6Class} generator object
-#' @field copyAndPasteCode Código copia e cola do PIX character
-#' @field qrCodeUrl URL da imagem do QR Code PIX character
-#' @field endToEndId E2E ID do PIX character
+#' @field copyAndPasteCode PIX copy and paste code character
+#' @field qrCodeUrl PIX QR Code image URL character
+#' @field endToEndId PIX E2E ID character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -23,9 +23,9 @@ PostOrders200ResponsePix <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponsePix class.
     #'
-    #' @param copyAndPasteCode Código copia e cola do PIX
-    #' @param qrCodeUrl URL da imagem do QR Code PIX
-    #' @param endToEndId E2E ID do PIX
+    #' @param copyAndPasteCode PIX copy and paste code
+    #' @param qrCodeUrl PIX QR Code image URL
+    #' @param endToEndId PIX E2E ID
     #' @param ... Other optional arguments.
     initialize = function(`copyAndPasteCode`, `qrCodeUrl`, `endToEndId`, ...) {
       if (!missing(`copyAndPasteCode`)) {

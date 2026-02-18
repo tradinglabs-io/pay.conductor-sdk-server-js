@@ -22,43 +22,43 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param externalId ID externo do item
- * @param id ID do item no pedido
- * @param name Nome do produto/serviço
- * @param qty Quantidade
- * @param totalAmount Valor total do item (quantidade × preço unitário)
- * @param totalNetAmount Valor líquido total do item
- * @param unityPrice Preço unitário
+ * @param externalId External item ID
+ * @param id Item ID in the order
+ * @param name Product/service name
+ * @param qty Quantity
+ * @param totalAmount Total item amount (quantity × unit price)
+ * @param totalNetAmount Total net amount of the item
+ * @param unityPrice Unit price
  */
 
 
 data class PostOrders200ResponseOrderItemsInner (
 
-    /* ID externo do item */
+    /* External item ID */
     @Json(name = "externalId")
     val externalId: kotlin.String?,
 
-    /* ID do item no pedido */
+    /* Item ID in the order */
     @Json(name = "id")
     val id: kotlin.String,
 
-    /* Nome do produto/serviço */
+    /* Product/service name */
     @Json(name = "name")
     val name: kotlin.String,
 
-    /* Quantidade */
+    /* Quantity */
     @Json(name = "qty")
     val qty: java.math.BigDecimal,
 
-    /* Valor total do item (quantidade × preço unitário) */
+    /* Total item amount (quantity × unit price) */
     @Json(name = "totalAmount")
     val totalAmount: java.math.BigDecimal,
 
-    /* Valor líquido total do item */
+    /* Total net amount of the item */
     @Json(name = "totalNetAmount")
     val totalNetAmount: java.math.BigDecimal,
 
-    /* Preço unitário */
+    /* Unit price */
     @Json(name = "unityPrice")
     val unityPrice: java.math.BigDecimal
 

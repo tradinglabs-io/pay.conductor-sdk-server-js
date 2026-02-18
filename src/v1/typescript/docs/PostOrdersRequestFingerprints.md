@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**threatMetrixFingerprintId** | **string** | ID de fingerprint do ThreatMetrix para análise de fraude | [optional] [default to undefined]
+**threatMetrixFingerprintId** | **string** | ThreatMetrix fingerprint ID for fraud analysis | [optional] [default to undefined]
 
 ## Example
 

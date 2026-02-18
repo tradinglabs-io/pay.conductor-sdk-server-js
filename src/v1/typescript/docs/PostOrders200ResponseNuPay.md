@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentUrl** | **string** | URL de pagamento NuPay | [default to undefined]
+**paymentUrl** | **string** | NuPay payment URL | [default to undefined]
 
 ## Example
 

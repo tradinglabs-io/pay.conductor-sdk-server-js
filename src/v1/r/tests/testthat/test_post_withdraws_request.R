@@ -7,7 +7,7 @@ model_instance <- PostWithdrawsRequest$new()
 
 test_that("amount", {
   # tests for the property `amount` (numeric)
-  # Valor do saque em centavos
+  # Withdrawal amount in cents
 
   # uncomment below to test the property
   #expect_equal(model.instance$`amount`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("amount", {
 
 test_that("externalId", {
   # tests for the property `externalId` (character)
-  # ID do saque no seu sistema
+  # Withdrawal ID in your system
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalId`, "EXPECTED_RESULT")

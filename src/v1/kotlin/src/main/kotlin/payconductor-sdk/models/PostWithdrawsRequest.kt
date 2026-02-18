@@ -24,23 +24,23 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param amount Valor do saque em centavos
+ * @param amount Withdrawal amount in cents
  * @param payoutAccount 
- * @param externalId ID do saque no seu sistema
+ * @param externalId Withdrawal ID in your system
  * @param merchant 
  */
 
 
 data class PostWithdrawsRequest (
 
-    /* Valor do saque em centavos */
+    /* Withdrawal amount in cents */
     @Json(name = "amount")
     val amount: java.math.BigDecimal,
 
     @Json(name = "payoutAccount")
     val payoutAccount: PostWithdrawsRequestPayoutAccount,
 
-    /* ID do saque no seu sistema */
+    /* Withdrawal ID in your system */
     @Json(name = "externalId")
     val externalId: kotlin.String? = null,
 

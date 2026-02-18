@@ -4,14 +4,14 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **character** | Identificador único do saque | 
-**externalId** | **character** | ID do saque no sistema no seu sistema | 
-**externalIntegrationKey** | **character** | Chave do provedor utilizado para o saque | 
-**externalIntegrationId** | **character** | ID do saque no provedor de pagamento | 
-**costFee** | **numeric** | Taxa de custo aplicada ao saque | 
-**status** | **character** | Status do saque | [default to &quot;Pending&quot;] [Enum: [Pending, Transferring, Completed, Failed]] 
-**errorCode** | **character** | Código do erro, se houver | 
-**errorMessage** | **character** | Mensagem descritiva do erro, se houver | 
+**id** | **character** | Unique withdrawal identifier | 
+**externalId** | **character** | Withdrawal ID in your system | 
+**externalIntegrationKey** | **character** | Provider key used for the withdrawal | 
+**externalIntegrationId** | **character** | Withdrawal ID in the payment provider | 
+**costFee** | **numeric** | Cost fee applied to the withdrawal | 
+**status** | **character** | Withdrawal status | [default to &quot;Pending&quot;] [Enum: [Pending, Transferring, Completed, Failed]] 
+**errorCode** | **character** | Error code, if any | 
+**errorMessage** | **character** | Descriptive error message, if any | 
 **payedAt** | [**PostWithdraws200ResponsePayedAt**](postWithdraws_200_response_payedAt.md) |  | 
 **payoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](postWithdraws_200_response_payoutAccount.md) |  | 
 

@@ -1,7 +1,7 @@
 (ns payconductor-sdk.specs.post-orders-request
   (:require [clojure.spec.alpha :as s]
             [spec-tools.data-spec :as ds]
-            [payconductor-sdk.specs.cliente :refer :all]
+            [payconductor-sdk.specs.customer :refer :all]
             [payconductor-sdk.specs.post-orders-request-fingerprints :refer :all]
             [payconductor-sdk.specs.post-orders-request-items-inner :refer :all]
             [payconductor-sdk.specs.merchant-input :refer :all]
@@ -16,7 +16,7 @@
   {
    (ds/req :chargeAmount) float?
    (ds/req :clientIp) string?
-   (ds/req :customer) cliente-spec
+   (ds/req :customer) customer-spec
    (ds/req :discountAmount) float?
    (ds/req :externalId) string?
    (ds/opt :fingerprints) post-orders-request-fingerprints-spec

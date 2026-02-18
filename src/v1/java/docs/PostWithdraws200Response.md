@@ -7,14 +7,14 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **String** | Identificador único do saque |  |
-|**externalId** | **String** | ID do saque no sistema no seu sistema |  |
-|**externalIntegrationKey** | **String** | Chave do provedor utilizado para o saque |  |
-|**externalIntegrationId** | **String** | ID do saque no provedor de pagamento |  |
-|**costFee** | **BigDecimal** | Taxa de custo aplicada ao saque |  |
-|**status** | [**StatusEnum**](#StatusEnum) | Status do saque |  |
-|**errorCode** | **String** | Código do erro, se houver |  |
-|**errorMessage** | **String** | Mensagem descritiva do erro, se houver |  |
+|**id** | **String** | Unique withdrawal identifier |  |
+|**externalId** | **String** | Withdrawal ID in your system |  |
+|**externalIntegrationKey** | **String** | Provider key used for the withdrawal |  |
+|**externalIntegrationId** | **String** | Withdrawal ID in the payment provider |  |
+|**costFee** | **BigDecimal** | Cost fee applied to the withdrawal |  |
+|**status** | [**StatusEnum**](#StatusEnum) | Withdrawal status |  |
+|**errorCode** | **String** | Error code, if any |  |
+|**errorMessage** | **String** | Descriptive error message, if any |  |
 |**payedAt** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  |  |
 |**payoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  |  |
 

@@ -25,13 +25,13 @@ class PostOrders200ResponsePicPayTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponsePicPay
         //val modelInstance = PostOrders200ResponsePicPay()
 
-        // to test the property `copyAndPasteCode` - Código copia e cola do PicPay
+        // to test the property `copyAndPasteCode` - PicPay copy and paste code
         should("test copyAndPasteCode") {
             // uncomment below to test the property
             //modelInstance.copyAndPasteCode shouldBe ("TODO")
         }
 
-        // to test the property `qrCodeUrl` - URL da imagem do QR Code PicPay
+        // to test the property `qrCodeUrl` - PicPay QR Code image URL
         should("test qrCodeUrl") {
             // uncomment below to test the property
             //modelInstance.qrCodeUrl shouldBe ("TODO")

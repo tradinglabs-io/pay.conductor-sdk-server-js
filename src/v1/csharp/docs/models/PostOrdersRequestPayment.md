@@ -1,5 +1,5 @@
 # payconductor-sdk.Model.PostOrdersRequestPayment
-Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 ## Properties
 

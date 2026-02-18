@@ -6,17 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PaymentMethod** | **string** |  | 
 **ExpirationInSeconds** | Pointer to [**PixExpirationInSeconds**](PixExpirationInSeconds.md) |  | [optional] [default to 3600]
-**Card** | [**CartODeCrDitoCard**](CartODeCrDitoCard.md) |  | 
-**Installments** | [**CartODeCrDitoInstallments**](CartODeCrDitoInstallments.md) |  | [default to 1]
-**SoftDescriptor** | Pointer to **string** | Texto que aparecerá na fatura do cartão (soft descriptor) | [optional] 
-**ExpirationInDays** | Pointer to [**BoletoExpirationInDays**](BoletoExpirationInDays.md) |  | [optional] [default to 7]
+**Card** | [**CreditCardCard**](CreditCardCard.md) |  | 
+**Installments** | [**CreditCardInstallments**](CreditCardInstallments.md) |  | [default to 1]
+**SoftDescriptor** | Pointer to **string** | Text that will appear on the card statement (soft descriptor) | [optional] 
+**ExpirationInDays** | Pointer to [**BankSlipExpirationInDays**](BankSlipExpirationInDays.md) |  | [optional] [default to 7]
 **NuPay** | [**NuPayNuPay**](NuPayNuPay.md) |  | 
 
 ## Methods
 
 ### NewPostOrdersRequestPayment
 
-`func NewPostOrdersRequestPayment(paymentMethod string, card CartODeCrDitoCard, installments CartODeCrDitoInstallments, nuPay NuPayNuPay, ) *PostOrdersRequestPayment`
+`func NewPostOrdersRequestPayment(paymentMethod string, card CreditCardCard, installments CreditCardInstallments, nuPay NuPayNuPay, ) *PostOrdersRequestPayment`
 
 NewPostOrdersRequestPayment instantiates a new PostOrdersRequestPayment object
 This constructor will assign default values to properties that have it defined,
@@ -78,40 +78,40 @@ HasExpirationInSeconds returns a boolean if a field has been set.
 
 ### GetCard
 
-`func (o *PostOrdersRequestPayment) GetCard() CartODeCrDitoCard`
+`func (o *PostOrdersRequestPayment) GetCard() CreditCardCard`
 
 GetCard returns the Card field if non-nil, zero value otherwise.
 
 ### GetCardOk
 
-`func (o *PostOrdersRequestPayment) GetCardOk() (*CartODeCrDitoCard, bool)`
+`func (o *PostOrdersRequestPayment) GetCardOk() (*CreditCardCard, bool)`
 
 GetCardOk returns a tuple with the Card field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCard
 
-`func (o *PostOrdersRequestPayment) SetCard(v CartODeCrDitoCard)`
+`func (o *PostOrdersRequestPayment) SetCard(v CreditCardCard)`
 
 SetCard sets Card field to given value.
 
 
 ### GetInstallments
 
-`func (o *PostOrdersRequestPayment) GetInstallments() CartODeCrDitoInstallments`
+`func (o *PostOrdersRequestPayment) GetInstallments() CreditCardInstallments`
 
 GetInstallments returns the Installments field if non-nil, zero value otherwise.
 
 ### GetInstallmentsOk
 
-`func (o *PostOrdersRequestPayment) GetInstallmentsOk() (*CartODeCrDitoInstallments, bool)`
+`func (o *PostOrdersRequestPayment) GetInstallmentsOk() (*CreditCardInstallments, bool)`
 
 GetInstallmentsOk returns a tuple with the Installments field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInstallments
 
-`func (o *PostOrdersRequestPayment) SetInstallments(v CartODeCrDitoInstallments)`
+`func (o *PostOrdersRequestPayment) SetInstallments(v CreditCardInstallments)`
 
 SetInstallments sets Installments field to given value.
 
@@ -143,20 +143,20 @@ HasSoftDescriptor returns a boolean if a field has been set.
 
 ### GetExpirationInDays
 
-`func (o *PostOrdersRequestPayment) GetExpirationInDays() BoletoExpirationInDays`
+`func (o *PostOrdersRequestPayment) GetExpirationInDays() BankSlipExpirationInDays`
 
 GetExpirationInDays returns the ExpirationInDays field if non-nil, zero value otherwise.
 
 ### GetExpirationInDaysOk
 
-`func (o *PostOrdersRequestPayment) GetExpirationInDaysOk() (*BoletoExpirationInDays, bool)`
+`func (o *PostOrdersRequestPayment) GetExpirationInDaysOk() (*BankSlipExpirationInDays, bool)`
 
 GetExpirationInDaysOk returns a tuple with the ExpirationInDays field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpirationInDays
 
-`func (o *PostOrdersRequestPayment) SetExpirationInDays(v BoletoExpirationInDays)`
+`func (o *PostOrdersRequestPayment) SetExpirationInDays(v BankSlipExpirationInDays)`
 
 SetExpirationInDays sets ExpirationInDays field to given value.
 

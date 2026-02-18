@@ -12,17 +12,17 @@ part 'post_withdraws_request_payout_account.g.dart';
 /// PostWithdrawsRequestPayoutAccount
 ///
 /// Properties:
-/// * [ownerDocument] - Documento do titular da conta (CPF ou CNPJ)
-/// * [ownerName] - Nome do titular da conta
+/// * [ownerDocument] - Account holder document (CPF or CNPJ)
+/// * [ownerName] - Account holder name
 /// * [pixKey] - PIX key for withdrawal
 /// * [pixType] - PIX key type
 @BuiltValue()
 abstract class PostWithdrawsRequestPayoutAccount implements Built<PostWithdrawsRequestPayoutAccount, PostWithdrawsRequestPayoutAccountBuilder> {
-  /// Documento do titular da conta (CPF ou CNPJ)
+  /// Account holder document (CPF or CNPJ)
   @BuiltValueField(wireName: r'ownerDocument')
   String get ownerDocument;
 
-  /// Nome do titular da conta
+  /// Account holder name
   @BuiltValueField(wireName: r'ownerName')
   String get ownerName;
 

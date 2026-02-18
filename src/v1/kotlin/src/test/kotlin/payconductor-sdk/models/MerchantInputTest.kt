@@ -25,19 +25,19 @@ class MerchantInputTest : ShouldSpec() {
         // uncomment below to create an instance of MerchantInput
         //val modelInstance = MerchantInput()
 
-        // to test the property `document` - CPF ou CNPJ do merchant sem formatação
+        // to test the property `document` - Merchant CPF or CNPJ without formatting
         should("test document") {
             // uncomment below to test the property
             //modelInstance.document shouldBe ("TODO")
         }
 
-        // to test the property `email` - Email do merchant
+        // to test the property `email` - Merchant email
         should("test email") {
             // uncomment below to test the property
             //modelInstance.email shouldBe ("TODO")
         }
 
-        // to test the property `name` - Nome do merchant
+        // to test the property `name` - Merchant name
         should("test name") {
             // uncomment below to test the property
             //modelInstance.name shouldBe ("TODO")

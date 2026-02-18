@@ -8,9 +8,9 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**copyAndPasteCode** | **String** | Código copia e cola do PIX | 
-**qrCodeUrl** | **String** | URL da imagem do QR Code PIX | 
-**endToEndId** | **String** | E2E ID do PIX | 
+**copyAndPasteCode** | **String** | PIX copy and paste code | 
+**qrCodeUrl** | **String** | PIX QR Code image URL | 
+**endToEndId** | **String** | PIX E2E ID | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

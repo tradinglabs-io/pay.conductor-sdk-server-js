@@ -2,7 +2,7 @@
 
 PayConductor API
 
-# Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
 
 The version of the OpenAPI document: 1.0.0
 
@@ -30,7 +30,7 @@ use Log::Any qw($log);
 use Date::Parse;
 use DateTime;
 
-use WWW::OpenAPIClient::Object::Cliente;
+use WWW::OpenAPIClient::Object::Customer;
 use WWW::OpenAPIClient::Object::MerchantInput;
 use WWW::OpenAPIClient::Object::PostOrdersRequestFingerprints;
 use WWW::OpenAPIClient::Object::PostOrdersRequestItemsInner;
@@ -50,7 +50,7 @@ use base ("Class::Accessor", "Class::Data::Inheritable");
 
 PayConductor API
 
-# Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
 
 The version of the OpenAPI document: 1.0.0
 
@@ -228,19 +228,19 @@ __PACKAGE__->method_documentation({
     'charge_amount' => {
         datatype => 'double',
         base_name => 'chargeAmount',
-        description => 'Valor total a ser cobrado no pedido em valor flutuante',
+        description => 'Total amount to be charged on the order in floating point value',
         format => '',
         read_only => '',
             },
     'client_ip' => {
         datatype => 'string',
         base_name => 'clientIp',
-        description => 'Endereço IP do cliente',
+        description => 'Client IP address',
         format => '',
         read_only => '',
             },
     'customer' => {
-        datatype => 'Cliente',
+        datatype => 'Customer',
         base_name => 'customer',
         description => '',
         format => '',
@@ -249,14 +249,14 @@ __PACKAGE__->method_documentation({
     'discount_amount' => {
         datatype => 'double',
         base_name => 'discountAmount',
-        description => 'Valor do desconto',
+        description => 'Discount amount',
         format => '',
         read_only => '',
             },
     'external_id' => {
         datatype => 'string',
         base_name => 'externalId',
-        description => 'ID da ordem no seu sistema',
+        description => 'Order ID in your system',
         format => '',
         read_only => '',
             },
@@ -270,7 +270,7 @@ __PACKAGE__->method_documentation({
     'items' => {
         datatype => 'ARRAY[PostOrdersRequestItemsInner]',
         base_name => 'items',
-        description => 'Lista de produtos ou serviços do pedido',
+        description => 'List of products or services in the order',
         format => '',
         read_only => '',
             },
@@ -291,7 +291,7 @@ __PACKAGE__->method_documentation({
     'split_amount_total' => {
         datatype => 'double',
         base_name => 'splitAmountTotal',
-        description => 'Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)',
+        description => 'Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)',
         format => '',
         read_only => '',
             },
@@ -305,21 +305,21 @@ __PACKAGE__->method_documentation({
     'shipping_fee' => {
         datatype => 'double',
         base_name => 'shippingFee',
-        description => 'Valor do frete',
+        description => 'Shipping fee',
         format => '',
         read_only => '',
             },
     'tax_fee' => {
         datatype => 'double',
         base_name => 'taxFee',
-        description => 'Taxas adicionais',
+        description => 'Additional fees',
         format => '',
         read_only => '',
             },
     'metadata' => {
         datatype => 'object',
         base_name => 'metadata',
-        description => 'Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves',
+        description => 'Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters',
         format => '',
         read_only => '',
             },
@@ -328,7 +328,7 @@ __PACKAGE__->method_documentation({
 __PACKAGE__->openapi_types( {
     'charge_amount' => 'double',
     'client_ip' => 'string',
-    'customer' => 'Cliente',
+    'customer' => 'Customer',
     'discount_amount' => 'double',
     'external_id' => 'string',
     'fingerprints' => 'PostOrdersRequestFingerprints',

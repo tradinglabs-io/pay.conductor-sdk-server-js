@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | **char \*** | CPF ou CNPJ do merchant sem formatação | 
-**email** | **char \*** | Email do merchant | 
-**name** | **char \*** | Nome do merchant | 
+**document** | **char \*** | Merchant CPF or CNPJ without formatting | 
+**email** | **char \*** | Merchant email | 
+**name** | **char \*** | Merchant name | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponseNuPay$new()
 
 test_that("paymentUrl", {
   # tests for the property `paymentUrl` (character)
-  # URL de pagamento NuPay
+  # NuPay payment URL
 
   # uncomment below to test the property
   #expect_equal(model.instance$`paymentUrl`, "EXPECTED_RESULT")

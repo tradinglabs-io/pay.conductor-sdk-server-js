@@ -25,7 +25,7 @@ class PostOrders200ResponseCreditCardTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponseCreditCard
         //val modelInstance = PostOrders200ResponseCreditCard()
 
-        // to test the property `authorizationCode` - Código de autorização da transação
+        // to test the property `authorizationCode` - Transaction authorization code
         should("test authorizationCode") {
             // uncomment below to test the property
             //modelInstance.authorizationCode shouldBe ("TODO")

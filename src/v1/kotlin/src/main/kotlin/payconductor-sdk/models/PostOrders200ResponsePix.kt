@@ -20,25 +20,25 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Dados do PIX
+ * PIX data
  *
- * @param copyAndPasteCode Código copia e cola do PIX
- * @param qrCodeUrl URL da imagem do QR Code PIX
- * @param endToEndId E2E ID do PIX
+ * @param copyAndPasteCode PIX copy and paste code
+ * @param qrCodeUrl PIX QR Code image URL
+ * @param endToEndId PIX E2E ID
  */
 
 
 data class PostOrders200ResponsePix (
 
-    /* Código copia e cola do PIX */
+    /* PIX copy and paste code */
     @Json(name = "copyAndPasteCode")
     val copyAndPasteCode: kotlin.String,
 
-    /* URL da imagem do QR Code PIX */
+    /* PIX QR Code image URL */
     @Json(name = "qrCodeUrl")
     val qrCodeUrl: kotlin.String,
 
-    /* E2E ID do PIX */
+    /* PIX E2E ID */
     @Json(name = "endToEndId")
     val endToEndId: kotlin.String?
 

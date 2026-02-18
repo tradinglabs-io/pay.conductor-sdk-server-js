@@ -7,13 +7,13 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponsePicPay, () {
-    // Código copia e cola do PicPay
+    // PicPay copy and paste code
     // String copyAndPasteCode
     test('to test the property `copyAndPasteCode`', () async {
       // TODO
     });
 
-    // URL da imagem do QR Code PicPay
+    // PicPay QR Code image URL
     // String qrCodeUrl
     test('to test the property `qrCodeUrl`', () async {
       // TODO

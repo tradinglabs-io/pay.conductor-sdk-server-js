@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorizationCode** | **string** | Código de autorização da transação | [optional] [default to undefined]
+**authorizationCode** | **string** | Transaction authorization code | [optional] [default to undefined]
 
 ## Example
 

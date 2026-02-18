@@ -13,17 +13,17 @@ part 'post_withdraws_request.g.dart';
 /// PostWithdrawsRequest
 ///
 /// Properties:
-/// * [amount] - Valor do saque em centavos
-/// * [externalId] - ID do saque no seu sistema
+/// * [amount] - Withdrawal amount in cents
+/// * [externalId] - Withdrawal ID in your system
 /// * [merchant] 
 /// * [payoutAccount] 
 @BuiltValue()
 abstract class PostWithdrawsRequest implements Built<PostWithdrawsRequest, PostWithdrawsRequestBuilder> {
-  /// Valor do saque em centavos
+  /// Withdrawal amount in cents
   @BuiltValueField(wireName: r'amount')
   num get amount;
 
-  /// ID do saque no seu sistema
+  /// Withdrawal ID in your system
   @BuiltValueField(wireName: r'externalId')
   String? get externalId;
 

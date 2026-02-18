@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bar_code** | **char \*** | Código de barras do boleto | 
-**digitable_line** | **char \*** | Linha digitável do boleto | 
-**pdf_url** | **char \*** | URL do PDF do boleto | [optional] 
+**bar_code** | **char \*** | Bank slip bar code | 
+**digitable_line** | **char \*** | Bank slip digitable line | 
+**pdf_url** | **char \*** | Bank slip PDF URL | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CopyAndPasteCode** | **string** | Código copia e cola do PIX | 
-**QrCodeUrl** | **string** | URL da imagem do QR Code PIX | 
-**EndToEndId** | **NullableString** | E2E ID do PIX | 
+**CopyAndPasteCode** | **string** | PIX copy and paste code | 
+**QrCodeUrl** | **string** | PIX QR Code image URL | 
+**EndToEndId** | **NullableString** | PIX E2E ID | 
 
 ## Methods
 

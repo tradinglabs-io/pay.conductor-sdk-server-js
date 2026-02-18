@@ -17,23 +17,23 @@ void main() {
       // TODO
     });
 
-    // CartODeCrDitoCard card
+    // CreditCardCard card
     test('to test the property `card`', () async {
       // TODO
     });
 
-    // CartODeCrDitoInstallments installments
+    // CreditCardInstallments installments
     test('to test the property `installments`', () async {
       // TODO
     });
 
-    // Texto que aparecerá na fatura do cartão (soft descriptor)
+    // Text that will appear on the card statement (soft descriptor)
     // String softDescriptor
     test('to test the property `softDescriptor`', () async {
       // TODO
     });
 
-    // BoletoExpirationInDays expirationInDays
+    // BankSlipExpirationInDays expirationInDays
     test('to test the property `expirationInDays`', () async {
       // TODO
     });

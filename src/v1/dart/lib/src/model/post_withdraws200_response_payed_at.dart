@@ -11,7 +11,7 @@ import 'package:one_of/any_of.dart';
 
 part 'post_withdraws200_response_payed_at.g.dart';
 
-/// Data e hora em que o saque foi pago (formato ISO 8601)
+/// Date and time when the withdrawal was paid (ISO 8601 format)
 @BuiltValue()
 abstract class PostWithdraws200ResponsePayedAt implements Built<PostWithdraws200ResponsePayedAt, PostWithdraws200ResponsePayedAtBuilder> {
   /// Any Of [Date], [DateTime], [num]

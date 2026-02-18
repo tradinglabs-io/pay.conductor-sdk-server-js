@@ -1,9 +1,9 @@
 openapi: 3.0.3
 info:
   description: |-
-    # Introdução
+    PayConductor API Documentation.
 
-    Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.
+    This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.
 
     <br />
 
@@ -14,24 +14,24 @@ info:
     <br />
 
 
-    # Autenticação
+    # Authentication
 
-    A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.
-
-    <br />
-
-    ## Obtendo Credenciais
-
-    1. Acesse o painel administrativo do PayConductor
-    2. Navegue até **Configurações > API Keys**
-    3. Gere um novo par de credenciais (Client ID e Client Secret)
-    4. Guarde o Client Secret em local seguro - ele não será exibido novamente
+    PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.
 
     <br />
 
-    ## Formato de Autenticação
+    ## Getting Credentials
 
-    As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:
+    1. Access the PayConductor admin panel
+    2. Navigate to **Settings > API Keys**
+    3. Generate a new credentials pair (Client ID and Client Secret)
+    4. Store the Client Secret in a secure location - it will not be displayed again
+
+    <br />
+
+    ## Authentication Format
+
+    Credentials must be sent in the `Authorization` header using the Basic scheme:
 
     ```
     Authorization: Basic base64(client_id:client_secret)
@@ -39,13 +39,13 @@ info:
 
     <br />
 
-    ## Exemplo em Node.js
+    ## Node.js Example
 
     ```javascript
-    const clientId = 'seu_client_id';
-    const clientSecret = 'seu_client_secret';
+    const clientId = 'your_client_id';
+    const clientSecret = 'your_client_secret';
 
-    // Codifica as credenciais em Base64
+    // Encode credentials in Base64
     const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
     const response = await fetch('https://api.payconductor.com/api/v1/orders', {
@@ -62,15 +62,15 @@ info:
 
     <br />
 
-    ## Erros de Autenticação
+    ## Authentication Errors
 
-    | Código | Descrição |
-    |--------|-----------|
-    | `401`  | Credenciais inválidas ou ausentes |
-    | `403`  | Credenciais válidas, mas sem permissão para o recurso |
-    | `429`  | Muitas requisições (rate limit excedido) |
+    | Code | Description |
+    |------|-------------|
+    | `401` | Invalid or missing credentials |
+    | `403` | Valid credentials but no permission for the resource |
+    | `429` | Too many requests (rate limit exceeded) |
 
-    ### Exemplo de resposta de erro
+    ### Error Response Example
 
     ```json
     {
@@ -88,15 +88,19 @@ servers:
 security:
 - basicAuth: []
 tags:
-- description: "Gere cobranças, consulte o status dos pedidos e gerencie reembolsos."
-  name: Pedidos
-- description: Inicie e monitore saques e transferências para suas contas externas.
-  name: Saques e Transferências
+- description: "Manage charges, check order status, and handle refunds."
+  name: Orders
+- description: Initiate and monitor withdrawals and transfers to your external accounts.
+  name: Withdrawals and Transfers
+- description: "Manage customers, create, update, delete and list customers."
+  name: Customers
+- description: Tokenize credit cards for future charges.
+  name: Card Tokenization
 paths:
   /orders/:
     get:
-      description: Recupere uma lista de pedidos. Utilize os parâmetros de filtro
-        de data e paginação para refinar os resultados conforme necessário.
+      description: Retrieve a list of orders. Use date filter and pagination parameters
+        to refine results as needed.
       operationId: getOrders
       parameters:
       - explode: true
@@ -105,7 +109,7 @@ paths:
         required: true
         schema:
           default: Last7Days
-          description: Período do filtro de datas
+          description: Date filter period
           enum:
           - Today
           - Yesterday
@@ -122,7 +126,7 @@ paths:
         name: endDate
         required: false
         schema:
-          description: Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)
+          description: End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
           format: date-time
           type: string
         style: form
@@ -131,7 +135,7 @@ paths:
         name: startDate
         required: false
         schema:
-          description: Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)
+          description: Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
           format: date-time
           type: string
         style: form
@@ -141,7 +145,7 @@ paths:
         required: true
         schema:
           default: 1
-          description: Número da página
+          description: Page number
           minimum: 1
           multipleOf: 1
           type: number
@@ -152,7 +156,7 @@ paths:
         required: true
         schema:
           default: 20
-          description: Número de itens por página
+          description: Number of items per page
           maximum: 100
           minimum: 1
           multipleOf: 1
@@ -163,7 +167,7 @@ paths:
         name: id
         required: false
         schema:
-          description: ID interno sendo do pedido ou do charge
+          description: Internal ID of the order or charge
           type: string
         style: form
       - explode: true
@@ -183,11 +187,11 @@ paths:
           - Chargeback
           type: string
         style: form
-      summary: Listar pedidos
+      summary: List orders
       tags:
-      - Pedidos
+      - Orders
     post:
-      description: Crie um novo pedido para pagamento utilizando os dados fornecidos
+      description: Create a new order for payment using the provided data
       operationId: postOrders
       requestBody:
         content:
@@ -202,12 +206,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/postOrders_200_response"
           description: Response for status 200
-      summary: Criar pedido
+      summary: Create order
       tags:
-      - Pedidos
+      - Orders
   /orders/{id}:
     get:
-      description: Localize os dados completos de um pedido buscando pelo nosso id
+      description: Retrieve the complete data of an order by our ID
       operationId: getOrdersById
       parameters:
       - explode: false
@@ -217,12 +221,12 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Buscar pelo ID
+      summary: Get order by ID
       tags:
-      - Pedidos
+      - Orders
   /orders/{id}/refund:
     post:
-      description: Inicie um reembolso para o pedido especificado pelo ID.
+      description: Initiate a refund for the order specified by ID.
       operationId: postOrdersByIdRefund
       parameters:
       - explode: false
@@ -232,14 +236,14 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Reembolsar pedido
+      summary: Refund order
       tags:
-      - Pedidos
+      - Orders
   /withdraws/:
     get:
-      description: "Retorna uma lista paginada de saques e transferências. Permite\
-        \ filtrar por data de criação ou buscar por ID (ID do saque, ID externo, ID\
-        \ da adquirente ou End2EndID)"
+      description: "Returns a paginated list of withdrawals and transfers. Filter\
+        \ by creation date or search by ID (withdrawal ID, external ID, acquirer ID,\
+        \ or End2EndID)"
       operationId: getWithdraws
       parameters:
       - explode: true
@@ -248,7 +252,7 @@ paths:
         required: true
         schema:
           default: Last7Days
-          description: Período do filtro de datas
+          description: Date filter period
           enum:
           - Today
           - Yesterday
@@ -265,7 +269,7 @@ paths:
         name: endDate
         required: false
         schema:
-          description: Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)
+          description: End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
           format: date-time
           type: string
         style: form
@@ -274,7 +278,7 @@ paths:
         name: startDate
         required: false
         schema:
-          description: Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)
+          description: Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
           format: date-time
           type: string
         style: form
@@ -284,7 +288,7 @@ paths:
         required: true
         schema:
           default: 1
-          description: Número da página
+          description: Page number
           minimum: 1
           multipleOf: 1
           type: number
@@ -295,7 +299,7 @@ paths:
         required: true
         schema:
           default: 20
-          description: Número de itens por página
+          description: Number of items per page
           maximum: 100
           minimum: 1
           multipleOf: 1
@@ -306,16 +310,15 @@ paths:
         name: id
         required: false
         schema:
-          description: "ID de busca do saque (pode ser ID do saque, ID externo, ID\
-            \ da adquirente ou End2EndID)"
+          description: "Withdrawal search ID (can be withdrawal ID, external ID, acquirer\
+            \ ID, or End2EndID)"
           type: string
         style: form
-      summary: Lista os saques
+      summary: List withdrawals
       tags:
-      - Saques e Transferências
+      - Withdrawals and Transfers
     post:
-      description: Realiza um novo saque ou transferência para a conta de pagamento
-        informada
+      description: Create a new withdrawal or transfer to the provided payment account
       operationId: postWithdraws
       requestBody:
         content:
@@ -330,13 +333,13 @@ paths:
               schema:
                 $ref: "#/components/schemas/postWithdraws_200_response"
           description: Response for status 200
-      summary: Cria saque
+      summary: Create withdrawal
       tags:
-      - Saques e Transferências
+      - Withdrawals and Transfers
   /withdraws/{id}:
     get:
-      description: Retorna os detalhes de um saque ou transferência específico usando
-        seu ID
+      description: Returns the details of a specific withdrawal or transfer using
+        its ID
       operationId: getWithdrawsById
       parameters:
       - explode: false
@@ -346,39 +349,205 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Buscar pelo ID
+      summary: Get withdrawal by ID
       tags:
-      - Saques e Transferências
+      - Withdrawals and Transfers
+  /customers/:
+    get:
+      operationId: getCustomers
+      parameters:
+      - explode: true
+        in: query
+        name: email
+        required: false
+        schema:
+          format: email
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          maxLength: 255
+          minLength: 1
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: true
+        schema:
+          default: 1
+          description: Page number
+          minimum: 1
+          multipleOf: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: pageSize
+        required: true
+        schema:
+          default: 20
+          description: Number of items per page
+          maximum: 100
+          minimum: 1
+          multipleOf: 1
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: period
+        required: true
+        schema:
+          default: Last7Days
+          description: Date filter period
+          enum:
+          - Today
+          - Yesterday
+          - Last7Days
+          - Last30Days
+          - ThisMonth
+          - LastMonth
+          - ThisYear
+          - Custom
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: endDate
+        required: false
+        schema:
+          description: End date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
+          format: date-time
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: startDate
+        required: false
+        schema:
+          description: Start date for custom filter (YYYY-MM-DDTHH:MM:SSZ format)
+          format: date-time
+          type: string
+        style: form
+      tags:
+      - Customers
+    post:
+      operationId: postCustomers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer"
+        description: Schema for creating a new customer
+        required: true
+      tags:
+      - Customers
+  /customers/{id}:
+    delete:
+      operationId: deleteCustomersById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      tags:
+      - Customers
+    get:
+      operationId: getCustomersById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      tags:
+      - Customers
+    patch:
+      operationId: patchCustomersById
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Customer_1"
+        description: Schema for creating a new customer
+        required: true
+      tags:
+      - Customers
+  /card-tokenization/:
+    post:
+      description: Tokenize credit cards for future charges.
+      operationId: postCard-tokenization
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/postCard_tokenization_request"
+        description: Data for creating a customer card
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/postCard_tokenization_200_response"
+          description: Response for status 200
+      summary: Tokenize card
+      tags:
+      - Card Tokenization
 components:
   schemas:
-    Endere_o_do_cliente:
-      description: Schema para criação de um novo endereço
+    Customer_address:
+      description: Schema for creating a new address
+      example:
+        country: BR
+        number: number
+        zipCode: zipCode
+        city: city
+        street: street
+        neighborhood: neighborhood
+        state: state
       properties:
         city:
-          description: Nome da cidade
+          description: City name
           type: string
         country:
           default: BR
-          description: Código do país no formato ISO 3166-1 alpha-2
+          description: Country code in ISO 3166-1 alpha-2 format
           maxLength: 2
           minLength: 2
           type: string
         neighborhood:
-          description: Nome do bairro
+          description: Neighborhood name
           type: string
         number:
-          description: Número do endereço
+          description: Address number
           type: string
         state:
-          description: Código do estado no formato ISO 3166-2
+          description: State code in ISO 3166-2 format
           maxLength: 2
           minLength: 2
           type: string
         street:
-          description: Nome da rua
+          description: Street name
           type: string
         zipCode:
-          description: CEP sem formatação
+          description: ZIP code without formatting
           type: string
       required:
       - city
@@ -388,15 +557,29 @@ components:
       - state
       - street
       - zipCode
-      title: Endereço do cliente
+      title: Customer address
       type: object
-    Cliente:
-      description: Schema para criação de um novo cliente
+    Customer:
+      description: Schema for creating a new customer
+      example:
+        address:
+          country: BR
+          number: number
+          zipCode: zipCode
+          city: city
+          street: street
+          neighborhood: neighborhood
+          state: state
+        phoneNumber: phoneNumber
+        documentType: Cpf
+        documentNumber: documentNumber
+        name: name
+        email: email
       properties:
         address:
-          $ref: "#/components/schemas/Endere_o_do_cliente"
+          $ref: "#/components/schemas/Customer_address"
         documentNumber:
-          description: CPF ou CNPJ do cliente sem formatação
+          description: Customer CPF or CNPJ without formatting
           pattern: "^\\d{11}$|^\\d{14}$"
           type: string
         documentType:
@@ -405,14 +588,14 @@ components:
           - Cnpj
           type: string
         email:
-          description: Email do cliente
+          description: Customer email
           format: email
           type: string
         name:
-          description: Nome completo do cliente
+          description: Customer full name
           type: string
         phoneNumber:
-          description: Número de telefone do cliente no formato +55 DD 9XXXXXXXX
+          description: Customer phone number in +55 DD 9XXXXXXXX format
           pattern: "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$"
           type: string
       required:
@@ -420,31 +603,31 @@ components:
       - documentType
       - email
       - name
-      title: Cliente
+      title: Customer
       type: object
     postOrders_request_fingerprints:
       properties:
         threatMetrixFingerprintId:
-          description: ID de fingerprint do ThreatMetrix para análise de fraude
+          description: ThreatMetrix fingerprint ID for fraud analysis
           type: string
       type: object
     postOrders_request_items_inner:
       properties:
         id:
-          description: ID do produto ou serviço no seu sistema
+          description: Product or service ID in your system
           type: string
         isPhysical:
           default: false
-          description: Define se o item é um produto físico ou um serviço
+          description: Defines if the item is a physical product or a service
           type: boolean
         name:
-          description: Nome do produto ou serviço
+          description: Product or service name
           type: string
         qty:
-          description: Quantidade do produto ou serviço
+          description: Quantity of the product or service
           type: number
         unitPrice:
-          description: Preço unitário
+          description: Unit price
           type: number
       required:
       - id
@@ -454,18 +637,18 @@ components:
       - unitPrice
       type: object
     MerchantInput:
-      description: Dados do merchant para pedido ou saque
+      description: Merchant data for order or withdrawal
       properties:
         document:
-          description: CPF ou CNPJ do merchant sem formatação
+          description: Merchant CPF or CNPJ without formatting
           pattern: "^\\d{11}$|^\\d{14}$"
           type: string
         email:
-          description: Email do merchant
+          description: Merchant email
           format: email
           type: string
         name:
-          description: Nome do merchant
+          description: Merchant name
           maxLength: 255
           minLength: 2
           type: string
@@ -481,11 +664,11 @@ components:
         format: integer
         type: string
       - default: 3600
-        description: Tempo de expiração do PIX em segundos
+        description: PIX expiration time in seconds
         minimum: 3600
         type: integer
       default: 3600
-      description: Tempo de expiração do PIX em segundos
+      description: PIX expiration time in seconds
       minimum: 3600
     Pix:
       properties:
@@ -497,27 +680,27 @@ components:
       - paymentMethod
       title: Pix
       type: object
-    Cart_o_tokenizado:
+    Tokenized_card:
       properties:
         firstSixCardNumber:
-          description: Primeiros 6 dígitos do cartão de crédito
+          description: First 6 digits of the credit card
           type: string
         token:
-          description: Token do cartão de crédito gerado anteriormente
+          description: Previously generated credit card token
           type: string
       required:
       - token
-      title: Cartão tokenizado
+      title: Tokenized card
       type: object
-    Dados_completos_do_cart_o_expiration:
+    Complete_card_data_expiration:
       properties:
         month:
-          description: Mês de expiração do cartão
+          description: Card expiration month
           maximum: 12
           minimum: 1
           type: number
         year:
-          description: Ano de expiração do cartão
+          description: Card expiration year
           maximum: 2046
           minimum: 2025
           type: number
@@ -525,56 +708,56 @@ components:
       - month
       - year
       type: object
-    Dados_completos_do_cart_o:
+    Complete_card_data:
       properties:
         cvv:
-          description: Código de segurança do cartão (CVV)
+          description: Card security code (CVV)
           maxLength: 4
           minLength: 3
           type: string
         expiration:
-          $ref: "#/components/schemas/Dados_completos_do_cart_o_expiration"
+          $ref: "#/components/schemas/Complete_card_data_expiration"
         holderName:
-          description: Nome do titular do cartão
+          description: Card holder name
           type: string
         number:
-          description: Número do cartão de crédito
+          description: Credit card number
           type: string
       required:
       - cvv
       - expiration
       - holderName
       - number
-      title: Dados completos do cartão
+      title: Complete card data
       type: object
-    Cart_o_de_cr_dito_card:
+    Credit_Card_card:
       anyOf:
-      - $ref: "#/components/schemas/Cart_o_tokenizado"
-      - $ref: "#/components/schemas/Dados_completos_do_cart_o"
-    Cart_o_de_cr_dito_installments:
+      - $ref: "#/components/schemas/Tokenized_card"
+      - $ref: "#/components/schemas/Complete_card_data"
+    Credit_Card_installments:
       anyOf:
       - default: "0"
         format: integer
         type: string
       - default: 1
-        description: Número de parcelas
+        description: Number of installments
         maximum: 12
         minimum: 1
         type: integer
       default: 1
-      description: Número de parcelas
+      description: Number of installments
       maximum: 12
       minimum: 1
-    Cart_o_de_cr_dito:
+    Credit_Card:
       properties:
         paymentMethod:
           type: string
         card:
-          $ref: "#/components/schemas/Cart_o_de_cr_dito_card"
+          $ref: "#/components/schemas/Credit_Card_card"
         installments:
-          $ref: "#/components/schemas/Cart_o_de_cr_dito_installments"
+          $ref: "#/components/schemas/Credit_Card_installments"
         softDescriptor:
-          description: Texto que aparecerá na fatura do cartão (soft descriptor)
+          description: Text that will appear on the card statement (soft descriptor)
           maxLength: 22
           minLength: 1
           type: string
@@ -582,44 +765,44 @@ components:
       - card
       - installments
       - paymentMethod
-      title: Cartão de crédito
+      title: Credit Card
       type: object
-    Boleto_expirationInDays:
+    Bank_Slip_expirationInDays:
       anyOf:
       - default: "0"
         format: integer
         type: string
       - default: 7
-        description: Dias até o vencimento do boleto
+        description: Days until bank slip expires
         minimum: 1
         type: integer
       default: 7
-      description: Dias até o vencimento do boleto
+      description: Days until bank slip expires
       minimum: 1
-    Boleto:
+    Bank_Slip:
       properties:
         paymentMethod:
           type: string
         expirationInDays:
-          $ref: "#/components/schemas/Boleto_expirationInDays"
+          $ref: "#/components/schemas/Bank_Slip_expirationInDays"
       required:
       - paymentMethod
-      title: Boleto
+      title: Bank Slip
       type: object
     NuPay_nuPay:
-      description: Dados específicos para pagamento via NuPay
+      description: Specific data for NuPay payment
       properties:
         cancelUrl:
-          description: URL de cancelamento do pagamento
+          description: Payment cancellation URL
           type: string
         merchantName:
-          description: Nome do comerciante
+          description: Merchant name
           type: string
         returnUrl:
-          description: URL de retorno após a conclusão do pagamento
+          description: Return URL after payment completion
           type: string
         storeName:
-          description: Nome da loja
+          description: Store name
           type: string
       required:
       - cancelUrl
@@ -648,31 +831,31 @@ components:
     postOrders_request_payment:
       anyOf:
       - $ref: "#/components/schemas/Pix"
-      - $ref: "#/components/schemas/Cart_o_de_cr_dito"
-      - $ref: "#/components/schemas/Boleto"
+      - $ref: "#/components/schemas/Credit_Card"
+      - $ref: "#/components/schemas/Bank_Slip"
       - $ref: "#/components/schemas/NuPay"
       - $ref: "#/components/schemas/PicPay"
-      description: "Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto,\
-        \ NuPay, etc...)"
+      description: "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay,\
+        \ etc...)"
     postOrders_request_session:
-      description: "Caso o externalSessionId ou sessionId sejam fornecidos e houver\
-        \ uma sessão existente, ela será atualizada com os novos dados. Caso contrá\
-        rio, uma nova sessão será criada."
+      description: "If externalSessionId or sessionId is provided and an existing\
+        \ session exists, it will be updated with the new data. Otherwise, a new session\
+        \ will be created."
       properties:
         expiresInMinutes:
           default: 30
-          description: Tempo em minutos para expiração da sessão do checkout
+          description: Time in minutes for checkout session expiration
           minimum: 15
           type: number
         checkoutUrl:
-          description: URL do checkout para que possamos redirecionar
+          description: Checkout URL for redirection
           type: string
         sessionId:
-          description: Id gerado pelo nosso serviço para identificar a sessão de checkout
+          description: ID generated by our service to identify the checkout session
           type: string
         externalSessionId:
-          description: Id da sessão de checkout gerado pelo lado do cliente. O id
-            deve ser único para cada sessão de carrinho
+          description: Checkout session ID generated by the client side. The ID must
+            be unique for each cart session
           minLength: 16
           type: string
       type: object
@@ -680,24 +863,24 @@ components:
       additionalProperties: false
       properties:
         chargeAmount:
-          description: Valor total a ser cobrado no pedido em valor flutuante
+          description: Total amount to be charged on the order in floating point value
           type: number
         clientIp:
-          description: Endereço IP do cliente
+          description: Client IP address
           type: string
         customer:
-          $ref: "#/components/schemas/Cliente"
+          $ref: "#/components/schemas/Customer"
         discountAmount:
           default: 0
-          description: Valor do desconto
+          description: Discount amount
           type: number
         externalId:
-          description: ID da ordem no seu sistema
+          description: Order ID in your system
           type: string
         fingerprints:
           $ref: "#/components/schemas/postOrders_request_fingerprints"
         items:
-          description: Lista de produtos ou serviços do pedido
+          description: List of products or services in the order
           items:
             $ref: "#/components/schemas/postOrders_request_items_inner"
           maxItems: 20
@@ -707,23 +890,23 @@ components:
         payment:
           $ref: "#/components/schemas/postOrders_request_payment"
         splitAmountTotal:
-          description: "Valor total do split a ser pago ao merchant (Sendo usado apenas\
-            \ para fins de relatório, ou seja não gera split real)"
+          description: "Total split amount to be paid to the merchant (Used only for\
+            \ reporting purposes, does not generate actual split)"
           minimum: 0
           type: number
         session:
           $ref: "#/components/schemas/postOrders_request_session"
         shippingFee:
           default: 0
-          description: Valor do frete
+          description: Shipping fee
           type: number
         taxFee:
           default: 0
-          description: Taxas adicionais
+          description: Additional fees
           type: number
         metadata:
-          description: Metadados adicionais para o pedido como pares chave-valor.
-            Não deve ter espaços ou caracteres especiais nas chaves
+          description: Additional metadata for the order as key-value pairs. Keys
+            should not contain spaces or special characters
           type: object
       required:
       - chargeAmount
@@ -736,20 +919,20 @@ components:
       - taxFee
       type: object
     postOrders_200_response_pix:
-      description: Dados do PIX
+      description: PIX data
       example:
         qrCodeUrl: qrCodeUrl
         copyAndPasteCode: copyAndPasteCode
         endToEndId: endToEndId
       properties:
         copyAndPasteCode:
-          description: Código copia e cola do PIX
+          description: PIX copy and paste code
           type: string
         qrCodeUrl:
-          description: URL da imagem do QR Code PIX
+          description: PIX QR Code image URL
           type: string
         endToEndId:
-          description: E2E ID do PIX
+          description: PIX E2E ID
           nullable: true
           type: string
       required:
@@ -764,13 +947,13 @@ components:
         digitableLine: digitableLine
       properties:
         barCode:
-          description: Código de barras do boleto
+          description: Bank slip bar code
           type: string
         digitableLine:
-          description: Linha digitável do boleto
+          description: Bank slip digitable line
           type: string
         pdfUrl:
-          description: URL do PDF do boleto
+          description: Bank slip PDF URL
           type: string
       required:
       - barCode
@@ -781,7 +964,7 @@ components:
         paymentUrl: paymentUrl
       properties:
         paymentUrl:
-          description: URL de pagamento NuPay
+          description: NuPay payment URL
           type: string
       required:
       - paymentUrl
@@ -792,10 +975,10 @@ components:
         copyAndPasteCode: copyAndPasteCode
       properties:
         copyAndPasteCode:
-          description: Código copia e cola do PicPay
+          description: PicPay copy and paste code
           type: string
         qrCodeUrl:
-          description: URL da imagem do QR Code PicPay
+          description: PicPay QR Code image URL
           type: string
       required:
       - copyAndPasteCode
@@ -806,7 +989,7 @@ components:
         authorizationCode: authorizationCode
       properties:
         authorizationCode:
-          description: Código de autorização da transação
+          description: Transaction authorization code
           type: string
       type: object
     postOrders_200_response_orderItems_inner:
@@ -820,26 +1003,26 @@ components:
         id: id
       properties:
         externalId:
-          description: ID externo do item
+          description: External item ID
           nullable: true
           type: string
         id:
-          description: ID do item no pedido
+          description: Item ID in the order
           type: string
         name:
-          description: Nome do produto/serviço
+          description: Product/service name
           type: string
         qty:
-          description: Quantidade
+          description: Quantity
           type: number
         totalAmount:
-          description: Valor total do item (quantidade × preço unitário)
+          description: Total item amount (quantity × unit price)
           type: number
         totalNetAmount:
-          description: Valor líquido total do item
+          description: Total net amount of the item
           type: number
         unityPrice:
-          description: Preço unitário
+          description: Unit price
           type: number
       required:
       - externalId
@@ -856,7 +1039,7 @@ components:
       nullable: true
       properties:
         sessionId:
-          description: ID da sessão de checkout associada ao pedido
+          description: ID of the checkout session associated with the order
           type: string
       required:
       - sessionId
@@ -909,24 +1092,24 @@ components:
         status: Generating
       properties:
         id:
-          description: ID do pedido no sistema
+          description: Order ID in the system
           type: string
         externalId:
-          description: ID externo do pedido (fornecido pela sua integração)
+          description: External order ID (provided by your integration)
           nullable: true
           type: string
         externalIntegrationKey:
-          description: Provedor utilizada para processar o pedido
+          description: Provider used to process the order
           type: string
         externalIntegrationId:
-          description: ID do pedido no provedor de pagamento
+          description: Order ID in the payment provider
           nullable: true
           type: string
         amount:
-          description: Valor total do pedido
+          description: Total order amount
           type: number
         costFee:
-          description: Taxa de custo aplicada ao pedido
+          description: Cost fee applied to the order
           type: number
         pix:
           $ref: "#/components/schemas/postOrders_200_response_pix"
@@ -965,15 +1148,15 @@ components:
           - GooglePay
           type: string
         payedAt:
-          description: Data e hora em que o pedido foi pago (ISO 8601)
+          description: Date and time when the order was paid (ISO 8601)
           nullable: true
           type: string
         errorCode:
-          description: "Código de erro, se houver"
+          description: "Error code, if any"
           nullable: true
           type: string
         errorMessage:
-          description: "Mensagem de erro, se houver"
+          description: "Error message, if any"
           nullable: true
           type: string
         orderItems:
@@ -999,10 +1182,10 @@ components:
     postWithdraws_request_payoutAccount:
       properties:
         ownerDocument:
-          description: Documento do titular da conta (CPF ou CNPJ)
+          description: Account holder document (CPF or CNPJ)
           type: string
         ownerName:
-          description: Nome do titular da conta
+          description: Account holder name
           type: string
         pixKey:
           description: PIX key for withdrawal
@@ -1024,14 +1207,13 @@ components:
       - pixType
       type: object
     postWithdraws_request:
-      additionalProperties: false
       properties:
         amount:
-          description: Valor do saque em centavos
+          description: Withdrawal amount in cents
           minimum: 1
           type: number
         externalId:
-          description: ID do saque no seu sistema
+          description: Withdrawal ID in your system
           type: string
         merchant:
           $ref: "#/components/schemas/MerchantInput"
@@ -1043,14 +1225,14 @@ components:
       type: object
     postWithdraws_200_response_payedAt:
       anyOf:
-      - description: Data e hora em que o saque foi pago (formato ISO 8601)
+      - description: Date and time when the withdrawal was paid (ISO 8601 format)
         type: Date
       - format: date-time
         type: string
       - format: date
         type: string
       - type: number
-      description: Data e hora em que o saque foi pago (formato ISO 8601)
+      description: Date and time when the withdrawal was paid (ISO 8601 format)
       nullable: true
     postWithdraws_200_response_payoutAccount:
       example:
@@ -1061,21 +1243,21 @@ components:
         pixKey: pixKey
       properties:
         id:
-          description: Identificador único da conta de pagamento
+          description: Unique payment account identifier
           type: string
         ownerDocument:
-          description: Documento do titular da conta (CPF ou CNPJ)
+          description: Account holder document (CPF or CNPJ)
           pattern: "^\\d{11}$|^\\d{14}$"
           type: string
         ownerName:
-          description: Nome do titular da conta
+          description: Account holder name
           type: string
         pixKey:
-          description: Chave PIX utilizada para o saque
+          description: PIX key used for the withdrawal
           type: string
         pixType:
           default: Cpf
-          description: Tipo da chave PIX
+          description: PIX key type
           enum:
           - Cpf
           - Cnpj
@@ -1091,7 +1273,6 @@ components:
       - pixType
       type: object
     postWithdraws_200_response:
-      additionalProperties: false
       example:
         payedAt: ""
         costFee: 0.8008281904610115
@@ -1110,25 +1291,25 @@ components:
         status: Pending
       properties:
         id:
-          description: Identificador único do saque
+          description: Unique withdrawal identifier
           type: string
         externalId:
-          description: ID do saque no sistema no seu sistema
+          description: Withdrawal ID in your system
           nullable: true
           type: string
         externalIntegrationKey:
-          description: Chave do provedor utilizado para o saque
+          description: Provider key used for the withdrawal
           type: string
         externalIntegrationId:
-          description: ID do saque no provedor de pagamento
+          description: Withdrawal ID in the payment provider
           nullable: true
           type: string
         costFee:
-          description: Taxa de custo aplicada ao saque
+          description: Cost fee applied to the withdrawal
           type: number
         status:
           default: Pending
-          description: Status do saque
+          description: Withdrawal status
           enum:
           - Pending
           - Transferring
@@ -1136,11 +1317,11 @@ components:
           - Failed
           type: string
         errorCode:
-          description: "Código do erro, se houver"
+          description: "Error code, if any"
           nullable: true
           type: string
         errorMessage:
-          description: "Mensagem descritiva do erro, se houver"
+          description: "Descriptive error message, if any"
           nullable: true
           type: string
         payedAt:
@@ -1159,8 +1340,111 @@ components:
       - payoutAccount
       - status
       type: object
+    Customer_1:
+      description: Schema for creating a new customer
+      properties:
+        address:
+          $ref: "#/components/schemas/Customer_address"
+        documentNumber:
+          description: Customer CPF or CNPJ without formatting
+          pattern: "^\\d{11}$|^\\d{14}$"
+          type: string
+        documentType:
+          enum:
+          - Cpf
+          - Cnpj
+          type: string
+        email:
+          description: Customer email
+          format: email
+          type: string
+        name:
+          description: Customer full name
+          type: string
+        phoneNumber:
+          description: Customer phone number in +55 DD 9XXXXXXXX format
+          pattern: "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$"
+          type: string
+      title: Customer
+      type: object
+    Customer_2_documentType:
+      anyOf:
+      - type: string
+      - type: string
+      description: "Document type: Cpf or Cnpj"
+    Customer_2:
+      description: Schema for creating a new customer
+      properties:
+        address:
+          $ref: "#/components/schemas/Customer_address"
+        documentNumber:
+          description: Customer CPF or CNPJ without formatting
+          pattern: "^\\d{11}$|^\\d{14}$"
+          type: string
+        documentType:
+          $ref: "#/components/schemas/Customer_2_documentType"
+        email:
+          description: Customer email
+          format: email
+          type: string
+        name:
+          description: Customer full name
+          type: string
+        phoneNumber:
+          description: Customer phone number in +55 DD 9XXXXXXXX format
+          pattern: "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$"
+          type: string
+      required:
+      - documentNumber
+      - documentType
+      - email
+      - name
+      title: Customer
+      type: object
+    postCard_tokenization_request_customer_anyOf:
+      properties:
+        id:
+          description: ID do cliente existente
+          type: string
+      required:
+      - id
+      type: object
+    postCard_tokenization_request_customer:
+      anyOf:
+      - $ref: "#/components/schemas/Customer_2"
+      - $ref: "#/components/schemas/postCard_tokenization_request_customer_anyOf"
+    postCard_tokenization_request:
+      description: Data for creating a customer card
+      properties:
+        card:
+          $ref: "#/components/schemas/Complete_card_data"
+        saveCard:
+          description: Indicates if the card should be saved for future use
+          type: boolean
+        customer:
+          $ref: "#/components/schemas/postCard_tokenization_request_customer"
+      required:
+      - card
+      - customer
+      - saveCard
+      type: object
+    postCard_tokenization_200_response:
+      example:
+        customerId: customerId
+        token: token
+      properties:
+        customerId:
+          description: ID of the customer associated with the created card
+          type: string
+        token:
+          description: Token of the created card for future transactions
+          type: string
+      required:
+      - customerId
+      - token
+      type: object
   securitySchemes:
     basicAuth:
-      description: "Use o formato Authorization: Basic base64('secret:')"
+      description: "Use the format Authorization: Basic base64('client_id:client_secret')"
       scheme: basic
       type: http

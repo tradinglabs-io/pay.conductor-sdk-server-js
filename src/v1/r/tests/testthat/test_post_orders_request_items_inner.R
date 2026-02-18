@@ -7,7 +7,7 @@ model_instance <- PostOrdersRequestItemsInner$new()
 
 test_that("id", {
   # tests for the property `id` (character)
-  # ID do produto ou serviço no seu sistema
+  # Product or service ID in your system
 
   # uncomment below to test the property
   #expect_equal(model.instance$`id`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("id", {
 
 test_that("isPhysical", {
   # tests for the property `isPhysical` (character)
-  # Define se o item é um produto físico ou um serviço
+  # Defines if the item is a physical product or a service
 
   # uncomment below to test the property
   #expect_equal(model.instance$`isPhysical`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("isPhysical", {
 
 test_that("name", {
   # tests for the property `name` (character)
-  # Nome do produto ou serviço
+  # Product or service name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`name`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("name", {
 
 test_that("qty", {
   # tests for the property `qty` (numeric)
-  # Quantidade do produto ou serviço
+  # Quantity of the product or service
 
   # uncomment below to test the property
   #expect_equal(model.instance$`qty`, "EXPECTED_RESULT")
@@ -39,7 +39,7 @@ test_that("qty", {
 
 test_that("unitPrice", {
   # tests for the property `unitPrice` (numeric)
-  # Preço unitário
+  # Unit price
 
   # uncomment below to test the property
   #expect_equal(model.instance$`unitPrice`, "EXPECTED_RESULT")

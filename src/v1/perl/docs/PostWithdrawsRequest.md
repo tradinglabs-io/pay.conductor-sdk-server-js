@@ -8,8 +8,8 @@ use WWW::OpenAPIClient::Object::PostWithdrawsRequest;
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **double** | Valor do saque em centavos | 
-**external_id** | **string** | ID do saque no seu sistema | [optional] 
+**amount** | **double** | Withdrawal amount in cents | 
+**external_id** | **string** | Withdrawal ID in your system | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payout_account** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  | 
 

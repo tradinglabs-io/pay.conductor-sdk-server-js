@@ -7,7 +7,7 @@
 #' @title PostOrders200ResponseSession
 #' @description PostOrders200ResponseSession Class
 #' @format An \code{R6Class} generator object
-#' @field sessionId ID da sessão de checkout associada ao pedido character
+#' @field sessionId ID of the checkout session associated with the order character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -19,7 +19,7 @@ PostOrders200ResponseSession <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponseSession class.
     #'
-    #' @param sessionId ID da sessão de checkout associada ao pedido
+    #' @param sessionId ID of the checkout session associated with the order
     #' @param ... Other optional arguments.
     initialize = function(`sessionId`, ...) {
       if (!missing(`sessionId`)) {

@@ -7,7 +7,7 @@ model_instance <- PostOrdersRequest$new()
 
 test_that("chargeAmount", {
   # tests for the property `chargeAmount` (numeric)
-  # Valor total a ser cobrado no pedido em valor flutuante
+  # Total amount to be charged on the order in floating point value
 
   # uncomment below to test the property
   #expect_equal(model.instance$`chargeAmount`, "EXPECTED_RESULT")
@@ -15,14 +15,14 @@ test_that("chargeAmount", {
 
 test_that("clientIp", {
   # tests for the property `clientIp` (character)
-  # Endereço IP do cliente
+  # Client IP address
 
   # uncomment below to test the property
   #expect_equal(model.instance$`clientIp`, "EXPECTED_RESULT")
 })
 
 test_that("customer", {
-  # tests for the property `customer` (Cliente)
+  # tests for the property `customer` (Customer)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`customer`, "EXPECTED_RESULT")
@@ -30,7 +30,7 @@ test_that("customer", {
 
 test_that("discountAmount", {
   # tests for the property `discountAmount` (numeric)
-  # Valor do desconto
+  # Discount amount
 
   # uncomment below to test the property
   #expect_equal(model.instance$`discountAmount`, "EXPECTED_RESULT")
@@ -38,7 +38,7 @@ test_that("discountAmount", {
 
 test_that("externalId", {
   # tests for the property `externalId` (character)
-  # ID da ordem no seu sistema
+  # Order ID in your system
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalId`, "EXPECTED_RESULT")
@@ -53,7 +53,7 @@ test_that("fingerprints", {
 
 test_that("items", {
   # tests for the property `items` (array[PostOrdersRequestItemsInner])
-  # Lista de produtos ou serviços do pedido
+  # List of products or services in the order
 
   # uncomment below to test the property
   #expect_equal(model.instance$`items`, "EXPECTED_RESULT")
@@ -75,7 +75,7 @@ test_that("payment", {
 
 test_that("splitAmountTotal", {
   # tests for the property `splitAmountTotal` (numeric)
-  # Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+  # Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`splitAmountTotal`, "EXPECTED_RESULT")
@@ -90,7 +90,7 @@ test_that("session", {
 
 test_that("shippingFee", {
   # tests for the property `shippingFee` (numeric)
-  # Valor do frete
+  # Shipping fee
 
   # uncomment below to test the property
   #expect_equal(model.instance$`shippingFee`, "EXPECTED_RESULT")
@@ -98,7 +98,7 @@ test_that("shippingFee", {
 
 test_that("taxFee", {
   # tests for the property `taxFee` (numeric)
-  # Taxas adicionais
+  # Additional fees
 
   # uncomment below to test the property
   #expect_equal(model.instance$`taxFee`, "EXPECTED_RESULT")
@@ -106,7 +106,7 @@ test_that("taxFee", {
 
 test_that("metadata", {
   # tests for the property `metadata` (object)
-  # Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+  # Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
 
   # uncomment below to test the property
   #expect_equal(model.instance$`metadata`, "EXPECTED_RESULT")

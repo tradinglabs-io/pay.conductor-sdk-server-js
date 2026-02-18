@@ -3,12 +3,12 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **char \*** | ID do pedido no sistema | 
-**external_id** | **char \*** | ID externo do pedido (fornecido pela sua integração) | 
-**external_integration_key** | **char \*** | Provedor utilizada para processar o pedido | 
-**external_integration_id** | **char \*** | ID do pedido no provedor de pagamento | 
-**amount** | **double** | Valor total do pedido | 
-**cost_fee** | **double** | Taxa de custo aplicada ao pedido | 
+**id** | **char \*** | Order ID in the system | 
+**external_id** | **char \*** | External order ID (provided by your integration) | 
+**external_integration_key** | **char \*** | Provider used to process the order | 
+**external_integration_id** | **char \*** | Order ID in the payment provider | 
+**amount** | **double** | Total order amount | 
+**cost_fee** | **double** | Cost fee applied to the order | 
 **pix** | [**post_orders_200_response_pix_t**](post_orders_200_response_pix.md) \* |  | [optional] 
 **bank_slip** | [**post_orders_200_response_bank_slip_t**](post_orders_200_response_bank_slip.md) \* |  | [optional] 
 **nu_pay** | [**post_orders_200_response_nu_pay_t**](post_orders_200_response_nu_pay.md) \* |  | [optional] 
@@ -16,9 +16,9 @@ Name | Type | Description | Notes
 **credit_card** | [**post_orders_200_response_credit_card_t**](post_orders_200_response_credit_card.md) \* |  | [optional] 
 **status** | **payconductor_api_post_orders_200_response_STATUS_e** |  | 
 **payment_method** | **payconductor_api_post_orders_200_response_PAYMENTMETHOD_e** |  | 
-**payed_at** | **char \*** | Data e hora em que o pedido foi pago (ISO 8601) | 
-**error_code** | **char \*** | Código de erro, se houver | 
-**error_message** | **char \*** | Mensagem de erro, se houver | 
+**payed_at** | **char \*** | Date and time when the order was paid (ISO 8601) | 
+**error_code** | **char \*** | Error code, if any | 
+**error_message** | **char \*** | Error message, if any | 
 **order_items** | [**list_t**](post_orders_200_response_order_items_inner.md) \* |  | 
 **session** | [**post_orders_200_response_session_t**](post_orders_200_response_session.md) \* |  | [optional] 
 

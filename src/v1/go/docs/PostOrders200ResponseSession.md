@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SessionId** | **string** | ID da sessão de checkout associada ao pedido | 
+**SessionId** | **string** | ID of the checkout session associated with the order | 
 
 ## Methods
 

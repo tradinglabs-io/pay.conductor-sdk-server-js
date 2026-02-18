@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | ID do pedido no sistema | [default to undefined]
-**externalId** | **string** | ID externo do pedido (fornecido pela sua integração) | [default to undefined]
-**externalIntegrationKey** | **string** | Provedor utilizada para processar o pedido | [default to undefined]
-**externalIntegrationId** | **string** | ID do pedido no provedor de pagamento | [default to undefined]
-**amount** | **number** | Valor total do pedido | [default to undefined]
-**costFee** | **number** | Taxa de custo aplicada ao pedido | [default to undefined]
+**id** | **string** | Order ID in the system | [default to undefined]
+**externalId** | **string** | External order ID (provided by your integration) | [default to undefined]
+**externalIntegrationKey** | **string** | Provider used to process the order | [default to undefined]
+**externalIntegrationId** | **string** | Order ID in the payment provider | [default to undefined]
+**amount** | **number** | Total order amount | [default to undefined]
+**costFee** | **number** | Cost fee applied to the order | [default to undefined]
 **pix** | [**PostOrders200ResponsePix**](PostOrders200ResponsePix.md) |  | [optional] [default to undefined]
 **bankSlip** | [**PostOrders200ResponseBankSlip**](PostOrders200ResponseBankSlip.md) |  | [optional] [default to undefined]
 **nuPay** | [**PostOrders200ResponseNuPay**](PostOrders200ResponseNuPay.md) |  | [optional] [default to undefined]
@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **creditCard** | [**PostOrders200ResponseCreditCard**](PostOrders200ResponseCreditCard.md) |  | [optional] [default to undefined]
 **status** | **string** |  | [default to undefined]
 **paymentMethod** | **string** |  | [default to undefined]
-**payedAt** | **string** | Data e hora em que o pedido foi pago (ISO 8601) | [default to undefined]
-**errorCode** | **string** | Código de erro, se houver | [default to undefined]
-**errorMessage** | **string** | Mensagem de erro, se houver | [default to undefined]
+**payedAt** | **string** | Date and time when the order was paid (ISO 8601) | [default to undefined]
+**errorCode** | **string** | Error code, if any | [default to undefined]
+**errorMessage** | **string** | Error message, if any | [default to undefined]
 **orderItems** | [**Array&lt;PostOrders200ResponseOrderItemsInner&gt;**](PostOrders200ResponseOrderItemsInner.md) |  | [default to undefined]
 **session** | [**PostOrders200ResponseSession**](PostOrders200ResponseSession.md) |  | [optional] [default to undefined]
 

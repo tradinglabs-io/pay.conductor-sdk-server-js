@@ -7,19 +7,19 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponsePix, () {
-    // Código copia e cola do PIX
+    // PIX copy and paste code
     // String copyAndPasteCode
     test('to test the property `copyAndPasteCode`', () async {
       // TODO
     });
 
-    // URL da imagem do QR Code PIX
+    // PIX QR Code image URL
     // String qrCodeUrl
     test('to test the property `qrCodeUrl`', () async {
       // TODO
     });
 
-    // E2E ID do PIX
+    // PIX E2E ID
     // String endToEndId
     test('to test the property `endToEndId`', () async {
       // TODO

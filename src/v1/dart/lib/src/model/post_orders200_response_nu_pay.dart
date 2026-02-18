@@ -11,10 +11,10 @@ part 'post_orders200_response_nu_pay.g.dart';
 /// PostOrders200ResponseNuPay
 ///
 /// Properties:
-/// * [paymentUrl] - URL de pagamento NuPay
+/// * [paymentUrl] - NuPay payment URL
 @BuiltValue()
 abstract class PostOrders200ResponseNuPay implements Built<PostOrders200ResponseNuPay, PostOrders200ResponseNuPayBuilder> {
-  /// URL de pagamento NuPay
+  /// NuPay payment URL
   @BuiltValueField(wireName: r'paymentUrl')
   String get paymentUrl;
 

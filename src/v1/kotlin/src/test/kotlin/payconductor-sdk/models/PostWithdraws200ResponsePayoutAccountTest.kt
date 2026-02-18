@@ -25,31 +25,31 @@ class PostWithdraws200ResponsePayoutAccountTest : ShouldSpec() {
         // uncomment below to create an instance of PostWithdraws200ResponsePayoutAccount
         //val modelInstance = PostWithdraws200ResponsePayoutAccount()
 
-        // to test the property `id` - Identificador único da conta de pagamento
+        // to test the property `id` - Unique payment account identifier
         should("test id") {
             // uncomment below to test the property
             //modelInstance.id shouldBe ("TODO")
         }
 
-        // to test the property `ownerDocument` - Documento do titular da conta (CPF ou CNPJ)
+        // to test the property `ownerDocument` - Account holder document (CPF or CNPJ)
         should("test ownerDocument") {
             // uncomment below to test the property
             //modelInstance.ownerDocument shouldBe ("TODO")
         }
 
-        // to test the property `ownerName` - Nome do titular da conta
+        // to test the property `ownerName` - Account holder name
         should("test ownerName") {
             // uncomment below to test the property
             //modelInstance.ownerName shouldBe ("TODO")
         }
 
-        // to test the property `pixKey` - Chave PIX utilizada para o saque
+        // to test the property `pixKey` - PIX key used for the withdrawal
         should("test pixKey") {
             // uncomment below to test the property
             //modelInstance.pixKey shouldBe ("TODO")
         }
 
-        // to test the property `pixType` - Tipo da chave PIX
+        // to test the property `pixType` - PIX key type
         should("test pixType") {
             // uncomment below to test the property
             //modelInstance.pixType shouldBe ("TODO")

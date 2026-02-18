@@ -7,7 +7,7 @@ model_instance <- NuPayNuPay$new()
 
 test_that("cancelUrl", {
   # tests for the property `cancelUrl` (character)
-  # URL de cancelamento do pagamento
+  # Payment cancellation URL
 
   # uncomment below to test the property
   #expect_equal(model.instance$`cancelUrl`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("cancelUrl", {
 
 test_that("merchantName", {
   # tests for the property `merchantName` (character)
-  # Nome do comerciante
+  # Merchant name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`merchantName`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("merchantName", {
 
 test_that("returnUrl", {
   # tests for the property `returnUrl` (character)
-  # URL de retorno após a conclusão do pagamento
+  # Return URL after payment completion
 
   # uncomment below to test the property
   #expect_equal(model.instance$`returnUrl`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("returnUrl", {
 
 test_that("storeName", {
   # tests for the property `storeName` (character)
-  # Nome da loja
+  # Store name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`storeName`, "EXPECTED_RESULT")

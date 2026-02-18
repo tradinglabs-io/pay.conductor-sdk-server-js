@@ -7,20 +7,20 @@
 #' @title PostOrdersRequest
 #' @description PostOrdersRequest Class
 #' @format An \code{R6Class} generator object
-#' @field chargeAmount Valor total a ser cobrado no pedido em valor flutuante numeric
-#' @field clientIp Endereço IP do cliente character
-#' @field customer  \link{Cliente}
-#' @field discountAmount Valor do desconto numeric
-#' @field externalId ID da ordem no seu sistema character
+#' @field chargeAmount Total amount to be charged on the order in floating point value numeric
+#' @field clientIp Client IP address character
+#' @field customer  \link{Customer}
+#' @field discountAmount Discount amount numeric
+#' @field externalId Order ID in your system character
 #' @field fingerprints  \link{PostOrdersRequestFingerprints} [optional]
-#' @field items Lista de produtos ou serviços do pedido list(\link{PostOrdersRequestItemsInner}) [optional]
+#' @field items List of products or services in the order list(\link{PostOrdersRequestItemsInner}) [optional]
 #' @field merchant  \link{MerchantInput} [optional]
 #' @field payment  \link{PostOrdersRequestPayment}
-#' @field splitAmountTotal Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) numeric [optional]
+#' @field splitAmountTotal Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) numeric [optional]
 #' @field session  \link{PostOrdersRequestSession} [optional]
-#' @field shippingFee Valor do frete numeric
-#' @field taxFee Taxas adicionais numeric
-#' @field metadata Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves object [optional]
+#' @field shippingFee Shipping fee numeric
+#' @field taxFee Additional fees numeric
+#' @field metadata Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters object [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -45,20 +45,20 @@ PostOrdersRequest <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrdersRequest class.
     #'
-    #' @param chargeAmount Valor total a ser cobrado no pedido em valor flutuante
-    #' @param clientIp Endereço IP do cliente
+    #' @param chargeAmount Total amount to be charged on the order in floating point value
+    #' @param clientIp Client IP address
     #' @param customer customer
-    #' @param discountAmount Valor do desconto
-    #' @param externalId ID da ordem no seu sistema
+    #' @param discountAmount Discount amount
+    #' @param externalId Order ID in your system
     #' @param payment payment
-    #' @param shippingFee Valor do frete
-    #' @param taxFee Taxas adicionais
+    #' @param shippingFee Shipping fee
+    #' @param taxFee Additional fees
     #' @param fingerprints fingerprints
-    #' @param items Lista de produtos ou serviços do pedido
+    #' @param items List of products or services in the order
     #' @param merchant merchant
-    #' @param splitAmountTotal Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+    #' @param splitAmountTotal Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
     #' @param session session
-    #' @param metadata Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+    #' @param metadata Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
     #' @param ... Other optional arguments.
     initialize = function(`chargeAmount`, `clientIp`, `customer`, `discountAmount`, `externalId`, `payment`, `shippingFee`, `taxFee`, `fingerprints` = NULL, `items` = NULL, `merchant` = NULL, `splitAmountTotal` = NULL, `session` = NULL, `metadata` = NULL, ...) {
       if (!missing(`chargeAmount`)) {
@@ -245,7 +245,7 @@ PostOrdersRequest <- R6::R6Class(
         self$`clientIp` <- this_object$`clientIp`
       }
       if (!is.null(this_object$`customer`)) {
-        `customer_object` <- Cliente$new()
+        `customer_object` <- Customer$new()
         `customer_object`$fromJSON(jsonlite::toJSON(this_object$`customer`, auto_unbox = TRUE, digits = NA))
         self$`customer` <- `customer_object`
       }
@@ -313,7 +313,7 @@ PostOrdersRequest <- R6::R6Class(
       this_object <- jsonlite::fromJSON(input_json)
       self$`chargeAmount` <- this_object$`chargeAmount`
       self$`clientIp` <- this_object$`clientIp`
-      self$`customer` <- Cliente$new()$fromJSON(jsonlite::toJSON(this_object$`customer`, auto_unbox = TRUE, digits = NA))
+      self$`customer` <- Customer$new()$fromJSON(jsonlite::toJSON(this_object$`customer`, auto_unbox = TRUE, digits = NA))
       self$`discountAmount` <- this_object$`discountAmount`
       self$`externalId` <- this_object$`externalId`
       self$`fingerprints` <- PostOrdersRequestFingerprints$new()$fromJSON(jsonlite::toJSON(this_object$`fingerprints`, auto_unbox = TRUE, digits = NA))

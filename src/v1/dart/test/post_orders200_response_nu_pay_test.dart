@@ -7,7 +7,7 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponseNuPay, () {
-    // URL de pagamento NuPay
+    // NuPay payment URL
     // String paymentUrl
     test('to test the property `paymentUrl`', () async {
       // TODO

@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **character** | ID do produto ou serviço no seu sistema | 
-**isPhysical** | **character** | Define se o item é um produto físico ou um serviço | [default to FALSE] 
-**name** | **character** | Nome do produto ou serviço | 
-**qty** | **numeric** | Quantidade do produto ou serviço | 
-**unitPrice** | **numeric** | Preço unitário | 
+**id** | **character** | Product or service ID in your system | 
+**isPhysical** | **character** | Defines if the item is a physical product or a service | [default to FALSE] 
+**name** | **character** | Product or service name | 
+**qty** | **numeric** | Quantity of the product or service | 
+**unitPrice** | **numeric** | Unit price | 
 
 

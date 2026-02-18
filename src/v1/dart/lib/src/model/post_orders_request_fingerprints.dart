@@ -11,10 +11,10 @@ part 'post_orders_request_fingerprints.g.dart';
 /// PostOrdersRequestFingerprints
 ///
 /// Properties:
-/// * [threatMetrixFingerprintId] - ID de fingerprint do ThreatMetrix para análise de fraude
+/// * [threatMetrixFingerprintId] - ThreatMetrix fingerprint ID for fraud analysis
 @BuiltValue()
 abstract class PostOrdersRequestFingerprints implements Built<PostOrdersRequestFingerprints, PostOrdersRequestFingerprintsBuilder> {
-  /// ID de fingerprint do ThreatMetrix para análise de fraude
+  /// ThreatMetrix fingerprint ID for fraud analysis
   @BuiltValueField(wireName: r'threatMetrixFingerprintId')
   String? get threatMetrixFingerprintId;
 

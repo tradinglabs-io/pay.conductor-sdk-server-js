@@ -8,14 +8,14 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | Identificador único do saque | 
-**externalId** | **String** | ID do saque no sistema no seu sistema | 
-**externalIntegrationKey** | **String** | Chave do provedor utilizado para o saque | 
-**externalIntegrationId** | **String** | ID do saque no provedor de pagamento | 
-**costFee** | **num** | Taxa de custo aplicada ao saque | 
-**status** | **String** | Status do saque | [default to 'Pending']
-**errorCode** | **String** | Código do erro, se houver | 
-**errorMessage** | **String** | Mensagem descritiva do erro, se houver | 
+**id** | **String** | Unique withdrawal identifier | 
+**externalId** | **String** | Withdrawal ID in your system | 
+**externalIntegrationKey** | **String** | Provider key used for the withdrawal | 
+**externalIntegrationId** | **String** | Withdrawal ID in the payment provider | 
+**costFee** | **num** | Cost fee applied to the withdrawal | 
+**status** | **String** | Withdrawal status | [default to 'Pending']
+**errorCode** | **String** | Error code, if any | 
+**errorMessage** | **String** | Descriptive error message, if any | 
 **payedAt** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | 
 **payoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | 
 

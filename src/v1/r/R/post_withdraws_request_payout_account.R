@@ -7,8 +7,8 @@
 #' @title PostWithdrawsRequestPayoutAccount
 #' @description PostWithdrawsRequestPayoutAccount Class
 #' @format An \code{R6Class} generator object
-#' @field ownerDocument Documento do titular da conta (CPF ou CNPJ) character
-#' @field ownerName Nome do titular da conta character
+#' @field ownerDocument Account holder document (CPF or CNPJ) character
+#' @field ownerName Account holder name character
 #' @field pixKey PIX key for withdrawal character
 #' @field pixType PIX key type character
 #' @importFrom R6 R6Class
@@ -25,8 +25,8 @@ PostWithdrawsRequestPayoutAccount <- R6::R6Class(
     #' @description
     #' Initialize a new PostWithdrawsRequestPayoutAccount class.
     #'
-    #' @param ownerDocument Documento do titular da conta (CPF ou CNPJ)
-    #' @param ownerName Nome do titular da conta
+    #' @param ownerDocument Account holder document (CPF or CNPJ)
+    #' @param ownerName Account holder name
     #' @param pixKey PIX key for withdrawal
     #' @param pixType PIX key type
     #' @param ... Other optional arguments.

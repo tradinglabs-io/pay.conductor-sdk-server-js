@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**threat_metrix_fingerprint_id** | **str** | ID de fingerprint do ThreatMetrix para análise de fraude | [optional] 
+**threat_metrix_fingerprint_id** | **str** | ThreatMetrix fingerprint ID for fraud analysis | [optional] 
 
 ## Example
 

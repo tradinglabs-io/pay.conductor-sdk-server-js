@@ -7,7 +7,7 @@ model_instance <- PostOrders200Response$new()
 
 test_that("id", {
   # tests for the property `id` (character)
-  # ID do pedido no sistema
+  # Order ID in the system
 
   # uncomment below to test the property
   #expect_equal(model.instance$`id`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("id", {
 
 test_that("externalId", {
   # tests for the property `externalId` (character)
-  # ID externo do pedido (fornecido pela sua integração)
+  # External order ID (provided by your integration)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalId`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("externalId", {
 
 test_that("externalIntegrationKey", {
   # tests for the property `externalIntegrationKey` (character)
-  # Provedor utilizada para processar o pedido
+  # Provider used to process the order
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalIntegrationKey`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("externalIntegrationKey", {
 
 test_that("externalIntegrationId", {
   # tests for the property `externalIntegrationId` (character)
-  # ID do pedido no provedor de pagamento
+  # Order ID in the payment provider
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalIntegrationId`, "EXPECTED_RESULT")
@@ -39,7 +39,7 @@ test_that("externalIntegrationId", {
 
 test_that("amount", {
   # tests for the property `amount` (numeric)
-  # Valor total do pedido
+  # Total order amount
 
   # uncomment below to test the property
   #expect_equal(model.instance$`amount`, "EXPECTED_RESULT")
@@ -47,7 +47,7 @@ test_that("amount", {
 
 test_that("costFee", {
   # tests for the property `costFee` (numeric)
-  # Taxa de custo aplicada ao pedido
+  # Cost fee applied to the order
 
   # uncomment below to test the property
   #expect_equal(model.instance$`costFee`, "EXPECTED_RESULT")
@@ -104,7 +104,7 @@ test_that("paymentMethod", {
 
 test_that("payedAt", {
   # tests for the property `payedAt` (character)
-  # Data e hora em que o pedido foi pago (ISO 8601)
+  # Date and time when the order was paid (ISO 8601)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`payedAt`, "EXPECTED_RESULT")
@@ -112,7 +112,7 @@ test_that("payedAt", {
 
 test_that("errorCode", {
   # tests for the property `errorCode` (character)
-  # Código de erro, se houver
+  # Error code, if any
 
   # uncomment below to test the property
   #expect_equal(model.instance$`errorCode`, "EXPECTED_RESULT")
@@ -120,7 +120,7 @@ test_that("errorCode", {
 
 test_that("errorMessage", {
   # tests for the property `errorMessage` (character)
-  # Mensagem de erro, se houver
+  # Error message, if any
 
   # uncomment below to test the property
   #expect_equal(model.instance$`errorMessage`, "EXPECTED_RESULT")

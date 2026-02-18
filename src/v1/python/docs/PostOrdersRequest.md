@@ -5,20 +5,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**charge_amount** | **float** | Valor total a ser cobrado no pedido em valor flutuante | 
-**client_ip** | **str** | Endereço IP do cliente | 
-**customer** | [**Cliente**](Cliente.md) |  | 
-**discount_amount** | **float** | Valor do desconto | [default to 0]
-**external_id** | **str** | ID da ordem no seu sistema | 
+**charge_amount** | **float** | Total amount to be charged on the order in floating point value | 
+**client_ip** | **str** | Client IP address | 
+**customer** | [**Customer**](Customer.md) |  | 
+**discount_amount** | **float** | Discount amount | [default to 0]
+**external_id** | **str** | Order ID in your system | 
 **fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  | [optional] 
-**items** | [**List[PostOrdersRequestItemsInner]**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido | [optional] 
+**items** | [**List[PostOrdersRequestItemsInner]**](PostOrdersRequestItemsInner.md) | List of products or services in the order | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  | 
-**split_amount_total** | **float** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) | [optional] 
+**split_amount_total** | **float** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) | [optional] 
 **session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  | [optional] 
-**shipping_fee** | **float** | Valor do frete | [default to 0]
-**tax_fee** | **float** | Taxas adicionais | [default to 0]
-**metadata** | **object** | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves | [optional] 
+**shipping_fee** | **float** | Shipping fee | [default to 0]
+**tax_fee** | **float** | Additional fees | [default to 0]
+**metadata** | **object** | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters | [optional] 
 
 ## Example
 

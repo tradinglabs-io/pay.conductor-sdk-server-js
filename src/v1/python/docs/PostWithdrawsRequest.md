@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **float** | Valor do saque em centavos | 
-**external_id** | **str** | ID do saque no seu sistema | [optional] 
+**amount** | **float** | Withdrawal amount in cents | 
+**external_id** | **str** | Withdrawal ID in your system | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payout_account** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  | 
 

@@ -4,6 +4,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorizationCode** | **character** | Código de autorização da transação | [optional] 
+**authorizationCode** | **character** | Transaction authorization code | [optional] 
 
 

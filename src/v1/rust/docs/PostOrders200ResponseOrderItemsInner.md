@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**external_id** | Option<**String**> | ID externo do item | 
-**id** | **String** | ID do item no pedido | 
-**name** | **String** | Nome do produto/serviço | 
-**qty** | **f64** | Quantidade | 
-**total_amount** | **f64** | Valor total do item (quantidade × preço unitário) | 
-**total_net_amount** | **f64** | Valor líquido total do item | 
-**unity_price** | **f64** | Preço unitário | 
+**external_id** | Option<**String**> | External item ID | 
+**id** | **String** | Item ID in the order | 
+**name** | **String** | Product/service name | 
+**qty** | **f64** | Quantity | 
+**total_amount** | **f64** | Total item amount (quantity × unit price) | 
+**total_net_amount** | **f64** | Total net amount of the item | 
+**unity_price** | **f64** | Unit price | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

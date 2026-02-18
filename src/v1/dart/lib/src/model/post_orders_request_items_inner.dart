@@ -11,30 +11,30 @@ part 'post_orders_request_items_inner.g.dart';
 /// PostOrdersRequestItemsInner
 ///
 /// Properties:
-/// * [id] - ID do produto ou serviço no seu sistema
-/// * [isPhysical] - Define se o item é um produto físico ou um serviço
-/// * [name] - Nome do produto ou serviço
-/// * [qty] - Quantidade do produto ou serviço
-/// * [unitPrice] - Preço unitário
+/// * [id] - Product or service ID in your system
+/// * [isPhysical] - Defines if the item is a physical product or a service
+/// * [name] - Product or service name
+/// * [qty] - Quantity of the product or service
+/// * [unitPrice] - Unit price
 @BuiltValue()
 abstract class PostOrdersRequestItemsInner implements Built<PostOrdersRequestItemsInner, PostOrdersRequestItemsInnerBuilder> {
-  /// ID do produto ou serviço no seu sistema
+  /// Product or service ID in your system
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  /// Define se o item é um produto físico ou um serviço
+  /// Defines if the item is a physical product or a service
   @BuiltValueField(wireName: r'isPhysical')
   bool get isPhysical;
 
-  /// Nome do produto ou serviço
+  /// Product or service name
   @BuiltValueField(wireName: r'name')
   String get name;
 
-  /// Quantidade do produto ou serviço
+  /// Quantity of the product or service
   @BuiltValueField(wireName: r'qty')
   num get qty;
 
-  /// Preço unitário
+  /// Unit price
   @BuiltValueField(wireName: r'unitPrice')
   num get unitPrice;
 

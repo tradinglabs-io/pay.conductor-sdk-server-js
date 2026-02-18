@@ -25,7 +25,7 @@ class PostOrders200ResponseNuPayTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponseNuPay
         //val modelInstance = PostOrders200ResponseNuPay()
 
-        // to test the property `paymentUrl` - URL de pagamento NuPay
+        // to test the property `paymentUrl` - NuPay payment URL
         should("test paymentUrl") {
             // uncomment below to test the property
             //modelInstance.paymentUrl shouldBe ("TODO")

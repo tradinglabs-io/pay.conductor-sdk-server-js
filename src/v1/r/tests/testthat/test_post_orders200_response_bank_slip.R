@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponseBankSlip$new()
 
 test_that("barCode", {
   # tests for the property `barCode` (character)
-  # Código de barras do boleto
+  # Bank slip bar code
 
   # uncomment below to test the property
   #expect_equal(model.instance$`barCode`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("barCode", {
 
 test_that("digitableLine", {
   # tests for the property `digitableLine` (character)
-  # Linha digitável do boleto
+  # Bank slip digitable line
 
   # uncomment below to test the property
   #expect_equal(model.instance$`digitableLine`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("digitableLine", {
 
 test_that("pdfUrl", {
   # tests for the property `pdfUrl` (character)
-  # URL do PDF do boleto
+  # Bank slip PDF URL
 
   # uncomment below to test the property
   #expect_equal(model.instance$`pdfUrl`, "EXPECTED_RESULT")

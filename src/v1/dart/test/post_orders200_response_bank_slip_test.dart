@@ -7,19 +7,19 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponseBankSlip, () {
-    // Código de barras do boleto
+    // Bank slip bar code
     // String barCode
     test('to test the property `barCode`', () async {
       // TODO
     });
 
-    // Linha digitável do boleto
+    // Bank slip digitable line
     // String digitableLine
     test('to test the property `digitableLine`', () async {
       // TODO
     });
 
-    // URL do PDF do boleto
+    // Bank slip PDF URL
     // String pdfUrl
     test('to test the property `pdfUrl`', () async {
       // TODO

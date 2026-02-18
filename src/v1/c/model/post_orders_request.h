@@ -15,7 +15,7 @@
 
 typedef struct post_orders_request_t post_orders_request_t;
 
-#include "cliente.h"
+#include "customer.h"
 #include "merchant_input.h"
 #include "object.h"
 #include "post_orders_request_fingerprints.h"
@@ -28,7 +28,7 @@ typedef struct post_orders_request_t post_orders_request_t;
 typedef struct post_orders_request_t {
     double charge_amount; //numeric
     char *client_ip; // string
-    struct cliente_t *customer; //model
+    struct customer_t *customer; //model
     double discount_amount; //numeric
     char *external_id; // string
     struct post_orders_request_fingerprints_t *fingerprints; //model
@@ -47,7 +47,7 @@ typedef struct post_orders_request_t {
 __attribute__((deprecated)) post_orders_request_t *post_orders_request_create(
     double charge_amount,
     char *client_ip,
-    cliente_t *customer,
+    customer_t *customer,
     double discount_amount,
     char *external_id,
     post_orders_request_fingerprints_t *fingerprints,

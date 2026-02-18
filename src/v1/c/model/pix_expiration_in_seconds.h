@@ -1,7 +1,7 @@
 /*
  * pix_expiration_in_seconds.h
  *
- * Tempo de expiração do PIX em segundos
+ * PIX expiration time in seconds
  */
 
 #ifndef _pix_expiration_in_seconds_H_

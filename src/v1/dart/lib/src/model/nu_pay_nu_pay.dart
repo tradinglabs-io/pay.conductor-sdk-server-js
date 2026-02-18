@@ -8,28 +8,28 @@ import 'package:built_value/serializer.dart';
 
 part 'nu_pay_nu_pay.g.dart';
 
-/// Dados específicos para pagamento via NuPay
+/// Specific data for NuPay payment
 ///
 /// Properties:
-/// * [cancelUrl] - URL de cancelamento do pagamento
-/// * [merchantName] - Nome do comerciante
-/// * [returnUrl] - URL de retorno após a conclusão do pagamento
-/// * [storeName] - Nome da loja
+/// * [cancelUrl] - Payment cancellation URL
+/// * [merchantName] - Merchant name
+/// * [returnUrl] - Return URL after payment completion
+/// * [storeName] - Store name
 @BuiltValue()
 abstract class NuPayNuPay implements Built<NuPayNuPay, NuPayNuPayBuilder> {
-  /// URL de cancelamento do pagamento
+  /// Payment cancellation URL
   @BuiltValueField(wireName: r'cancelUrl')
   String get cancelUrl;
 
-  /// Nome do comerciante
+  /// Merchant name
   @BuiltValueField(wireName: r'merchantName')
   String get merchantName;
 
-  /// URL de retorno após a conclusão do pagamento
+  /// Return URL after payment completion
   @BuiltValueField(wireName: r'returnUrl')
   String get returnUrl;
 
-  /// Nome da loja
+  /// Store name
   @BuiltValueField(wireName: r'storeName')
   String? get storeName;
 

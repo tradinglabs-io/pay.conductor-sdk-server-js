@@ -7,7 +7,7 @@ model_instance <- PostOrdersRequestFingerprints$new()
 
 test_that("threatMetrixFingerprintId", {
   # tests for the property `threatMetrixFingerprintId` (character)
-  # ID de fingerprint do ThreatMetrix para análise de fraude
+  # ThreatMetrix fingerprint ID for fraud analysis
 
   # uncomment below to test the property
   #expect_equal(model.instance$`threatMetrixFingerprintId`, "EXPECTED_RESULT")

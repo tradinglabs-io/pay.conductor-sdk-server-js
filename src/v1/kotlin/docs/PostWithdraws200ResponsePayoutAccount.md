@@ -4,11 +4,11 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **id** | **kotlin.String** | Identificador único da conta de pagamento |  |
-| **ownerDocument** | **kotlin.String** | Documento do titular da conta (CPF ou CNPJ) |  |
-| **ownerName** | **kotlin.String** | Nome do titular da conta |  |
-| **pixKey** | **kotlin.String** | Chave PIX utilizada para o saque |  |
-| **pixType** | [**inline**](#PixType) | Tipo da chave PIX |  |
+| **id** | **kotlin.String** | Unique payment account identifier |  |
+| **ownerDocument** | **kotlin.String** | Account holder document (CPF or CNPJ) |  |
+| **ownerName** | **kotlin.String** | Account holder name |  |
+| **pixKey** | **kotlin.String** | PIX key used for the withdrawal |  |
+| **pixType** | [**inline**](#PixType) | PIX key type |  |
 
 
 <a id="PixType"></a>

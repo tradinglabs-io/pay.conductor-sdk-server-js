@@ -25,19 +25,19 @@ class PostOrders200ResponsePixTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponsePix
         //val modelInstance = PostOrders200ResponsePix()
 
-        // to test the property `copyAndPasteCode` - Código copia e cola do PIX
+        // to test the property `copyAndPasteCode` - PIX copy and paste code
         should("test copyAndPasteCode") {
             // uncomment below to test the property
             //modelInstance.copyAndPasteCode shouldBe ("TODO")
         }
 
-        // to test the property `qrCodeUrl` - URL da imagem do QR Code PIX
+        // to test the property `qrCodeUrl` - PIX QR Code image URL
         should("test qrCodeUrl") {
             // uncomment below to test the property
             //modelInstance.qrCodeUrl shouldBe ("TODO")
         }
 
-        // to test the property `endToEndId` - E2E ID do PIX
+        // to test the property `endToEndId` - PIX E2E ID
         should("test endToEndId") {
             // uncomment below to test the property
             //modelInstance.endToEndId shouldBe ("TODO")

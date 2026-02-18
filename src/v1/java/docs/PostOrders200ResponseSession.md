@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**sessionId** | **String** | ID da sessão de checkout associada ao pedido |  |
+|**sessionId** | **String** | ID of the checkout session associated with the order |  |
 
 
 

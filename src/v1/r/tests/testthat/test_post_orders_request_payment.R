@@ -20,14 +20,14 @@ test_that("expirationInSeconds", {
 })
 
 test_that("card", {
-  # tests for the property `card` (CartODeCrDitoCard)
+  # tests for the property `card` (CreditCardCard)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`card`, "EXPECTED_RESULT")
 })
 
 test_that("installments", {
-  # tests for the property `installments` (CartODeCrDitoInstallments)
+  # tests for the property `installments` (CreditCardInstallments)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`installments`, "EXPECTED_RESULT")
@@ -35,14 +35,14 @@ test_that("installments", {
 
 test_that("softDescriptor", {
   # tests for the property `softDescriptor` (character)
-  # Texto que aparecerá na fatura do cartão (soft descriptor)
+  # Text that will appear on the card statement (soft descriptor)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`softDescriptor`, "EXPECTED_RESULT")
 })
 
 test_that("expirationInDays", {
-  # tests for the property `expirationInDays` (BoletoExpirationInDays)
+  # tests for the property `expirationInDays` (BankSlipExpirationInDays)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`expirationInDays`, "EXPECTED_RESULT")

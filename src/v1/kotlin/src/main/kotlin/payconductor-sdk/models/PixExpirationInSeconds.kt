@@ -20,7 +20,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Tempo de expiração do PIX em segundos
+ * PIX expiration time in seconds
  *
  */
 

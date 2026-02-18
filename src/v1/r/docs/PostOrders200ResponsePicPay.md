@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**copyAndPasteCode** | **character** | Código copia e cola do PicPay | 
-**qrCodeUrl** | **character** | URL da imagem do QR Code PicPay | 
+**copyAndPasteCode** | **character** | PicPay copy and paste code | 
+**qrCodeUrl** | **character** | PicPay QR Code image URL | 
 
 

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ownerDocument** | **string** | Documento do titular da conta (CPF ou CNPJ) | [default to undefined]
-**ownerName** | **string** | Nome do titular da conta | [default to undefined]
+**ownerDocument** | **string** | Account holder document (CPF or CNPJ) | [default to undefined]
+**ownerName** | **string** | Account holder name | [default to undefined]
 **pixKey** | **string** | PIX key for withdrawal | [default to undefined]
 **pixType** | **string** | PIX key type | [default to PixTypeEnum_Cnpj]
 

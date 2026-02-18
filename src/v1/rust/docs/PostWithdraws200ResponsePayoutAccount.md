@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | Identificador único da conta de pagamento | 
-**owner_document** | **String** | Documento do titular da conta (CPF ou CNPJ) | 
-**owner_name** | **String** | Nome do titular da conta | 
-**pix_key** | **String** | Chave PIX utilizada para o saque | 
-**pix_type** | **PixType** | Tipo da chave PIX (enum: Cpf, Cnpj, Email, Phone, Random) | [default to Cpf]
+**id** | **String** | Unique payment account identifier | 
+**owner_document** | **String** | Account holder document (CPF or CNPJ) | 
+**owner_name** | **String** | Account holder name | 
+**pix_key** | **String** | PIX key used for the withdrawal | 
+**pix_type** | **PixType** | PIX key type (enum: Cpf, Cnpj, Email, Phone, Random) | [default to Cpf]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -4,20 +4,20 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **chargeAmount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor total a ser cobrado no pedido em valor flutuante |  |
-| **clientIp** | **kotlin.String** | Endereço IP do cliente |  |
-| **customer** | [**Cliente**](Cliente.md) |  |  |
-| **discountAmount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor do desconto |  |
-| **externalId** | **kotlin.String** | ID da ordem no seu sistema |  |
+| **chargeAmount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Total amount to be charged on the order in floating point value |  |
+| **clientIp** | **kotlin.String** | Client IP address |  |
+| **customer** | [**Customer**](Customer.md) |  |  |
+| **discountAmount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Discount amount |  |
+| **externalId** | **kotlin.String** | Order ID in your system |  |
 | **payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  |  |
-| **shippingFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor do frete |  |
-| **taxFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Taxas adicionais |  |
+| **shippingFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Shipping fee |  |
+| **taxFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Additional fees |  |
 | **fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  |  [optional] |
-| **items** | [**kotlin.collections.List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido |  [optional] |
+| **items** | [**kotlin.collections.List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | List of products or services in the order |  [optional] |
 | **merchant** | [**MerchantInput**](MerchantInput.md) |  |  [optional] |
-| **splitAmountTotal** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) |  [optional] |
+| **splitAmountTotal** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) |  [optional] |
 | **session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  |  [optional] |
-| **metadata** | [**kotlin.Any**](.md) | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves |  [optional] |
+| **metadata** | [**kotlin.Any**](.md) | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters |  [optional] |
 
 
 

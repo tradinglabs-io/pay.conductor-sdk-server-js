@@ -111,7 +111,9 @@ impl From<&str> for ContentType {
     }
 }
 
-pub mod pedidos_api;
-pub mod saques_e_transferncias_api;
+pub mod card_tokenization_api;
+pub mod customers_api;
+pub mod orders_api;
+pub mod withdrawals_and_transfers_api;
 
 pub mod configuration;

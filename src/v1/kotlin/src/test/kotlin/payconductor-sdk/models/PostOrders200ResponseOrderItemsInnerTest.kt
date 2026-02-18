@@ -25,43 +25,43 @@ class PostOrders200ResponseOrderItemsInnerTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponseOrderItemsInner
         //val modelInstance = PostOrders200ResponseOrderItemsInner()
 
-        // to test the property `externalId` - ID externo do item
+        // to test the property `externalId` - External item ID
         should("test externalId") {
             // uncomment below to test the property
             //modelInstance.externalId shouldBe ("TODO")
         }
 
-        // to test the property `id` - ID do item no pedido
+        // to test the property `id` - Item ID in the order
         should("test id") {
             // uncomment below to test the property
             //modelInstance.id shouldBe ("TODO")
         }
 
-        // to test the property `name` - Nome do produto/serviço
+        // to test the property `name` - Product/service name
         should("test name") {
             // uncomment below to test the property
             //modelInstance.name shouldBe ("TODO")
         }
 
-        // to test the property `qty` - Quantidade
+        // to test the property `qty` - Quantity
         should("test qty") {
             // uncomment below to test the property
             //modelInstance.qty shouldBe ("TODO")
         }
 
-        // to test the property `totalAmount` - Valor total do item (quantidade × preço unitário)
+        // to test the property `totalAmount` - Total item amount (quantity × unit price)
         should("test totalAmount") {
             // uncomment below to test the property
             //modelInstance.totalAmount shouldBe ("TODO")
         }
 
-        // to test the property `totalNetAmount` - Valor líquido total do item
+        // to test the property `totalNetAmount` - Total net amount of the item
         should("test totalNetAmount") {
             // uncomment below to test the property
             //modelInstance.totalNetAmount shouldBe ("TODO")
         }
 
-        // to test the property `unityPrice` - Preço unitário
+        // to test the property `unityPrice` - Unit price
         should("test unityPrice") {
             // uncomment below to test the property
             //modelInstance.unityPrice shouldBe ("TODO")

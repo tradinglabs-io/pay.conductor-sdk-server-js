@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **decimal** | Valor do saque em centavos | 
+**Amount** | **decimal** | Withdrawal amount in cents | 
 **PayoutAccount** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  | 
-**ExternalId** | **string** | ID do saque no seu sistema | [optional] 
+**ExternalId** | **string** | Withdrawal ID in your system | [optional] 
 **Merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

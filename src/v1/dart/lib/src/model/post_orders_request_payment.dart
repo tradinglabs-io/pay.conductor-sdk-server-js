@@ -6,32 +6,32 @@
 import 'package:openapi/src/model/pic_pay.dart';
 import 'package:openapi/src/model/nu_pay.dart';
 import 'package:openapi/src/model/pix.dart';
-import 'package:openapi/src/model/boleto.dart';
 import 'package:openapi/src/model/nu_pay_nu_pay.dart';
-import 'package:openapi/src/model/boleto_expiration_in_days.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito_installments.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito.dart';
+import 'package:openapi/src/model/bank_slip_expiration_in_days.dart';
+import 'package:openapi/src/model/credit_card_installments.dart';
+import 'package:openapi/src/model/credit_card_card.dart';
 import 'package:openapi/src/model/pix_expiration_in_seconds.dart';
-import 'package:openapi/src/model/cart_ode_cr_dito_card.dart';
+import 'package:openapi/src/model/credit_card.dart';
+import 'package:openapi/src/model/bank_slip.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:one_of/any_of.dart';
 
 part 'post_orders_request_payment.g.dart';
 
-/// Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+/// Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 ///
 /// Properties:
 /// * [paymentMethod] 
 /// * [expirationInSeconds] 
 /// * [card] 
 /// * [installments] 
-/// * [softDescriptor] - Texto que aparecerá na fatura do cartão (soft descriptor)
+/// * [softDescriptor] - Text that will appear on the card statement (soft descriptor)
 /// * [expirationInDays] 
 /// * [nuPay] 
 @BuiltValue()
 abstract class PostOrdersRequestPayment implements Built<PostOrdersRequestPayment, PostOrdersRequestPaymentBuilder> {
-  /// Any Of [Boleto], [CartODeCrDito], [NuPay], [PicPay], [Pix]
+  /// Any Of [BankSlip], [CreditCard], [NuPay], [PicPay], [Pix]
   AnyOf get anyOf;
 
   PostOrdersRequestPayment._();
@@ -77,7 +77,7 @@ class _$PostOrdersRequestPaymentSerializer implements PrimitiveSerializer<PostOr
   }) {
     final result = PostOrdersRequestPaymentBuilder();
     Object? anyOfDataSrc;
-    final targetType = const FullType(AnyOf, [FullType(Pix), FullType(CartODeCrDito), FullType(Boleto), FullType(NuPay), FullType(PicPay), ]);
+    final targetType = const FullType(AnyOf, [FullType(Pix), FullType(CreditCard), FullType(BankSlip), FullType(NuPay), FullType(PicPay), ]);
     anyOfDataSrc = serialized;
     result.anyOf = serializers.deserialize(anyOfDataSrc, specifiedType: targetType) as AnyOf;
     return result.build();

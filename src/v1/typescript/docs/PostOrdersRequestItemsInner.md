@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | ID do produto ou serviço no seu sistema | [default to undefined]
-**isPhysical** | **boolean** | Define se o item é um produto físico ou um serviço | [default to false]
-**name** | **string** | Nome do produto ou serviço | [default to undefined]
-**qty** | **number** | Quantidade do produto ou serviço | [default to undefined]
-**unitPrice** | **number** | Preço unitário | [default to undefined]
+**id** | **string** | Product or service ID in your system | [default to undefined]
+**isPhysical** | **boolean** | Defines if the item is a physical product or a service | [default to false]
+**name** | **string** | Product or service name | [default to undefined]
+**qty** | **number** | Quantity of the product or service | [default to undefined]
+**unitPrice** | **number** | Unit price | [default to undefined]
 
 ## Example
 

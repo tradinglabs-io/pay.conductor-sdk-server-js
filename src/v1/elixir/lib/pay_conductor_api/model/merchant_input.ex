@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.MerchantInput do
   @moduledoc """
-  Dados do merchant para pedido ou saque
+  Merchant data for order or withdrawal
   """
 
   @derive JSON.Encoder

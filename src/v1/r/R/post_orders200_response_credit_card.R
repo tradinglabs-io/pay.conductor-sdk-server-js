@@ -7,7 +7,7 @@
 #' @title PostOrders200ResponseCreditCard
 #' @description PostOrders200ResponseCreditCard Class
 #' @format An \code{R6Class} generator object
-#' @field authorizationCode Código de autorização da transação character [optional]
+#' @field authorizationCode Transaction authorization code character [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -19,7 +19,7 @@ PostOrders200ResponseCreditCard <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponseCreditCard class.
     #'
-    #' @param authorizationCode Código de autorização da transação
+    #' @param authorizationCode Transaction authorization code
     #' @param ... Other optional arguments.
     initialize = function(`authorizationCode` = NULL, ...) {
       if (!is.null(`authorizationCode`)) {

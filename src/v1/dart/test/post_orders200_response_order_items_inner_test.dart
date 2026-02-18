@@ -7,43 +7,43 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200ResponseOrderItemsInner, () {
-    // ID externo do item
+    // External item ID
     // String externalId
     test('to test the property `externalId`', () async {
       // TODO
     });
 
-    // ID do item no pedido
+    // Item ID in the order
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // Nome do produto/serviço
+    // Product/service name
     // String name
     test('to test the property `name`', () async {
       // TODO
     });
 
-    // Quantidade
+    // Quantity
     // num qty
     test('to test the property `qty`', () async {
       // TODO
     });
 
-    // Valor total do item (quantidade × preço unitário)
+    // Total item amount (quantity × unit price)
     // num totalAmount
     test('to test the property `totalAmount`', () async {
       // TODO
     });
 
-    // Valor líquido total do item
+    // Total net amount of the item
     // num totalNetAmount
     test('to test the property `totalNetAmount`', () async {
       // TODO
     });
 
-    // Preço unitário
+    // Unit price
     // num unityPrice
     test('to test the property `unityPrice`', () async {
       // TODO

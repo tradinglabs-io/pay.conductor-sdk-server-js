@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identificador único do saque | [default to undefined]
-**externalId** | **string** | ID do saque no sistema no seu sistema | [default to undefined]
-**externalIntegrationKey** | **string** | Chave do provedor utilizado para o saque | [default to undefined]
-**externalIntegrationId** | **string** | ID do saque no provedor de pagamento | [default to undefined]
-**costFee** | **number** | Taxa de custo aplicada ao saque | [default to undefined]
-**status** | **string** | Status do saque | [default to StatusEnum_Pending]
-**errorCode** | **string** | Código do erro, se houver | [default to undefined]
-**errorMessage** | **string** | Mensagem descritiva do erro, se houver | [default to undefined]
+**id** | **string** | Unique withdrawal identifier | [default to undefined]
+**externalId** | **string** | Withdrawal ID in your system | [default to undefined]
+**externalIntegrationKey** | **string** | Provider key used for the withdrawal | [default to undefined]
+**externalIntegrationId** | **string** | Withdrawal ID in the payment provider | [default to undefined]
+**costFee** | **number** | Cost fee applied to the withdrawal | [default to undefined]
+**status** | **string** | Withdrawal status | [default to StatusEnum_Pending]
+**errorCode** | **string** | Error code, if any | [default to undefined]
+**errorMessage** | **string** | Descriptive error message, if any | [default to undefined]
 **payedAt** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | [default to undefined]
 **payoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | [default to undefined]
 

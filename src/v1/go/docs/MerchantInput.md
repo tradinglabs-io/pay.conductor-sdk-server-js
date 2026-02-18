@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Document** | **string** | CPF ou CNPJ do merchant sem formatação | 
-**Email** | **string** | Email do merchant | 
-**Name** | **string** | Nome do merchant | 
+**Document** | **string** | Merchant CPF or CNPJ without formatting | 
+**Email** | **string** | Merchant email | 
+**Name** | **string** | Merchant name | 
 
 ## Methods
 

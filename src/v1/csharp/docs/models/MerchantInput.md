@@ -1,13 +1,13 @@
 # payconductor-sdk.Model.MerchantInput
-Dados do merchant para pedido ou saque
+Merchant data for order or withdrawal
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Document** | **string** | CPF ou CNPJ do merchant sem formatação | 
-**Email** | **string** | Email do merchant | 
-**Name** | **string** | Nome do merchant | 
+**Document** | **string** | Merchant CPF or CNPJ without formatting | 
+**Email** | **string** | Merchant email | 
+**Name** | **string** | Merchant name | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

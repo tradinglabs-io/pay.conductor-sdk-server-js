@@ -1,6 +1,6 @@
 /**
  * PayConductor API
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -22,11 +22,11 @@ class PostOrdersRequestItemsInner {
     /**
      * Constructs a new <code>PostOrdersRequestItemsInner</code>.
      * @alias module:model/PostOrdersRequestItemsInner
-     * @param id {String} ID do produto ou serviço no seu sistema
-     * @param isPhysical {Boolean} Define se o item é um produto físico ou um serviço
-     * @param name {String} Nome do produto ou serviço
-     * @param qty {Number} Quantidade do produto ou serviço
-     * @param unitPrice {Number} Preço unitário
+     * @param id {String} Product or service ID in your system
+     * @param isPhysical {Boolean} Defines if the item is a physical product or a service
+     * @param name {String} Product or service name
+     * @param qty {Number} Quantity of the product or service
+     * @param unitPrice {Number} Unit price
      */
     constructor(id, isPhysical, name, qty, unitPrice) { 
         
@@ -106,32 +106,32 @@ class PostOrdersRequestItemsInner {
 PostOrdersRequestItemsInner.RequiredProperties = ["id", "isPhysical", "name", "qty", "unitPrice"];
 
 /**
- * ID do produto ou serviço no seu sistema
+ * Product or service ID in your system
  * @member {String} id
  */
 PostOrdersRequestItemsInner.prototype['id'] = undefined;
 
 /**
- * Define se o item é um produto físico ou um serviço
+ * Defines if the item is a physical product or a service
  * @member {Boolean} isPhysical
  * @default false
  */
 PostOrdersRequestItemsInner.prototype['isPhysical'] = false;
 
 /**
- * Nome do produto ou serviço
+ * Product or service name
  * @member {String} name
  */
 PostOrdersRequestItemsInner.prototype['name'] = undefined;
 
 /**
- * Quantidade do produto ou serviço
+ * Quantity of the product or service
  * @member {Number} qty
  */
 PostOrdersRequestItemsInner.prototype['qty'] = undefined;
 
 /**
- * Preço unitário
+ * Unit price
  * @member {Number} unitPrice
  */
 PostOrdersRequestItemsInner.prototype['unitPrice'] = undefined;

@@ -1,15 +1,15 @@
 # NuPayNuPay
 
-Dados específicos para pagamento via NuPay
+Specific data for NuPay payment
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**cancel_url** | **str** | URL de cancelamento do pagamento | 
-**merchant_name** | **str** | Nome do comerciante | 
-**return_url** | **str** | URL de retorno após a conclusão do pagamento | 
-**store_name** | **str** | Nome da loja | [optional] 
+**cancel_url** | **str** | Payment cancellation URL | 
+**merchant_name** | **str** | Merchant name | 
+**return_url** | **str** | Return URL after payment completion | 
+**store_name** | **str** | Store name | [optional] 
 
 ## Example
 

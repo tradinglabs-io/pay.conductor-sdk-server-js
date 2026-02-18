@@ -27,7 +27,7 @@ class PostWithdrawsRequestTest : ShouldSpec() {
         // uncomment below to create an instance of PostWithdrawsRequest
         //val modelInstance = PostWithdrawsRequest()
 
-        // to test the property `amount` - Valor do saque em centavos
+        // to test the property `amount` - Withdrawal amount in cents
         should("test amount") {
             // uncomment below to test the property
             //modelInstance.amount shouldBe ("TODO")
@@ -39,7 +39,7 @@ class PostWithdrawsRequestTest : ShouldSpec() {
             //modelInstance.payoutAccount shouldBe ("TODO")
         }
 
-        // to test the property `externalId` - ID do saque no seu sistema
+        // to test the property `externalId` - Withdrawal ID in your system
         should("test externalId") {
             // uncomment below to test the property
             //modelInstance.externalId shouldBe ("TODO")

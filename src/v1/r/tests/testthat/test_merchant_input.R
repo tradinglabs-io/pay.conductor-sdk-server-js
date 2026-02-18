@@ -7,7 +7,7 @@ model_instance <- MerchantInput$new()
 
 test_that("document", {
   # tests for the property `document` (character)
-  # CPF ou CNPJ do merchant sem formatação
+  # Merchant CPF or CNPJ without formatting
 
   # uncomment below to test the property
   #expect_equal(model.instance$`document`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("document", {
 
 test_that("email", {
   # tests for the property `email` (character)
-  # Email do merchant
+  # Merchant email
 
   # uncomment below to test the property
   #expect_equal(model.instance$`email`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("email", {
 
 test_that("name", {
   # tests for the property `name` (character)
-  # Nome do merchant
+  # Merchant name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`name`, "EXPECTED_RESULT")

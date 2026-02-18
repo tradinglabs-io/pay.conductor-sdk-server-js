@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BarCode** | **string** | Código de barras do boleto | 
-**DigitableLine** | **string** | Linha digitável do boleto | 
-**PdfUrl** | Pointer to **string** | URL do PDF do boleto | [optional] 
+**BarCode** | **string** | Bank slip bar code | 
+**DigitableLine** | **string** | Bank slip digitable line | 
+**PdfUrl** | Pointer to **string** | Bank slip PDF URL | [optional] 
 
 ## Methods
 

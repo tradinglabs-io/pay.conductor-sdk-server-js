@@ -3,13 +3,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**external_id** | **char \*** | ID externo do item | 
-**id** | **char \*** | ID do item no pedido | 
-**name** | **char \*** | Nome do produto/serviço | 
-**qty** | **double** | Quantidade | 
-**total_amount** | **double** | Valor total do item (quantidade × preço unitário) | 
-**total_net_amount** | **double** | Valor líquido total do item | 
-**unity_price** | **double** | Preço unitário | 
+**external_id** | **char \*** | External item ID | 
+**id** | **char \*** | Item ID in the order | 
+**name** | **char \*** | Product/service name | 
+**qty** | **double** | Quantity | 
+**total_amount** | **double** | Total item amount (quantity × unit price) | 
+**total_net_amount** | **double** | Total net amount of the item | 
+**unity_price** | **double** | Unit price | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

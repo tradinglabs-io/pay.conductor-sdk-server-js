@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**owner_document** | **String** | Documento do titular da conta (CPF ou CNPJ) | 
-**owner_name** | **String** | Nome do titular da conta | 
+**owner_document** | **String** | Account holder document (CPF or CNPJ) | 
+**owner_name** | **String** | Account holder name | 
 **pix_key** | **String** | PIX key for withdrawal | 
 **pix_type** | **PixType** | PIX key type (enum: Cnpj, Cpf, Email, Phone, Random) | [default to Cnpj]
 

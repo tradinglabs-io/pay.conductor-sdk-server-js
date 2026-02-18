@@ -24,14 +24,14 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param id Identificador único do saque
- * @param externalId ID do saque no sistema no seu sistema
- * @param externalIntegrationKey Chave do provedor utilizado para o saque
- * @param externalIntegrationId ID do saque no provedor de pagamento
- * @param costFee Taxa de custo aplicada ao saque
- * @param status Status do saque
- * @param errorCode Código do erro, se houver
- * @param errorMessage Mensagem descritiva do erro, se houver
+ * @param id Unique withdrawal identifier
+ * @param externalId Withdrawal ID in your system
+ * @param externalIntegrationKey Provider key used for the withdrawal
+ * @param externalIntegrationId Withdrawal ID in the payment provider
+ * @param costFee Cost fee applied to the withdrawal
+ * @param status Withdrawal status
+ * @param errorCode Error code, if any
+ * @param errorMessage Descriptive error message, if any
  * @param payedAt 
  * @param payoutAccount 
  */
@@ -39,35 +39,35 @@ import com.squareup.moshi.JsonClass
 
 data class PostWithdraws200Response (
 
-    /* Identificador único do saque */
+    /* Unique withdrawal identifier */
     @Json(name = "id")
     val id: kotlin.String,
 
-    /* ID do saque no sistema no seu sistema */
+    /* Withdrawal ID in your system */
     @Json(name = "externalId")
     val externalId: kotlin.String?,
 
-    /* Chave do provedor utilizado para o saque */
+    /* Provider key used for the withdrawal */
     @Json(name = "externalIntegrationKey")
     val externalIntegrationKey: kotlin.String,
 
-    /* ID do saque no provedor de pagamento */
+    /* Withdrawal ID in the payment provider */
     @Json(name = "externalIntegrationId")
     val externalIntegrationId: kotlin.String?,
 
-    /* Taxa de custo aplicada ao saque */
+    /* Cost fee applied to the withdrawal */
     @Json(name = "costFee")
     val costFee: java.math.BigDecimal,
 
-    /* Status do saque */
+    /* Withdrawal status */
     @Json(name = "status")
     val status: PostWithdraws200Response.Status = Status.Pending,
 
-    /* Código do erro, se houver */
+    /* Error code, if any */
     @Json(name = "errorCode")
     val errorCode: kotlin.String?,
 
-    /* Mensagem descritiva do erro, se houver */
+    /* Descriptive error message, if any */
     @Json(name = "errorMessage")
     val errorMessage: kotlin.String?,
 
@@ -80,7 +80,7 @@ data class PostWithdraws200Response (
 ) {
 
     /**
-     * Status do saque
+     * Withdrawal status
      *
      * Values: Pending,Transferring,Completed,Failed
      */

@@ -20,30 +20,30 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Dados específicos para pagamento via NuPay
+ * Specific data for NuPay payment
  *
- * @param cancelUrl URL de cancelamento do pagamento
- * @param merchantName Nome do comerciante
- * @param returnUrl URL de retorno após a conclusão do pagamento
- * @param storeName Nome da loja
+ * @param cancelUrl Payment cancellation URL
+ * @param merchantName Merchant name
+ * @param returnUrl Return URL after payment completion
+ * @param storeName Store name
  */
 
 
 data class NuPayNuPay (
 
-    /* URL de cancelamento do pagamento */
+    /* Payment cancellation URL */
     @Json(name = "cancelUrl")
     val cancelUrl: kotlin.String,
 
-    /* Nome do comerciante */
+    /* Merchant name */
     @Json(name = "merchantName")
     val merchantName: kotlin.String,
 
-    /* URL de retorno após a conclusão do pagamento */
+    /* Return URL after payment completion */
     @Json(name = "returnUrl")
     val returnUrl: kotlin.String,
 
-    /* Nome da loja */
+    /* Store name */
     @Json(name = "storeName")
     val storeName: kotlin.String? = null
 

@@ -1,13 +1,13 @@
 # payconductor-sdk.Model.PostOrders200ResponsePix
-Dados do PIX
+PIX data
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CopyAndPasteCode** | **string** | Código copia e cola do PIX | 
-**QrCodeUrl** | **string** | URL da imagem do QR Code PIX | 
-**EndToEndId** | **string** | E2E ID do PIX | 
+**CopyAndPasteCode** | **string** | PIX copy and paste code | 
+**QrCodeUrl** | **string** | PIX QR Code image URL | 
+**EndToEndId** | **string** | PIX E2E ID | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

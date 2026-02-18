@@ -8,8 +8,8 @@ use WWW::OpenAPIClient::Object::PostOrders200ResponsePicPay;
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**copy_and_paste_code** | **string** | Código copia e cola do PicPay | 
-**qr_code_url** | **string** | URL da imagem do QR Code PicPay | 
+**copy_and_paste_code** | **string** | PicPay copy and paste code | 
+**qr_code_url** | **string** | PicPay QR Code image URL | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

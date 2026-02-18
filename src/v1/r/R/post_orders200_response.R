@@ -7,12 +7,12 @@
 #' @title PostOrders200Response
 #' @description PostOrders200Response Class
 #' @format An \code{R6Class} generator object
-#' @field id ID do pedido no sistema character
-#' @field externalId ID externo do pedido (fornecido pela sua integração) character
-#' @field externalIntegrationKey Provedor utilizada para processar o pedido character
-#' @field externalIntegrationId ID do pedido no provedor de pagamento character
-#' @field amount Valor total do pedido numeric
-#' @field costFee Taxa de custo aplicada ao pedido numeric
+#' @field id Order ID in the system character
+#' @field externalId External order ID (provided by your integration) character
+#' @field externalIntegrationKey Provider used to process the order character
+#' @field externalIntegrationId Order ID in the payment provider character
+#' @field amount Total order amount numeric
+#' @field costFee Cost fee applied to the order numeric
 #' @field pix  \link{PostOrders200ResponsePix} [optional]
 #' @field bankSlip  \link{PostOrders200ResponseBankSlip} [optional]
 #' @field nuPay  \link{PostOrders200ResponseNuPay} [optional]
@@ -20,9 +20,9 @@
 #' @field creditCard  \link{PostOrders200ResponseCreditCard} [optional]
 #' @field status  character
 #' @field paymentMethod  character
-#' @field payedAt Data e hora em que o pedido foi pago (ISO 8601) character
-#' @field errorCode Código de erro, se houver character
-#' @field errorMessage Mensagem de erro, se houver character
+#' @field payedAt Date and time when the order was paid (ISO 8601) character
+#' @field errorCode Error code, if any character
+#' @field errorMessage Error message, if any character
 #' @field orderItems  list(\link{PostOrders200ResponseOrderItemsInner})
 #' @field session  \link{PostOrders200ResponseSession} [optional]
 #' @importFrom R6 R6Class
@@ -53,17 +53,17 @@ PostOrders200Response <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200Response class.
     #'
-    #' @param id ID do pedido no sistema
-    #' @param externalId ID externo do pedido (fornecido pela sua integração)
-    #' @param externalIntegrationKey Provedor utilizada para processar o pedido
-    #' @param externalIntegrationId ID do pedido no provedor de pagamento
-    #' @param amount Valor total do pedido
-    #' @param costFee Taxa de custo aplicada ao pedido
+    #' @param id Order ID in the system
+    #' @param externalId External order ID (provided by your integration)
+    #' @param externalIntegrationKey Provider used to process the order
+    #' @param externalIntegrationId Order ID in the payment provider
+    #' @param amount Total order amount
+    #' @param costFee Cost fee applied to the order
     #' @param status status
     #' @param paymentMethod paymentMethod
-    #' @param payedAt Data e hora em que o pedido foi pago (ISO 8601)
-    #' @param errorCode Código de erro, se houver
-    #' @param errorMessage Mensagem de erro, se houver
+    #' @param payedAt Date and time when the order was paid (ISO 8601)
+    #' @param errorCode Error code, if any
+    #' @param errorMessage Error message, if any
     #' @param orderItems orderItems
     #' @param pix pix
     #' @param bankSlip bankSlip

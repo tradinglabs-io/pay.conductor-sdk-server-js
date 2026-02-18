@@ -4,14 +4,14 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **id** | **kotlin.String** | Identificador único do saque |  |
-| **externalId** | **kotlin.String** | ID do saque no sistema no seu sistema |  |
-| **externalIntegrationKey** | **kotlin.String** | Chave do provedor utilizado para o saque |  |
-| **externalIntegrationId** | **kotlin.String** | ID do saque no provedor de pagamento |  |
-| **costFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Taxa de custo aplicada ao saque |  |
-| **status** | [**inline**](#Status) | Status do saque |  |
-| **errorCode** | **kotlin.String** | Código do erro, se houver |  |
-| **errorMessage** | **kotlin.String** | Mensagem descritiva do erro, se houver |  |
+| **id** | **kotlin.String** | Unique withdrawal identifier |  |
+| **externalId** | **kotlin.String** | Withdrawal ID in your system |  |
+| **externalIntegrationKey** | **kotlin.String** | Provider key used for the withdrawal |  |
+| **externalIntegrationId** | **kotlin.String** | Withdrawal ID in the payment provider |  |
+| **costFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Cost fee applied to the withdrawal |  |
+| **status** | [**inline**](#Status) | Withdrawal status |  |
+| **errorCode** | **kotlin.String** | Error code, if any |  |
+| **errorMessage** | **kotlin.String** | Descriptive error message, if any |  |
 | **payedAt** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  |  |
 | **payoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  |  |
 

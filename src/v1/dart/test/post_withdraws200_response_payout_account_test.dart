@@ -7,31 +7,31 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostWithdraws200ResponsePayoutAccount, () {
-    // Identificador único da conta de pagamento
+    // Unique payment account identifier
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // Documento do titular da conta (CPF ou CNPJ)
+    // Account holder document (CPF or CNPJ)
     // String ownerDocument
     test('to test the property `ownerDocument`', () async {
       // TODO
     });
 
-    // Nome do titular da conta
+    // Account holder name
     // String ownerName
     test('to test the property `ownerName`', () async {
       // TODO
     });
 
-    // Chave PIX utilizada para o saque
+    // PIX key used for the withdrawal
     // String pixKey
     test('to test the property `pixKey`', () async {
       // TODO
     });
 
-    // Tipo da chave PIX
+    // PIX key type
     // String pixType (default value: 'Cpf')
     test('to test the property `pixType`', () async {
       // TODO

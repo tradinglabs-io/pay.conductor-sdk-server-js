@@ -25,25 +25,25 @@ class NuPayNuPayTest : ShouldSpec() {
         // uncomment below to create an instance of NuPayNuPay
         //val modelInstance = NuPayNuPay()
 
-        // to test the property `cancelUrl` - URL de cancelamento do pagamento
+        // to test the property `cancelUrl` - Payment cancellation URL
         should("test cancelUrl") {
             // uncomment below to test the property
             //modelInstance.cancelUrl shouldBe ("TODO")
         }
 
-        // to test the property `merchantName` - Nome do comerciante
+        // to test the property `merchantName` - Merchant name
         should("test merchantName") {
             // uncomment below to test the property
             //modelInstance.merchantName shouldBe ("TODO")
         }
 
-        // to test the property `returnUrl` - URL de retorno após a conclusão do pagamento
+        // to test the property `returnUrl` - Return URL after payment completion
         should("test returnUrl") {
             // uncomment below to test the property
             //modelInstance.returnUrl shouldBe ("TODO")
         }
 
-        // to test the property `storeName` - Nome da loja
+        // to test the property `storeName` - Store name
         should("test storeName") {
             // uncomment below to test the property
             //modelInstance.storeName shouldBe ("TODO")

@@ -15,7 +15,7 @@
 
 package payconductor-sdk.models
 
-import payconductor-sdk.models.Cliente
+import payconductor-sdk.models.Customer
 import payconductor-sdk.models.MerchantInput
 import payconductor-sdk.models.PostOrdersRequestFingerprints
 import payconductor-sdk.models.PostOrdersRequestItemsInner
@@ -28,73 +28,73 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param chargeAmount Valor total a ser cobrado no pedido em valor flutuante
- * @param clientIp Endereço IP do cliente
+ * @param chargeAmount Total amount to be charged on the order in floating point value
+ * @param clientIp Client IP address
  * @param customer 
- * @param discountAmount Valor do desconto
- * @param externalId ID da ordem no seu sistema
+ * @param discountAmount Discount amount
+ * @param externalId Order ID in your system
  * @param payment 
- * @param shippingFee Valor do frete
- * @param taxFee Taxas adicionais
+ * @param shippingFee Shipping fee
+ * @param taxFee Additional fees
  * @param fingerprints 
- * @param items Lista de produtos ou serviços do pedido
+ * @param items List of products or services in the order
  * @param merchant 
- * @param splitAmountTotal Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+ * @param splitAmountTotal Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
  * @param session 
- * @param metadata Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+ * @param metadata Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
  */
 
 
 data class PostOrdersRequest (
 
-    /* Valor total a ser cobrado no pedido em valor flutuante */
+    /* Total amount to be charged on the order in floating point value */
     @Json(name = "chargeAmount")
     val chargeAmount: java.math.BigDecimal,
 
-    /* Endereço IP do cliente */
+    /* Client IP address */
     @Json(name = "clientIp")
     val clientIp: kotlin.String,
 
     @Json(name = "customer")
-    val customer: Cliente,
+    val customer: Customer,
 
-    /* Valor do desconto */
+    /* Discount amount */
     @Json(name = "discountAmount")
     val discountAmount: java.math.BigDecimal = java.math.BigDecimal("0"),
 
-    /* ID da ordem no seu sistema */
+    /* Order ID in your system */
     @Json(name = "externalId")
     val externalId: kotlin.String,
 
     @Json(name = "payment")
     val payment: PostOrdersRequestPayment,
 
-    /* Valor do frete */
+    /* Shipping fee */
     @Json(name = "shippingFee")
     val shippingFee: java.math.BigDecimal = java.math.BigDecimal("0"),
 
-    /* Taxas adicionais */
+    /* Additional fees */
     @Json(name = "taxFee")
     val taxFee: java.math.BigDecimal = java.math.BigDecimal("0"),
 
     @Json(name = "fingerprints")
     val fingerprints: PostOrdersRequestFingerprints? = null,
 
-    /* Lista de produtos ou serviços do pedido */
+    /* List of products or services in the order */
     @Json(name = "items")
     val items: kotlin.collections.List<PostOrdersRequestItemsInner>? = null,
 
     @Json(name = "merchant")
     val merchant: MerchantInput? = null,
 
-    /* Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) */
+    /* Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) */
     @Json(name = "splitAmountTotal")
     val splitAmountTotal: java.math.BigDecimal? = null,
 
     @Json(name = "session")
     val session: PostOrdersRequestSession? = null,
 
-    /* Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves */
+    /* Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters */
     @Json(name = "metadata")
     val metadata: kotlin.Any? = null
 

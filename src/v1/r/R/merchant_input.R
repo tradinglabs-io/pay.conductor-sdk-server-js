@@ -1,15 +1,15 @@
 #' Create a new MerchantInput
 #'
 #' @description
-#' Dados do merchant para pedido ou saque
+#' Merchant data for order or withdrawal
 #'
 #' @docType class
 #' @title MerchantInput
 #' @description MerchantInput Class
 #' @format An \code{R6Class} generator object
-#' @field document CPF ou CNPJ do merchant sem formatação character
-#' @field email Email do merchant character
-#' @field name Nome do merchant character
+#' @field document Merchant CPF or CNPJ without formatting character
+#' @field email Merchant email character
+#' @field name Merchant name character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -23,9 +23,9 @@ MerchantInput <- R6::R6Class(
     #' @description
     #' Initialize a new MerchantInput class.
     #'
-    #' @param document CPF ou CNPJ do merchant sem formatação
-    #' @param email Email do merchant
-    #' @param name Nome do merchant
+    #' @param document Merchant CPF or CNPJ without formatting
+    #' @param email Merchant email
+    #' @param name Merchant name
     #' @param ... Other optional arguments.
     initialize = function(`document`, `email`, `name`, ...) {
       if (!missing(`document`)) {

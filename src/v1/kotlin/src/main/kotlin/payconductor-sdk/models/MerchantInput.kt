@@ -20,25 +20,25 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Dados do merchant para pedido ou saque
+ * Merchant data for order or withdrawal
  *
- * @param document CPF ou CNPJ do merchant sem formatação
- * @param email Email do merchant
- * @param name Nome do merchant
+ * @param document Merchant CPF or CNPJ without formatting
+ * @param email Merchant email
+ * @param name Merchant name
  */
 
 
 data class MerchantInput (
 
-    /* CPF ou CNPJ do merchant sem formatação */
+    /* Merchant CPF or CNPJ without formatting */
     @Json(name = "document")
     val document: kotlin.String,
 
-    /* Email do merchant */
+    /* Merchant email */
     @Json(name = "email")
     val email: kotlin.String,
 
-    /* Nome do merchant */
+    /* Merchant name */
     @Json(name = "name")
     val name: kotlin.String
 

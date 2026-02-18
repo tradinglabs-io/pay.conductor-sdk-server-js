@@ -1,7 +1,7 @@
 =begin
 #PayConductor API
 
-## Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+#PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
 
 The version of the OpenAPI document: 1.0.0
 
@@ -18,22 +18,28 @@ require 'openapi_client/version'
 require 'openapi_client/configuration'
 
 # Models
-require 'openapi_client/models/boleto'
-require 'openapi_client/models/boleto_expiration_in_days'
-require 'openapi_client/models/cart_ode_cr_dito'
-require 'openapi_client/models/cart_ode_cr_dito_card'
-require 'openapi_client/models/cart_ode_cr_dito_installments'
-require 'openapi_client/models/cart_o_tokenizado'
-require 'openapi_client/models/cliente'
-require 'openapi_client/models/dados_completos_do_cart_o'
-require 'openapi_client/models/dados_completos_do_cart_o_expiration'
-require 'openapi_client/models/endere_odo_cliente'
+require 'openapi_client/models/bank_slip'
+require 'openapi_client/models/bank_slip_expiration_in_days'
+require 'openapi_client/models/complete_card_data'
+require 'openapi_client/models/complete_card_data_expiration'
+require 'openapi_client/models/credit_card'
+require 'openapi_client/models/credit_card_card'
+require 'openapi_client/models/credit_card_installments'
+require 'openapi_client/models/customer'
+require 'openapi_client/models/customer1'
+require 'openapi_client/models/customer2'
+require 'openapi_client/models/customer2_document_type'
+require 'openapi_client/models/customer_address'
 require 'openapi_client/models/merchant_input'
 require 'openapi_client/models/nu_pay'
 require 'openapi_client/models/nu_pay_nu_pay'
 require 'openapi_client/models/pic_pay'
 require 'openapi_client/models/pix'
 require 'openapi_client/models/pix_expiration_in_seconds'
+require 'openapi_client/models/post_card_tokenization200_response'
+require 'openapi_client/models/post_card_tokenization_request'
+require 'openapi_client/models/post_card_tokenization_request_customer'
+require 'openapi_client/models/post_card_tokenization_request_customer_any_of'
 require 'openapi_client/models/post_orders200_response'
 require 'openapi_client/models/post_orders200_response_bank_slip'
 require 'openapi_client/models/post_orders200_response_credit_card'
@@ -52,10 +58,13 @@ require 'openapi_client/models/post_withdraws200_response_payed_at'
 require 'openapi_client/models/post_withdraws200_response_payout_account'
 require 'openapi_client/models/post_withdraws_request'
 require 'openapi_client/models/post_withdraws_request_payout_account'
+require 'openapi_client/models/tokenized_card'
 
 # APIs
-require 'openapi_client/api/pedidos_api'
-require 'openapi_client/api/saques_e_transferncias_api'
+require 'openapi_client/api/card_tokenization_api'
+require 'openapi_client/api/customers_api'
+require 'openapi_client/api/orders_api'
+require 'openapi_client/api/withdrawals_and_transfers_api'
 
 module OpenapiClient
   class << self

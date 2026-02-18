@@ -1,6 +1,6 @@
 /**
  * PayConductor API
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import Cliente from './Cliente';
+import Customer from './Customer';
 import MerchantInput from './MerchantInput';
 import PostOrdersRequestFingerprints from './PostOrdersRequestFingerprints';
 import PostOrdersRequestItemsInner from './PostOrdersRequestItemsInner';
@@ -28,14 +28,14 @@ class PostOrdersRequest {
     /**
      * Constructs a new <code>PostOrdersRequest</code>.
      * @alias module:model/PostOrdersRequest
-     * @param chargeAmount {Number} Valor total a ser cobrado no pedido em valor flutuante
-     * @param clientIp {String} Endereço IP do cliente
-     * @param customer {module:model/Cliente} 
-     * @param discountAmount {Number} Valor do desconto
-     * @param externalId {String} ID da ordem no seu sistema
+     * @param chargeAmount {Number} Total amount to be charged on the order in floating point value
+     * @param clientIp {String} Client IP address
+     * @param customer {module:model/Customer} 
+     * @param discountAmount {Number} Discount amount
+     * @param externalId {String} Order ID in your system
      * @param payment {module:model/PostOrdersRequestPayment} 
-     * @param shippingFee {Number} Valor do frete
-     * @param taxFee {Number} Taxas adicionais
+     * @param shippingFee {Number} Shipping fee
+     * @param taxFee {Number} Additional fees
      */
     constructor(chargeAmount, clientIp, customer, discountAmount, externalId, payment, shippingFee, taxFee) { 
         
@@ -76,7 +76,7 @@ class PostOrdersRequest {
                 obj['clientIp'] = ApiClient.convertToType(data['clientIp'], 'String');
             }
             if (data.hasOwnProperty('customer')) {
-                obj['customer'] = Cliente.constructFromObject(data['customer']);
+                obj['customer'] = Customer.constructFromObject(data['customer']);
             }
             if (data.hasOwnProperty('discountAmount')) {
                 obj['discountAmount'] = ApiClient.convertToType(data['discountAmount'], 'Number');
@@ -133,7 +133,7 @@ class PostOrdersRequest {
         }
         // validate the optional field `customer`
         if (data['customer']) { // data not null
-          Cliente.validateJSON(data['customer']);
+          Customer.validateJSON(data['customer']);
         }
         // ensure the json data is a string
         if (data['externalId'] && !(typeof data['externalId'] === 'string' || data['externalId'] instanceof String)) {
@@ -175,31 +175,31 @@ class PostOrdersRequest {
 PostOrdersRequest.RequiredProperties = ["chargeAmount", "clientIp", "customer", "discountAmount", "externalId", "payment", "shippingFee", "taxFee"];
 
 /**
- * Valor total a ser cobrado no pedido em valor flutuante
+ * Total amount to be charged on the order in floating point value
  * @member {Number} chargeAmount
  */
 PostOrdersRequest.prototype['chargeAmount'] = undefined;
 
 /**
- * Endereço IP do cliente
+ * Client IP address
  * @member {String} clientIp
  */
 PostOrdersRequest.prototype['clientIp'] = undefined;
 
 /**
- * @member {module:model/Cliente} customer
+ * @member {module:model/Customer} customer
  */
 PostOrdersRequest.prototype['customer'] = undefined;
 
 /**
- * Valor do desconto
+ * Discount amount
  * @member {Number} discountAmount
  * @default 0
  */
 PostOrdersRequest.prototype['discountAmount'] = 0;
 
 /**
- * ID da ordem no seu sistema
+ * Order ID in your system
  * @member {String} externalId
  */
 PostOrdersRequest.prototype['externalId'] = undefined;
@@ -210,7 +210,7 @@ PostOrdersRequest.prototype['externalId'] = undefined;
 PostOrdersRequest.prototype['fingerprints'] = undefined;
 
 /**
- * Lista de produtos ou serviços do pedido
+ * List of products or services in the order
  * @member {Array.<module:model/PostOrdersRequestItemsInner>} items
  */
 PostOrdersRequest.prototype['items'] = undefined;
@@ -226,7 +226,7 @@ PostOrdersRequest.prototype['merchant'] = undefined;
 PostOrdersRequest.prototype['payment'] = undefined;
 
 /**
- * Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+ * Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
  * @member {Number} splitAmountTotal
  */
 PostOrdersRequest.prototype['splitAmountTotal'] = undefined;
@@ -237,21 +237,21 @@ PostOrdersRequest.prototype['splitAmountTotal'] = undefined;
 PostOrdersRequest.prototype['session'] = undefined;
 
 /**
- * Valor do frete
+ * Shipping fee
  * @member {Number} shippingFee
  * @default 0
  */
 PostOrdersRequest.prototype['shippingFee'] = 0;
 
 /**
- * Taxas adicionais
+ * Additional fees
  * @member {Number} taxFee
  * @default 0
  */
 PostOrdersRequest.prototype['taxFee'] = 0;
 
 /**
- * Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+ * Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
  * @member {Object} metadata
  */
 PostOrdersRequest.prototype['metadata'] = undefined;

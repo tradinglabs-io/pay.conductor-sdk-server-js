@@ -20,7 +20,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Data e hora em que o saque foi pago (formato ISO 8601)
+ * Date and time when the withdrawal was paid (ISO 8601 format)
  *
  */
 

@@ -1,7 +1,7 @@
 /*
  * PayConductor API
  *
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -13,22 +13,22 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct PostOrders200Response {
-    /// ID do pedido no sistema
+    /// Order ID in the system
     #[serde(rename = "id")]
     pub id: String,
-    /// ID externo do pedido (fornecido pela sua integração)
+    /// External order ID (provided by your integration)
     #[serde(rename = "externalId", deserialize_with = "Option::deserialize")]
     pub external_id: Option<String>,
-    /// Provedor utilizada para processar o pedido
+    /// Provider used to process the order
     #[serde(rename = "externalIntegrationKey")]
     pub external_integration_key: String,
-    /// ID do pedido no provedor de pagamento
+    /// Order ID in the payment provider
     #[serde(rename = "externalIntegrationId", deserialize_with = "Option::deserialize")]
     pub external_integration_id: Option<String>,
-    /// Valor total do pedido
+    /// Total order amount
     #[serde(rename = "amount")]
     pub amount: f64,
-    /// Taxa de custo aplicada ao pedido
+    /// Cost fee applied to the order
     #[serde(rename = "costFee")]
     pub cost_fee: f64,
     #[serde(rename = "pix", skip_serializing_if = "Option::is_none")]
@@ -45,13 +45,13 @@ pub struct PostOrders200Response {
     pub status: Status,
     #[serde(rename = "paymentMethod")]
     pub payment_method: PaymentMethod,
-    /// Data e hora em que o pedido foi pago (ISO 8601)
+    /// Date and time when the order was paid (ISO 8601)
     #[serde(rename = "payedAt", deserialize_with = "Option::deserialize")]
     pub payed_at: Option<String>,
-    /// Código de erro, se houver
+    /// Error code, if any
     #[serde(rename = "errorCode", deserialize_with = "Option::deserialize")]
     pub error_code: Option<String>,
-    /// Mensagem de erro, se houver
+    /// Error message, if any
     #[serde(rename = "errorMessage", deserialize_with = "Option::deserialize")]
     pub error_message: Option<String>,
     #[serde(rename = "orderItems")]

@@ -51,33 +51,45 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PedidosApi* | [**getOrders**](docs/PedidosApi.md#getorders) | **GET** /orders/ | Listar pedidos
-*PedidosApi* | [**getOrdersById**](docs/PedidosApi.md#getordersbyid) | **GET** /orders/{id} | Buscar pelo ID
-*PedidosApi* | [**postOrders**](docs/PedidosApi.md#postorders) | **POST** /orders/ | Criar pedido
-*PedidosApi* | [**postOrdersByIdRefund**](docs/PedidosApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Reembolsar pedido
-*SaquesETransfernciasApi* | [**getWithdraws**](docs/SaquesETransfernciasApi.md#getwithdraws) | **GET** /withdraws/ | Lista os saques
-*SaquesETransfernciasApi* | [**getWithdrawsById**](docs/SaquesETransfernciasApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Buscar pelo ID
-*SaquesETransfernciasApi* | [**postWithdraws**](docs/SaquesETransfernciasApi.md#postwithdraws) | **POST** /withdraws/ | Cria saque
+*CardTokenizationApi* | [**postCardTokenization**](docs/CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card
+*CustomersApi* | [**deleteCustomersById**](docs/CustomersApi.md#deletecustomersbyid) | **DELETE** /customers/{id} | 
+*CustomersApi* | [**getCustomers**](docs/CustomersApi.md#getcustomers) | **GET** /customers/ | 
+*CustomersApi* | [**getCustomersById**](docs/CustomersApi.md#getcustomersbyid) | **GET** /customers/{id} | 
+*CustomersApi* | [**patchCustomersById**](docs/CustomersApi.md#patchcustomersbyid) | **PATCH** /customers/{id} | 
+*CustomersApi* | [**postCustomers**](docs/CustomersApi.md#postcustomers) | **POST** /customers/ | 
+*OrdersApi* | [**getOrders**](docs/OrdersApi.md#getorders) | **GET** /orders/ | List orders
+*OrdersApi* | [**getOrdersById**](docs/OrdersApi.md#getordersbyid) | **GET** /orders/{id} | Get order by ID
+*OrdersApi* | [**postOrders**](docs/OrdersApi.md#postorders) | **POST** /orders/ | Create order
+*OrdersApi* | [**postOrdersByIdRefund**](docs/OrdersApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Refund order
+*WithdrawalsAndTransfersApi* | [**getWithdraws**](docs/WithdrawalsAndTransfersApi.md#getwithdraws) | **GET** /withdraws/ | List withdrawals
+*WithdrawalsAndTransfersApi* | [**getWithdrawsById**](docs/WithdrawalsAndTransfersApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Get withdrawal by ID
+*WithdrawalsAndTransfersApi* | [**postWithdraws**](docs/WithdrawalsAndTransfersApi.md#postwithdraws) | **POST** /withdraws/ | Create withdrawal
 
 
 ### Documentation For Models
 
- - [Boleto](docs/Boleto.md)
- - [BoletoExpirationInDays](docs/BoletoExpirationInDays.md)
- - [CartODeCrDito](docs/CartODeCrDito.md)
- - [CartODeCrDitoCard](docs/CartODeCrDitoCard.md)
- - [CartODeCrDitoInstallments](docs/CartODeCrDitoInstallments.md)
- - [CartOTokenizado](docs/CartOTokenizado.md)
- - [Cliente](docs/Cliente.md)
- - [DadosCompletosDoCartO](docs/DadosCompletosDoCartO.md)
- - [DadosCompletosDoCartOExpiration](docs/DadosCompletosDoCartOExpiration.md)
- - [EndereODoCliente](docs/EndereODoCliente.md)
+ - [BankSlip](docs/BankSlip.md)
+ - [BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
+ - [CompleteCardData](docs/CompleteCardData.md)
+ - [CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
+ - [CreditCard](docs/CreditCard.md)
+ - [CreditCardCard](docs/CreditCardCard.md)
+ - [CreditCardInstallments](docs/CreditCardInstallments.md)
+ - [Customer](docs/Customer.md)
+ - [Customer1](docs/Customer1.md)
+ - [Customer2](docs/Customer2.md)
+ - [Customer2DocumentType](docs/Customer2DocumentType.md)
+ - [CustomerAddress](docs/CustomerAddress.md)
  - [MerchantInput](docs/MerchantInput.md)
  - [NuPay](docs/NuPay.md)
  - [NuPayNuPay](docs/NuPayNuPay.md)
  - [PicPay](docs/PicPay.md)
  - [Pix](docs/Pix.md)
  - [PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
+ - [PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
+ - [PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
+ - [PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
+ - [PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
  - [PostOrders200Response](docs/PostOrders200Response.md)
  - [PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
  - [PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
@@ -96,6 +108,7 @@ Class | Method | HTTP request | Description
  - [PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
  - [PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
  - [PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
+ - [TokenizedCard](docs/TokenizedCard.md)
 
 
 <a id="documentation-for-authorization"></a>

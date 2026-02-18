@@ -16,7 +16,7 @@
 #include "../model/post_orders_request.h"
 post_orders_request_t* instantiate_post_orders_request(int include_optional);
 
-#include "test_cliente.c"
+#include "test_customer.c"
 #include "test_post_orders_request_fingerprints.c"
 #include "test_merchant_input.c"
 #include "test_post_orders_request_payment.c"
@@ -30,7 +30,7 @@ post_orders_request_t* instantiate_post_orders_request(int include_optional) {
       1.337,
       "0",
        // false, not to have infinite recursion
-      instantiate_cliente(0),
+      instantiate_customer(0),
       1.337,
       "0",
        // false, not to have infinite recursion

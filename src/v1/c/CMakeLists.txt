@@ -48,22 +48,28 @@ set(SRCS
     src/binary.c
     external/cJSON.c
     model/object.c
-    model/boleto.c
-    model/boleto_expiration_in_days.c
-    model/cart_o_de_cr_dito.c
-    model/cart_o_de_cr_dito_card.c
-    model/cart_o_de_cr_dito_installments.c
-    model/cart_o_tokenizado.c
-    model/cliente.c
-    model/dados_completos_do_cart_o.c
-    model/dados_completos_do_cart_o_expiration.c
-    model/endere_o_do_cliente.c
+    model/bank_slip.c
+    model/bank_slip_expiration_in_days.c
+    model/complete_card_data.c
+    model/complete_card_data_expiration.c
+    model/credit_card.c
+    model/credit_card_card.c
+    model/credit_card_installments.c
+    model/customer.c
+    model/customer_1.c
+    model/customer_2.c
+    model/customer_2_document_type.c
+    model/customer_address.c
     model/merchant_input.c
     model/nu_pay.c
     model/nu_pay_nu_pay.c
     model/pic_pay.c
     model/pix.c
     model/pix_expiration_in_seconds.c
+    model/post_card_tokenization_200_response.c
+    model/post_card_tokenization_request.c
+    model/post_card_tokenization_request_customer.c
+    model/post_card_tokenization_request_customer_any_of.c
     model/post_orders_200_response.c
     model/post_orders_200_response_bank_slip.c
     model/post_orders_200_response_credit_card.c
@@ -82,8 +88,11 @@ set(SRCS
     model/post_withdraws_200_response_payout_account.c
     model/post_withdraws_request.c
     model/post_withdraws_request_payout_account.c
-    api/PedidosAPI.c
-    api/SaquesETransfernciasAPI.c
+    model/tokenized_card.c
+    api/CardTokenizationAPI.c
+    api/CustomersAPI.c
+    api/OrdersAPI.c
+    api/WithdrawalsAndTransfersAPI.c
 
 )
 
@@ -95,22 +104,28 @@ set(HDRS
     external/cJSON.h
     model/object.h
     model/any_type.h
-    model/boleto.h
-    model/boleto_expiration_in_days.h
-    model/cart_o_de_cr_dito.h
-    model/cart_o_de_cr_dito_card.h
-    model/cart_o_de_cr_dito_installments.h
-    model/cart_o_tokenizado.h
-    model/cliente.h
-    model/dados_completos_do_cart_o.h
-    model/dados_completos_do_cart_o_expiration.h
-    model/endere_o_do_cliente.h
+    model/bank_slip.h
+    model/bank_slip_expiration_in_days.h
+    model/complete_card_data.h
+    model/complete_card_data_expiration.h
+    model/credit_card.h
+    model/credit_card_card.h
+    model/credit_card_installments.h
+    model/customer.h
+    model/customer_1.h
+    model/customer_2.h
+    model/customer_2_document_type.h
+    model/customer_address.h
     model/merchant_input.h
     model/nu_pay.h
     model/nu_pay_nu_pay.h
     model/pic_pay.h
     model/pix.h
     model/pix_expiration_in_seconds.h
+    model/post_card_tokenization_200_response.h
+    model/post_card_tokenization_request.h
+    model/post_card_tokenization_request_customer.h
+    model/post_card_tokenization_request_customer_any_of.h
     model/post_orders_200_response.h
     model/post_orders_200_response_bank_slip.h
     model/post_orders_200_response_credit_card.h
@@ -129,8 +144,11 @@ set(HDRS
     model/post_withdraws_200_response_payout_account.h
     model/post_withdraws_request.h
     model/post_withdraws_request_payout_account.h
-    api/PedidosAPI.h
-    api/SaquesETransfernciasAPI.h
+    model/tokenized_card.h
+    api/CardTokenizationAPI.h
+    api/CustomersAPI.h
+    api/OrdersAPI.h
+    api/WithdrawalsAndTransfersAPI.h
 
 )
 
@@ -216,8 +234,10 @@ set(HDRS "")
 ## This section shows how to use the above compiled library to compile the source files
 ## set source files
 #set(SRCS
-#    unit-tests/manual-PedidosAPI.c
-#    unit-tests/manual-SaquesETransfernciasAPI.c
+#    unit-tests/manual-CardTokenizationAPI.c
+#    unit-tests/manual-CustomersAPI.c
+#    unit-tests/manual-OrdersAPI.c
+#    unit-tests/manual-WithdrawalsAndTransfersAPI.c
 #)
 
 ##set header files

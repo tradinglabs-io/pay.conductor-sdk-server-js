@@ -1,8 +1,8 @@
 # payconductor-sdk
 
-# Introdução
+PayConductor API Documentation.
 
-Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.
+This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.
 
 <br />
 
@@ -13,24 +13,24 @@ Esta documentação cobre todas as funcionalidades disponíveis na API RESTful d
 <br />
 
 
-# Autenticação
+# Authentication
 
-A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.
-
-<br />
-
-## Obtendo Credenciais
-
-1. Acesse o painel administrativo do PayConductor
-2. Navegue até **Configurações > API Keys**
-3. Gere um novo par de credenciais (Client ID e Client Secret)
-4. Guarde o Client Secret em local seguro - ele não será exibido novamente
+PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.
 
 <br />
 
-## Formato de Autenticação
+## Getting Credentials
 
-As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:
+1. Access the PayConductor admin panel
+2. Navigate to **Settings > API Keys**
+3. Generate a new credentials pair (Client ID and Client Secret)
+4. Store the Client Secret in a secure location - it will not be displayed again
+
+<br />
+
+## Authentication Format
+
+Credentials must be sent in the `Authorization` header using the Basic scheme:
 
 ```
 Authorization: Basic base64(client_id:client_secret)
@@ -38,13 +38,13 @@ Authorization: Basic base64(client_id:client_secret)
 
 <br />
 
-## Exemplo em Node.js
+## Node.js Example
 
 ```javascript
-const clientId = 'seu_client_id';
-const clientSecret = 'seu_client_secret';
+const clientId = 'your_client_id';
+const clientSecret = 'your_client_secret';
 
-// Codifica as credenciais em Base64
+// Encode credentials in Base64
 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
 
 const response = await fetch('https://api.payconductor.com/api/v1/orders', {
@@ -61,15 +61,15 @@ console.log(data);
 
 <br />
 
-## Erros de Autenticação
+## Authentication Errors
 
-| Código | Descrição |
-|--------|-----------|
-| `401`  | Credenciais inválidas ou ausentes |
-| `403`  | Credenciais válidas, mas sem permissão para o recurso |
-| `429`  | Muitas requisições (rate limit excedido) |
+| Code | Description |
+|------|-------------|
+| `401` | Invalid or missing credentials |
+| `403` | Valid credentials but no permission for the resource |
+| `429` | Too many requests (rate limit exceeded) |
 
-### Exemplo de resposta de erro
+### Error Response Example
 
 ```json
 {
@@ -133,24 +133,19 @@ $config = OpenAPI\Client\Configuration::getDefaultConfiguration()
               ->setPassword('YOUR_PASSWORD');
 
 
-$apiInstance = new OpenAPI\Client\Api\PedidosApi(
+$apiInstance = new OpenAPI\Client\Api\CardTokenizationApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
     $config
 );
-$period = 'Last7Days'; // string
-$page = 1; // float
-$page_size = 20; // float
-$end_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$start_date = new \DateTime('2013-10-20T19:20:30+01:00'); // \DateTime
-$id = 'id_example'; // string
-$status = 'status_example'; // string
+$post_card_tokenization_request = new \OpenAPI\Client\Model\PostCardTokenizationRequest(); // \OpenAPI\Client\Model\PostCardTokenizationRequest | Data for creating a customer card
 
 try {
-    $apiInstance->getOrders($period, $page, $page_size, $end_date, $start_date, $id, $status);
+    $result = $apiInstance->postCardTokenization($post_card_tokenization_request);
+    print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling PedidosApi->getOrders: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling CardTokenizationApi->postCardTokenization: ', $e->getMessage(), PHP_EOL;
 }
 
 ```
@@ -161,32 +156,44 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PedidosApi* | [**getOrders**](docs/Api/PedidosApi.md#getorders) | **GET** /orders/ | Listar pedidos
-*PedidosApi* | [**getOrdersById**](docs/Api/PedidosApi.md#getordersbyid) | **GET** /orders/{id} | Buscar pelo ID
-*PedidosApi* | [**postOrders**](docs/Api/PedidosApi.md#postorders) | **POST** /orders/ | Criar pedido
-*PedidosApi* | [**postOrdersByIdRefund**](docs/Api/PedidosApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Reembolsar pedido
-*SaquesETransfernciasApi* | [**getWithdraws**](docs/Api/SaquesETransfernciasApi.md#getwithdraws) | **GET** /withdraws/ | Lista os saques
-*SaquesETransfernciasApi* | [**getWithdrawsById**](docs/Api/SaquesETransfernciasApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Buscar pelo ID
-*SaquesETransfernciasApi* | [**postWithdraws**](docs/Api/SaquesETransfernciasApi.md#postwithdraws) | **POST** /withdraws/ | Cria saque
+*CardTokenizationApi* | [**postCardTokenization**](docs/Api/CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card
+*CustomersApi* | [**deleteCustomersById**](docs/Api/CustomersApi.md#deletecustomersbyid) | **DELETE** /customers/{id} | 
+*CustomersApi* | [**getCustomers**](docs/Api/CustomersApi.md#getcustomers) | **GET** /customers/ | 
+*CustomersApi* | [**getCustomersById**](docs/Api/CustomersApi.md#getcustomersbyid) | **GET** /customers/{id} | 
+*CustomersApi* | [**patchCustomersById**](docs/Api/CustomersApi.md#patchcustomersbyid) | **PATCH** /customers/{id} | 
+*CustomersApi* | [**postCustomers**](docs/Api/CustomersApi.md#postcustomers) | **POST** /customers/ | 
+*OrdersApi* | [**getOrders**](docs/Api/OrdersApi.md#getorders) | **GET** /orders/ | List orders
+*OrdersApi* | [**getOrdersById**](docs/Api/OrdersApi.md#getordersbyid) | **GET** /orders/{id} | Get order by ID
+*OrdersApi* | [**postOrders**](docs/Api/OrdersApi.md#postorders) | **POST** /orders/ | Create order
+*OrdersApi* | [**postOrdersByIdRefund**](docs/Api/OrdersApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Refund order
+*WithdrawalsAndTransfersApi* | [**getWithdraws**](docs/Api/WithdrawalsAndTransfersApi.md#getwithdraws) | **GET** /withdraws/ | List withdrawals
+*WithdrawalsAndTransfersApi* | [**getWithdrawsById**](docs/Api/WithdrawalsAndTransfersApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Get withdrawal by ID
+*WithdrawalsAndTransfersApi* | [**postWithdraws**](docs/Api/WithdrawalsAndTransfersApi.md#postwithdraws) | **POST** /withdraws/ | Create withdrawal
 
 ## Models
 
-- [Boleto](docs/Model/Boleto.md)
-- [BoletoExpirationInDays](docs/Model/BoletoExpirationInDays.md)
-- [CartODeCrDito](docs/Model/CartODeCrDito.md)
-- [CartODeCrDitoCard](docs/Model/CartODeCrDitoCard.md)
-- [CartODeCrDitoInstallments](docs/Model/CartODeCrDitoInstallments.md)
-- [CartOTokenizado](docs/Model/CartOTokenizado.md)
-- [Cliente](docs/Model/Cliente.md)
-- [DadosCompletosDoCartO](docs/Model/DadosCompletosDoCartO.md)
-- [DadosCompletosDoCartOExpiration](docs/Model/DadosCompletosDoCartOExpiration.md)
-- [EndereODoCliente](docs/Model/EndereODoCliente.md)
+- [BankSlip](docs/Model/BankSlip.md)
+- [BankSlipExpirationInDays](docs/Model/BankSlipExpirationInDays.md)
+- [CompleteCardData](docs/Model/CompleteCardData.md)
+- [CompleteCardDataExpiration](docs/Model/CompleteCardDataExpiration.md)
+- [CreditCard](docs/Model/CreditCard.md)
+- [CreditCardCard](docs/Model/CreditCardCard.md)
+- [CreditCardInstallments](docs/Model/CreditCardInstallments.md)
+- [Customer](docs/Model/Customer.md)
+- [Customer1](docs/Model/Customer1.md)
+- [Customer2](docs/Model/Customer2.md)
+- [Customer2DocumentType](docs/Model/Customer2DocumentType.md)
+- [CustomerAddress](docs/Model/CustomerAddress.md)
 - [MerchantInput](docs/Model/MerchantInput.md)
 - [NuPay](docs/Model/NuPay.md)
 - [NuPayNuPay](docs/Model/NuPayNuPay.md)
 - [PicPay](docs/Model/PicPay.md)
 - [Pix](docs/Model/Pix.md)
 - [PixExpirationInSeconds](docs/Model/PixExpirationInSeconds.md)
+- [PostCardTokenization200Response](docs/Model/PostCardTokenization200Response.md)
+- [PostCardTokenizationRequest](docs/Model/PostCardTokenizationRequest.md)
+- [PostCardTokenizationRequestCustomer](docs/Model/PostCardTokenizationRequestCustomer.md)
+- [PostCardTokenizationRequestCustomerAnyOf](docs/Model/PostCardTokenizationRequestCustomerAnyOf.md)
 - [PostOrders200Response](docs/Model/PostOrders200Response.md)
 - [PostOrders200ResponseBankSlip](docs/Model/PostOrders200ResponseBankSlip.md)
 - [PostOrders200ResponseCreditCard](docs/Model/PostOrders200ResponseCreditCard.md)
@@ -205,6 +212,7 @@ Class | Method | HTTP request | Description
 - [PostWithdraws200ResponsePayoutAccount](docs/Model/PostWithdraws200ResponsePayoutAccount.md)
 - [PostWithdrawsRequest](docs/Model/PostWithdrawsRequest.md)
 - [PostWithdrawsRequestPayoutAccount](docs/Model/PostWithdrawsRequestPayoutAccount.md)
+- [TokenizedCard](docs/Model/TokenizedCard.md)
 
 ## Authorization
 

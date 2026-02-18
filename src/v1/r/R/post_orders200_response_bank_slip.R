@@ -7,9 +7,9 @@
 #' @title PostOrders200ResponseBankSlip
 #' @description PostOrders200ResponseBankSlip Class
 #' @format An \code{R6Class} generator object
-#' @field barCode Código de barras do boleto character
-#' @field digitableLine Linha digitável do boleto character
-#' @field pdfUrl URL do PDF do boleto character [optional]
+#' @field barCode Bank slip bar code character
+#' @field digitableLine Bank slip digitable line character
+#' @field pdfUrl Bank slip PDF URL character [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -23,9 +23,9 @@ PostOrders200ResponseBankSlip <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponseBankSlip class.
     #'
-    #' @param barCode Código de barras do boleto
-    #' @param digitableLine Linha digitável do boleto
-    #' @param pdfUrl URL do PDF do boleto
+    #' @param barCode Bank slip bar code
+    #' @param digitableLine Bank slip digitable line
+    #' @param pdfUrl Bank slip PDF URL
     #' @param ... Other optional arguments.
     initialize = function(`barCode`, `digitableLine`, `pdfUrl` = NULL, ...) {
       if (!missing(`barCode`)) {

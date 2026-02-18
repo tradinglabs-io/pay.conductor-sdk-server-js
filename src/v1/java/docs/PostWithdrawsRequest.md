@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**amount** | **BigDecimal** | Valor do saque em centavos |  |
-|**externalId** | **String** | ID do saque no seu sistema |  [optional] |
+|**amount** | **BigDecimal** | Withdrawal amount in cents |  |
+|**externalId** | **String** | Withdrawal ID in your system |  [optional] |
 |**merchant** | [**MerchantInput**](MerchantInput.md) |  |  [optional] |
 |**payoutAccount** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  |  |
 

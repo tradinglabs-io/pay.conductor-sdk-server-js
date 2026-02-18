@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OwnerDocument** | **string** | Documento do titular da conta (CPF ou CNPJ) | 
-**OwnerName** | **string** | Nome do titular da conta | 
+**OwnerDocument** | **string** | Account holder document (CPF or CNPJ) | 
+**OwnerName** | **string** | Account holder name | 
 **PixKey** | **string** | PIX key for withdrawal | 
 **PixType** | **string** | PIX key type | [default to PixTypeEnum.Cnpj]
 

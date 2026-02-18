@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**barCode** | **character** | Código de barras do boleto | 
-**digitableLine** | **character** | Linha digitável do boleto | 
-**pdfUrl** | **character** | URL do PDF do boleto | [optional] 
+**barCode** | **character** | Bank slip bar code | 
+**digitableLine** | **character** | Bank slip digitable line | 
+**pdfUrl** | **character** | Bank slip PDF URL | [optional] 
 
 

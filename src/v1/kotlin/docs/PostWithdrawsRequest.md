@@ -4,9 +4,9 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **amount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor do saque em centavos |  |
+| **amount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Withdrawal amount in cents |  |
 | **payoutAccount** | [**PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  |  |
-| **externalId** | **kotlin.String** | ID do saque no seu sistema |  [optional] |
+| **externalId** | **kotlin.String** | Withdrawal ID in your system |  [optional] |
 | **merchant** | [**MerchantInput**](MerchantInput.md) |  |  [optional] |
 
 

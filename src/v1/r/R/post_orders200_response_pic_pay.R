@@ -7,8 +7,8 @@
 #' @title PostOrders200ResponsePicPay
 #' @description PostOrders200ResponsePicPay Class
 #' @format An \code{R6Class} generator object
-#' @field copyAndPasteCode Código copia e cola do PicPay character
-#' @field qrCodeUrl URL da imagem do QR Code PicPay character
+#' @field copyAndPasteCode PicPay copy and paste code character
+#' @field qrCodeUrl PicPay QR Code image URL character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -21,8 +21,8 @@ PostOrders200ResponsePicPay <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponsePicPay class.
     #'
-    #' @param copyAndPasteCode Código copia e cola do PicPay
-    #' @param qrCodeUrl URL da imagem do QR Code PicPay
+    #' @param copyAndPasteCode PicPay copy and paste code
+    #' @param qrCodeUrl PicPay QR Code image URL
     #' @param ... Other optional arguments.
     initialize = function(`copyAndPasteCode`, `qrCodeUrl`, ...) {
       if (!missing(`copyAndPasteCode`)) {

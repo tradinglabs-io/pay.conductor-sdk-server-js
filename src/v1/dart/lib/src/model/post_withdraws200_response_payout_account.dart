@@ -12,30 +12,30 @@ part 'post_withdraws200_response_payout_account.g.dart';
 /// PostWithdraws200ResponsePayoutAccount
 ///
 /// Properties:
-/// * [id] - Identificador único da conta de pagamento
-/// * [ownerDocument] - Documento do titular da conta (CPF ou CNPJ)
-/// * [ownerName] - Nome do titular da conta
-/// * [pixKey] - Chave PIX utilizada para o saque
-/// * [pixType] - Tipo da chave PIX
+/// * [id] - Unique payment account identifier
+/// * [ownerDocument] - Account holder document (CPF or CNPJ)
+/// * [ownerName] - Account holder name
+/// * [pixKey] - PIX key used for the withdrawal
+/// * [pixType] - PIX key type
 @BuiltValue()
 abstract class PostWithdraws200ResponsePayoutAccount implements Built<PostWithdraws200ResponsePayoutAccount, PostWithdraws200ResponsePayoutAccountBuilder> {
-  /// Identificador único da conta de pagamento
+  /// Unique payment account identifier
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  /// Documento do titular da conta (CPF ou CNPJ)
+  /// Account holder document (CPF or CNPJ)
   @BuiltValueField(wireName: r'ownerDocument')
   String get ownerDocument;
 
-  /// Nome do titular da conta
+  /// Account holder name
   @BuiltValueField(wireName: r'ownerName')
   String get ownerName;
 
-  /// Chave PIX utilizada para o saque
+  /// PIX key used for the withdrawal
   @BuiltValueField(wireName: r'pixKey')
   String get pixKey;
 
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueField(wireName: r'pixType')
   PostWithdraws200ResponsePayoutAccountPixTypeEnum get pixType;
   // enum pixTypeEnum {  Cpf,  Cnpj,  Email,  Phone,  Random,  };
@@ -178,19 +178,19 @@ class _$PostWithdraws200ResponsePayoutAccountSerializer implements PrimitiveSeri
 
 class PostWithdraws200ResponsePayoutAccountPixTypeEnum extends EnumClass {
 
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueEnumConst(wireName: r'Cpf')
   static const PostWithdraws200ResponsePayoutAccountPixTypeEnum cpf = _$postWithdraws200ResponsePayoutAccountPixTypeEnum_cpf;
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueEnumConst(wireName: r'Cnpj')
   static const PostWithdraws200ResponsePayoutAccountPixTypeEnum cnpj = _$postWithdraws200ResponsePayoutAccountPixTypeEnum_cnpj;
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueEnumConst(wireName: r'Email')
   static const PostWithdraws200ResponsePayoutAccountPixTypeEnum email = _$postWithdraws200ResponsePayoutAccountPixTypeEnum_email;
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueEnumConst(wireName: r'Phone')
   static const PostWithdraws200ResponsePayoutAccountPixTypeEnum phone = _$postWithdraws200ResponsePayoutAccountPixTypeEnum_phone;
-  /// Tipo da chave PIX
+  /// PIX key type
   @BuiltValueEnumConst(wireName: r'Random')
   static const PostWithdraws200ResponsePayoutAccountPixTypeEnum random = _$postWithdraws200ResponsePayoutAccountPixTypeEnum_random;
 

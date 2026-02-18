@@ -8,23 +8,23 @@ import 'package:built_value/serializer.dart';
 
 part 'merchant_input.g.dart';
 
-/// Dados do merchant para pedido ou saque
+/// Merchant data for order or withdrawal
 ///
 /// Properties:
-/// * [document] - CPF ou CNPJ do merchant sem formatação
-/// * [email] - Email do merchant
-/// * [name] - Nome do merchant
+/// * [document] - Merchant CPF or CNPJ without formatting
+/// * [email] - Merchant email
+/// * [name] - Merchant name
 @BuiltValue()
 abstract class MerchantInput implements Built<MerchantInput, MerchantInputBuilder> {
-  /// CPF ou CNPJ do merchant sem formatação
+  /// Merchant CPF or CNPJ without formatting
   @BuiltValueField(wireName: r'document')
   String get document;
 
-  /// Email do merchant
+  /// Merchant email
   @BuiltValueField(wireName: r'email')
   String get email;
 
-  /// Nome do merchant
+  /// Merchant name
   @BuiltValueField(wireName: r'name')
   String get name;
 

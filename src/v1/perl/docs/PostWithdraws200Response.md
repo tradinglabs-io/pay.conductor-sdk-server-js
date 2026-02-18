@@ -8,14 +8,14 @@ use WWW::OpenAPIClient::Object::PostWithdraws200Response;
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identificador único do saque | 
-**external_id** | **string** | ID do saque no sistema no seu sistema | 
-**external_integration_key** | **string** | Chave do provedor utilizado para o saque | 
-**external_integration_id** | **string** | ID do saque no provedor de pagamento | 
-**cost_fee** | **double** | Taxa de custo aplicada ao saque | 
-**status** | **string** | Status do saque | [default to &#39;Pending&#39;]
-**error_code** | **string** | Código do erro, se houver | 
-**error_message** | **string** | Mensagem descritiva do erro, se houver | 
+**id** | **string** | Unique withdrawal identifier | 
+**external_id** | **string** | Withdrawal ID in your system | 
+**external_integration_key** | **string** | Provider key used for the withdrawal | 
+**external_integration_id** | **string** | Withdrawal ID in the payment provider | 
+**cost_fee** | **double** | Cost fee applied to the withdrawal | 
+**status** | **string** | Withdrawal status | [default to &#39;Pending&#39;]
+**error_code** | **string** | Error code, if any | 
+**error_message** | **string** | Descriptive error message, if any | 
 **payed_at** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | 
 **payout_account** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | 
 

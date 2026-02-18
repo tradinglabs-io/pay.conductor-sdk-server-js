@@ -22,40 +22,40 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param id Identificador único da conta de pagamento
- * @param ownerDocument Documento do titular da conta (CPF ou CNPJ)
- * @param ownerName Nome do titular da conta
- * @param pixKey Chave PIX utilizada para o saque
- * @param pixType Tipo da chave PIX
+ * @param id Unique payment account identifier
+ * @param ownerDocument Account holder document (CPF or CNPJ)
+ * @param ownerName Account holder name
+ * @param pixKey PIX key used for the withdrawal
+ * @param pixType PIX key type
  */
 
 
 data class PostWithdraws200ResponsePayoutAccount (
 
-    /* Identificador único da conta de pagamento */
+    /* Unique payment account identifier */
     @Json(name = "id")
     val id: kotlin.String,
 
-    /* Documento do titular da conta (CPF ou CNPJ) */
+    /* Account holder document (CPF or CNPJ) */
     @Json(name = "ownerDocument")
     val ownerDocument: kotlin.String,
 
-    /* Nome do titular da conta */
+    /* Account holder name */
     @Json(name = "ownerName")
     val ownerName: kotlin.String,
 
-    /* Chave PIX utilizada para o saque */
+    /* PIX key used for the withdrawal */
     @Json(name = "pixKey")
     val pixKey: kotlin.String,
 
-    /* Tipo da chave PIX */
+    /* PIX key type */
     @Json(name = "pixType")
     val pixType: PostWithdraws200ResponsePayoutAccount.PixType = PixType.Cpf
 
 ) {
 
     /**
-     * Tipo da chave PIX
+     * PIX key type
      *
      * Values: Cpf,Cnpj,Email,Phone,Random
      */

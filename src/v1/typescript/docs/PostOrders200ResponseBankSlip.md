@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**barCode** | **string** | Código de barras do boleto | [default to undefined]
-**digitableLine** | **string** | Linha digitável do boleto | [default to undefined]
-**pdfUrl** | **string** | URL do PDF do boleto | [optional] [default to undefined]
+**barCode** | **string** | Bank slip bar code | [default to undefined]
+**digitableLine** | **string** | Bank slip digitable line | [default to undefined]
+**pdfUrl** | **string** | Bank slip PDF URL | [optional] [default to undefined]
 
 ## Example
 

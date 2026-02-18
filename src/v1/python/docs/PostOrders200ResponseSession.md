@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**session_id** | **str** | ID da sessão de checkout associada ao pedido | 
+**session_id** | **str** | ID of the checkout session associated with the order | 
 
 ## Example
 

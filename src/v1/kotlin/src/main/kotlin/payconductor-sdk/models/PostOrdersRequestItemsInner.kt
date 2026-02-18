@@ -22,33 +22,33 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param id ID do produto ou serviço no seu sistema
- * @param isPhysical Define se o item é um produto físico ou um serviço
- * @param name Nome do produto ou serviço
- * @param qty Quantidade do produto ou serviço
- * @param unitPrice Preço unitário
+ * @param id Product or service ID in your system
+ * @param isPhysical Defines if the item is a physical product or a service
+ * @param name Product or service name
+ * @param qty Quantity of the product or service
+ * @param unitPrice Unit price
  */
 
 
 data class PostOrdersRequestItemsInner (
 
-    /* ID do produto ou serviço no seu sistema */
+    /* Product or service ID in your system */
     @Json(name = "id")
     val id: kotlin.String,
 
-    /* Define se o item é um produto físico ou um serviço */
+    /* Defines if the item is a physical product or a service */
     @Json(name = "isPhysical")
     val isPhysical: kotlin.Boolean = false,
 
-    /* Nome do produto ou serviço */
+    /* Product or service name */
     @Json(name = "name")
     val name: kotlin.String,
 
-    /* Quantidade do produto ou serviço */
+    /* Quantity of the product or service */
     @Json(name = "qty")
     val qty: java.math.BigDecimal,
 
-    /* Preço unitário */
+    /* Unit price */
     @Json(name = "unitPrice")
     val unitPrice: java.math.BigDecimal
 

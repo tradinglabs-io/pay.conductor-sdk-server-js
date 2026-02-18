@@ -25,19 +25,19 @@ class PostOrders200ResponseBankSlipTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponseBankSlip
         //val modelInstance = PostOrders200ResponseBankSlip()
 
-        // to test the property `barCode` - Código de barras do boleto
+        // to test the property `barCode` - Bank slip bar code
         should("test barCode") {
             // uncomment below to test the property
             //modelInstance.barCode shouldBe ("TODO")
         }
 
-        // to test the property `digitableLine` - Linha digitável do boleto
+        // to test the property `digitableLine` - Bank slip digitable line
         should("test digitableLine") {
             // uncomment below to test the property
             //modelInstance.digitableLine shouldBe ("TODO")
         }
 
-        // to test the property `pdfUrl` - URL do PDF do boleto
+        // to test the property `pdfUrl` - Bank slip PDF URL
         should("test pdfUrl") {
             // uncomment below to test the property
             //modelInstance.pdfUrl shouldBe ("TODO")

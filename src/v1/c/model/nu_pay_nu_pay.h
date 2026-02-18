@@ -1,7 +1,7 @@
 /*
  * nu_pay_nu_pay.h
  *
- * Dados específicos para pagamento via NuPay
+ * Specific data for NuPay payment
  */
 
 #ifndef _nu_pay_nu_pay_H_

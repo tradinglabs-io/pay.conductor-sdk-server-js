@@ -1,6 +1,6 @@
 # PostOrdersRequestPayment
 
-Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 ## Properties
 
@@ -8,10 +8,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **paymentMethod** | **string** |  | [default to undefined]
 **expirationInSeconds** | [**PixExpirationInSeconds**](PixExpirationInSeconds.md) |  | [optional] [default to undefined]
-**card** | [**CartODeCrDitoCard**](CartODeCrDitoCard.md) |  | [default to undefined]
-**installments** | [**CartODeCrDitoInstallments**](CartODeCrDitoInstallments.md) |  | [default to undefined]
-**softDescriptor** | **string** | Texto que aparecerá na fatura do cartão (soft descriptor) | [optional] [default to undefined]
-**expirationInDays** | [**BoletoExpirationInDays**](BoletoExpirationInDays.md) |  | [optional] [default to undefined]
+**card** | [**CreditCardCard**](CreditCardCard.md) |  | [default to undefined]
+**installments** | [**CreditCardInstallments**](CreditCardInstallments.md) |  | [default to undefined]
+**softDescriptor** | **string** | Text that will appear on the card statement (soft descriptor) | [optional] [default to undefined]
+**expirationInDays** | [**BankSlipExpirationInDays**](BankSlipExpirationInDays.md) |  | [optional] [default to undefined]
 **nuPay** | [**NuPayNuPay**](NuPayNuPay.md) |  | [default to undefined]
 
 ## Example

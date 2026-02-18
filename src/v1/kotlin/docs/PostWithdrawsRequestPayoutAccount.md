@@ -4,8 +4,8 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **ownerDocument** | **kotlin.String** | Documento do titular da conta (CPF ou CNPJ) |  |
-| **ownerName** | **kotlin.String** | Nome do titular da conta |  |
+| **ownerDocument** | **kotlin.String** | Account holder document (CPF or CNPJ) |  |
+| **ownerName** | **kotlin.String** | Account holder name |  |
 | **pixKey** | **kotlin.String** | PIX key for withdrawal |  |
 | **pixType** | [**inline**](#PixType) | PIX key type |  |
 

@@ -6,9 +6,9 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:openapi/src/model/post_orders_request_fingerprints.dart';
 import 'package:openapi/src/model/post_orders_request_payment.dart';
-import 'package:openapi/src/model/cliente.dart';
 import 'package:openapi/src/model/merchant_input.dart';
 import 'package:openapi/src/model/post_orders_request_items_inner.dart';
+import 'package:openapi/src/model/customer.dart';
 import 'package:built_value/json_object.dart';
 import 'package:openapi/src/model/post_orders_request_session.dart';
 import 'package:built_value/built_value.dart';
@@ -19,45 +19,45 @@ part 'post_orders_request.g.dart';
 /// PostOrdersRequest
 ///
 /// Properties:
-/// * [chargeAmount] - Valor total a ser cobrado no pedido em valor flutuante
-/// * [clientIp] - Endereço IP do cliente
+/// * [chargeAmount] - Total amount to be charged on the order in floating point value
+/// * [clientIp] - Client IP address
 /// * [customer] 
-/// * [discountAmount] - Valor do desconto
-/// * [externalId] - ID da ordem no seu sistema
+/// * [discountAmount] - Discount amount
+/// * [externalId] - Order ID in your system
 /// * [fingerprints] 
-/// * [items] - Lista de produtos ou serviços do pedido
+/// * [items] - List of products or services in the order
 /// * [merchant] 
 /// * [payment] 
-/// * [splitAmountTotal] - Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+/// * [splitAmountTotal] - Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
 /// * [session] 
-/// * [shippingFee] - Valor do frete
-/// * [taxFee] - Taxas adicionais
-/// * [metadata] - Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+/// * [shippingFee] - Shipping fee
+/// * [taxFee] - Additional fees
+/// * [metadata] - Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
 @BuiltValue()
 abstract class PostOrdersRequest implements Built<PostOrdersRequest, PostOrdersRequestBuilder> {
-  /// Valor total a ser cobrado no pedido em valor flutuante
+  /// Total amount to be charged on the order in floating point value
   @BuiltValueField(wireName: r'chargeAmount')
   num get chargeAmount;
 
-  /// Endereço IP do cliente
+  /// Client IP address
   @BuiltValueField(wireName: r'clientIp')
   String get clientIp;
 
   @BuiltValueField(wireName: r'customer')
-  Cliente get customer;
+  Customer get customer;
 
-  /// Valor do desconto
+  /// Discount amount
   @BuiltValueField(wireName: r'discountAmount')
   num get discountAmount;
 
-  /// ID da ordem no seu sistema
+  /// Order ID in your system
   @BuiltValueField(wireName: r'externalId')
   String get externalId;
 
   @BuiltValueField(wireName: r'fingerprints')
   PostOrdersRequestFingerprints? get fingerprints;
 
-  /// Lista de produtos ou serviços do pedido
+  /// List of products or services in the order
   @BuiltValueField(wireName: r'items')
   BuiltList<PostOrdersRequestItemsInner>? get items;
 
@@ -67,22 +67,22 @@ abstract class PostOrdersRequest implements Built<PostOrdersRequest, PostOrdersR
   @BuiltValueField(wireName: r'payment')
   PostOrdersRequestPayment get payment;
 
-  /// Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+  /// Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
   @BuiltValueField(wireName: r'splitAmountTotal')
   num? get splitAmountTotal;
 
   @BuiltValueField(wireName: r'session')
   PostOrdersRequestSession? get session;
 
-  /// Valor do frete
+  /// Shipping fee
   @BuiltValueField(wireName: r'shippingFee')
   num get shippingFee;
 
-  /// Taxas adicionais
+  /// Additional fees
   @BuiltValueField(wireName: r'taxFee')
   num get taxFee;
 
-  /// Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+  /// Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
   @BuiltValueField(wireName: r'metadata')
   JsonObject? get metadata;
 
@@ -125,7 +125,7 @@ class _$PostOrdersRequestSerializer implements PrimitiveSerializer<PostOrdersReq
     yield r'customer';
     yield serializers.serialize(
       object.customer,
-      specifiedType: const FullType(Cliente),
+      specifiedType: const FullType(Customer),
     );
     yield r'discountAmount';
     yield serializers.serialize(
@@ -234,8 +234,8 @@ class _$PostOrdersRequestSerializer implements PrimitiveSerializer<PostOrdersReq
         case r'customer':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(Cliente),
-          ) as Cliente;
+            specifiedType: const FullType(Customer),
+          ) as Customer;
           result.customer.replace(valueDes);
           break;
         case r'discountAmount':

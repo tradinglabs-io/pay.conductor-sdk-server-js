@@ -17,9 +17,9 @@
 post_orders_request_payment_t* instantiate_post_orders_request_payment(int include_optional);
 
 #include "test_pix_expiration_in_seconds.c"
-#include "test_cart_o_de_cr_dito_card.c"
-#include "test_cart_o_de_cr_dito_installments.c"
-#include "test_boleto_expiration_in_days.c"
+#include "test_credit_card_card.c"
+#include "test_credit_card_installments.c"
+#include "test_bank_slip_expiration_in_days.c"
 #include "test_nu_pay_nu_pay.c"
 
 

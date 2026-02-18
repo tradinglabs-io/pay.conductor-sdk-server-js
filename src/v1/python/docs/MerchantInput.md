@@ -1,14 +1,14 @@
 # MerchantInput
 
-Dados do merchant para pedido ou saque
+Merchant data for order or withdrawal
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document** | **str** | CPF ou CNPJ do merchant sem formatação | 
-**email** | **str** | Email do merchant | 
-**name** | **str** | Nome do merchant | 
+**document** | **str** | Merchant CPF or CNPJ without formatting | 
+**email** | **str** | Merchant email | 
+**name** | **str** | Merchant name | 
 
 ## Example
 

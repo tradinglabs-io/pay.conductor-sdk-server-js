@@ -1,7 +1,7 @@
 /*
 PayConductor API
 
-# Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
 
 API version: 1.0.0
 */
@@ -21,28 +21,28 @@ var _ MappedNullable = &PostOrdersRequest{}
 
 // PostOrdersRequest struct for PostOrdersRequest
 type PostOrdersRequest struct {
-	// Valor total a ser cobrado no pedido em valor flutuante
+	// Total amount to be charged on the order in floating point value
 	ChargeAmount float32 `json:"chargeAmount"`
-	// Endereço IP do cliente
+	// Client IP address
 	ClientIp string `json:"clientIp"`
-	Customer Cliente `json:"customer"`
-	// Valor do desconto
+	Customer Customer `json:"customer"`
+	// Discount amount
 	DiscountAmount float32 `json:"discountAmount"`
-	// ID da ordem no seu sistema
+	// Order ID in your system
 	ExternalId string `json:"externalId"`
 	Fingerprints *PostOrdersRequestFingerprints `json:"fingerprints,omitempty"`
-	// Lista de produtos ou serviços do pedido
+	// List of products or services in the order
 	Items []PostOrdersRequestItemsInner `json:"items,omitempty"`
 	Merchant *MerchantInput `json:"merchant,omitempty"`
 	Payment PostOrdersRequestPayment `json:"payment"`
-	// Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+	// Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
 	SplitAmountTotal *float32 `json:"splitAmountTotal,omitempty"`
 	Session *PostOrdersRequestSession `json:"session,omitempty"`
-	// Valor do frete
+	// Shipping fee
 	ShippingFee float32 `json:"shippingFee"`
-	// Taxas adicionais
+	// Additional fees
 	TaxFee float32 `json:"taxFee"`
-	// Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+	// Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 }
 
@@ -52,7 +52,7 @@ type _PostOrdersRequest PostOrdersRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPostOrdersRequest(chargeAmount float32, clientIp string, customer Cliente, discountAmount float32, externalId string, payment PostOrdersRequestPayment, shippingFee float32, taxFee float32) *PostOrdersRequest {
+func NewPostOrdersRequest(chargeAmount float32, clientIp string, customer Customer, discountAmount float32, externalId string, payment PostOrdersRequestPayment, shippingFee float32, taxFee float32) *PostOrdersRequest {
 	this := PostOrdersRequest{}
 	this.ChargeAmount = chargeAmount
 	this.ClientIp = clientIp
@@ -128,9 +128,9 @@ func (o *PostOrdersRequest) SetClientIp(v string) {
 }
 
 // GetCustomer returns the Customer field value
-func (o *PostOrdersRequest) GetCustomer() Cliente {
+func (o *PostOrdersRequest) GetCustomer() Customer {
 	if o == nil {
-		var ret Cliente
+		var ret Customer
 		return ret
 	}
 
@@ -139,7 +139,7 @@ func (o *PostOrdersRequest) GetCustomer() Cliente {
 
 // GetCustomerOk returns a tuple with the Customer field value
 // and a boolean to check if the value has been set.
-func (o *PostOrdersRequest) GetCustomerOk() (*Cliente, bool) {
+func (o *PostOrdersRequest) GetCustomerOk() (*Customer, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -147,7 +147,7 @@ func (o *PostOrdersRequest) GetCustomerOk() (*Cliente, bool) {
 }
 
 // SetCustomer sets field value
-func (o *PostOrdersRequest) SetCustomer(v Cliente) {
+func (o *PostOrdersRequest) SetCustomer(v Customer) {
 	o.Customer = v
 }
 

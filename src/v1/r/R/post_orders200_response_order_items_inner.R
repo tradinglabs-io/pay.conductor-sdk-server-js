@@ -7,13 +7,13 @@
 #' @title PostOrders200ResponseOrderItemsInner
 #' @description PostOrders200ResponseOrderItemsInner Class
 #' @format An \code{R6Class} generator object
-#' @field externalId ID externo do item character
-#' @field id ID do item no pedido character
-#' @field name Nome do produto/serviço character
-#' @field qty Quantidade numeric
-#' @field totalAmount Valor total do item (quantidade × preço unitário) numeric
-#' @field totalNetAmount Valor líquido total do item numeric
-#' @field unityPrice Preço unitário numeric
+#' @field externalId External item ID character
+#' @field id Item ID in the order character
+#' @field name Product/service name character
+#' @field qty Quantity numeric
+#' @field totalAmount Total item amount (quantity × unit price) numeric
+#' @field totalNetAmount Total net amount of the item numeric
+#' @field unityPrice Unit price numeric
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -31,13 +31,13 @@ PostOrders200ResponseOrderItemsInner <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponseOrderItemsInner class.
     #'
-    #' @param externalId ID externo do item
-    #' @param id ID do item no pedido
-    #' @param name Nome do produto/serviço
-    #' @param qty Quantidade
-    #' @param totalAmount Valor total do item (quantidade × preço unitário)
-    #' @param totalNetAmount Valor líquido total do item
-    #' @param unityPrice Preço unitário
+    #' @param externalId External item ID
+    #' @param id Item ID in the order
+    #' @param name Product/service name
+    #' @param qty Quantity
+    #' @param totalAmount Total item amount (quantity × unit price)
+    #' @param totalNetAmount Total net amount of the item
+    #' @param unityPrice Unit price
     #' @param ... Other optional arguments.
     initialize = function(`externalId`, `id`, `name`, `qty`, `totalAmount`, `totalNetAmount`, `unityPrice`, ...) {
       if (!missing(`externalId`)) {

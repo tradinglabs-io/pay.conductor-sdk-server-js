@@ -22,18 +22,18 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param copyAndPasteCode Código copia e cola do PicPay
- * @param qrCodeUrl URL da imagem do QR Code PicPay
+ * @param copyAndPasteCode PicPay copy and paste code
+ * @param qrCodeUrl PicPay QR Code image URL
  */
 
 
 data class PostOrders200ResponsePicPay (
 
-    /* Código copia e cola do PicPay */
+    /* PicPay copy and paste code */
     @Json(name = "copyAndPasteCode")
     val copyAndPasteCode: kotlin.String,
 
-    /* URL da imagem do QR Code PicPay */
+    /* PicPay QR Code image URL */
     @Json(name = "qrCodeUrl")
     val qrCodeUrl: kotlin.String
 

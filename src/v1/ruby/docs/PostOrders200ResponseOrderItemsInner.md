@@ -4,13 +4,13 @@
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **external_id** | **String** | ID externo do item |  |
-| **id** | **String** | ID do item no pedido |  |
-| **name** | **String** | Nome do produto/serviço |  |
-| **qty** | **Float** | Quantidade |  |
-| **total_amount** | **Float** | Valor total do item (quantidade × preço unitário) |  |
-| **total_net_amount** | **Float** | Valor líquido total do item |  |
-| **unity_price** | **Float** | Preço unitário |  |
+| **external_id** | **String** | External item ID |  |
+| **id** | **String** | Item ID in the order |  |
+| **name** | **String** | Product/service name |  |
+| **qty** | **Float** | Quantity |  |
+| **total_amount** | **Float** | Total item amount (quantity × unit price) |  |
+| **total_net_amount** | **Float** | Total net amount of the item |  |
+| **unity_price** | **Float** | Unit price |  |
 
 ## Example
 

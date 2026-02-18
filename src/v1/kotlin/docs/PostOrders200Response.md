@@ -4,17 +4,17 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **id** | **kotlin.String** | ID do pedido no sistema |  |
-| **externalId** | **kotlin.String** | ID externo do pedido (fornecido pela sua integração) |  |
-| **externalIntegrationKey** | **kotlin.String** | Provedor utilizada para processar o pedido |  |
-| **externalIntegrationId** | **kotlin.String** | ID do pedido no provedor de pagamento |  |
-| **amount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Valor total do pedido |  |
-| **costFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Taxa de custo aplicada ao pedido |  |
+| **id** | **kotlin.String** | Order ID in the system |  |
+| **externalId** | **kotlin.String** | External order ID (provided by your integration) |  |
+| **externalIntegrationKey** | **kotlin.String** | Provider used to process the order |  |
+| **externalIntegrationId** | **kotlin.String** | Order ID in the payment provider |  |
+| **amount** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Total order amount |  |
+| **costFee** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Cost fee applied to the order |  |
 | **status** | [**inline**](#Status) |  |  |
 | **paymentMethod** | [**inline**](#PaymentMethod) |  |  |
-| **payedAt** | **kotlin.String** | Data e hora em que o pedido foi pago (ISO 8601) |  |
-| **errorCode** | **kotlin.String** | Código de erro, se houver |  |
-| **errorMessage** | **kotlin.String** | Mensagem de erro, se houver |  |
+| **payedAt** | **kotlin.String** | Date and time when the order was paid (ISO 8601) |  |
+| **errorCode** | **kotlin.String** | Error code, if any |  |
+| **errorMessage** | **kotlin.String** | Error message, if any |  |
 | **orderItems** | [**kotlin.collections.List&lt;PostOrders200ResponseOrderItemsInner&gt;**](PostOrders200ResponseOrderItemsInner.md) |  |  |
 | **pix** | [**PostOrders200ResponsePix**](PostOrders200ResponsePix.md) |  |  [optional] |
 | **bankSlip** | [**PostOrders200ResponseBankSlip**](PostOrders200ResponseBankSlip.md) |  |  [optional] |

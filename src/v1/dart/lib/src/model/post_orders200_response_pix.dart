@@ -8,23 +8,23 @@ import 'package:built_value/serializer.dart';
 
 part 'post_orders200_response_pix.g.dart';
 
-/// Dados do PIX
+/// PIX data
 ///
 /// Properties:
-/// * [copyAndPasteCode] - Código copia e cola do PIX
-/// * [qrCodeUrl] - URL da imagem do QR Code PIX
-/// * [endToEndId] - E2E ID do PIX
+/// * [copyAndPasteCode] - PIX copy and paste code
+/// * [qrCodeUrl] - PIX QR Code image URL
+/// * [endToEndId] - PIX E2E ID
 @BuiltValue()
 abstract class PostOrders200ResponsePix implements Built<PostOrders200ResponsePix, PostOrders200ResponsePixBuilder> {
-  /// Código copia e cola do PIX
+  /// PIX copy and paste code
   @BuiltValueField(wireName: r'copyAndPasteCode')
   String get copyAndPasteCode;
 
-  /// URL da imagem do QR Code PIX
+  /// PIX QR Code image URL
   @BuiltValueField(wireName: r'qrCodeUrl')
   String get qrCodeUrl;
 
-  /// E2E ID do PIX
+  /// PIX E2E ID
   @BuiltValueField(wireName: r'endToEndId')
   String? get endToEndId;
 

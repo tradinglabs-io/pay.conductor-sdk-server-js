@@ -7,37 +7,37 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrders200Response, () {
-    // ID do pedido no sistema
+    // Order ID in the system
     // String id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // ID externo do pedido (fornecido pela sua integração)
+    // External order ID (provided by your integration)
     // String externalId
     test('to test the property `externalId`', () async {
       // TODO
     });
 
-    // Provedor utilizada para processar o pedido
+    // Provider used to process the order
     // String externalIntegrationKey
     test('to test the property `externalIntegrationKey`', () async {
       // TODO
     });
 
-    // ID do pedido no provedor de pagamento
+    // Order ID in the payment provider
     // String externalIntegrationId
     test('to test the property `externalIntegrationId`', () async {
       // TODO
     });
 
-    // Valor total do pedido
+    // Total order amount
     // num amount
     test('to test the property `amount`', () async {
       // TODO
     });
 
-    // Taxa de custo aplicada ao pedido
+    // Cost fee applied to the order
     // num costFee
     test('to test the property `costFee`', () async {
       // TODO
@@ -78,19 +78,19 @@ void main() {
       // TODO
     });
 
-    // Data e hora em que o pedido foi pago (ISO 8601)
+    // Date and time when the order was paid (ISO 8601)
     // String payedAt
     test('to test the property `payedAt`', () async {
       // TODO
     });
 
-    // Código de erro, se houver
+    // Error code, if any
     // String errorCode
     test('to test the property `errorCode`', () async {
       // TODO
     });
 
-    // Mensagem de erro, se houver
+    // Error message, if any
     // String errorMessage
     test('to test the property `errorMessage`', () async {
       // TODO

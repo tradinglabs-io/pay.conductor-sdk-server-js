@@ -25,13 +25,13 @@ class PostWithdrawsRequestPayoutAccountTest : ShouldSpec() {
         // uncomment below to create an instance of PostWithdrawsRequestPayoutAccount
         //val modelInstance = PostWithdrawsRequestPayoutAccount()
 
-        // to test the property `ownerDocument` - Documento do titular da conta (CPF ou CNPJ)
+        // to test the property `ownerDocument` - Account holder document (CPF or CNPJ)
         should("test ownerDocument") {
             // uncomment below to test the property
             //modelInstance.ownerDocument shouldBe ("TODO")
         }
 
-        // to test the property `ownerName` - Nome do titular da conta
+        // to test the property `ownerName` - Account holder name
         should("test ownerName") {
             // uncomment below to test the property
             //modelInstance.ownerName shouldBe ("TODO")

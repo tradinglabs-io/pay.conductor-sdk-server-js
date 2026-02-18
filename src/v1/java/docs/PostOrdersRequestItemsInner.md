@@ -7,11 +7,11 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**id** | **String** | ID do produto ou serviço no seu sistema |  |
-|**isPhysical** | **Boolean** | Define se o item é um produto físico ou um serviço |  |
-|**name** | **String** | Nome do produto ou serviço |  |
-|**qty** | **BigDecimal** | Quantidade do produto ou serviço |  |
-|**unitPrice** | **BigDecimal** | Preço unitário |  |
+|**id** | **String** | Product or service ID in your system |  |
+|**isPhysical** | **Boolean** | Defines if the item is a physical product or a service |  |
+|**name** | **String** | Product or service name |  |
+|**qty** | **BigDecimal** | Quantity of the product or service |  |
+|**unitPrice** | **BigDecimal** | Unit price |  |
 
 
 

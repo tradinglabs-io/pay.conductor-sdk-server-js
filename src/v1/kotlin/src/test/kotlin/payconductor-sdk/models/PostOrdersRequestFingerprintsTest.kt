@@ -25,7 +25,7 @@ class PostOrdersRequestFingerprintsTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrdersRequestFingerprints
         //val modelInstance = PostOrdersRequestFingerprints()
 
-        // to test the property `threatMetrixFingerprintId` - ID de fingerprint do ThreatMetrix para análise de fraude
+        // to test the property `threatMetrixFingerprintId` - ThreatMetrix fingerprint ID for fraud analysis
         should("test threatMetrixFingerprintId") {
             // uncomment below to test the property
             //modelInstance.threatMetrixFingerprintId shouldBe ("TODO")

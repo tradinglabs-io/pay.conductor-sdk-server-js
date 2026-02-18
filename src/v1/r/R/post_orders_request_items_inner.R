@@ -7,11 +7,11 @@
 #' @title PostOrdersRequestItemsInner
 #' @description PostOrdersRequestItemsInner Class
 #' @format An \code{R6Class} generator object
-#' @field id ID do produto ou serviço no seu sistema character
-#' @field isPhysical Define se o item é um produto físico ou um serviço character
-#' @field name Nome do produto ou serviço character
-#' @field qty Quantidade do produto ou serviço numeric
-#' @field unitPrice Preço unitário numeric
+#' @field id Product or service ID in your system character
+#' @field isPhysical Defines if the item is a physical product or a service character
+#' @field name Product or service name character
+#' @field qty Quantity of the product or service numeric
+#' @field unitPrice Unit price numeric
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -27,11 +27,11 @@ PostOrdersRequestItemsInner <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrdersRequestItemsInner class.
     #'
-    #' @param id ID do produto ou serviço no seu sistema
-    #' @param isPhysical Define se o item é um produto físico ou um serviço
-    #' @param name Nome do produto ou serviço
-    #' @param qty Quantidade do produto ou serviço
-    #' @param unitPrice Preço unitário
+    #' @param id Product or service ID in your system
+    #' @param isPhysical Defines if the item is a physical product or a service
+    #' @param name Product or service name
+    #' @param qty Quantity of the product or service
+    #' @param unitPrice Unit price
     #' @param ... Other optional arguments.
     initialize = function(`id`, `isPhysical`, `name`, `qty`, `unitPrice`, ...) {
       if (!missing(`id`)) {

@@ -19,7 +19,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import payconductor-sdk.models.PostOrdersRequest
-import payconductor-sdk.models.Cliente
+import payconductor-sdk.models.Customer
 import payconductor-sdk.models.MerchantInput
 import payconductor-sdk.models.PostOrdersRequestFingerprints
 import payconductor-sdk.models.PostOrdersRequestItemsInner
@@ -31,13 +31,13 @@ class PostOrdersRequestTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrdersRequest
         //val modelInstance = PostOrdersRequest()
 
-        // to test the property `chargeAmount` - Valor total a ser cobrado no pedido em valor flutuante
+        // to test the property `chargeAmount` - Total amount to be charged on the order in floating point value
         should("test chargeAmount") {
             // uncomment below to test the property
             //modelInstance.chargeAmount shouldBe ("TODO")
         }
 
-        // to test the property `clientIp` - Endereço IP do cliente
+        // to test the property `clientIp` - Client IP address
         should("test clientIp") {
             // uncomment below to test the property
             //modelInstance.clientIp shouldBe ("TODO")
@@ -49,13 +49,13 @@ class PostOrdersRequestTest : ShouldSpec() {
             //modelInstance.customer shouldBe ("TODO")
         }
 
-        // to test the property `discountAmount` - Valor do desconto
+        // to test the property `discountAmount` - Discount amount
         should("test discountAmount") {
             // uncomment below to test the property
             //modelInstance.discountAmount shouldBe ("TODO")
         }
 
-        // to test the property `externalId` - ID da ordem no seu sistema
+        // to test the property `externalId` - Order ID in your system
         should("test externalId") {
             // uncomment below to test the property
             //modelInstance.externalId shouldBe ("TODO")
@@ -67,13 +67,13 @@ class PostOrdersRequestTest : ShouldSpec() {
             //modelInstance.payment shouldBe ("TODO")
         }
 
-        // to test the property `shippingFee` - Valor do frete
+        // to test the property `shippingFee` - Shipping fee
         should("test shippingFee") {
             // uncomment below to test the property
             //modelInstance.shippingFee shouldBe ("TODO")
         }
 
-        // to test the property `taxFee` - Taxas adicionais
+        // to test the property `taxFee` - Additional fees
         should("test taxFee") {
             // uncomment below to test the property
             //modelInstance.taxFee shouldBe ("TODO")
@@ -85,7 +85,7 @@ class PostOrdersRequestTest : ShouldSpec() {
             //modelInstance.fingerprints shouldBe ("TODO")
         }
 
-        // to test the property `items` - Lista de produtos ou serviços do pedido
+        // to test the property `items` - List of products or services in the order
         should("test items") {
             // uncomment below to test the property
             //modelInstance.items shouldBe ("TODO")
@@ -97,7 +97,7 @@ class PostOrdersRequestTest : ShouldSpec() {
             //modelInstance.merchant shouldBe ("TODO")
         }
 
-        // to test the property `splitAmountTotal` - Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+        // to test the property `splitAmountTotal` - Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
         should("test splitAmountTotal") {
             // uncomment below to test the property
             //modelInstance.splitAmountTotal shouldBe ("TODO")
@@ -109,7 +109,7 @@ class PostOrdersRequestTest : ShouldSpec() {
             //modelInstance.session shouldBe ("TODO")
         }
 
-        // to test the property `metadata` - Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+        // to test the property `metadata` - Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
         should("test metadata") {
             // uncomment below to test the property
             //modelInstance.metadata shouldBe ("TODO")

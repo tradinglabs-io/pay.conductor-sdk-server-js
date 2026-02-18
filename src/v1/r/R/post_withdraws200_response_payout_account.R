@@ -7,11 +7,11 @@
 #' @title PostWithdraws200ResponsePayoutAccount
 #' @description PostWithdraws200ResponsePayoutAccount Class
 #' @format An \code{R6Class} generator object
-#' @field id Identificador único da conta de pagamento character
-#' @field ownerDocument Documento do titular da conta (CPF ou CNPJ) character
-#' @field ownerName Nome do titular da conta character
-#' @field pixKey Chave PIX utilizada para o saque character
-#' @field pixType Tipo da chave PIX character
+#' @field id Unique payment account identifier character
+#' @field ownerDocument Account holder document (CPF or CNPJ) character
+#' @field ownerName Account holder name character
+#' @field pixKey PIX key used for the withdrawal character
+#' @field pixType PIX key type character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -27,11 +27,11 @@ PostWithdraws200ResponsePayoutAccount <- R6::R6Class(
     #' @description
     #' Initialize a new PostWithdraws200ResponsePayoutAccount class.
     #'
-    #' @param id Identificador único da conta de pagamento
-    #' @param ownerDocument Documento do titular da conta (CPF ou CNPJ)
-    #' @param ownerName Nome do titular da conta
-    #' @param pixKey Chave PIX utilizada para o saque
-    #' @param pixType Tipo da chave PIX
+    #' @param id Unique payment account identifier
+    #' @param ownerDocument Account holder document (CPF or CNPJ)
+    #' @param ownerName Account holder name
+    #' @param pixKey PIX key used for the withdrawal
+    #' @param pixType PIX key type
     #' @param ... Other optional arguments.
     initialize = function(`id`, `ownerDocument`, `ownerName`, `pixKey`, `pixType`, ...) {
       if (!missing(`id`)) {

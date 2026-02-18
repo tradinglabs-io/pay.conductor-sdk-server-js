@@ -6,10 +6,10 @@
 | ---- | ---- | ----------- | ----- |
 | **payment_method** | **String** |  |  |
 | **expiration_in_seconds** | [**PixExpirationInSeconds**](PixExpirationInSeconds.md) |  | [optional] |
-| **card** | [**CartODeCrDitoCard**](CartODeCrDitoCard.md) |  |  |
-| **installments** | [**CartODeCrDitoInstallments**](CartODeCrDitoInstallments.md) |  |  |
-| **soft_descriptor** | **String** | Texto que aparecerá na fatura do cartão (soft descriptor) | [optional] |
-| **expiration_in_days** | [**BoletoExpirationInDays**](BoletoExpirationInDays.md) |  | [optional] |
+| **card** | [**CreditCardCard**](CreditCardCard.md) |  |  |
+| **installments** | [**CreditCardInstallments**](CreditCardInstallments.md) |  |  |
+| **soft_descriptor** | **String** | Text that will appear on the card statement (soft descriptor) | [optional] |
+| **expiration_in_days** | [**BankSlipExpirationInDays**](BankSlipExpirationInDays.md) |  | [optional] |
 | **nu_pay** | [**NuPayNuPay**](NuPayNuPay.md) |  |  |
 
 ## Example

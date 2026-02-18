@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **string** | Identificador único da conta de pagamento | [default to undefined]
-**ownerDocument** | **string** | Documento do titular da conta (CPF ou CNPJ) | [default to undefined]
-**ownerName** | **string** | Nome do titular da conta | [default to undefined]
-**pixKey** | **string** | Chave PIX utilizada para o saque | [default to undefined]
-**pixType** | **string** | Tipo da chave PIX | [default to PixTypeEnum_Cpf]
+**id** | **string** | Unique payment account identifier | [default to undefined]
+**ownerDocument** | **string** | Account holder document (CPF or CNPJ) | [default to undefined]
+**ownerName** | **string** | Account holder name | [default to undefined]
+**pixKey** | **string** | PIX key used for the withdrawal | [default to undefined]
+**pixType** | **string** | PIX key type | [default to PixTypeEnum_Cpf]
 
 ## Example
 

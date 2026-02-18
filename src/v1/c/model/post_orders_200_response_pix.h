@@ -1,7 +1,7 @@
 /*
  * post_orders_200_response_pix.h
  *
- * Dados do PIX
+ * PIX data
  */
 
 #ifndef _post_orders_200_response_pix_H_

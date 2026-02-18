@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**amount** | **f64** | Valor do saque em centavos | 
-**external_id** | Option<**String**> | ID do saque no seu sistema | [optional]
+**amount** | **f64** | Withdrawal amount in cents | 
+**external_id** | Option<**String**> | Withdrawal ID in your system | [optional]
 **merchant** | Option<[**models::MerchantInput**](MerchantInput.md)> |  | [optional]
 **payout_account** | [**models::PostWithdrawsRequestPayoutAccount**](PostWithdrawsRequestPayoutAccount.md) |  | 
 

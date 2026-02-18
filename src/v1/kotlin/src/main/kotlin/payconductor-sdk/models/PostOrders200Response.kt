@@ -29,17 +29,17 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param id ID do pedido no sistema
- * @param externalId ID externo do pedido (fornecido pela sua integração)
- * @param externalIntegrationKey Provedor utilizada para processar o pedido
- * @param externalIntegrationId ID do pedido no provedor de pagamento
- * @param amount Valor total do pedido
- * @param costFee Taxa de custo aplicada ao pedido
+ * @param id Order ID in the system
+ * @param externalId External order ID (provided by your integration)
+ * @param externalIntegrationKey Provider used to process the order
+ * @param externalIntegrationId Order ID in the payment provider
+ * @param amount Total order amount
+ * @param costFee Cost fee applied to the order
  * @param status 
  * @param paymentMethod 
- * @param payedAt Data e hora em que o pedido foi pago (ISO 8601)
- * @param errorCode Código de erro, se houver
- * @param errorMessage Mensagem de erro, se houver
+ * @param payedAt Date and time when the order was paid (ISO 8601)
+ * @param errorCode Error code, if any
+ * @param errorMessage Error message, if any
  * @param orderItems 
  * @param pix 
  * @param bankSlip 
@@ -52,27 +52,27 @@ import com.squareup.moshi.JsonClass
 
 data class PostOrders200Response (
 
-    /* ID do pedido no sistema */
+    /* Order ID in the system */
     @Json(name = "id")
     val id: kotlin.String,
 
-    /* ID externo do pedido (fornecido pela sua integração) */
+    /* External order ID (provided by your integration) */
     @Json(name = "externalId")
     val externalId: kotlin.String?,
 
-    /* Provedor utilizada para processar o pedido */
+    /* Provider used to process the order */
     @Json(name = "externalIntegrationKey")
     val externalIntegrationKey: kotlin.String,
 
-    /* ID do pedido no provedor de pagamento */
+    /* Order ID in the payment provider */
     @Json(name = "externalIntegrationId")
     val externalIntegrationId: kotlin.String?,
 
-    /* Valor total do pedido */
+    /* Total order amount */
     @Json(name = "amount")
     val amount: java.math.BigDecimal,
 
-    /* Taxa de custo aplicada ao pedido */
+    /* Cost fee applied to the order */
     @Json(name = "costFee")
     val costFee: java.math.BigDecimal,
 
@@ -82,15 +82,15 @@ data class PostOrders200Response (
     @Json(name = "paymentMethod")
     val paymentMethod: PostOrders200Response.PaymentMethod,
 
-    /* Data e hora em que o pedido foi pago (ISO 8601) */
+    /* Date and time when the order was paid (ISO 8601) */
     @Json(name = "payedAt")
     val payedAt: kotlin.String?,
 
-    /* Código de erro, se houver */
+    /* Error code, if any */
     @Json(name = "errorCode")
     val errorCode: kotlin.String?,
 
-    /* Mensagem de erro, se houver */
+    /* Error message, if any */
     @Json(name = "errorMessage")
     val errorMessage: kotlin.String?,
 

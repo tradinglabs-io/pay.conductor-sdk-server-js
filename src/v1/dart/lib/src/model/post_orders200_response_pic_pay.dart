@@ -11,15 +11,15 @@ part 'post_orders200_response_pic_pay.g.dart';
 /// PostOrders200ResponsePicPay
 ///
 /// Properties:
-/// * [copyAndPasteCode] - Código copia e cola do PicPay
-/// * [qrCodeUrl] - URL da imagem do QR Code PicPay
+/// * [copyAndPasteCode] - PicPay copy and paste code
+/// * [qrCodeUrl] - PicPay QR Code image URL
 @BuiltValue()
 abstract class PostOrders200ResponsePicPay implements Built<PostOrders200ResponsePicPay, PostOrders200ResponsePicPayBuilder> {
-  /// Código copia e cola do PicPay
+  /// PicPay copy and paste code
   @BuiltValueField(wireName: r'copyAndPasteCode')
   String get copyAndPasteCode;
 
-  /// URL da imagem do QR Code PicPay
+  /// PicPay QR Code image URL
   @BuiltValueField(wireName: r'qrCodeUrl')
   String get qrCodeUrl;
 

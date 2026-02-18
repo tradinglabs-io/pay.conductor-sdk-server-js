@@ -3,7 +3,7 @@
 
 defmodule PayConductorAPI.Model.PixExpirationInSeconds do
   @moduledoc """
-  Tempo de expiração do PIX em segundos
+  PIX expiration time in seconds
   """
 
   @derive JSON.Encoder

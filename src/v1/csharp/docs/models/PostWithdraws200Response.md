@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Identificador único do saque | 
-**ExternalIntegrationKey** | **string** | Chave do provedor utilizado para o saque | 
-**CostFee** | **decimal** | Taxa de custo aplicada ao saque | 
+**Id** | **string** | Unique withdrawal identifier | 
+**ExternalIntegrationKey** | **string** | Provider key used for the withdrawal | 
+**CostFee** | **decimal** | Cost fee applied to the withdrawal | 
 **PayoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | 
-**ExternalId** | **string** | ID do saque no sistema no seu sistema | 
-**ExternalIntegrationId** | **string** | ID do saque no provedor de pagamento | 
-**Status** | **string** | Status do saque | [default to StatusEnum.Pending]
-**ErrorCode** | **string** | Código do erro, se houver | 
-**ErrorMessage** | **string** | Mensagem descritiva do erro, se houver | 
+**ExternalId** | **string** | Withdrawal ID in your system | 
+**ExternalIntegrationId** | **string** | Withdrawal ID in the payment provider | 
+**Status** | **string** | Withdrawal status | [default to StatusEnum.Pending]
+**ErrorCode** | **string** | Error code, if any | 
+**ErrorMessage** | **string** | Descriptive error message, if any | 
 **PayedAt** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

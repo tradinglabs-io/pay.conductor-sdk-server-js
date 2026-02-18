@@ -10,7 +10,7 @@ import 'package:one_of/any_of.dart';
 
 part 'pix_expiration_in_seconds.g.dart';
 
-/// Tempo de expiração do PIX em segundos
+/// PIX expiration time in seconds
 @BuiltValue()
 abstract class PixExpirationInSeconds implements Built<PixExpirationInSeconds, PixExpirationInSecondsBuilder> {
   /// Any Of [int]

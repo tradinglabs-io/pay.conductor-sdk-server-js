@@ -14,48 +14,48 @@ part 'post_withdraws200_response.g.dart';
 /// PostWithdraws200Response
 ///
 /// Properties:
-/// * [id] - Identificador único do saque
-/// * [externalId] - ID do saque no sistema no seu sistema
-/// * [externalIntegrationKey] - Chave do provedor utilizado para o saque
-/// * [externalIntegrationId] - ID do saque no provedor de pagamento
-/// * [costFee] - Taxa de custo aplicada ao saque
-/// * [status] - Status do saque
-/// * [errorCode] - Código do erro, se houver
-/// * [errorMessage] - Mensagem descritiva do erro, se houver
+/// * [id] - Unique withdrawal identifier
+/// * [externalId] - Withdrawal ID in your system
+/// * [externalIntegrationKey] - Provider key used for the withdrawal
+/// * [externalIntegrationId] - Withdrawal ID in the payment provider
+/// * [costFee] - Cost fee applied to the withdrawal
+/// * [status] - Withdrawal status
+/// * [errorCode] - Error code, if any
+/// * [errorMessage] - Descriptive error message, if any
 /// * [payedAt] 
 /// * [payoutAccount] 
 @BuiltValue()
 abstract class PostWithdraws200Response implements Built<PostWithdraws200Response, PostWithdraws200ResponseBuilder> {
-  /// Identificador único do saque
+  /// Unique withdrawal identifier
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  /// ID do saque no sistema no seu sistema
+  /// Withdrawal ID in your system
   @BuiltValueField(wireName: r'externalId')
   String? get externalId;
 
-  /// Chave do provedor utilizado para o saque
+  /// Provider key used for the withdrawal
   @BuiltValueField(wireName: r'externalIntegrationKey')
   String get externalIntegrationKey;
 
-  /// ID do saque no provedor de pagamento
+  /// Withdrawal ID in the payment provider
   @BuiltValueField(wireName: r'externalIntegrationId')
   String? get externalIntegrationId;
 
-  /// Taxa de custo aplicada ao saque
+  /// Cost fee applied to the withdrawal
   @BuiltValueField(wireName: r'costFee')
   num get costFee;
 
-  /// Status do saque
+  /// Withdrawal status
   @BuiltValueField(wireName: r'status')
   PostWithdraws200ResponseStatusEnum get status;
   // enum statusEnum {  Pending,  Transferring,  Completed,  Failed,  };
 
-  /// Código do erro, se houver
+  /// Error code, if any
   @BuiltValueField(wireName: r'errorCode')
   String? get errorCode;
 
-  /// Mensagem descritiva do erro, se houver
+  /// Descriptive error message, if any
   @BuiltValueField(wireName: r'errorMessage')
   String? get errorMessage;
 
@@ -268,16 +268,16 @@ class _$PostWithdraws200ResponseSerializer implements PrimitiveSerializer<PostWi
 
 class PostWithdraws200ResponseStatusEnum extends EnumClass {
 
-  /// Status do saque
+  /// Withdrawal status
   @BuiltValueEnumConst(wireName: r'Pending')
   static const PostWithdraws200ResponseStatusEnum pending = _$postWithdraws200ResponseStatusEnum_pending;
-  /// Status do saque
+  /// Withdrawal status
   @BuiltValueEnumConst(wireName: r'Transferring')
   static const PostWithdraws200ResponseStatusEnum transferring = _$postWithdraws200ResponseStatusEnum_transferring;
-  /// Status do saque
+  /// Withdrawal status
   @BuiltValueEnumConst(wireName: r'Completed')
   static const PostWithdraws200ResponseStatusEnum completed = _$postWithdraws200ResponseStatusEnum_completed;
-  /// Status do saque
+  /// Withdrawal status
   @BuiltValueEnumConst(wireName: r'Failed')
   static const PostWithdraws200ResponseStatusEnum failed = _$postWithdraws200ResponseStatusEnum_failed;
 

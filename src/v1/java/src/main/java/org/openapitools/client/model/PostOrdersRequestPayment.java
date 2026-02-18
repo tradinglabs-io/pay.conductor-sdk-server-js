@@ -1,6 +1,6 @@
 /*
  * PayConductor API
- * # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  <br />  <br />  ----  <br />   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.  <br />  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações > API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  <br />  ## Formato de Autenticação  As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Exemplo em Node.js  ```javascript const clientId = 'seu_client_id'; const clientSecret = 'seu_client_secret';  // Codifica as credenciais em Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Erros de Autenticação  | Código | Descrição | |--------|-----------| | `401`  | Credenciais inválidas ou ausentes | | `403`  | Credenciais válidas, mas sem permissão para o recurso | | `429`  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
+ * PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  <br />  <br />  ----  <br />   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the `client:secret` format encoded in Base64.  <br />  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings > API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  <br />  ## Authentication Format  Credentials must be sent in the `Authorization` header using the Basic scheme:  ``` Authorization: Basic base64(client_id:client_secret) ```  <br />  ## Node.js Example  ```javascript const clientId = 'your_client_id'; const clientSecret = 'your_client_secret';  // Encode credentials in Base64 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');  const response = await fetch('https://api.payconductor.com/api/v1/orders', {   method: 'GET',   headers: {     'Authorization': `Basic ${credentials}`,     'Content-Type': 'application/json'   } });  const data = await response.json(); console.log(data); ```  <br />  ## Authentication Errors  | Code | Description | |------|-------------| | `401` | Invalid or missing credentials | | `403` | Valid credentials but no permission for the resource | | `429` | Too many requests (rate limit exceeded) |  ### Error Response Example  ```json {   \"error\": {     \"code\": \"UNAUTHORIZED\",     \"message\": \"Invalid credentials\",     \"details\": \"The provided client ID or secret is incorrect\"   } } ```
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -21,11 +21,11 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import org.openapitools.client.model.Boleto;
-import org.openapitools.client.model.BoletoExpirationInDays;
-import org.openapitools.client.model.CartODeCrDito;
-import org.openapitools.client.model.CartODeCrDitoCard;
-import org.openapitools.client.model.CartODeCrDitoInstallments;
+import org.openapitools.client.model.BankSlip;
+import org.openapitools.client.model.BankSlipExpirationInDays;
+import org.openapitools.client.model.CreditCard;
+import org.openapitools.client.model.CreditCardCard;
+import org.openapitools.client.model.CreditCardInstallments;
 import org.openapitools.client.model.NuPay;
 import org.openapitools.client.model.NuPayNuPay;
 import org.openapitools.client.model.PicPay;
@@ -67,7 +67,7 @@ import com.google.gson.JsonParseException;
 
 import org.openapitools.client.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-18T14:44:19.268927700-03:00[America/Bahia]", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-18T15:58:14.340077800-03:00[America/Bahia]", comments = "Generator version: 7.20.0")
 public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(PostOrdersRequestPayment.class.getName());
 
@@ -80,8 +80,8 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
             }
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
             final TypeAdapter<Pix> adapterPix = gson.getDelegateAdapter(this, TypeToken.get(Pix.class));
-            final TypeAdapter<CartODeCrDito> adapterCartODeCrDito = gson.getDelegateAdapter(this, TypeToken.get(CartODeCrDito.class));
-            final TypeAdapter<Boleto> adapterBoleto = gson.getDelegateAdapter(this, TypeToken.get(Boleto.class));
+            final TypeAdapter<CreditCard> adapterCreditCard = gson.getDelegateAdapter(this, TypeToken.get(CreditCard.class));
+            final TypeAdapter<BankSlip> adapterBankSlip = gson.getDelegateAdapter(this, TypeToken.get(BankSlip.class));
             final TypeAdapter<NuPay> adapterNuPay = gson.getDelegateAdapter(this, TypeToken.get(NuPay.class));
             final TypeAdapter<PicPay> adapterPicPay = gson.getDelegateAdapter(this, TypeToken.get(PicPay.class));
 
@@ -99,15 +99,15 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
                         elementAdapter.write(out, element);
                         return;
                     }
-                    // check if the actual instance is of the type `CartODeCrDito`
-                    if (value.getActualInstance() instanceof CartODeCrDito) {
-                        JsonElement element = adapterCartODeCrDito.toJsonTree((CartODeCrDito)value.getActualInstance());
+                    // check if the actual instance is of the type `CreditCard`
+                    if (value.getActualInstance() instanceof CreditCard) {
+                        JsonElement element = adapterCreditCard.toJsonTree((CreditCard)value.getActualInstance());
                         elementAdapter.write(out, element);
                         return;
                     }
-                    // check if the actual instance is of the type `Boleto`
-                    if (value.getActualInstance() instanceof Boleto) {
-                        JsonElement element = adapterBoleto.toJsonTree((Boleto)value.getActualInstance());
+                    // check if the actual instance is of the type `BankSlip`
+                    if (value.getActualInstance() instanceof BankSlip) {
+                        JsonElement element = adapterBankSlip.toJsonTree((BankSlip)value.getActualInstance());
                         elementAdapter.write(out, element);
                         return;
                     }
@@ -123,7 +123,7 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
                         elementAdapter.write(out, element);
                         return;
                     }
-                    throw new IOException("Failed to serialize as the type doesn't match anyOf schemas: Boleto, CartODeCrDito, NuPay, PicPay, Pix");
+                    throw new IOException("Failed to serialize as the type doesn't match anyOf schemas: BankSlip, CreditCard, NuPay, PicPay, Pix");
                 }
 
                 @Override
@@ -147,31 +147,31 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
                         errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for Pix failed with `%s`.", e.getMessage()));
                         log.log(Level.FINER, "Input data does not match schema 'Pix'", e);
                     }
-                    // deserialize CartODeCrDito
+                    // deserialize CreditCard
                     try {
                         // validate the JSON object to see if any exception is thrown
-                        CartODeCrDito.validateJsonElement(jsonElement);
-                        actualAdapter = adapterCartODeCrDito;
+                        CreditCard.validateJsonElement(jsonElement);
+                        actualAdapter = adapterCreditCard;
                         PostOrdersRequestPayment ret = new PostOrdersRequestPayment();
                         ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
-                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for CartODeCrDito failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'CartODeCrDito'", e);
+                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for CreditCard failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'CreditCard'", e);
                     }
-                    // deserialize Boleto
+                    // deserialize BankSlip
                     try {
                         // validate the JSON object to see if any exception is thrown
-                        Boleto.validateJsonElement(jsonElement);
-                        actualAdapter = adapterBoleto;
+                        BankSlip.validateJsonElement(jsonElement);
+                        actualAdapter = adapterBankSlip;
                         PostOrdersRequestPayment ret = new PostOrdersRequestPayment();
                         ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
                         return ret;
                     } catch (Exception e) {
                         // deserialization failed, continue
-                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for Boleto failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'Boleto'", e);
+                        errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for BankSlip failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'BankSlip'", e);
                     }
                     // deserialize NuPay
                     try {
@@ -220,8 +220,8 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
 
     static {
         schemas.put("Pix", Pix.class);
-        schemas.put("CartODeCrDito", CartODeCrDito.class);
-        schemas.put("Boleto", Boleto.class);
+        schemas.put("CreditCard", CreditCard.class);
+        schemas.put("BankSlip", BankSlip.class);
         schemas.put("NuPay", NuPay.class);
         schemas.put("PicPay", PicPay.class);
     }
@@ -234,7 +234,7 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the anyOf child schema, check
      * the instance parameter is valid against the anyOf child schemas:
-     * Boleto, CartODeCrDito, NuPay, PicPay, Pix
+     * BankSlip, CreditCard, NuPay, PicPay, Pix
      *
      * It could be an instance of the 'anyOf' schemas.
      */
@@ -245,12 +245,12 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
             return;
         }
 
-        if (instance instanceof CartODeCrDito) {
+        if (instance instanceof CreditCard) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof Boleto) {
+        if (instance instanceof BankSlip) {
             super.setActualInstance(instance);
             return;
         }
@@ -265,14 +265,14 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be Boleto, CartODeCrDito, NuPay, PicPay, Pix");
+        throw new RuntimeException("Invalid instance type. Must be BankSlip, CreditCard, NuPay, PicPay, Pix");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * Boleto, CartODeCrDito, NuPay, PicPay, Pix
+     * BankSlip, CreditCard, NuPay, PicPay, Pix
      *
-     * @return The actual instance (Boleto, CartODeCrDito, NuPay, PicPay, Pix)
+     * @return The actual instance (BankSlip, CreditCard, NuPay, PicPay, Pix)
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -292,25 +292,25 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
     }
 
     /**
-     * Get the actual instance of `CartODeCrDito`. If the actual instance is not `CartODeCrDito`,
+     * Get the actual instance of `CreditCard`. If the actual instance is not `CreditCard`,
      * the ClassCastException will be thrown.
      *
-     * @return The actual instance of `CartODeCrDito`
-     * @throws ClassCastException if the instance is not `CartODeCrDito`
+     * @return The actual instance of `CreditCard`
+     * @throws ClassCastException if the instance is not `CreditCard`
      */
-    public CartODeCrDito getCartODeCrDito() throws ClassCastException {
-        return (CartODeCrDito)super.getActualInstance();
+    public CreditCard getCreditCard() throws ClassCastException {
+        return (CreditCard)super.getActualInstance();
     }
 
     /**
-     * Get the actual instance of `Boleto`. If the actual instance is not `Boleto`,
+     * Get the actual instance of `BankSlip`. If the actual instance is not `BankSlip`,
      * the ClassCastException will be thrown.
      *
-     * @return The actual instance of `Boleto`
-     * @throws ClassCastException if the instance is not `Boleto`
+     * @return The actual instance of `BankSlip`
+     * @throws ClassCastException if the instance is not `BankSlip`
      */
-    public Boleto getBoleto() throws ClassCastException {
-        return (Boleto)super.getActualInstance();
+    public BankSlip getBankSlip() throws ClassCastException {
+        return (BankSlip)super.getActualInstance();
     }
 
     /**
@@ -352,20 +352,20 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
             errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for Pix failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
-        // validate the json string with CartODeCrDito
+        // validate the json string with CreditCard
         try {
-            CartODeCrDito.validateJsonElement(jsonElement);
+            CreditCard.validateJsonElement(jsonElement);
             return;
         } catch (Exception e) {
-            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for CartODeCrDito failed with `%s`.", e.getMessage()));
+            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for CreditCard failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
-        // validate the json string with Boleto
+        // validate the json string with BankSlip
         try {
-            Boleto.validateJsonElement(jsonElement);
+            BankSlip.validateJsonElement(jsonElement);
             return;
         } catch (Exception e) {
-            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for Boleto failed with `%s`.", e.getMessage()));
+            errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for BankSlip failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
         // validate the json string with NuPay
@@ -384,7 +384,7 @@ public class PostOrdersRequestPayment extends AbstractOpenApiSchema {
             errorMessages.add(String.format(java.util.Locale.ROOT, "Deserialization for PicPay failed with `%s`.", e.getMessage()));
             // continue to the next one
         }
-        throw new IOException(String.format(java.util.Locale.ROOT, "The JSON string is invalid for PostOrdersRequestPayment with anyOf schemas: Boleto, CartODeCrDito, NuPay, PicPay, Pix. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
+        throw new IOException(String.format(java.util.Locale.ROOT, "The JSON string is invalid for PostOrdersRequestPayment with anyOf schemas: BankSlip, CreditCard, NuPay, PicPay, Pix. no class match the result, expected at least 1. Detailed failure message for anyOf schemas: %s. JSON: %s", errorMessages, jsonElement.toString()));
     }
 
     /**

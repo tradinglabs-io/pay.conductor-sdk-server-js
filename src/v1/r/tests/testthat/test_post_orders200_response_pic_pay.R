@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponsePicPay$new()
 
 test_that("copyAndPasteCode", {
   # tests for the property `copyAndPasteCode` (character)
-  # Código copia e cola do PicPay
+  # PicPay copy and paste code
 
   # uncomment below to test the property
   #expect_equal(model.instance$`copyAndPasteCode`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("copyAndPasteCode", {
 
 test_that("qrCodeUrl", {
   # tests for the property `qrCodeUrl` (character)
-  # URL da imagem do QR Code PicPay
+  # PicPay QR Code image URL
 
   # uncomment below to test the property
   #expect_equal(model.instance$`qrCodeUrl`, "EXPECTED_RESULT")

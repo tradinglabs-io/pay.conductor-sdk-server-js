@@ -8,10 +8,10 @@
 static post_orders_request_payment_t *post_orders_request_payment_create_internal(
     char *payment_method,
     pix_expiration_in_seconds_t *expiration_in_seconds,
-    cart_o_de_cr_dito_card_t *card,
-    cart_o_de_cr_dito_installments_t *installments,
+    credit_card_card_t *card,
+    credit_card_installments_t *installments,
     char *soft_descriptor,
-    boleto_expiration_in_days_t *expiration_in_days,
+    bank_slip_expiration_in_days_t *expiration_in_days,
     nu_pay_nu_pay_t *nu_pay
     ) {
     post_orders_request_payment_t *post_orders_request_payment_local_var = malloc(sizeof(post_orders_request_payment_t));
@@ -33,10 +33,10 @@ static post_orders_request_payment_t *post_orders_request_payment_create_interna
 __attribute__((deprecated)) post_orders_request_payment_t *post_orders_request_payment_create(
     char *payment_method,
     pix_expiration_in_seconds_t *expiration_in_seconds,
-    cart_o_de_cr_dito_card_t *card,
-    cart_o_de_cr_dito_installments_t *installments,
+    credit_card_card_t *card,
+    credit_card_installments_t *installments,
     char *soft_descriptor,
-    boleto_expiration_in_days_t *expiration_in_days,
+    bank_slip_expiration_in_days_t *expiration_in_days,
     nu_pay_nu_pay_t *nu_pay
     ) {
     return post_orders_request_payment_create_internal (
@@ -68,11 +68,11 @@ void post_orders_request_payment_free(post_orders_request_payment_t *post_orders
         post_orders_request_payment->expiration_in_seconds = NULL;
     }
     if (post_orders_request_payment->card) {
-        cart_o_de_cr_dito_card_free(post_orders_request_payment->card);
+        credit_card_card_free(post_orders_request_payment->card);
         post_orders_request_payment->card = NULL;
     }
     if (post_orders_request_payment->installments) {
-        cart_o_de_cr_dito_installments_free(post_orders_request_payment->installments);
+        credit_card_installments_free(post_orders_request_payment->installments);
         post_orders_request_payment->installments = NULL;
     }
     if (post_orders_request_payment->soft_descriptor) {
@@ -80,7 +80,7 @@ void post_orders_request_payment_free(post_orders_request_payment_t *post_orders
         post_orders_request_payment->soft_descriptor = NULL;
     }
     if (post_orders_request_payment->expiration_in_days) {
-        boleto_expiration_in_days_free(post_orders_request_payment->expiration_in_days);
+        bank_slip_expiration_in_days_free(post_orders_request_payment->expiration_in_days);
         post_orders_request_payment->expiration_in_days = NULL;
     }
     if (post_orders_request_payment->nu_pay) {
@@ -119,7 +119,7 @@ cJSON *post_orders_request_payment_convertToJSON(post_orders_request_payment_t *
     if (!post_orders_request_payment->card) {
         goto fail;
     }
-    cJSON *card_local_JSON = cart_o_de_cr_dito_card_convertToJSON(post_orders_request_payment->card);
+    cJSON *card_local_JSON = credit_card_card_convertToJSON(post_orders_request_payment->card);
     if(card_local_JSON == NULL) {
     goto fail; //model
     }
@@ -133,7 +133,7 @@ cJSON *post_orders_request_payment_convertToJSON(post_orders_request_payment_t *
     if (!post_orders_request_payment->installments) {
         goto fail;
     }
-    cJSON *installments_local_JSON = cart_o_de_cr_dito_installments_convertToJSON(post_orders_request_payment->installments);
+    cJSON *installments_local_JSON = credit_card_installments_convertToJSON(post_orders_request_payment->installments);
     if(installments_local_JSON == NULL) {
     goto fail; //model
     }
@@ -153,7 +153,7 @@ cJSON *post_orders_request_payment_convertToJSON(post_orders_request_payment_t *
 
     // post_orders_request_payment->expiration_in_days
     if(post_orders_request_payment->expiration_in_days) {
-    cJSON *expiration_in_days_local_JSON = boleto_expiration_in_days_convertToJSON(post_orders_request_payment->expiration_in_days);
+    cJSON *expiration_in_days_local_JSON = bank_slip_expiration_in_days_convertToJSON(post_orders_request_payment->expiration_in_days);
     if(expiration_in_days_local_JSON == NULL) {
     goto fail; //model
     }
@@ -193,13 +193,13 @@ post_orders_request_payment_t *post_orders_request_payment_parseFromJSON(cJSON *
     pix_expiration_in_seconds_t *expiration_in_seconds_local_nonprim = NULL;
 
     // define the local variable for post_orders_request_payment->card
-    cart_o_de_cr_dito_card_t *card_local_nonprim = NULL;
+    credit_card_card_t *card_local_nonprim = NULL;
 
     // define the local variable for post_orders_request_payment->installments
-    cart_o_de_cr_dito_installments_t *installments_local_nonprim = NULL;
+    credit_card_installments_t *installments_local_nonprim = NULL;
 
     // define the local variable for post_orders_request_payment->expiration_in_days
-    boleto_expiration_in_days_t *expiration_in_days_local_nonprim = NULL;
+    bank_slip_expiration_in_days_t *expiration_in_days_local_nonprim = NULL;
 
     // define the local variable for post_orders_request_payment->nu_pay
     nu_pay_nu_pay_t *nu_pay_local_nonprim = NULL;
@@ -238,7 +238,7 @@ post_orders_request_payment_t *post_orders_request_payment_parseFromJSON(cJSON *
     }
 
     
-    card_local_nonprim = cart_o_de_cr_dito_card_parseFromJSON(card); //nonprimitive
+    card_local_nonprim = credit_card_card_parseFromJSON(card); //nonprimitive
 
     // post_orders_request_payment->installments
     cJSON *installments = cJSON_GetObjectItemCaseSensitive(post_orders_request_paymentJSON, "installments");
@@ -250,7 +250,7 @@ post_orders_request_payment_t *post_orders_request_payment_parseFromJSON(cJSON *
     }
 
     
-    installments_local_nonprim = cart_o_de_cr_dito_installments_parseFromJSON(installments); //nonprimitive
+    installments_local_nonprim = credit_card_installments_parseFromJSON(installments); //nonprimitive
 
     // post_orders_request_payment->soft_descriptor
     cJSON *soft_descriptor = cJSON_GetObjectItemCaseSensitive(post_orders_request_paymentJSON, "softDescriptor");
@@ -270,7 +270,7 @@ post_orders_request_payment_t *post_orders_request_payment_parseFromJSON(cJSON *
         expiration_in_days = NULL;
     }
     if (expiration_in_days) { 
-    expiration_in_days_local_nonprim = boleto_expiration_in_days_parseFromJSON(expiration_in_days); //nonprimitive
+    expiration_in_days_local_nonprim = bank_slip_expiration_in_days_parseFromJSON(expiration_in_days); //nonprimitive
     }
 
     // post_orders_request_payment->nu_pay
@@ -303,15 +303,15 @@ end:
         expiration_in_seconds_local_nonprim = NULL;
     }
     if (card_local_nonprim) {
-        cart_o_de_cr_dito_card_free(card_local_nonprim);
+        credit_card_card_free(card_local_nonprim);
         card_local_nonprim = NULL;
     }
     if (installments_local_nonprim) {
-        cart_o_de_cr_dito_installments_free(installments_local_nonprim);
+        credit_card_installments_free(installments_local_nonprim);
         installments_local_nonprim = NULL;
     }
     if (expiration_in_days_local_nonprim) {
-        boleto_expiration_in_days_free(expiration_in_days_local_nonprim);
+        bank_slip_expiration_in_days_free(expiration_in_days_local_nonprim);
         expiration_in_days_local_nonprim = NULL;
     }
     if (nu_pay_local_nonprim) {

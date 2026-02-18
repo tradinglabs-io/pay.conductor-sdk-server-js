@@ -7,7 +7,7 @@ model_instance <- PostWithdraws200ResponsePayoutAccount$new()
 
 test_that("id", {
   # tests for the property `id` (character)
-  # Identificador único da conta de pagamento
+  # Unique payment account identifier
 
   # uncomment below to test the property
   #expect_equal(model.instance$`id`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("id", {
 
 test_that("ownerDocument", {
   # tests for the property `ownerDocument` (character)
-  # Documento do titular da conta (CPF ou CNPJ)
+  # Account holder document (CPF or CNPJ)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`ownerDocument`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("ownerDocument", {
 
 test_that("ownerName", {
   # tests for the property `ownerName` (character)
-  # Nome do titular da conta
+  # Account holder name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`ownerName`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("ownerName", {
 
 test_that("pixKey", {
   # tests for the property `pixKey` (character)
-  # Chave PIX utilizada para o saque
+  # PIX key used for the withdrawal
 
   # uncomment below to test the property
   #expect_equal(model.instance$`pixKey`, "EXPECTED_RESULT")
@@ -39,7 +39,7 @@ test_that("pixKey", {
 
 test_that("pixType", {
   # tests for the property `pixType` (character)
-  # Tipo da chave PIX
+  # PIX key type
 
   # uncomment below to test the property
   #expect_equal(model.instance$`pixType`, "EXPECTED_RESULT")

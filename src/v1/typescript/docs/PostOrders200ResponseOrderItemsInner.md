@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**externalId** | **string** | ID externo do item | [default to undefined]
-**id** | **string** | ID do item no pedido | [default to undefined]
-**name** | **string** | Nome do produto/serviço | [default to undefined]
-**qty** | **number** | Quantidade | [default to undefined]
-**totalAmount** | **number** | Valor total do item (quantidade × preço unitário) | [default to undefined]
-**totalNetAmount** | **number** | Valor líquido total do item | [default to undefined]
-**unityPrice** | **number** | Preço unitário | [default to undefined]
+**externalId** | **string** | External item ID | [default to undefined]
+**id** | **string** | Item ID in the order | [default to undefined]
+**name** | **string** | Product/service name | [default to undefined]
+**qty** | **number** | Quantity | [default to undefined]
+**totalAmount** | **number** | Total item amount (quantity × unit price) | [default to undefined]
+**totalNetAmount** | **number** | Total net amount of the item | [default to undefined]
+**unityPrice** | **number** | Unit price | [default to undefined]
 
 ## Example
 

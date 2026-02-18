@@ -7,13 +7,13 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostWithdrawsRequest, () {
-    // Valor do saque em centavos
+    // Withdrawal amount in cents
     // num amount
     test('to test the property `amount`', () async {
       // TODO
     });
 
-    // ID do saque no seu sistema
+    // Withdrawal ID in your system
     // String externalId
     test('to test the property `externalId`', () async {
       // TODO

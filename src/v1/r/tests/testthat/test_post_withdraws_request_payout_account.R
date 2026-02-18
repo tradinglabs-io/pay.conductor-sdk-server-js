@@ -7,7 +7,7 @@ model_instance <- PostWithdrawsRequestPayoutAccount$new()
 
 test_that("ownerDocument", {
   # tests for the property `ownerDocument` (character)
-  # Documento do titular da conta (CPF ou CNPJ)
+  # Account holder document (CPF or CNPJ)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`ownerDocument`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("ownerDocument", {
 
 test_that("ownerName", {
   # tests for the property `ownerName` (character)
-  # Nome do titular da conta
+  # Account holder name
 
   # uncomment below to test the property
   #expect_equal(model.instance$`ownerName`, "EXPECTED_RESULT")

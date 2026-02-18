@@ -4,26 +4,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChargeAmount** | **float32** | Valor total a ser cobrado no pedido em valor flutuante | 
-**ClientIp** | **string** | Endereço IP do cliente | 
-**Customer** | [**Cliente**](Cliente.md) |  | 
-**DiscountAmount** | **float32** | Valor do desconto | [default to 0]
-**ExternalId** | **string** | ID da ordem no seu sistema | 
+**ChargeAmount** | **float32** | Total amount to be charged on the order in floating point value | 
+**ClientIp** | **string** | Client IP address | 
+**Customer** | [**Customer**](Customer.md) |  | 
+**DiscountAmount** | **float32** | Discount amount | [default to 0]
+**ExternalId** | **string** | Order ID in your system | 
 **Fingerprints** | Pointer to [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  | [optional] 
-**Items** | Pointer to [**[]PostOrdersRequestItemsInner**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido | [optional] 
+**Items** | Pointer to [**[]PostOrdersRequestItemsInner**](PostOrdersRequestItemsInner.md) | List of products or services in the order | [optional] 
 **Merchant** | Pointer to [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **Payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  | 
-**SplitAmountTotal** | Pointer to **float32** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) | [optional] 
+**SplitAmountTotal** | Pointer to **float32** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) | [optional] 
 **Session** | Pointer to [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  | [optional] 
-**ShippingFee** | **float32** | Valor do frete | [default to 0]
-**TaxFee** | **float32** | Taxas adicionais | [default to 0]
-**Metadata** | Pointer to **map[string]interface{}** | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves | [optional] 
+**ShippingFee** | **float32** | Shipping fee | [default to 0]
+**TaxFee** | **float32** | Additional fees | [default to 0]
+**Metadata** | Pointer to **map[string]interface{}** | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters | [optional] 
 
 ## Methods
 
 ### NewPostOrdersRequest
 
-`func NewPostOrdersRequest(chargeAmount float32, clientIp string, customer Cliente, discountAmount float32, externalId string, payment PostOrdersRequestPayment, shippingFee float32, taxFee float32, ) *PostOrdersRequest`
+`func NewPostOrdersRequest(chargeAmount float32, clientIp string, customer Customer, discountAmount float32, externalId string, payment PostOrdersRequestPayment, shippingFee float32, taxFee float32, ) *PostOrdersRequest`
 
 NewPostOrdersRequest instantiates a new PostOrdersRequest object
 This constructor will assign default values to properties that have it defined,
@@ -80,20 +80,20 @@ SetClientIp sets ClientIp field to given value.
 
 ### GetCustomer
 
-`func (o *PostOrdersRequest) GetCustomer() Cliente`
+`func (o *PostOrdersRequest) GetCustomer() Customer`
 
 GetCustomer returns the Customer field if non-nil, zero value otherwise.
 
 ### GetCustomerOk
 
-`func (o *PostOrdersRequest) GetCustomerOk() (*Cliente, bool)`
+`func (o *PostOrdersRequest) GetCustomerOk() (*Customer, bool)`
 
 GetCustomerOk returns a tuple with the Customer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomer
 
-`func (o *PostOrdersRequest) SetCustomer(v Cliente)`
+`func (o *PostOrdersRequest) SetCustomer(v Customer)`
 
 SetCustomer sets Customer field to given value.
 

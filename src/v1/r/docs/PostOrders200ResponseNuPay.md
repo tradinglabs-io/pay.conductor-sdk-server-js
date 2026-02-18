@@ -4,6 +4,6 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentUrl** | **character** | URL de pagamento NuPay | 
+**paymentUrl** | **character** | NuPay payment URL | 
 
 

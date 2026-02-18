@@ -32,37 +32,37 @@ class PostOrders200ResponseTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200Response
         //val modelInstance = PostOrders200Response()
 
-        // to test the property `id` - ID do pedido no sistema
+        // to test the property `id` - Order ID in the system
         should("test id") {
             // uncomment below to test the property
             //modelInstance.id shouldBe ("TODO")
         }
 
-        // to test the property `externalId` - ID externo do pedido (fornecido pela sua integração)
+        // to test the property `externalId` - External order ID (provided by your integration)
         should("test externalId") {
             // uncomment below to test the property
             //modelInstance.externalId shouldBe ("TODO")
         }
 
-        // to test the property `externalIntegrationKey` - Provedor utilizada para processar o pedido
+        // to test the property `externalIntegrationKey` - Provider used to process the order
         should("test externalIntegrationKey") {
             // uncomment below to test the property
             //modelInstance.externalIntegrationKey shouldBe ("TODO")
         }
 
-        // to test the property `externalIntegrationId` - ID do pedido no provedor de pagamento
+        // to test the property `externalIntegrationId` - Order ID in the payment provider
         should("test externalIntegrationId") {
             // uncomment below to test the property
             //modelInstance.externalIntegrationId shouldBe ("TODO")
         }
 
-        // to test the property `amount` - Valor total do pedido
+        // to test the property `amount` - Total order amount
         should("test amount") {
             // uncomment below to test the property
             //modelInstance.amount shouldBe ("TODO")
         }
 
-        // to test the property `costFee` - Taxa de custo aplicada ao pedido
+        // to test the property `costFee` - Cost fee applied to the order
         should("test costFee") {
             // uncomment below to test the property
             //modelInstance.costFee shouldBe ("TODO")
@@ -80,19 +80,19 @@ class PostOrders200ResponseTest : ShouldSpec() {
             //modelInstance.paymentMethod shouldBe ("TODO")
         }
 
-        // to test the property `payedAt` - Data e hora em que o pedido foi pago (ISO 8601)
+        // to test the property `payedAt` - Date and time when the order was paid (ISO 8601)
         should("test payedAt") {
             // uncomment below to test the property
             //modelInstance.payedAt shouldBe ("TODO")
         }
 
-        // to test the property `errorCode` - Código de erro, se houver
+        // to test the property `errorCode` - Error code, if any
         should("test errorCode") {
             // uncomment below to test the property
             //modelInstance.errorCode shouldBe ("TODO")
         }
 
-        // to test the property `errorMessage` - Mensagem de erro, se houver
+        // to test the property `errorMessage` - Error message, if any
         should("test errorMessage") {
             // uncomment below to test the property
             //modelInstance.errorMessage shouldBe ("TODO")

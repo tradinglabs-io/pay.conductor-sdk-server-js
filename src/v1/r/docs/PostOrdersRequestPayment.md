@@ -1,16 +1,16 @@
 # payconductor-sdk::PostOrdersRequestPayment
 
-Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **paymentMethod** | **character** |  | 
 **expirationInSeconds** | [**PixExpirationInSeconds**](Pix_expirationInSeconds.md) |  | [optional] 
-**card** | [**CartODeCrDitoCard**](Cart_o_de_cr_dito_card.md) |  | 
-**installments** | [**CartODeCrDitoInstallments**](Cart_o_de_cr_dito_installments.md) |  | 
-**softDescriptor** | **character** | Texto que aparecerá na fatura do cartão (soft descriptor) | [optional] [Max. length: 22] [Min. length: 1] 
-**expirationInDays** | [**BoletoExpirationInDays**](Boleto_expirationInDays.md) |  | [optional] 
+**card** | [**CreditCardCard**](Credit_Card_card.md) |  | 
+**installments** | [**CreditCardInstallments**](Credit_Card_installments.md) |  | 
+**softDescriptor** | **character** | Text that will appear on the card statement (soft descriptor) | [optional] [Max. length: 22] [Min. length: 1] 
+**expirationInDays** | [**BankSlipExpirationInDays**](Bank_Slip_expirationInDays.md) |  | [optional] 
 **nuPay** | [**NuPayNuPay**](NuPay_nuPay.md) |  | 
 
 

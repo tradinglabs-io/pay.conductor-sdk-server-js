@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponsePix$new()
 
 test_that("copyAndPasteCode", {
   # tests for the property `copyAndPasteCode` (character)
-  # Código copia e cola do PIX
+  # PIX copy and paste code
 
   # uncomment below to test the property
   #expect_equal(model.instance$`copyAndPasteCode`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("copyAndPasteCode", {
 
 test_that("qrCodeUrl", {
   # tests for the property `qrCodeUrl` (character)
-  # URL da imagem do QR Code PIX
+  # PIX QR Code image URL
 
   # uncomment below to test the property
   #expect_equal(model.instance$`qrCodeUrl`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("qrCodeUrl", {
 
 test_that("endToEndId", {
   # tests for the property `endToEndId` (character)
-  # E2E ID do PIX
+  # PIX E2E ID
 
   # uncomment below to test the property
   #expect_equal(model.instance$`endToEndId`, "EXPECTED_RESULT")

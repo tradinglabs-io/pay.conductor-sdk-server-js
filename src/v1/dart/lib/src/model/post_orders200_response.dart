@@ -19,12 +19,12 @@ part 'post_orders200_response.g.dart';
 /// PostOrders200Response
 ///
 /// Properties:
-/// * [id] - ID do pedido no sistema
-/// * [externalId] - ID externo do pedido (fornecido pela sua integração)
-/// * [externalIntegrationKey] - Provedor utilizada para processar o pedido
-/// * [externalIntegrationId] - ID do pedido no provedor de pagamento
-/// * [amount] - Valor total do pedido
-/// * [costFee] - Taxa de custo aplicada ao pedido
+/// * [id] - Order ID in the system
+/// * [externalId] - External order ID (provided by your integration)
+/// * [externalIntegrationKey] - Provider used to process the order
+/// * [externalIntegrationId] - Order ID in the payment provider
+/// * [amount] - Total order amount
+/// * [costFee] - Cost fee applied to the order
 /// * [pix] 
 /// * [bankSlip] 
 /// * [nuPay] 
@@ -32,34 +32,34 @@ part 'post_orders200_response.g.dart';
 /// * [creditCard] 
 /// * [status] 
 /// * [paymentMethod] 
-/// * [payedAt] - Data e hora em que o pedido foi pago (ISO 8601)
-/// * [errorCode] - Código de erro, se houver
-/// * [errorMessage] - Mensagem de erro, se houver
+/// * [payedAt] - Date and time when the order was paid (ISO 8601)
+/// * [errorCode] - Error code, if any
+/// * [errorMessage] - Error message, if any
 /// * [orderItems] 
 /// * [session] 
 @BuiltValue()
 abstract class PostOrders200Response implements Built<PostOrders200Response, PostOrders200ResponseBuilder> {
-  /// ID do pedido no sistema
+  /// Order ID in the system
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  /// ID externo do pedido (fornecido pela sua integração)
+  /// External order ID (provided by your integration)
   @BuiltValueField(wireName: r'externalId')
   String? get externalId;
 
-  /// Provedor utilizada para processar o pedido
+  /// Provider used to process the order
   @BuiltValueField(wireName: r'externalIntegrationKey')
   String get externalIntegrationKey;
 
-  /// ID do pedido no provedor de pagamento
+  /// Order ID in the payment provider
   @BuiltValueField(wireName: r'externalIntegrationId')
   String? get externalIntegrationId;
 
-  /// Valor total do pedido
+  /// Total order amount
   @BuiltValueField(wireName: r'amount')
   num get amount;
 
-  /// Taxa de custo aplicada ao pedido
+  /// Cost fee applied to the order
   @BuiltValueField(wireName: r'costFee')
   num get costFee;
 
@@ -86,15 +86,15 @@ abstract class PostOrders200Response implements Built<PostOrders200Response, Pos
   PostOrders200ResponsePaymentMethodEnum get paymentMethod;
   // enum paymentMethodEnum {  Pix,  CreditCard,  DebitCard,  BankSlip,  Crypto,  ApplePay,  NuPay,  PicPay,  AmazonPay,  SepaDebit,  GooglePay,  };
 
-  /// Data e hora em que o pedido foi pago (ISO 8601)
+  /// Date and time when the order was paid (ISO 8601)
   @BuiltValueField(wireName: r'payedAt')
   String? get payedAt;
 
-  /// Código de erro, se houver
+  /// Error code, if any
   @BuiltValueField(wireName: r'errorCode')
   String? get errorCode;
 
-  /// Mensagem de erro, se houver
+  /// Error message, if any
   @BuiltValueField(wireName: r'errorMessage')
   String? get errorMessage;
 

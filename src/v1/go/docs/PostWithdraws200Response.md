@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Identificador único do saque | 
-**ExternalId** | **NullableString** | ID do saque no sistema no seu sistema | 
-**ExternalIntegrationKey** | **string** | Chave do provedor utilizado para o saque | 
-**ExternalIntegrationId** | **NullableString** | ID do saque no provedor de pagamento | 
-**CostFee** | **float32** | Taxa de custo aplicada ao saque | 
-**Status** | **string** | Status do saque | [default to "Pending"]
-**ErrorCode** | **NullableString** | Código do erro, se houver | 
-**ErrorMessage** | **NullableString** | Mensagem descritiva do erro, se houver | 
+**Id** | **string** | Unique withdrawal identifier | 
+**ExternalId** | **NullableString** | Withdrawal ID in your system | 
+**ExternalIntegrationKey** | **string** | Provider key used for the withdrawal | 
+**ExternalIntegrationId** | **NullableString** | Withdrawal ID in the payment provider | 
+**CostFee** | **float32** | Cost fee applied to the withdrawal | 
+**Status** | **string** | Withdrawal status | [default to "Pending"]
+**ErrorCode** | **NullableString** | Error code, if any | 
+**ErrorMessage** | **NullableString** | Descriptive error message, if any | 
 **PayedAt** | [**NullablePostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | 
 **PayoutAccount** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | 
 

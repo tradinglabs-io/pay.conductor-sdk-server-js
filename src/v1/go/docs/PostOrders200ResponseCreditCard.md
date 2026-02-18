@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthorizationCode** | Pointer to **string** | Código de autorização da transação | [optional] 
+**AuthorizationCode** | Pointer to **string** | Transaction authorization code | [optional] 
 
 ## Methods
 

@@ -65,33 +65,45 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Category | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PedidosAPI* | [**PedidosAPI_getOrders**](docs/PedidosAPI.md#PedidosAPI_getOrders) | **GET** /orders/ | Listar pedidos
-*PedidosAPI* | [**PedidosAPI_getOrdersById**](docs/PedidosAPI.md#PedidosAPI_getOrdersById) | **GET** /orders/{id} | Buscar pelo ID
-*PedidosAPI* | [**PedidosAPI_postOrders**](docs/PedidosAPI.md#PedidosAPI_postOrders) | **POST** /orders/ | Criar pedido
-*PedidosAPI* | [**PedidosAPI_postOrdersByIdRefund**](docs/PedidosAPI.md#PedidosAPI_postOrdersByIdRefund) | **POST** /orders/{id}/refund | Reembolsar pedido
-*SaquesETransfernciasAPI* | [**SaquesETransfernciasAPI_getWithdraws**](docs/SaquesETransfernciasAPI.md#SaquesETransfernciasAPI_getWithdraws) | **GET** /withdraws/ | Lista os saques
-*SaquesETransfernciasAPI* | [**SaquesETransfernciasAPI_getWithdrawsById**](docs/SaquesETransfernciasAPI.md#SaquesETransfernciasAPI_getWithdrawsById) | **GET** /withdraws/{id} | Buscar pelo ID
-*SaquesETransfernciasAPI* | [**SaquesETransfernciasAPI_postWithdraws**](docs/SaquesETransfernciasAPI.md#SaquesETransfernciasAPI_postWithdraws) | **POST** /withdraws/ | Cria saque
+*CardTokenizationAPI* | [**CardTokenizationAPI_postCardTokenization**](docs/CardTokenizationAPI.md#CardTokenizationAPI_postCardTokenization) | **POST** /card-tokenization/ | Tokenize card
+*CustomersAPI* | [**CustomersAPI_deleteCustomersById**](docs/CustomersAPI.md#CustomersAPI_deleteCustomersById) | **DELETE** /customers/{id} | 
+*CustomersAPI* | [**CustomersAPI_getCustomers**](docs/CustomersAPI.md#CustomersAPI_getCustomers) | **GET** /customers/ | 
+*CustomersAPI* | [**CustomersAPI_getCustomersById**](docs/CustomersAPI.md#CustomersAPI_getCustomersById) | **GET** /customers/{id} | 
+*CustomersAPI* | [**CustomersAPI_patchCustomersById**](docs/CustomersAPI.md#CustomersAPI_patchCustomersById) | **PATCH** /customers/{id} | 
+*CustomersAPI* | [**CustomersAPI_postCustomers**](docs/CustomersAPI.md#CustomersAPI_postCustomers) | **POST** /customers/ | 
+*OrdersAPI* | [**OrdersAPI_getOrders**](docs/OrdersAPI.md#OrdersAPI_getOrders) | **GET** /orders/ | List orders
+*OrdersAPI* | [**OrdersAPI_getOrdersById**](docs/OrdersAPI.md#OrdersAPI_getOrdersById) | **GET** /orders/{id} | Get order by ID
+*OrdersAPI* | [**OrdersAPI_postOrders**](docs/OrdersAPI.md#OrdersAPI_postOrders) | **POST** /orders/ | Create order
+*OrdersAPI* | [**OrdersAPI_postOrdersByIdRefund**](docs/OrdersAPI.md#OrdersAPI_postOrdersByIdRefund) | **POST** /orders/{id}/refund | Refund order
+*WithdrawalsAndTransfersAPI* | [**WithdrawalsAndTransfersAPI_getWithdraws**](docs/WithdrawalsAndTransfersAPI.md#WithdrawalsAndTransfersAPI_getWithdraws) | **GET** /withdraws/ | List withdrawals
+*WithdrawalsAndTransfersAPI* | [**WithdrawalsAndTransfersAPI_getWithdrawsById**](docs/WithdrawalsAndTransfersAPI.md#WithdrawalsAndTransfersAPI_getWithdrawsById) | **GET** /withdraws/{id} | Get withdrawal by ID
+*WithdrawalsAndTransfersAPI* | [**WithdrawalsAndTransfersAPI_postWithdraws**](docs/WithdrawalsAndTransfersAPI.md#WithdrawalsAndTransfersAPI_postWithdraws) | **POST** /withdraws/ | Create withdrawal
 
 
 ## Documentation for Models
 
- - [boleto_t](docs/boleto.md)
- - [boleto_expiration_in_days_t](docs/boleto_expiration_in_days.md)
- - [cart_o_de_cr_dito_t](docs/cart_o_de_cr_dito.md)
- - [cart_o_de_cr_dito_card_t](docs/cart_o_de_cr_dito_card.md)
- - [cart_o_de_cr_dito_installments_t](docs/cart_o_de_cr_dito_installments.md)
- - [cart_o_tokenizado_t](docs/cart_o_tokenizado.md)
- - [cliente_t](docs/cliente.md)
- - [dados_completos_do_cart_o_t](docs/dados_completos_do_cart_o.md)
- - [dados_completos_do_cart_o_expiration_t](docs/dados_completos_do_cart_o_expiration.md)
- - [endere_o_do_cliente_t](docs/endere_o_do_cliente.md)
+ - [bank_slip_t](docs/bank_slip.md)
+ - [bank_slip_expiration_in_days_t](docs/bank_slip_expiration_in_days.md)
+ - [complete_card_data_t](docs/complete_card_data.md)
+ - [complete_card_data_expiration_t](docs/complete_card_data_expiration.md)
+ - [credit_card_t](docs/credit_card.md)
+ - [credit_card_card_t](docs/credit_card_card.md)
+ - [credit_card_installments_t](docs/credit_card_installments.md)
+ - [customer_t](docs/customer.md)
+ - [customer_1_t](docs/customer_1.md)
+ - [customer_2_t](docs/customer_2.md)
+ - [customer_2_document_type_t](docs/customer_2_document_type.md)
+ - [customer_address_t](docs/customer_address.md)
  - [merchant_input_t](docs/merchant_input.md)
  - [nu_pay_t](docs/nu_pay.md)
  - [nu_pay_nu_pay_t](docs/nu_pay_nu_pay.md)
  - [pic_pay_t](docs/pic_pay.md)
  - [pix_t](docs/pix.md)
  - [pix_expiration_in_seconds_t](docs/pix_expiration_in_seconds.md)
+ - [post_card_tokenization_200_response_t](docs/post_card_tokenization_200_response.md)
+ - [post_card_tokenization_request_t](docs/post_card_tokenization_request.md)
+ - [post_card_tokenization_request_customer_t](docs/post_card_tokenization_request_customer.md)
+ - [post_card_tokenization_request_customer_any_of_t](docs/post_card_tokenization_request_customer_any_of.md)
  - [post_orders_200_response_t](docs/post_orders_200_response.md)
  - [post_orders_200_response_bank_slip_t](docs/post_orders_200_response_bank_slip.md)
  - [post_orders_200_response_credit_card_t](docs/post_orders_200_response_credit_card.md)
@@ -110,6 +122,7 @@ Category | Method | HTTP request | Description
  - [post_withdraws_200_response_payout_account_t](docs/post_withdraws_200_response_payout_account.md)
  - [post_withdraws_request_t](docs/post_withdraws_request.md)
  - [post_withdraws_request_payout_account_t](docs/post_withdraws_request_payout_account.md)
+ - [tokenized_card_t](docs/tokenized_card.md)
 
 
 ## Documentation for Authorization

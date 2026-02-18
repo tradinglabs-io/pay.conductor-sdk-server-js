@@ -25,7 +25,7 @@ class PostOrders200ResponseSessionTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrders200ResponseSession
         //val modelInstance = PostOrders200ResponseSession()
 
-        // to test the property `sessionId` - ID da sessão de checkout associada ao pedido
+        // to test the property `sessionId` - ID of the checkout session associated with the order
         should("test sessionId") {
             // uncomment below to test the property
             //modelInstance.sessionId shouldBe ("TODO")

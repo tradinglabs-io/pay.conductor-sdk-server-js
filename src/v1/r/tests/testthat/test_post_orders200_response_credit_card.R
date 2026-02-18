@@ -7,7 +7,7 @@ model_instance <- PostOrders200ResponseCreditCard$new()
 
 test_that("authorizationCode", {
   # tests for the property `authorizationCode` (character)
-  # Código de autorização da transação
+  # Transaction authorization code
 
   # uncomment below to test the property
   #expect_equal(model.instance$`authorizationCode`, "EXPECTED_RESULT")

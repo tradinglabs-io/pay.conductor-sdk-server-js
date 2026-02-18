@@ -7,8 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**copyAndPasteCode** | **String** | Código copia e cola do PicPay |  |
-|**qrCodeUrl** | **String** | URL da imagem do QR Code PicPay |  |
+|**copyAndPasteCode** | **String** | PicPay copy and paste code |  |
+|**qrCodeUrl** | **String** | PicPay QR Code image URL |  |
 
 
 

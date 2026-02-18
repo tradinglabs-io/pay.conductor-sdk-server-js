@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**chargeAmount** | **Number** | Valor total a ser cobrado no pedido em valor flutuante | 
-**clientIp** | **String** | Endereço IP do cliente | 
-**customer** | [**Cliente**](Cliente.md) |  | 
-**discountAmount** | **Number** | Valor do desconto | [default to 0]
-**externalId** | **String** | ID da ordem no seu sistema | 
+**chargeAmount** | **Number** | Total amount to be charged on the order in floating point value | 
+**clientIp** | **String** | Client IP address | 
+**customer** | [**Customer**](Customer.md) |  | 
+**discountAmount** | **Number** | Discount amount | [default to 0]
+**externalId** | **String** | Order ID in your system | 
 **fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  | [optional] 
-**items** | [**[PostOrdersRequestItemsInner]**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido | [optional] 
+**items** | [**[PostOrdersRequestItemsInner]**](PostOrdersRequestItemsInner.md) | List of products or services in the order | [optional] 
 **merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
 **payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  | 
-**splitAmountTotal** | **Number** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) | [optional] 
+**splitAmountTotal** | **Number** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) | [optional] 
 **session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  | [optional] 
-**shippingFee** | **Number** | Valor do frete | [default to 0]
-**taxFee** | **Number** | Taxas adicionais | [default to 0]
-**metadata** | **Object** | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves | [optional] 
+**shippingFee** | **Number** | Shipping fee | [default to 0]
+**taxFee** | **Number** | Additional fees | [default to 0]
+**metadata** | **Object** | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters | [optional] 
 
 

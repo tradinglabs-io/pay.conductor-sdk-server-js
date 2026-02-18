@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID do pedido no sistema | 
-**external_id** | **str** | ID externo do pedido (fornecido pela sua integração) | 
-**external_integration_key** | **str** | Provedor utilizada para processar o pedido | 
-**external_integration_id** | **str** | ID do pedido no provedor de pagamento | 
-**amount** | **float** | Valor total do pedido | 
-**cost_fee** | **float** | Taxa de custo aplicada ao pedido | 
+**id** | **str** | Order ID in the system | 
+**external_id** | **str** | External order ID (provided by your integration) | 
+**external_integration_key** | **str** | Provider used to process the order | 
+**external_integration_id** | **str** | Order ID in the payment provider | 
+**amount** | **float** | Total order amount | 
+**cost_fee** | **float** | Cost fee applied to the order | 
 **pix** | [**PostOrders200ResponsePix**](PostOrders200ResponsePix.md) |  | [optional] 
 **bank_slip** | [**PostOrders200ResponseBankSlip**](PostOrders200ResponseBankSlip.md) |  | [optional] 
 **nu_pay** | [**PostOrders200ResponseNuPay**](PostOrders200ResponseNuPay.md) |  | [optional] 
@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 **credit_card** | [**PostOrders200ResponseCreditCard**](PostOrders200ResponseCreditCard.md) |  | [optional] 
 **status** | **str** |  | 
 **payment_method** | **str** |  | 
-**payed_at** | **str** | Data e hora em que o pedido foi pago (ISO 8601) | 
-**error_code** | **str** | Código de erro, se houver | 
-**error_message** | **str** | Mensagem de erro, se houver | 
+**payed_at** | **str** | Date and time when the order was paid (ISO 8601) | 
+**error_code** | **str** | Error code, if any | 
+**error_message** | **str** | Error message, if any | 
 **order_items** | [**List[PostOrders200ResponseOrderItemsInner]**](PostOrders200ResponseOrderItemsInner.md) |  | 
 **session** | [**PostOrders200ResponseSession**](PostOrders200ResponseSession.md) |  | [optional] 
 

@@ -27,7 +27,7 @@ defmodule PayConductorAPI.Model.PostOrdersRequest do
   @type t :: %__MODULE__{
     :chargeAmount => number(),
     :clientIp => String.t,
-    :customer => PayConductorAPI.Model.Cliente.t,
+    :customer => PayConductorAPI.Model.Customer.t,
     :discountAmount => number(),
     :externalId => String.t,
     :fingerprints => PayConductorAPI.Model.PostOrdersRequestFingerprints.t | nil,
@@ -45,7 +45,7 @@ defmodule PayConductorAPI.Model.PostOrdersRequest do
 
   def decode(value) do
     value
-     |> Deserializer.deserialize(:customer, :struct, PayConductorAPI.Model.Cliente)
+     |> Deserializer.deserialize(:customer, :struct, PayConductorAPI.Model.Customer)
      |> Deserializer.deserialize(:fingerprints, :struct, PayConductorAPI.Model.PostOrdersRequestFingerprints)
      |> Deserializer.deserialize(:items, :list, PayConductorAPI.Model.PostOrdersRequestItemsInner)
      |> Deserializer.deserialize(:merchant, :struct, PayConductorAPI.Model.MerchantInput)

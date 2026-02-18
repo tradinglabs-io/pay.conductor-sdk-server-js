@@ -25,31 +25,31 @@ class PostOrdersRequestItemsInnerTest : ShouldSpec() {
         // uncomment below to create an instance of PostOrdersRequestItemsInner
         //val modelInstance = PostOrdersRequestItemsInner()
 
-        // to test the property `id` - ID do produto ou serviço no seu sistema
+        // to test the property `id` - Product or service ID in your system
         should("test id") {
             // uncomment below to test the property
             //modelInstance.id shouldBe ("TODO")
         }
 
-        // to test the property `isPhysical` - Define se o item é um produto físico ou um serviço
+        // to test the property `isPhysical` - Defines if the item is a physical product or a service
         should("test isPhysical") {
             // uncomment below to test the property
             //modelInstance.isPhysical shouldBe ("TODO")
         }
 
-        // to test the property `name` - Nome do produto ou serviço
+        // to test the property `name` - Product or service name
         should("test name") {
             // uncomment below to test the property
             //modelInstance.name shouldBe ("TODO")
         }
 
-        // to test the property `qty` - Quantidade do produto ou serviço
+        // to test the property `qty` - Quantity of the product or service
         should("test qty") {
             // uncomment below to test the property
             //modelInstance.qty shouldBe ("TODO")
         }
 
-        // to test the property `unitPrice` - Preço unitário
+        // to test the property `unitPrice` - Unit price
         should("test unitPrice") {
             // uncomment below to test the property
             //modelInstance.unitPrice shouldBe ("TODO")

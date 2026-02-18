@@ -7,8 +7,8 @@
 #' @title PostWithdrawsRequest
 #' @description PostWithdrawsRequest Class
 #' @format An \code{R6Class} generator object
-#' @field amount Valor do saque em centavos numeric
-#' @field externalId ID do saque no seu sistema character [optional]
+#' @field amount Withdrawal amount in cents numeric
+#' @field externalId Withdrawal ID in your system character [optional]
 #' @field merchant  \link{MerchantInput} [optional]
 #' @field payoutAccount  \link{PostWithdrawsRequestPayoutAccount}
 #' @importFrom R6 R6Class
@@ -25,9 +25,9 @@ PostWithdrawsRequest <- R6::R6Class(
     #' @description
     #' Initialize a new PostWithdrawsRequest class.
     #'
-    #' @param amount Valor do saque em centavos
+    #' @param amount Withdrawal amount in cents
     #' @param payoutAccount payoutAccount
-    #' @param externalId ID do saque no seu sistema
+    #' @param externalId Withdrawal ID in your system
     #' @param merchant merchant
     #' @param ... Other optional arguments.
     initialize = function(`amount`, `payoutAccount`, `externalId` = NULL, `merchant` = NULL, ...) {

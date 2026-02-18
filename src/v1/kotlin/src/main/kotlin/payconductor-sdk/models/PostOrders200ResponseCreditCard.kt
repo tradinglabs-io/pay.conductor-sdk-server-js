@@ -22,13 +22,13 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param authorizationCode Código de autorização da transação
+ * @param authorizationCode Transaction authorization code
  */
 
 
 data class PostOrders200ResponseCreditCard (
 
-    /* Código de autorização da transação */
+    /* Transaction authorization code */
     @Json(name = "authorizationCode")
     val authorizationCode: kotlin.String? = null
 

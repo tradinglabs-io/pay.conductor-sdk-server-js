@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CancelUrl** | **string** | URL de cancelamento do pagamento | 
-**MerchantName** | **string** | Nome do comerciante | 
-**ReturnUrl** | **string** | URL de retorno após a conclusão do pagamento | 
-**StoreName** | Pointer to **string** | Nome da loja | [optional] 
+**CancelUrl** | **string** | Payment cancellation URL | 
+**MerchantName** | **string** | Merchant name | 
+**ReturnUrl** | **string** | Return URL after payment completion | 
+**StoreName** | Pointer to **string** | Store name | [optional] 
 
 ## Methods
 

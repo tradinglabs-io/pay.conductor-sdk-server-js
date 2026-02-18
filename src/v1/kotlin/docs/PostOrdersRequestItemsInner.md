@@ -4,11 +4,11 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **id** | **kotlin.String** | ID do produto ou serviço no seu sistema |  |
-| **isPhysical** | **kotlin.Boolean** | Define se o item é um produto físico ou um serviço |  |
-| **name** | **kotlin.String** | Nome do produto ou serviço |  |
-| **qty** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Quantidade do produto ou serviço |  |
-| **unitPrice** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Preço unitário |  |
+| **id** | **kotlin.String** | Product or service ID in your system |  |
+| **isPhysical** | **kotlin.Boolean** | Defines if the item is a physical product or a service |  |
+| **name** | **kotlin.String** | Product or service name |  |
+| **qty** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Quantity of the product or service |  |
+| **unitPrice** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Unit price |  |
 
 
 

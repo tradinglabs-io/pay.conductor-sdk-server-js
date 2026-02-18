@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **character** | Identificador único da conta de pagamento | 
-**ownerDocument** | **character** | Documento do titular da conta (CPF ou CNPJ) | [Pattern: ^\\d{11}$|^\\d{14}$] 
-**ownerName** | **character** | Nome do titular da conta | 
-**pixKey** | **character** | Chave PIX utilizada para o saque | 
-**pixType** | **character** | Tipo da chave PIX | [default to &quot;Cpf&quot;] [Enum: [Cpf, Cnpj, Email, Phone, Random]] 
+**id** | **character** | Unique payment account identifier | 
+**ownerDocument** | **character** | Account holder document (CPF or CNPJ) | [Pattern: ^\\d{11}$|^\\d{14}$] 
+**ownerName** | **character** | Account holder name | 
+**pixKey** | **character** | PIX key used for the withdrawal | 
+**pixType** | **character** | PIX key type | [default to &quot;Cpf&quot;] [Enum: [Cpf, Cnpj, Email, Phone, Random]] 
 
 

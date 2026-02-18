@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ThreatMetrixFingerprintId** | Pointer to **string** | ID de fingerprint do ThreatMetrix para análise de fraude | [optional] 
+**ThreatMetrixFingerprintId** | Pointer to **string** | ThreatMetrix fingerprint ID for fraud analysis | [optional] 
 
 ## Methods
 

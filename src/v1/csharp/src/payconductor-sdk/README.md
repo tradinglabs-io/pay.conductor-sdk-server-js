@@ -11,7 +11,7 @@ outputDir: out
 
 # https://openapi-generator.tech/docs/generators/csharp
 additionalProperties:
-  packageGuid: '{1F973631-142C-46B1-B22C-9CEBD3D9F91B}'
+  packageGuid: '{7B22639D-B704-4767-92CD-C14AB06D7D00}'
 
 # https://openapi-generator.tech/docs/integrations/#github-integration
 # gitHost:
@@ -54,9 +54,9 @@ namespace YourProject
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            var api = host.Services.GetRequiredService<IPedidosApi>();
-            IGetOrdersApiResponse apiResponse = await api.GetOrdersAsync("todo");
-            object? model = apiResponse.Ok();
+            var api = host.Services.GetRequiredService<ICardTokenizationApi>();
+            IPostCardTokenizationApiResponse apiResponse = await api.PostCardTokenizationAsync("todo");
+            PostCardTokenization200Response? model = apiResponse.Ok();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
@@ -109,7 +109,7 @@ namespace YourProject
 ## Api Information
 - appName: PayConductor API
 - appVersion: 1.0.0
-- appDescription: # Introdução  Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.  &lt;br /&gt;  &lt;br /&gt;  - -- -  &lt;br /&gt;   # Autenticação  A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato &#x60;client:secret&#x60; codificado em Base64.  &lt;br /&gt;  ## Obtendo Credenciais  1. Acesse o painel administrativo do PayConductor 2. Navegue até **Configurações &gt; API Keys** 3. Gere um novo par de credenciais (Client ID e Client Secret) 4. Guarde o Client Secret em local seguro - ele não será exibido novamente  &lt;br /&gt;  ## Formato de Autenticação  As credenciais devem ser enviadas no header &#x60;Authorization&#x60; usando o esquema Basic:  &#x60;&#x60;&#x60; Authorization: Basic base64(client_id:client_secret) &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Exemplo em Node.js  &#x60;&#x60;&#x60;javascript const clientId &#x3D; &#39;seu_client_id&#39;; const clientSecret &#x3D; &#39;seu_client_secret&#39;;  // Codifica as credenciais em Base64 const credentials &#x3D; Buffer.from(&#x60;${clientId}:${clientSecret}&#x60;).toString(&#39;base64&#39;);  const response &#x3D; await fetch(&#39;https://api.payconductor.com/api/v1/orders&#39;, {   method: &#39;GET&#39;,   headers: {     &#39;Authorization&#39;: &#x60;Basic ${credentials}&#x60;,     &#39;Content-Type&#39;: &#39;application/json&#39;   } });  const data &#x3D; await response.json(); console.log(data); &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Erros de Autenticação  | Código | Descrição | |- -- -- -- -|- -- -- -- -- --| | &#x60;401&#x60;  | Credenciais inválidas ou ausentes | | &#x60;403&#x60;  | Credenciais válidas, mas sem permissão para o recurso | | &#x60;429&#x60;  | Muitas requisições (rate limit excedido) |  ### Exemplo de resposta de erro  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;UNAUTHORIZED\&quot;,     \&quot;message\&quot;: \&quot;Invalid credentials\&quot;,     \&quot;details\&quot;: \&quot;The provided client ID or secret is incorrect\&quot;   } } &#x60;&#x60;&#x60;
+- appDescription: PayConductor API Documentation.  This documentation covers all available features in the PayConductor RESTful API, including authentication, resource management, and usage examples.  &lt;br /&gt;  &lt;br /&gt;  - -- -  &lt;br /&gt;   # Authentication  PayConductor API uses HTTP Basic authentication to validate requests. You need to provide your credentials (Client ID and Client Secret) in the &#x60;client:secret&#x60; format encoded in Base64.  &lt;br /&gt;  ## Getting Credentials  1. Access the PayConductor admin panel 2. Navigate to **Settings &gt; API Keys** 3. Generate a new credentials pair (Client ID and Client Secret) 4. Store the Client Secret in a secure location - it will not be displayed again  &lt;br /&gt;  ## Authentication Format  Credentials must be sent in the &#x60;Authorization&#x60; header using the Basic scheme:  &#x60;&#x60;&#x60; Authorization: Basic base64(client_id:client_secret) &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Node.js Example  &#x60;&#x60;&#x60;javascript const clientId &#x3D; &#39;your_client_id&#39;; const clientSecret &#x3D; &#39;your_client_secret&#39;;  // Encode credentials in Base64 const credentials &#x3D; Buffer.from(&#x60;${clientId}:${clientSecret}&#x60;).toString(&#39;base64&#39;);  const response &#x3D; await fetch(&#39;https://api.payconductor.com/api/v1/orders&#39;, {   method: &#39;GET&#39;,   headers: {     &#39;Authorization&#39;: &#x60;Basic ${credentials}&#x60;,     &#39;Content-Type&#39;: &#39;application/json&#39;   } });  const data &#x3D; await response.json(); console.log(data); &#x60;&#x60;&#x60;  &lt;br /&gt;  ## Authentication Errors  | Code | Description | |- -- -- -|- -- -- -- -- -- --| | &#x60;401&#x60; | Invalid or missing credentials | | &#x60;403&#x60; | Valid credentials but no permission for the resource | | &#x60;429&#x60; | Too many requests (rate limit exceeded) |  ### Error Response Example  &#x60;&#x60;&#x60;json {   \&quot;error\&quot;: {     \&quot;code\&quot;: \&quot;UNAUTHORIZED\&quot;,     \&quot;message\&quot;: \&quot;Invalid credentials\&quot;,     \&quot;details\&quot;: \&quot;The provided client ID or secret is incorrect\&quot;   } } &#x60;&#x60;&#x60;
 
 ## Build
 This C# SDK is automatically generated by the [OpenAPI Generator](https://openapi-generator.tech) project.

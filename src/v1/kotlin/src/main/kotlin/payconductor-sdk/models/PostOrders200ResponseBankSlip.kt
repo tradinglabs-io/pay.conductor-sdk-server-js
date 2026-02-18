@@ -22,23 +22,23 @@ import com.squareup.moshi.JsonClass
 /**
  * 
  *
- * @param barCode Código de barras do boleto
- * @param digitableLine Linha digitável do boleto
- * @param pdfUrl URL do PDF do boleto
+ * @param barCode Bank slip bar code
+ * @param digitableLine Bank slip digitable line
+ * @param pdfUrl Bank slip PDF URL
  */
 
 
 data class PostOrders200ResponseBankSlip (
 
-    /* Código de barras do boleto */
+    /* Bank slip bar code */
     @Json(name = "barCode")
     val barCode: kotlin.String,
 
-    /* Linha digitável do boleto */
+    /* Bank slip digitable line */
     @Json(name = "digitableLine")
     val digitableLine: kotlin.String,
 
-    /* URL do PDF do boleto */
+    /* Bank slip PDF URL */
     @Json(name = "pdfUrl")
     val pdfUrl: kotlin.String? = null
 

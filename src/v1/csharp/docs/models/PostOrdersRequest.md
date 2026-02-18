@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ChargeAmount** | **decimal** | Valor total a ser cobrado no pedido em valor flutuante | 
-**ClientIp** | **string** | Endereço IP do cliente | 
-**Customer** | [**Cliente**](Cliente.md) |  | 
-**ExternalId** | **string** | ID da ordem no seu sistema | 
+**ChargeAmount** | **decimal** | Total amount to be charged on the order in floating point value | 
+**ClientIp** | **string** | Client IP address | 
+**Customer** | [**Customer**](Customer.md) |  | 
+**ExternalId** | **string** | Order ID in your system | 
 **Payment** | [**PostOrdersRequestPayment**](PostOrdersRequestPayment.md) |  | 
-**DiscountAmount** | **decimal** | Valor do desconto | [default to 0M]
+**DiscountAmount** | **decimal** | Discount amount | [default to 0M]
 **Fingerprints** | [**PostOrdersRequestFingerprints**](PostOrdersRequestFingerprints.md) |  | [optional] 
-**Items** | [**List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | Lista de produtos ou serviços do pedido | [optional] 
+**Items** | [**List&lt;PostOrdersRequestItemsInner&gt;**](PostOrdersRequestItemsInner.md) | List of products or services in the order | [optional] 
 **Merchant** | [**MerchantInput**](MerchantInput.md) |  | [optional] 
-**SplitAmountTotal** | **decimal** | Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real) | [optional] 
+**SplitAmountTotal** | **decimal** | Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split) | [optional] 
 **Session** | [**PostOrdersRequestSession**](PostOrdersRequestSession.md) |  | [optional] 
-**ShippingFee** | **decimal** | Valor do frete | [default to 0M]
-**TaxFee** | **decimal** | Taxas adicionais | [default to 0M]
-**Metadata** | **Object** | Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves | [optional] 
+**ShippingFee** | **decimal** | Shipping fee | [default to 0M]
+**TaxFee** | **decimal** | Additional fees | [default to 0M]
+**Metadata** | **Object** | Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

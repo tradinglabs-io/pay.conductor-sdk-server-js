@@ -1,7 +1,7 @@
 /*
  * post_withdraws_200_response_payed_at.h
  *
- * Data e hora em que o saque foi pago (formato ISO 8601)
+ * Date and time when the withdrawal was paid (ISO 8601 format)
  */
 
 #ifndef _post_withdraws_200_response_payed_at_H_

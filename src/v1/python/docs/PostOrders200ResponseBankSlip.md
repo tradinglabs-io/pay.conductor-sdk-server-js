@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**bar_code** | **str** | Código de barras do boleto | 
-**digitable_line** | **str** | Linha digitável do boleto | 
-**pdf_url** | **str** | URL do PDF do boleto | [optional] 
+**bar_code** | **str** | Bank slip bar code | 
+**digitable_line** | **str** | Bank slip digitable line | 
+**pdf_url** | **str** | Bank slip PDF URL | [optional] 
 
 ## Example
 

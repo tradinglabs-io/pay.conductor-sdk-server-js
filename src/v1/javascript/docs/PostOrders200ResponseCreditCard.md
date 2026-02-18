@@ -4,6 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authorizationCode** | **String** | Código de autorização da transação | [optional] 
+**authorizationCode** | **String** | Transaction authorization code | [optional] 
 
 

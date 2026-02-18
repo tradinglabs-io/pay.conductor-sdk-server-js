@@ -19,11 +19,11 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import payconductor-sdk.models.PostOrdersRequestPayment
-import payconductor-sdk.models.Boleto
-import payconductor-sdk.models.BoletoExpirationInDays
-import payconductor-sdk.models.CartODeCrDito
-import payconductor-sdk.models.CartODeCrDitoCard
-import payconductor-sdk.models.CartODeCrDitoInstallments
+import payconductor-sdk.models.BankSlip
+import payconductor-sdk.models.BankSlipExpirationInDays
+import payconductor-sdk.models.CreditCard
+import payconductor-sdk.models.CreditCardCard
+import payconductor-sdk.models.CreditCardInstallments
 import payconductor-sdk.models.NuPay
 import payconductor-sdk.models.NuPayNuPay
 import payconductor-sdk.models.PicPay
@@ -65,7 +65,7 @@ class PostOrdersRequestPaymentTest : ShouldSpec() {
             //modelInstance.expirationInSeconds shouldBe ("TODO")
         }
 
-        // to test the property `softDescriptor` - Texto que aparecerá na fatura do cartão (soft descriptor)
+        // to test the property `softDescriptor` - Text that will appear on the card statement (soft descriptor)
         should("test softDescriptor") {
             // uncomment below to test the property
             //modelInstance.softDescriptor shouldBe ("TODO")

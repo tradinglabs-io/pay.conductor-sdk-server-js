@@ -7,7 +7,7 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrdersRequestFingerprints, () {
-    // ID de fingerprint do ThreatMetrix para análise de fraude
+    // ThreatMetrix fingerprint ID for fraud analysis
     // String threatMetrixFingerprintId
     test('to test the property `threatMetrixFingerprintId`', () async {
       // TODO

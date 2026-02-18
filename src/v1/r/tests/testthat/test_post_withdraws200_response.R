@@ -7,7 +7,7 @@ model_instance <- PostWithdraws200Response$new()
 
 test_that("id", {
   # tests for the property `id` (character)
-  # Identificador único do saque
+  # Unique withdrawal identifier
 
   # uncomment below to test the property
   #expect_equal(model.instance$`id`, "EXPECTED_RESULT")
@@ -15,7 +15,7 @@ test_that("id", {
 
 test_that("externalId", {
   # tests for the property `externalId` (character)
-  # ID do saque no sistema no seu sistema
+  # Withdrawal ID in your system
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalId`, "EXPECTED_RESULT")
@@ -23,7 +23,7 @@ test_that("externalId", {
 
 test_that("externalIntegrationKey", {
   # tests for the property `externalIntegrationKey` (character)
-  # Chave do provedor utilizado para o saque
+  # Provider key used for the withdrawal
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalIntegrationKey`, "EXPECTED_RESULT")
@@ -31,7 +31,7 @@ test_that("externalIntegrationKey", {
 
 test_that("externalIntegrationId", {
   # tests for the property `externalIntegrationId` (character)
-  # ID do saque no provedor de pagamento
+  # Withdrawal ID in the payment provider
 
   # uncomment below to test the property
   #expect_equal(model.instance$`externalIntegrationId`, "EXPECTED_RESULT")
@@ -39,7 +39,7 @@ test_that("externalIntegrationId", {
 
 test_that("costFee", {
   # tests for the property `costFee` (numeric)
-  # Taxa de custo aplicada ao saque
+  # Cost fee applied to the withdrawal
 
   # uncomment below to test the property
   #expect_equal(model.instance$`costFee`, "EXPECTED_RESULT")
@@ -47,7 +47,7 @@ test_that("costFee", {
 
 test_that("status", {
   # tests for the property `status` (character)
-  # Status do saque
+  # Withdrawal status
 
   # uncomment below to test the property
   #expect_equal(model.instance$`status`, "EXPECTED_RESULT")
@@ -55,7 +55,7 @@ test_that("status", {
 
 test_that("errorCode", {
   # tests for the property `errorCode` (character)
-  # Código do erro, se houver
+  # Error code, if any
 
   # uncomment below to test the property
   #expect_equal(model.instance$`errorCode`, "EXPECTED_RESULT")
@@ -63,7 +63,7 @@ test_that("errorCode", {
 
 test_that("errorMessage", {
   # tests for the property `errorMessage` (character)
-  # Mensagem descritiva do erro, se houver
+  # Descriptive error message, if any
 
   # uncomment below to test the property
   #expect_equal(model.instance$`errorMessage`, "EXPECTED_RESULT")

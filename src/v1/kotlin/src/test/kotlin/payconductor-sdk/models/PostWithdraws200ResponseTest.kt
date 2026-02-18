@@ -27,49 +27,49 @@ class PostWithdraws200ResponseTest : ShouldSpec() {
         // uncomment below to create an instance of PostWithdraws200Response
         //val modelInstance = PostWithdraws200Response()
 
-        // to test the property `id` - Identificador único do saque
+        // to test the property `id` - Unique withdrawal identifier
         should("test id") {
             // uncomment below to test the property
             //modelInstance.id shouldBe ("TODO")
         }
 
-        // to test the property `externalId` - ID do saque no sistema no seu sistema
+        // to test the property `externalId` - Withdrawal ID in your system
         should("test externalId") {
             // uncomment below to test the property
             //modelInstance.externalId shouldBe ("TODO")
         }
 
-        // to test the property `externalIntegrationKey` - Chave do provedor utilizado para o saque
+        // to test the property `externalIntegrationKey` - Provider key used for the withdrawal
         should("test externalIntegrationKey") {
             // uncomment below to test the property
             //modelInstance.externalIntegrationKey shouldBe ("TODO")
         }
 
-        // to test the property `externalIntegrationId` - ID do saque no provedor de pagamento
+        // to test the property `externalIntegrationId` - Withdrawal ID in the payment provider
         should("test externalIntegrationId") {
             // uncomment below to test the property
             //modelInstance.externalIntegrationId shouldBe ("TODO")
         }
 
-        // to test the property `costFee` - Taxa de custo aplicada ao saque
+        // to test the property `costFee` - Cost fee applied to the withdrawal
         should("test costFee") {
             // uncomment below to test the property
             //modelInstance.costFee shouldBe ("TODO")
         }
 
-        // to test the property `status` - Status do saque
+        // to test the property `status` - Withdrawal status
         should("test status") {
             // uncomment below to test the property
             //modelInstance.status shouldBe ("TODO")
         }
 
-        // to test the property `errorCode` - Código do erro, se houver
+        // to test the property `errorCode` - Error code, if any
         should("test errorCode") {
             // uncomment below to test the property
             //modelInstance.errorCode shouldBe ("TODO")
         }
 
-        // to test the property `errorMessage` - Mensagem descritiva do erro, se houver
+        // to test the property `errorMessage` - Descriptive error message, if any
         should("test errorMessage") {
             // uncomment below to test the property
             //modelInstance.errorMessage shouldBe ("TODO")

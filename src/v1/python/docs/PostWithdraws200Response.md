@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | Identificador único do saque | 
-**external_id** | **str** | ID do saque no sistema no seu sistema | 
-**external_integration_key** | **str** | Chave do provedor utilizado para o saque | 
-**external_integration_id** | **str** | ID do saque no provedor de pagamento | 
-**cost_fee** | **float** | Taxa de custo aplicada ao saque | 
-**status** | **str** | Status do saque | [default to 'Pending']
-**error_code** | **str** | Código do erro, se houver | 
-**error_message** | **str** | Mensagem descritiva do erro, se houver | 
+**id** | **str** | Unique withdrawal identifier | 
+**external_id** | **str** | Withdrawal ID in your system | 
+**external_integration_key** | **str** | Provider key used for the withdrawal | 
+**external_integration_id** | **str** | Withdrawal ID in the payment provider | 
+**cost_fee** | **float** | Cost fee applied to the withdrawal | 
+**status** | **str** | Withdrawal status | [default to 'Pending']
+**error_code** | **str** | Error code, if any | 
+**error_message** | **str** | Descriptive error message, if any | 
 **payed_at** | [**PostWithdraws200ResponsePayedAt**](PostWithdraws200ResponsePayedAt.md) |  | 
 **payout_account** | [**PostWithdraws200ResponsePayoutAccount**](PostWithdraws200ResponsePayoutAccount.md) |  | 
 

@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **authorizationCode** | **kotlin.String** | Código de autorização da transação |  [optional] |
+| **authorizationCode** | **kotlin.String** | Transaction authorization code |  [optional] |
 
 
 

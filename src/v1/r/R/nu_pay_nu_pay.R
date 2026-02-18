@@ -1,16 +1,16 @@
 #' Create a new NuPayNuPay
 #'
 #' @description
-#' Dados específicos para pagamento via NuPay
+#' Specific data for NuPay payment
 #'
 #' @docType class
 #' @title NuPayNuPay
 #' @description NuPayNuPay Class
 #' @format An \code{R6Class} generator object
-#' @field cancelUrl URL de cancelamento do pagamento character
-#' @field merchantName Nome do comerciante character
-#' @field returnUrl URL de retorno após a conclusão do pagamento character
-#' @field storeName Nome da loja character [optional]
+#' @field cancelUrl Payment cancellation URL character
+#' @field merchantName Merchant name character
+#' @field returnUrl Return URL after payment completion character
+#' @field storeName Store name character [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -25,10 +25,10 @@ NuPayNuPay <- R6::R6Class(
     #' @description
     #' Initialize a new NuPayNuPay class.
     #'
-    #' @param cancelUrl URL de cancelamento do pagamento
-    #' @param merchantName Nome do comerciante
-    #' @param returnUrl URL de retorno após a conclusão do pagamento
-    #' @param storeName Nome da loja
+    #' @param cancelUrl Payment cancellation URL
+    #' @param merchantName Merchant name
+    #' @param returnUrl Return URL after payment completion
+    #' @param storeName Store name
     #' @param ... Other optional arguments.
     initialize = function(`cancelUrl`, `merchantName`, `returnUrl`, `storeName` = NULL, ...) {
       if (!missing(`cancelUrl`)) {

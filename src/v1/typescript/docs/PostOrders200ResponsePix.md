@@ -1,14 +1,14 @@
 # PostOrders200ResponsePix
 
-Dados do PIX
+PIX data
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**copyAndPasteCode** | **string** | Código copia e cola do PIX | [default to undefined]
-**qrCodeUrl** | **string** | URL da imagem do QR Code PIX | [default to undefined]
-**endToEndId** | **string** | E2E ID do PIX | [default to undefined]
+**copyAndPasteCode** | **string** | PIX copy and paste code | [default to undefined]
+**qrCodeUrl** | **string** | PIX QR Code image URL | [default to undefined]
+**endToEndId** | **string** | PIX E2E ID | [default to undefined]
 
 ## Example
 

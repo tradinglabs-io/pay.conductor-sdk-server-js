@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | ID do pedido no sistema | 
-**ExternalId** | **NullableString** | ID externo do pedido (fornecido pela sua integração) | 
-**ExternalIntegrationKey** | **string** | Provedor utilizada para processar o pedido | 
-**ExternalIntegrationId** | **NullableString** | ID do pedido no provedor de pagamento | 
-**Amount** | **float32** | Valor total do pedido | 
-**CostFee** | **float32** | Taxa de custo aplicada ao pedido | 
+**Id** | **string** | Order ID in the system | 
+**ExternalId** | **NullableString** | External order ID (provided by your integration) | 
+**ExternalIntegrationKey** | **string** | Provider used to process the order | 
+**ExternalIntegrationId** | **NullableString** | Order ID in the payment provider | 
+**Amount** | **float32** | Total order amount | 
+**CostFee** | **float32** | Cost fee applied to the order | 
 **Pix** | Pointer to [**PostOrders200ResponsePix**](PostOrders200ResponsePix.md) |  | [optional] 
 **BankSlip** | Pointer to [**PostOrders200ResponseBankSlip**](PostOrders200ResponseBankSlip.md) |  | [optional] 
 **NuPay** | Pointer to [**PostOrders200ResponseNuPay**](PostOrders200ResponseNuPay.md) |  | [optional] 
@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **CreditCard** | Pointer to [**PostOrders200ResponseCreditCard**](PostOrders200ResponseCreditCard.md) |  | [optional] 
 **Status** | **string** |  | 
 **PaymentMethod** | **string** |  | 
-**PayedAt** | **NullableString** | Data e hora em que o pedido foi pago (ISO 8601) | 
-**ErrorCode** | **NullableString** | Código de erro, se houver | 
-**ErrorMessage** | **NullableString** | Mensagem de erro, se houver | 
+**PayedAt** | **NullableString** | Date and time when the order was paid (ISO 8601) | 
+**ErrorCode** | **NullableString** | Error code, if any | 
+**ErrorMessage** | **NullableString** | Error message, if any | 
 **OrderItems** | [**[]PostOrders200ResponseOrderItemsInner**](PostOrders200ResponseOrderItemsInner.md) |  | 
 **Session** | Pointer to [**NullablePostOrders200ResponseSession**](PostOrders200ResponseSession.md) |  | [optional] 
 

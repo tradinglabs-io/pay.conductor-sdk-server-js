@@ -7,13 +7,13 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostWithdrawsRequestPayoutAccount, () {
-    // Documento do titular da conta (CPF ou CNPJ)
+    // Account holder document (CPF or CNPJ)
     // String ownerDocument
     test('to test the property `ownerDocument`', () async {
       // TODO
     });
 
-    // Nome do titular da conta
+    // Account holder name
     // String ownerName
     test('to test the property `ownerName`', () async {
       // TODO

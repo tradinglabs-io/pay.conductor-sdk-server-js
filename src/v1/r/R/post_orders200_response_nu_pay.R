@@ -7,7 +7,7 @@
 #' @title PostOrders200ResponseNuPay
 #' @description PostOrders200ResponseNuPay Class
 #' @format An \code{R6Class} generator object
-#' @field paymentUrl URL de pagamento NuPay character
+#' @field paymentUrl NuPay payment URL character
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
 #' @export
@@ -19,7 +19,7 @@ PostOrders200ResponseNuPay <- R6::R6Class(
     #' @description
     #' Initialize a new PostOrders200ResponseNuPay class.
     #'
-    #' @param paymentUrl URL de pagamento NuPay
+    #' @param paymentUrl NuPay payment URL
     #' @param ... Other optional arguments.
     initialize = function(`paymentUrl`, ...) {
       if (!missing(`paymentUrl`)) {

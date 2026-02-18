@@ -11,40 +11,40 @@ part 'post_orders200_response_order_items_inner.g.dart';
 /// PostOrders200ResponseOrderItemsInner
 ///
 /// Properties:
-/// * [externalId] - ID externo do item
-/// * [id] - ID do item no pedido
-/// * [name] - Nome do produto/serviço
-/// * [qty] - Quantidade
-/// * [totalAmount] - Valor total do item (quantidade × preço unitário)
-/// * [totalNetAmount] - Valor líquido total do item
-/// * [unityPrice] - Preço unitário
+/// * [externalId] - External item ID
+/// * [id] - Item ID in the order
+/// * [name] - Product/service name
+/// * [qty] - Quantity
+/// * [totalAmount] - Total item amount (quantity × unit price)
+/// * [totalNetAmount] - Total net amount of the item
+/// * [unityPrice] - Unit price
 @BuiltValue()
 abstract class PostOrders200ResponseOrderItemsInner implements Built<PostOrders200ResponseOrderItemsInner, PostOrders200ResponseOrderItemsInnerBuilder> {
-  /// ID externo do item
+  /// External item ID
   @BuiltValueField(wireName: r'externalId')
   String? get externalId;
 
-  /// ID do item no pedido
+  /// Item ID in the order
   @BuiltValueField(wireName: r'id')
   String get id;
 
-  /// Nome do produto/serviço
+  /// Product/service name
   @BuiltValueField(wireName: r'name')
   String get name;
 
-  /// Quantidade
+  /// Quantity
   @BuiltValueField(wireName: r'qty')
   num get qty;
 
-  /// Valor total do item (quantidade × preço unitário)
+  /// Total item amount (quantity × unit price)
   @BuiltValueField(wireName: r'totalAmount')
   num get totalAmount;
 
-  /// Valor líquido total do item
+  /// Total net amount of the item
   @BuiltValueField(wireName: r'totalNetAmount')
   num get totalNetAmount;
 
-  /// Preço unitário
+  /// Unit price
   @BuiltValueField(wireName: r'unityPrice')
   num get unityPrice;
 

@@ -7,30 +7,30 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(PostOrdersRequest, () {
-    // Valor total a ser cobrado no pedido em valor flutuante
+    // Total amount to be charged on the order in floating point value
     // num chargeAmount
     test('to test the property `chargeAmount`', () async {
       // TODO
     });
 
-    // Endereço IP do cliente
+    // Client IP address
     // String clientIp
     test('to test the property `clientIp`', () async {
       // TODO
     });
 
-    // Cliente customer
+    // Customer customer
     test('to test the property `customer`', () async {
       // TODO
     });
 
-    // Valor do desconto
+    // Discount amount
     // num discountAmount (default value: 0)
     test('to test the property `discountAmount`', () async {
       // TODO
     });
 
-    // ID da ordem no seu sistema
+    // Order ID in your system
     // String externalId
     test('to test the property `externalId`', () async {
       // TODO
@@ -41,7 +41,7 @@ void main() {
       // TODO
     });
 
-    // Lista de produtos ou serviços do pedido
+    // List of products or services in the order
     // BuiltList<PostOrdersRequestItemsInner> items
     test('to test the property `items`', () async {
       // TODO
@@ -57,7 +57,7 @@ void main() {
       // TODO
     });
 
-    // Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)
+    // Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
     // num splitAmountTotal
     test('to test the property `splitAmountTotal`', () async {
       // TODO
@@ -68,19 +68,19 @@ void main() {
       // TODO
     });
 
-    // Valor do frete
+    // Shipping fee
     // num shippingFee (default value: 0)
     test('to test the property `shippingFee`', () async {
       // TODO
     });
 
-    // Taxas adicionais
+    // Additional fees
     // num taxFee (default value: 0)
     test('to test the property `taxFee`', () async {
       // TODO
     });
 
-    // Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+    // Additional metadata for the order as key-value pairs. Keys should not contain spaces or special characters
     // JsonObject metadata
     test('to test the property `metadata`', () async {
       // TODO

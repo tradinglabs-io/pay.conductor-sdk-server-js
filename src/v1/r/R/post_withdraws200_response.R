@@ -7,14 +7,14 @@
 #' @title PostWithdraws200Response
 #' @description PostWithdraws200Response Class
 #' @format An \code{R6Class} generator object
-#' @field id Identificador único do saque character
-#' @field externalId ID do saque no sistema no seu sistema character
-#' @field externalIntegrationKey Chave do provedor utilizado para o saque character
-#' @field externalIntegrationId ID do saque no provedor de pagamento character
-#' @field costFee Taxa de custo aplicada ao saque numeric
-#' @field status Status do saque character
-#' @field errorCode Código do erro, se houver character
-#' @field errorMessage Mensagem descritiva do erro, se houver character
+#' @field id Unique withdrawal identifier character
+#' @field externalId Withdrawal ID in your system character
+#' @field externalIntegrationKey Provider key used for the withdrawal character
+#' @field externalIntegrationId Withdrawal ID in the payment provider character
+#' @field costFee Cost fee applied to the withdrawal numeric
+#' @field status Withdrawal status character
+#' @field errorCode Error code, if any character
+#' @field errorMessage Descriptive error message, if any character
 #' @field payedAt  \link{PostWithdraws200ResponsePayedAt}
 #' @field payoutAccount  \link{PostWithdraws200ResponsePayoutAccount}
 #' @importFrom R6 R6Class
@@ -37,14 +37,14 @@ PostWithdraws200Response <- R6::R6Class(
     #' @description
     #' Initialize a new PostWithdraws200Response class.
     #'
-    #' @param id Identificador único do saque
-    #' @param externalId ID do saque no sistema no seu sistema
-    #' @param externalIntegrationKey Chave do provedor utilizado para o saque
-    #' @param externalIntegrationId ID do saque no provedor de pagamento
-    #' @param costFee Taxa de custo aplicada ao saque
-    #' @param status Status do saque
-    #' @param errorCode Código do erro, se houver
-    #' @param errorMessage Mensagem descritiva do erro, se houver
+    #' @param id Unique withdrawal identifier
+    #' @param externalId Withdrawal ID in your system
+    #' @param externalIntegrationKey Provider key used for the withdrawal
+    #' @param externalIntegrationId Withdrawal ID in the payment provider
+    #' @param costFee Cost fee applied to the withdrawal
+    #' @param status Withdrawal status
+    #' @param errorCode Error code, if any
+    #' @param errorMessage Descriptive error message, if any
     #' @param payedAt payedAt
     #' @param payoutAccount payoutAccount
     #' @param ... Other optional arguments.

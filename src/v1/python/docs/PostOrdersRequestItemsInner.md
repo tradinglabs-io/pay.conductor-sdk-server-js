@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID do produto ou serviço no seu sistema | 
-**is_physical** | **bool** | Define se o item é um produto físico ou um serviço | [default to False]
-**name** | **str** | Nome do produto ou serviço | 
-**qty** | **float** | Quantidade do produto ou serviço | 
-**unit_price** | **float** | Preço unitário | 
+**id** | **str** | Product or service ID in your system | 
+**is_physical** | **bool** | Defines if the item is a physical product or a service | [default to False]
+**name** | **str** | Product or service name | 
+**qty** | **float** | Quantity of the product or service | 
+**unit_price** | **float** | Unit price | 
 
 ## Example
 

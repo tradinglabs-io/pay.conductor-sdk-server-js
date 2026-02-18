@@ -15,11 +15,11 @@
 
 package payconductor-sdk.models
 
-import payconductor-sdk.models.Boleto
-import payconductor-sdk.models.BoletoExpirationInDays
-import payconductor-sdk.models.CartODeCrDito
-import payconductor-sdk.models.CartODeCrDitoCard
-import payconductor-sdk.models.CartODeCrDitoInstallments
+import payconductor-sdk.models.BankSlip
+import payconductor-sdk.models.BankSlipExpirationInDays
+import payconductor-sdk.models.CreditCard
+import payconductor-sdk.models.CreditCardCard
+import payconductor-sdk.models.CreditCardInstallments
 import payconductor-sdk.models.NuPay
 import payconductor-sdk.models.NuPayNuPay
 import payconductor-sdk.models.PicPay
@@ -30,14 +30,14 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 /**
- * Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)
+ * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
  *
  * @param paymentMethod 
  * @param card 
  * @param installments 
  * @param nuPay 
  * @param expirationInSeconds 
- * @param softDescriptor Texto que aparecerá na fatura do cartão (soft descriptor)
+ * @param softDescriptor Text that will appear on the card statement (soft descriptor)
  * @param expirationInDays 
  */
 
@@ -48,10 +48,10 @@ data class PostOrdersRequestPayment (
     val paymentMethod: kotlin.String,
 
     @Json(name = "card")
-    val card: CartODeCrDitoCard,
+    val card: CreditCardCard,
 
     @Json(name = "installments")
-    val installments: CartODeCrDitoInstallments,
+    val installments: CreditCardInstallments,
 
     @Json(name = "nuPay")
     val nuPay: NuPayNuPay,
@@ -59,12 +59,12 @@ data class PostOrdersRequestPayment (
     @Json(name = "expirationInSeconds")
     val expirationInSeconds: PixExpirationInSeconds? = null,
 
-    /* Texto que aparecerá na fatura do cartão (soft descriptor) */
+    /* Text that will appear on the card statement (soft descriptor) */
     @Json(name = "softDescriptor")
     val softDescriptor: kotlin.String? = null,
 
     @Json(name = "expirationInDays")
-    val expirationInDays: BoletoExpirationInDays? = null
+    val expirationInDays: BankSlipExpirationInDays? = null
 
 ) {
 

@@ -9,8 +9,10 @@ import 'package:openapi/src/auth/api_key_auth.dart';
 import 'package:openapi/src/auth/basic_auth.dart';
 import 'package:openapi/src/auth/bearer_auth.dart';
 import 'package:openapi/src/auth/oauth.dart';
-import 'package:openapi/src/api/pedidos_api.dart';
-import 'package:openapi/src/api/saques_e_transferncias_api.dart';
+import 'package:openapi/src/api/card_tokenization_api.dart';
+import 'package:openapi/src/api/customers_api.dart';
+import 'package:openapi/src/api/orders_api.dart';
+import 'package:openapi/src/api/withdrawals_and_transfers_api.dart';
 
 class Openapi {
   static const String basePath = r'https://app.payconductor.ai/api/v1';
@@ -66,15 +68,27 @@ class Openapi {
     }
   }
 
-  /// Get PedidosApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get CardTokenizationApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  PedidosApi getPedidosApi() {
-    return PedidosApi(dio, serializers);
+  CardTokenizationApi getCardTokenizationApi() {
+    return CardTokenizationApi(dio, serializers);
   }
 
-  /// Get SaquesETransfernciasApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get CustomersApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  SaquesETransfernciasApi getSaquesETransfernciasApi() {
-    return SaquesETransfernciasApi(dio, serializers);
+  CustomersApi getCustomersApi() {
+    return CustomersApi(dio, serializers);
+  }
+
+  /// Get OrdersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  OrdersApi getOrdersApi() {
+    return OrdersApi(dio, serializers);
+  }
+
+  /// Get WithdrawalsAndTransfersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  WithdrawalsAndTransfersApi getWithdrawalsAndTransfersApi() {
+    return WithdrawalsAndTransfersApi(dio, serializers);
   }
 }

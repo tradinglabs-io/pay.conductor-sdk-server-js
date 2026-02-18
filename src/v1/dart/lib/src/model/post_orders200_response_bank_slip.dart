@@ -11,20 +11,20 @@ part 'post_orders200_response_bank_slip.g.dart';
 /// PostOrders200ResponseBankSlip
 ///
 /// Properties:
-/// * [barCode] - Código de barras do boleto
-/// * [digitableLine] - Linha digitável do boleto
-/// * [pdfUrl] - URL do PDF do boleto
+/// * [barCode] - Bank slip bar code
+/// * [digitableLine] - Bank slip digitable line
+/// * [pdfUrl] - Bank slip PDF URL
 @BuiltValue()
 abstract class PostOrders200ResponseBankSlip implements Built<PostOrders200ResponseBankSlip, PostOrders200ResponseBankSlipBuilder> {
-  /// Código de barras do boleto
+  /// Bank slip bar code
   @BuiltValueField(wireName: r'barCode')
   String get barCode;
 
-  /// Linha digitável do boleto
+  /// Bank slip digitable line
   @BuiltValueField(wireName: r'digitableLine')
   String get digitableLine;
 
-  /// URL do PDF do boleto
+  /// Bank slip PDF URL
   @BuiltValueField(wireName: r'pdfUrl')
   String? get pdfUrl;
 
