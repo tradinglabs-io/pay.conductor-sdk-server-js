@@ -1,0 +1,223 @@
+#' Create a new PostOrdersRequestSession
+#'
+#' @description
+#' Caso o externalSessionId ou sessionId sejam fornecidos e houver uma sessão existente, ela será atualizada com os novos dados. Caso contrário, uma nova sessão será criada.
+#'
+#' @docType class
+#' @title PostOrdersRequestSession
+#' @description PostOrdersRequestSession Class
+#' @format An \code{R6Class} generator object
+#' @field expiresInMinutes Tempo em minutos para expiração da sessão do checkout numeric [optional]
+#' @field checkoutUrl URL do checkout para que possamos redirecionar character [optional]
+#' @field sessionId Id gerado pelo nosso serviço para identificar a sessão de checkout character [optional]
+#' @field externalSessionId Id da sessão de checkout gerado pelo lado do cliente. O id deve ser único para cada sessão de carrinho character [optional]
+#' @importFrom R6 R6Class
+#' @importFrom jsonlite fromJSON toJSON
+#' @export
+PostOrdersRequestSession <- R6::R6Class(
+  "PostOrdersRequestSession",
+  public = list(
+    `expiresInMinutes` = NULL,
+    `checkoutUrl` = NULL,
+    `sessionId` = NULL,
+    `externalSessionId` = NULL,
+
+    #' @description
+    #' Initialize a new PostOrdersRequestSession class.
+    #'
+    #' @param expiresInMinutes Tempo em minutos para expiração da sessão do checkout. Default to 30.
+    #' @param checkoutUrl URL do checkout para que possamos redirecionar
+    #' @param sessionId Id gerado pelo nosso serviço para identificar a sessão de checkout
+    #' @param externalSessionId Id da sessão de checkout gerado pelo lado do cliente. O id deve ser único para cada sessão de carrinho
+    #' @param ... Other optional arguments.
+    initialize = function(`expiresInMinutes` = 30, `checkoutUrl` = NULL, `sessionId` = NULL, `externalSessionId` = NULL, ...) {
+      if (!is.null(`expiresInMinutes`)) {
+        self$`expiresInMinutes` <- `expiresInMinutes`
+      }
+      if (!is.null(`checkoutUrl`)) {
+        if (!(is.character(`checkoutUrl`) && length(`checkoutUrl`) == 1)) {
+          stop(paste("Error! Invalid data for `checkoutUrl`. Must be a string:", `checkoutUrl`))
+        }
+        self$`checkoutUrl` <- `checkoutUrl`
+      }
+      if (!is.null(`sessionId`)) {
+        if (!(is.character(`sessionId`) && length(`sessionId`) == 1)) {
+          stop(paste("Error! Invalid data for `sessionId`. Must be a string:", `sessionId`))
+        }
+        self$`sessionId` <- `sessionId`
+      }
+      if (!is.null(`externalSessionId`)) {
+        if (!(is.character(`externalSessionId`) && length(`externalSessionId`) == 1)) {
+          stop(paste("Error! Invalid data for `externalSessionId`. Must be a string:", `externalSessionId`))
+        }
+        self$`externalSessionId` <- `externalSessionId`
+      }
+    },
+
+    #' @description
+    #' Convert to an R object. This method is deprecated. Use `toSimpleType()` instead.
+    toJSON = function() {
+      .Deprecated(new = "toSimpleType", msg = "Use the '$toSimpleType()' method instead since that is more clearly named. Use '$toJSONString()' to get a JSON string")
+      return(self$toSimpleType())
+    },
+
+    #' @description
+    #' Convert to a List
+    #'
+    #' Convert the R6 object to a list to work more easily with other tooling.
+    #'
+    #' @return PostOrdersRequestSession as a base R list.
+    #' @examples
+    #' # convert array of PostOrdersRequestSession (x) to a data frame
+    #' \dontrun{
+    #' library(purrr)
+    #' library(tibble)
+    #' df <- x |> map(\(y)y$toList()) |> map(as_tibble) |> list_rbind()
+    #' df
+    #' }
+    toList = function() {
+      return(self$toSimpleType())
+    },
+
+    #' @description
+    #' Convert PostOrdersRequestSession to a base R type
+    #'
+    #' @return A base R type, e.g. a list or numeric/character array.
+    toSimpleType = function() {
+      PostOrdersRequestSessionObject <- list()
+      if (!is.null(self$`expiresInMinutes`)) {
+        PostOrdersRequestSessionObject[["expiresInMinutes"]] <-
+          self$`expiresInMinutes`
+      }
+      if (!is.null(self$`checkoutUrl`)) {
+        PostOrdersRequestSessionObject[["checkoutUrl"]] <-
+          self$`checkoutUrl`
+      }
+      if (!is.null(self$`sessionId`)) {
+        PostOrdersRequestSessionObject[["sessionId"]] <-
+          self$`sessionId`
+      }
+      if (!is.null(self$`externalSessionId`)) {
+        PostOrdersRequestSessionObject[["externalSessionId"]] <-
+          self$`externalSessionId`
+      }
+      return(PostOrdersRequestSessionObject)
+    },
+
+    #' @description
+    #' Deserialize JSON string into an instance of PostOrdersRequestSession
+    #'
+    #' @param input_json the JSON input
+    #' @return the instance of PostOrdersRequestSession
+    fromJSON = function(input_json) {
+      this_object <- jsonlite::fromJSON(input_json)
+      if (!is.null(this_object$`expiresInMinutes`)) {
+        self$`expiresInMinutes` <- this_object$`expiresInMinutes`
+      }
+      if (!is.null(this_object$`checkoutUrl`)) {
+        self$`checkoutUrl` <- this_object$`checkoutUrl`
+      }
+      if (!is.null(this_object$`sessionId`)) {
+        self$`sessionId` <- this_object$`sessionId`
+      }
+      if (!is.null(this_object$`externalSessionId`)) {
+        self$`externalSessionId` <- this_object$`externalSessionId`
+      }
+      self
+    },
+
+    #' @description
+    #' To JSON String
+    #' 
+    #' @param ... Parameters passed to `jsonlite::toJSON`
+    #' @return PostOrdersRequestSession in JSON format
+    toJSONString = function(...) {
+      simple <- self$toSimpleType()
+      json <- jsonlite::toJSON(simple, auto_unbox = TRUE, digits = NA, ...)
+      return(as.character(jsonlite::minify(json)))
+    },
+
+    #' @description
+    #' Deserialize JSON string into an instance of PostOrdersRequestSession
+    #'
+    #' @param input_json the JSON input
+    #' @return the instance of PostOrdersRequestSession
+    fromJSONString = function(input_json) {
+      this_object <- jsonlite::fromJSON(input_json)
+      self$`expiresInMinutes` <- this_object$`expiresInMinutes`
+      self$`checkoutUrl` <- this_object$`checkoutUrl`
+      self$`sessionId` <- this_object$`sessionId`
+      self$`externalSessionId` <- this_object$`externalSessionId`
+      self
+    },
+
+    #' @description
+    #' Validate JSON input with respect to PostOrdersRequestSession and throw an exception if invalid
+    #'
+    #' @param input the JSON input
+    validateJSON = function(input) {
+      input_json <- jsonlite::fromJSON(input)
+    },
+
+    #' @description
+    #' To string (JSON format)
+    #'
+    #' @return String representation of PostOrdersRequestSession
+    toString = function() {
+      self$toJSONString()
+    },
+
+    #' @description
+    #' Return true if the values in all fields are valid.
+    #'
+    #' @return true if the values in all fields are valid.
+    isValid = function() {
+      if (self$`expiresInMinutes` < 15) {
+        return(FALSE)
+      }
+
+      if (nchar(self$`externalSessionId`) < 16) {
+        return(FALSE)
+      }
+
+      TRUE
+    },
+
+    #' @description
+    #' Return a list of invalid fields (if any).
+    #'
+    #' @return A list of invalid fields (if any).
+    getInvalidFields = function() {
+      invalid_fields <- list()
+      if (self$`expiresInMinutes` < 15) {
+        invalid_fields["expiresInMinutes"] <- "Invalid value for `expiresInMinutes`, must be bigger than or equal to 15."
+      }
+
+      if (nchar(self$`externalSessionId`) < 16) {
+        invalid_fields["externalSessionId"] <- "Invalid length for `externalSessionId`, must be bigger than or equal to 16."
+      }
+
+      invalid_fields
+    },
+
+    #' @description
+    #' Print the object
+    print = function() {
+      print(jsonlite::prettify(self$toJSONString()))
+      invisible(self)
+    }
+  ),
+  # Lock the class to prevent modifications to the method or field
+  lock_class = TRUE
+)
+## Uncomment below to unlock the class to allow modifications of the method or field
+# PostOrdersRequestSession$unlock()
+#
+## Below is an example to define the print function
+# PostOrdersRequestSession$set("public", "print", function(...) {
+#   print(jsonlite::prettify(self$toJSONString()))
+#   invisible(self)
+# })
+## Uncomment below to lock the class to prevent modifications to the method or field
+# PostOrdersRequestSession$lock()
+
