@@ -6,8 +6,10 @@ Multi-language SDKs for the PayConductor API. Generate client libraries in multi
 
 PayConductor is a payment orchestration platform that provides APIs for:
 
+- **Card Tokenization** - Generate and manage credit card tokens
+- **Customers** - Create and manage customer data
 - **Orders** - Create and manage payment orders
-- **Withdrawals** - Process withdrawals and transfers
+- **Withdrawals & Transfers** - Process withdrawals and transfers
 
 This repository contains generated SDKs in multiple programming languages to simplify integration with the PayConductor API.
 
@@ -86,25 +88,25 @@ bun run sdk generate
 
 ### Available Languages
 
-| Language | Directory | Generator |
-|----------|-----------|-----------|
-| C | `src/v1/c` | c |
-| C# | `src/v1/csharp` | csharp |
-| Clojure | `src/v1/clojure` | clojure |
-| Dart | `src/v1/dart` | dart |
-| Elixir | `src/v1/elixir` | elixir |
-| Go | `src/v1/go` | go |
-| Java | `src/v1/java` | java |
-| JavaScript | `src/v1/javascript` | javascript |
-| Kotlin | `src/v1/kotlin` | kotlin |
-| Lua | `src/v1/lua` | lua |
-| Perl | `src/v1/perl` | perl |
-| PHP | `src/v1/php` | php |
-| Python | `src/v1/python` | python |
-| R | `src/v1/r` | r |
-| Ruby | `src/v1/ruby` | ruby |
-| Rust | `src/v1/rust` | rust |
-| TypeScript | `src/v1/typescript` | typescript-axios |
+| Language | Directory |
+|----------|-----------|
+| C | `src/v1/c` |
+| C# | `src/v1/csharp` |
+| Clojure | `src/v1/clojure` |
+| Dart | `src/v1/dart` |
+| Elixir | `src/v1/elixir` |
+| Go | `src/v1/go` |
+| Java | `src/v1/java` |
+| JavaScript | `src/v1/javascript` |
+| Kotlin | `src/v1/kotlin` |
+| Lua | `src/v1/lua` |
+| Perl | `src/v1/perl` |
+| PHP | `src/v1/php` |
+| Python | `src/v1/python` |
+| R | `src/v1/r` |
+| Ruby | `src/v1/ruby` |
+| Rust | `src/v1/rust` |
+| TypeScript | `src/v1/typescript` |
 
 ## Adding a New Language
 
@@ -177,6 +179,18 @@ fetch('https://app.payconductor.ai/api/v1/orders/', {
 
 ## API Reference
 
+### Card Tokenization
+
+- `POST /cards/tokenization` - Generate a credit card token
+
+### Customers
+
+- `POST /customers/` - Create a new customer
+- `GET /customers/` - List customers
+- `GET /customers/{id}` - Get customer by ID
+- `PATCH /customers/{id}` - Update customer
+- `DELETE /customers/{id}` - Delete customer
+
 ### Orders
 
 - `POST /orders/` - Create a new payment order
@@ -184,7 +198,7 @@ fetch('https://app.payconductor.ai/api/v1/orders/', {
 - `GET /orders/{id}` - Get order by ID
 - `POST /orders/{id}/refund` - Refund an order
 
-### Withdrawals
+### Withdrawals & Transfers
 
 - `POST /withdraws/` - Create a withdrawal/transfer
 - `GET /withdraws/` - List withdrawals
