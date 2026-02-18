@@ -47,9 +47,21 @@ pay.conductor-sdk/
 │       └── typescript/        # TypeScript SDK
 ├── scripts/
 │   └── sdk.ts                 # CLI for SDK generation
+├── examples/
+│   └── typescript/            # TypeScript usage examples
 ├── package.json               # Node.js dependencies
 ├── tsconfig.json              # TypeScript configuration
 └── README.md                  # This file
+```
+
+## Examples
+
+Check the [examples/typescript](./examples/typescript) folder for usage examples with TypeScript.
+
+```bash
+cd examples/typescript
+bun install
+bun run index.ts
 ```
 
 ## Requirements
