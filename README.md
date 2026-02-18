@@ -13,7 +13,7 @@ This repository contains generated SDKs in multiple programming languages to sim
 
 ## Features
 
-- Multi-language support (TypeScript, Python, Go, Ruby, C#, PHP, Lua, Java, Kotlin)
+- Multi-language support (C, C#, Clojure, Dart, Elixir, Go, Java, JavaScript, Kotlin, Lua, Perl, PHP, Python, R, Ruby, Rust, TypeScript)
 - Auto-generated from OpenAPI specification
 - Versioned SDKs (currently v1)
 - Interactive CLI for SDK generation
@@ -21,20 +21,28 @@ This repository contains generated SDKs in multiple programming languages to sim
 ## Project Structure
 
 ```
-pay.conductor-sdk-server-js/
+pay.conductor-sdk/
 ├── src/
 │   └── v1/                    # API Version
 │       ├── openapi.json       # OpenAPI specification (JSON)
 │       ├── openapi.yaml       # OpenAPI specification (YAML)
-│       ├── typescript/        # TypeScript SDK
-│       ├── python/            # Python SDK
-│       ├── go/                # Go SDK
-│       ├── ruby/              # Ruby SDK
+│       ├── c/                 # C SDK
+│       ├── clojure/           # Clojure SDK
 │       ├── csharp/            # C# SDK
-│       ├── php/               # PHP SDK
-│       ├── lua/               # Lua SDK
+│       ├── dart/              # Dart SDK
+│       ├── elixir/            # Elixir SDK
+│       ├── go/                # Go SDK
 │       ├── java/              # Java SDK
-│       └── kotlin/            # Kotlin SDK
+│       ├── javascript/        # JavaScript SDK
+│       ├── kotlin/            # Kotlin SDK
+│       ├── lua/               # Lua SDK
+│       ├── perl/              # Perl SDK
+│       ├── php/               # PHP SDK
+│       ├── python/            # Python SDK
+│       ├── r/                 # R SDK
+│       ├── ruby/              # Ruby SDK
+│       ├── rust/              # Rust SDK
+│       └── typescript/        # TypeScript SDK
 ├── scripts/
 │   └── sdk.ts                 # CLI for SDK generation
 ├── package.json               # Node.js dependencies
@@ -80,15 +88,23 @@ bun run sdk generate
 
 | Language | Directory | Generator |
 |----------|-----------|-----------|
-| TypeScript | `src/v1/typescript` | typescript-axios |
-| Python | `src/v1/python` | python |
-| Go | `src/v1/go` | go |
-| Ruby | `src/v1/ruby` | ruby |
+| C | `src/v1/c` | c |
 | C# | `src/v1/csharp` | csharp |
-| PHP | `src/v1/php` | php |
-| Lua | `src/v1/lua` | lua |
+| Clojure | `src/v1/clojure` | clojure |
+| Dart | `src/v1/dart` | dart |
+| Elixir | `src/v1/elixir` | elixir |
+| Go | `src/v1/go` | go |
 | Java | `src/v1/java` | java |
+| JavaScript | `src/v1/javascript` | javascript |
 | Kotlin | `src/v1/kotlin` | kotlin |
+| Lua | `src/v1/lua` | lua |
+| Perl | `src/v1/perl` | perl |
+| PHP | `src/v1/php` | php |
+| Python | `src/v1/python` | python |
+| R | `src/v1/r` | r |
+| Ruby | `src/v1/ruby` | ruby |
+| Rust | `src/v1/rust` | rust |
+| TypeScript | `src/v1/typescript` | typescript-axios |
 
 ## Adding a New Language
 
