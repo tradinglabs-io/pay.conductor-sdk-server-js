@@ -1,0 +1,23 @@
+{
+  "name": "pay.conductor-sdk-server-js",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "sdk": "bun run scripts/sdk.ts",
+    "download": "bun run scripts/sdk.ts download",
+    "generate": "bun run scripts/sdk.ts generate"
+  },
+  "devDependencies": {
+    "@openapitools/openapi-generator-cli": "^2.29.0",
+    "@redocly/cli": "^2.18.2",
+    "@types/bun": "^1.3.9",
+    "openapi-format": "^1.29.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "enquirer": "^2.4.1",
+    "rimraf": "^6.1.3"
+  }
+}

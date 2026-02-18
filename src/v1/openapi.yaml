@@ -1,0 +1,1695 @@
+openapi: 3.0.3
+info:
+  title: PayConductor API
+  description: |-
+    # Introdução
+
+    Esta documentação cobre todas as funcionalidades disponíveis na API RESTful do PayConductor, incluindo autenticação, gerenciamento de recursos e exemplos de uso.
+
+    <br />
+
+    <br />
+
+    ----
+
+    <br />
+
+
+    # Autenticação
+
+    A API do PayConductor utiliza autenticação HTTP Basic para validar requisições. Você precisa fornecer suas credenciais (Client ID e Client Secret) no formato `client:secret` codificado em Base64.
+
+    <br />
+
+    ## Obtendo Credenciais
+
+    1. Acesse o painel administrativo do PayConductor
+    2. Navegue até **Configurações > API Keys**
+    3. Gere um novo par de credenciais (Client ID e Client Secret)
+    4. Guarde o Client Secret em local seguro - ele não será exibido novamente
+
+    <br />
+
+    ## Formato de Autenticação
+
+    As credenciais devem ser enviadas no header `Authorization` usando o esquema Basic:
+
+    ```
+    Authorization: Basic base64(client_id:client_secret)
+    ```
+
+    <br />
+
+    ## Exemplo em Node.js
+
+    ```javascript
+    const clientId = 'seu_client_id';
+    const clientSecret = 'seu_client_secret';
+
+    // Codifica as credenciais em Base64
+    const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
+
+    const response = await fetch('https://api.payconductor.com/api/v1/orders', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const data = await response.json();
+    console.log(data);
+    ```
+
+    <br />
+
+    ## Erros de Autenticação
+
+    | Código | Descrição |
+    |--------|-----------|
+    | `401`  | Credenciais inválidas ou ausentes |
+    | `403`  | Credenciais válidas, mas sem permissão para o recurso |
+    | `429`  | Muitas requisições (rate limit excedido) |
+
+    ### Exemplo de resposta de erro
+
+    ```json
+    {
+      "error": {
+        "code": "UNAUTHORIZED",
+        "message": "Invalid credentials",
+        "details": "The provided client ID or secret is incorrect"
+      }
+    }
+    ```
+  version: 1.0.0
+servers:
+  - url: 'https://app.payconductor.ai/api/v1'
+paths:
+  /orders/:
+    post:
+      operationId: postOrders
+      summary: Criar pedido
+      description: Crie um novo pedido para pagamento utilizando os dados fornecidos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chargeAmount:
+                  description: Valor total a ser cobrado no pedido em valor flutuante
+                  type: number
+                  examples:
+                    - 150
+                clientIp:
+                  description: Endereço IP do cliente
+                  type: string
+                  examples:
+                    - 192.168.0.1
+                customer:
+                  description: Schema para criação de um novo cliente
+                  type: object
+                  properties:
+                    address:
+                      description: Schema para criação de um novo endereço
+                      type: object
+                      properties:
+                        city:
+                          description: Nome da cidade
+                          type: string
+                          examples:
+                            - São Paulo
+                            - Rio de Janeiro
+                        country:
+                          description: Código do país no formato ISO 3166-1 alpha-2
+                          type: string
+                          default: BR
+                          examples:
+                            - BR
+                            - US
+                          maxLength: 2
+                          minLength: 2
+                        neighborhood:
+                          description: Nome do bairro
+                          type: string
+                          examples:
+                            - Centro
+                            - Jardins
+                        number:
+                          description: Número do endereço
+                          type: string
+                          examples:
+                            - '1000'
+                            - '150'
+                        state:
+                          description: Código do estado no formato ISO 3166-2
+                          type: string
+                          examples:
+                            - SP
+                            - RJ
+                          maxLength: 2
+                          minLength: 2
+                        street:
+                          description: Nome da rua
+                          type: string
+                          examples:
+                            - Av. Paulista
+                            - Rua das Flores
+                        zipCode:
+                          description: CEP sem formatação
+                          type: string
+                          examples:
+                            - '01311200'
+                            - '20040002'
+                      required:
+                        - city
+                        - country
+                        - neighborhood
+                        - number
+                        - state
+                        - street
+                        - zipCode
+                      title: Endereço do cliente
+                    documentNumber:
+                      description: CPF ou CNPJ do cliente sem formatação
+                      type: string
+                      examples:
+                        - '12345678909'
+                        - '12345678000195'
+                      pattern: '^\d{11}$|^\d{14}$'
+                    documentType:
+                      type: string
+                      enum:
+                        - Cpf
+                        - Cnpj
+                    email:
+                      description: Email do cliente
+                      type: string
+                      format: email
+                      examples:
+                        - cliente@example.com
+                    name:
+                      description: Nome completo do cliente
+                      type: string
+                      examples:
+                        - João da Silva
+                    phoneNumber:
+                      description: Número de telefone do cliente no formato +55 DD 9XXXXXXXX
+                      type: string
+                      error: 'Invalid phone number format. Expected format: +55 DD 9XXXXXXXX'
+                      examples:
+                        - +55 11 987654321
+                      pattern: '^\+(\d{1,2}) (\d{2}) (\d{8,9})$'
+                  required:
+                    - documentNumber
+                    - documentType
+                    - email
+                    - name
+                  title: Cliente
+                discountAmount:
+                  description: Valor do desconto
+                  type: number
+                  default: 0
+                externalId:
+                  description: ID da ordem no seu sistema
+                  type: string
+                  examples:
+                    - seu_id_12345
+                fingerprints:
+                  type: object
+                  properties:
+                    threatMetrixFingerprintId:
+                      description: ID de fingerprint do ThreatMetrix para análise de fraude
+                      type: string
+                      examples:
+                        - tmx_fingerprint_abc123
+                items:
+                  description: Lista de produtos ou serviços do pedido
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      id:
+                        description: ID do produto ou serviço no seu sistema
+                        type: string
+                        examples:
+                          - prod_123
+                          - serv_456
+                      isPhysical:
+                        description: Define se o item é um produto físico ou um serviço
+                        type: boolean
+                        default: false
+                        examples:
+                          - true
+                          - false
+                      name:
+                        description: Nome do produto ou serviço
+                        type: string
+                        examples:
+                          - Camisa Polo
+                          - Prestação de Serviço
+                      qty:
+                        description: Quantidade do produto ou serviço
+                        type: number
+                        examples:
+                          - 1
+                      unitPrice:
+                        description: Preço unitário
+                        type: number
+                        examples:
+                          - 100
+                    required:
+                      - id
+                      - isPhysical
+                      - name
+                      - qty
+                      - unitPrice
+                  maxItems: 20
+                merchant:
+                  description: Dados do merchant para pedido ou saque
+                  type: object
+                  properties:
+                    document:
+                      description: CPF ou CNPJ do merchant sem formatação
+                      type: string
+                      examples:
+                        - '12345678909'
+                        - '12345678000195'
+                      pattern: '^\d{11}$|^\d{14}$'
+                    email:
+                      description: Email do merchant
+                      type: string
+                      format: email
+                      examples:
+                        - merchant@example.com
+                    name:
+                      description: Nome do merchant
+                      type: string
+                      examples:
+                        - Loja do João
+                      maxLength: 255
+                      minLength: 2
+                  required:
+                    - document
+                    - email
+                    - name
+                  title: MerchantInput
+                payment:
+                  description: 'Dados de pagamento para o pedido (Pix, Cartão de Crédito, Boleto, NuPay, etc...)'
+                  anyOf:
+                    - title: Pix
+                      type: object
+                      properties:
+                        paymentMethod:
+                          type: string
+                          const: Pix
+                        expirationInSeconds:
+                          description: Tempo de expiração do PIX em segundos
+                          default: 3600
+                          anyOf:
+                            - format: integer
+                              default: 0
+                              type: string
+                            - default: 3600
+                              description: Tempo de expiração do PIX em segundos
+                              examples:
+                                - 3600
+                                - 86400
+                              minimum: 3600
+                              type: integer
+                          examples:
+                            - 3600
+                            - 86400
+                          minimum: 3600
+                      required:
+                        - paymentMethod
+                    - title: Cartão de crédito
+                      type: object
+                      properties:
+                        paymentMethod:
+                          type: string
+                          const: CreditCard
+                        card:
+                          anyOf:
+                            - title: Cartão tokenizado
+                              type: object
+                              properties:
+                                firstSixCardNumber:
+                                  description: Primeiros 6 dígitos do cartão de crédito
+                                  type: string
+                                  examples:
+                                    - '411111'
+                                token:
+                                  description: Token do cartão de crédito gerado anteriormente
+                                  type: string
+                              required:
+                                - token
+                            - title: Dados completos do cartão
+                              type: object
+                              properties:
+                                cvv:
+                                  description: Código de segurança do cartão (CVV)
+                                  type: string
+                                  examples:
+                                    - '123'
+                                    - '1234'
+                                  maxLength: 4
+                                  minLength: 3
+                                expiration:
+                                  type: object
+                                  properties:
+                                    month:
+                                      description: Mês de expiração do cartão
+                                      type: number
+                                      examples:
+                                        - 1
+                                        - 12
+                                      maximum: 12
+                                      minimum: 1
+                                    year:
+                                      description: Ano de expiração do cartão
+                                      type: number
+                                      examples:
+                                        - 2030
+                                      maximum: 2046
+                                      minimum: 2025
+                                  required:
+                                    - month
+                                    - year
+                                holderName:
+                                  description: Nome do titular do cartão
+                                  type: string
+                                  examples:
+                                    - JOAO DA SILVA
+                                number:
+                                  description: Número do cartão de crédito
+                                  type: string
+                                  examples:
+                                    - '4242424242424242'
+                              required:
+                                - cvv
+                                - expiration
+                                - holderName
+                                - number
+                        installments:
+                          description: Número de parcelas
+                          default: 1
+                          anyOf:
+                            - format: integer
+                              default: 0
+                              type: string
+                            - default: 1
+                              description: Número de parcelas
+                              maximum: 12
+                              minimum: 1
+                              type: integer
+                          maximum: 12
+                          minimum: 1
+                        softDescriptor:
+                          description: Texto que aparecerá na fatura do cartão (soft descriptor)
+                          type: string
+                          examples:
+                            - PEDRO*TESTE
+                          maxLength: 22
+                          minLength: 1
+                      required:
+                        - paymentMethod
+                        - card
+                        - installments
+                    - title: Boleto
+                      type: object
+                      properties:
+                        paymentMethod:
+                          type: string
+                          const: BankSlip
+                        expirationInDays:
+                          description: Dias até o vencimento do boleto
+                          default: 7
+                          anyOf:
+                            - format: integer
+                              default: 0
+                              type: string
+                            - default: 7
+                              description: Dias até o vencimento do boleto
+                              examples:
+                                - 3
+                                - 7
+                                - 15
+                              minimum: 1
+                              type: integer
+                          examples:
+                            - 3
+                            - 7
+                            - 15
+                          minimum: 1
+                      required:
+                        - paymentMethod
+                    - title: NuPay
+                      type: object
+                      properties:
+                        paymentMethod:
+                          type: string
+                          const: NuPay
+                        nuPay:
+                          description: Dados específicos para pagamento via NuPay
+                          type: object
+                          properties:
+                            cancelUrl:
+                              description: URL de cancelamento do pagamento
+                              type: string
+                              examples:
+                                - 'https://example.com/cancel'
+                            merchantName:
+                              description: Nome do comerciante
+                              type: string
+                              examples:
+                                - Minha Loja
+                            returnUrl:
+                              description: URL de retorno após a conclusão do pagamento
+                              type: string
+                              examples:
+                                - 'https://example.com/success'
+                            storeName:
+                              description: Nome da loja
+                              type: string
+                              examples:
+                                - Filial Centro
+                          required:
+                            - cancelUrl
+                            - merchantName
+                            - returnUrl
+                      required:
+                        - paymentMethod
+                        - nuPay
+                    - title: PicPay
+                      type: object
+                      properties:
+                        paymentMethod:
+                          type: string
+                          const: PicPay
+                      required:
+                        - paymentMethod
+                splitAmountTotal:
+                  description: 'Valor total do split a ser pago ao merchant (Sendo usado apenas para fins de relatório, ou seja não gera split real)'
+                  type: number
+                  examples:
+                    - 50
+                  minimum: 0
+                session:
+                  description: 'Caso o externalSessionId ou sessionId sejam fornecidos e houver uma sessão existente, ela será atualizada com os novos dados. Caso contrário, uma nova sessão será criada.'
+                  type: object
+                  properties:
+                    expiresInMinutes:
+                      description: Tempo em minutos para expiração da sessão do checkout
+                      type: number
+                      default: 30
+                      minimum: 15
+                    checkoutUrl:
+                      description: URL do checkout para que possamos redirecionar
+                      type: string
+                      regex: '^(https?:\/\/)(www\.)?([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}([\/\w\-._~:?#[\]@!$&''()*+,;=%]*)?$'
+                    sessionId:
+                      description: Id gerado pelo nosso serviço para identificar a sessão de checkout
+                      type: string
+                    externalSessionId:
+                      description: Id da sessão de checkout gerado pelo lado do cliente. O id deve ser único para cada sessão de carrinho
+                      type: string
+                      minLength: 16
+                shippingFee:
+                  description: Valor do frete
+                  type: number
+                  default: 0
+                taxFee:
+                  description: Taxas adicionais
+                  type: number
+                  default: 0
+                metadata:
+                  description: Metadados adicionais para o pedido como pares chave-valor. Não deve ter espaços ou caracteres especiais nas chaves
+                  type: object
+                  patternProperties:
+                    ^(.*)$:
+                      description: Valor do metadado
+                      examples:
+                        - merchant@gmail.com
+                      type: string
+              additionalProperties: false
+              noValidate: true
+              required:
+                - chargeAmount
+                - clientIp
+                - customer
+                - discountAmount
+                - externalId
+                - payment
+                - shippingFee
+                - taxFee
+      responses:
+        '200':
+          description: Response for status 200
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: ID do pedido no sistema
+                    type: string
+                    examples:
+                      - ord_abc123
+                  externalId:
+                    anyOf:
+                      - description: ID externo do pedido (fornecido pela sua integração)
+                        examples:
+                          - pedido_123
+                        type: string
+                      - type: 'null'
+                  externalIntegrationKey:
+                    description: Provedor utilizada para processar o pedido
+                    type: string
+                    examples:
+                      - PagarMe
+                      - Stripe
+                  externalIntegrationId:
+                    anyOf:
+                      - description: ID do pedido no provedor de pagamento
+                        examples:
+                          - pedido_123
+                        type: string
+                      - type: 'null'
+                  amount:
+                    description: Valor total do pedido
+                    type: number
+                    examples:
+                      - 150.45
+                  costFee:
+                    description: Taxa de custo aplicada ao pedido
+                    type: number
+                    examples:
+                      - 4.5
+                  pix:
+                    description: Dados do PIX
+                    type: object
+                    properties:
+                      copyAndPasteCode:
+                        description: Código copia e cola do PIX
+                        type: string
+                        examples:
+                          - 00020126580014br.gov.bcb.pix...
+                      qrCodeUrl:
+                        description: URL da imagem do QR Code PIX
+                        type: string
+                        examples:
+                          - 'https://example.com/qrcode.png'
+                      endToEndId:
+                        anyOf:
+                          - description: E2E ID do PIX
+                            examples:
+                              - E2EID1234567890
+                            type: string
+                          - type: 'null'
+                        nullable: true
+                    required:
+                      - copyAndPasteCode
+                      - qrCodeUrl
+                      - endToEndId
+                  bankSlip:
+                    type: object
+                    properties:
+                      barCode:
+                        description: Código de barras do boleto
+                        type: string
+                        examples:
+                          - '34191790010104351004791020150008291070026000'
+                      digitableLine:
+                        description: Linha digitável do boleto
+                        type: string
+                        examples:
+                          - 34191.79001 01043.510047 91020.150008 2 91070026000
+                      pdfUrl:
+                        description: URL do PDF do boleto
+                        type: string
+                        examples:
+                          - 'https://example.com/boleto.pdf'
+                    required:
+                      - barCode
+                      - digitableLine
+                  nuPay:
+                    type: object
+                    properties:
+                      paymentUrl:
+                        description: URL de pagamento NuPay
+                        type: string
+                        examples:
+                          - 'https://nupay.com.br/payment/123456'
+                    required:
+                      - paymentUrl
+                  picPay:
+                    type: object
+                    properties:
+                      copyAndPasteCode:
+                        description: Código copia e cola do PicPay
+                        type: string
+                        examples:
+                          - picpay.me/loja/abc123
+                      qrCodeUrl:
+                        description: URL da imagem do QR Code PicPay
+                        type: string
+                        examples:
+                          - 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...'
+                    required:
+                      - copyAndPasteCode
+                      - qrCodeUrl
+                  creditCard:
+                    type: object
+                    properties:
+                      authorizationCode:
+                        description: Código de autorização da transação
+                        type: string
+                        examples:
+                          - '123456'
+                  status:
+                    type: string
+                    enum:
+                      - Generating
+                      - Pending
+                      - Completed
+                      - Failed
+                      - Canceled
+                      - Refunding
+                      - Refunded
+                      - InDispute
+                      - Chargeback
+                  paymentMethod:
+                    type: string
+                    enum:
+                      - Pix
+                      - CreditCard
+                      - DebitCard
+                      - BankSlip
+                      - Crypto
+                      - ApplePay
+                      - NuPay
+                      - PicPay
+                      - AmazonPay
+                      - SepaDebit
+                      - GooglePay
+                  payedAt:
+                    anyOf:
+                      - description: Data e hora em que o pedido foi pago (ISO 8601)
+                        examples:
+                          - '2024-01-01T12:00:00Z'
+                        type: string
+                      - type: 'null'
+                  errorCode:
+                    anyOf:
+                      - description: 'Código de erro, se houver'
+                        examples:
+                          - INSUFFICIENT_FUNDS
+                        type: string
+                      - type: 'null'
+                  errorMessage:
+                    anyOf:
+                      - description: 'Mensagem de erro, se houver'
+                        examples:
+                          - Saldo insuficiente
+                        type: string
+                      - type: 'null'
+                  orderItems:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        externalId:
+                          anyOf:
+                            - description: ID externo do item
+                              examples:
+                                - prod_123
+                              type: string
+                            - type: 'null'
+                        id:
+                          description: ID do item no pedido
+                          type: string
+                          examples:
+                            - item_abc123
+                        name:
+                          description: Nome do produto/serviço
+                          type: string
+                          examples:
+                            - Camisa Polo
+                        qty:
+                          description: Quantidade
+                          type: number
+                          examples:
+                            - 2
+                        totalAmount:
+                          description: Valor total do item (quantidade × preço unitário)
+                          type: number
+                          examples:
+                            - 200
+                        totalNetAmount:
+                          description: Valor líquido total do item
+                          type: number
+                          examples:
+                            - 180
+                        unityPrice:
+                          description: Preço unitário
+                          type: number
+                          examples:
+                            - 100
+                      required:
+                        - externalId
+                        - id
+                        - name
+                        - qty
+                        - totalAmount
+                        - totalNetAmount
+                        - unityPrice
+                  session:
+                    anyOf:
+                      - type: object
+                        properties:
+                          sessionId:
+                            description: ID da sessão de checkout associada ao pedido
+                            type: string
+                        required:
+                          - sessionId
+                      - type: 'null'
+                    nullable: true
+                additionalProperties: false
+                noValidate: true
+                required:
+                  - id
+                  - externalId
+                  - externalIntegrationKey
+                  - externalIntegrationId
+                  - amount
+                  - costFee
+                  - status
+                  - paymentMethod
+                  - payedAt
+                  - errorCode
+                  - errorMessage
+                  - orderItems
+      tags:
+        - Pedidos
+    get:
+      operationId: getOrders
+      summary: Listar pedidos
+      description: Recupere uma lista de pedidos. Utilize os parâmetros de filtro de data e paginação para refinar os resultados conforme necessário.
+      parameters:
+        - name: period
+          in: query
+          required: true
+          schema:
+            description: Período do filtro de datas
+            type: string
+            default: Last7Days
+            enum:
+              - Today
+              - Yesterday
+              - Last7Days
+              - Last30Days
+              - ThisMonth
+              - LastMonth
+              - ThisYear
+              - Custom
+            examples:
+              - Last7Days
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            description: 'Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)'
+            type: string
+            format: date-time
+            examples:
+              - '2025-01-15T03:00:00Z'
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            description: 'Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)'
+            type: string
+            format: date-time
+            examples:
+              - '2025-01-01T03:00:00Z'
+        - name: page
+          in: query
+          required: true
+          schema:
+            description: Número da página
+            type: number
+            default: 1
+            examples:
+              - 1
+              - 2
+              - 3
+            minimum: 1
+            multipleOf: 1
+        - name: pageSize
+          in: query
+          required: true
+          schema:
+            description: Número de itens por página
+            type: number
+            default: 20
+            examples:
+              - 10
+              - 20
+              - 50
+            maximum: 100
+            minimum: 1
+            multipleOf: 1
+        - name: id
+          in: query
+          required: false
+          schema:
+            description: ID interno sendo do pedido ou do charge
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum:
+              - Generating
+              - Pending
+              - Completed
+              - Failed
+              - Canceled
+              - Refunding
+              - Refunded
+              - InDispute
+              - Chargeback
+      tags:
+        - Pedidos
+  '/orders/{id}':
+    get:
+      operationId: getOrdersById
+      summary: Buscar pelo ID
+      description: Localize os dados completos de um pedido buscando pelo nosso id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Pedidos
+  '/orders/{id}/refund':
+    post:
+      operationId: postOrdersByIdRefund
+      summary: Reembolsar pedido
+      description: Inicie um reembolso para o pedido especificado pelo ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Pedidos
+  /withdraws/:
+    post:
+      operationId: postWithdraws
+      summary: Cria saque
+      description: Realiza um novo saque ou transferência para a conta de pagamento informada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  description: Valor do saque em centavos
+                  type: number
+                  minimum: 1
+                externalId:
+                  description: ID do saque no seu sistema
+                  type: string
+                  examples:
+                    - external_withdraw_123
+                merchant:
+                  description: Dados do merchant para pedido ou saque
+                  type: object
+                  properties:
+                    document:
+                      description: CPF ou CNPJ do merchant sem formatação
+                      type: string
+                      examples:
+                        - '12345678909'
+                        - '12345678000195'
+                      pattern: '^\d{11}$|^\d{14}$'
+                    email:
+                      description: Email do merchant
+                      type: string
+                      format: email
+                      examples:
+                        - merchant@example.com
+                    name:
+                      description: Nome do merchant
+                      type: string
+                      examples:
+                        - Loja do João
+                      maxLength: 255
+                      minLength: 2
+                  required:
+                    - document
+                    - email
+                    - name
+                  title: MerchantInput
+                payoutAccount:
+                  type: object
+                  properties:
+                    ownerDocument:
+                      description: Documento do titular da conta (CPF ou CNPJ)
+                      type: string
+                    ownerName:
+                      description: Nome do titular da conta
+                      type: string
+                    pixKey:
+                      description: PIX key for withdrawal
+                      type: string
+                    pixType:
+                      description: PIX key type
+                      type: string
+                      default: Cnpj
+                      enum:
+                        - Cnpj
+                        - Cpf
+                        - Email
+                        - Phone
+                        - Random
+                  required:
+                    - ownerDocument
+                    - ownerName
+                    - pixKey
+                    - pixType
+              additionalProperties: false
+              required:
+                - amount
+                - payoutAccount
+      responses:
+        '200':
+          description: Response for status 200
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Identificador único do saque
+                    type: string
+                    examples:
+                      - wd_1234567890
+                  externalId:
+                    anyOf:
+                      - description: ID do saque no sistema no seu sistema
+                        examples:
+                          - external_withdraw_123
+                        type: string
+                      - type: 'null'
+                    nullable: true
+                  externalIntegrationKey:
+                    description: Chave do provedor utilizado para o saque
+                    type: string
+                    examples:
+                      - PagarMe
+                      - Asaas
+                  externalIntegrationId:
+                    anyOf:
+                      - description: ID do saque no provedor de pagamento
+                        examples:
+                          - withdraw_123
+                        type: string
+                      - type: 'null'
+                  costFee:
+                    description: Taxa de custo aplicada ao saque
+                    type: number
+                    examples:
+                      - 4.5
+                  status:
+                    description: Status do saque
+                    type: string
+                    default: Pending
+                    enum:
+                      - Pending
+                      - Transferring
+                      - Completed
+                      - Failed
+                    examples:
+                      - Pending
+                      - Completed
+                  errorCode:
+                    anyOf:
+                      - description: 'Código do erro, se houver'
+                        examples:
+                          - insufficient_funds
+                          - invalid_account
+                        type: string
+                      - type: 'null'
+                  errorMessage:
+                    anyOf:
+                      - type: 'null'
+                      - description: 'Mensagem descritiva do erro, se houver'
+                        examples:
+                          - Saldo insuficiente para completar o saque
+                          - Conta bancária inválida
+                        type: string
+                  payedAt:
+                    anyOf:
+                      - type: 'null'
+                      - description: Data e hora em que o saque foi pago (formato ISO 8601)
+                        examples:
+                          - '2024-01-01T12:00:00Z'
+                        anyOf:
+                          - description: Data e hora em que o saque foi pago (formato ISO 8601)
+                            examples:
+                              - '2024-01-01T12:00:00Z'
+                            type: Date
+                          - format: date-time
+                            type: string
+                          - format: date
+                            type: string
+                          - type: number
+                  payoutAccount:
+                    type: object
+                    properties:
+                      id:
+                        description: Identificador único da conta de pagamento
+                        type: string
+                        examples:
+                          - pa_1234567890
+                      ownerDocument:
+                        description: Documento do titular da conta (CPF ou CNPJ)
+                        type: string
+                        examples:
+                          - '12345678909'
+                          - '12345678000195'
+                        pattern: '^\d{11}$|^\d{14}$'
+                      ownerName:
+                        description: Nome do titular da conta
+                        type: string
+                        examples:
+                          - João da Silva
+                          - Empresa XYZ Ltda
+                      pixKey:
+                        description: Chave PIX utilizada para o saque
+                        type: string
+                        examples:
+                          - joao@example.com
+                          - '11999999999'
+                      pixType:
+                        description: Tipo da chave PIX
+                        type: string
+                        default: Cpf
+                        enum:
+                          - Cpf
+                          - Cnpj
+                          - Email
+                          - Phone
+                          - Random
+                        examples:
+                          - Email
+                          - Cpf
+                    required:
+                      - id
+                      - ownerDocument
+                      - ownerName
+                      - pixKey
+                      - pixType
+                additionalProperties: false
+                noValidate: true
+                required:
+                  - id
+                  - externalId
+                  - externalIntegrationKey
+                  - externalIntegrationId
+                  - costFee
+                  - status
+                  - errorCode
+                  - errorMessage
+                  - payedAt
+                  - payoutAccount
+      tags:
+        - Saques e Transferências
+    get:
+      operationId: getWithdraws
+      summary: Lista os saques
+      description: 'Retorna uma lista paginada de saques e transferências. Permite filtrar por data de criação ou buscar por ID (ID do saque, ID externo, ID da adquirente ou End2EndID)'
+      parameters:
+        - name: period
+          in: query
+          required: true
+          schema:
+            description: Período do filtro de datas
+            type: string
+            default: Last7Days
+            enum:
+              - Today
+              - Yesterday
+              - Last7Days
+              - Last30Days
+              - ThisMonth
+              - LastMonth
+              - ThisYear
+              - Custom
+            examples:
+              - Last7Days
+        - name: endDate
+          in: query
+          required: false
+          schema:
+            description: 'Data de término para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)'
+            type: string
+            format: date-time
+            examples:
+              - '2025-01-15T03:00:00Z'
+        - name: startDate
+          in: query
+          required: false
+          schema:
+            description: 'Data de início para o filtro personalizado (formato AAAA-MM-DDTHH:MM:SSZ)'
+            type: string
+            format: date-time
+            examples:
+              - '2025-01-01T03:00:00Z'
+        - name: page
+          in: query
+          required: true
+          schema:
+            description: Número da página
+            type: number
+            default: 1
+            examples:
+              - 1
+              - 2
+              - 3
+            minimum: 1
+            multipleOf: 1
+        - name: pageSize
+          in: query
+          required: true
+          schema:
+            description: Número de itens por página
+            type: number
+            default: 20
+            examples:
+              - 10
+              - 20
+              - 50
+            maximum: 100
+            minimum: 1
+            multipleOf: 1
+        - name: id
+          in: query
+          required: false
+          schema:
+            description: 'ID de busca do saque (pode ser ID do saque, ID externo, ID da adquirente ou End2EndID)'
+            type: string
+      tags:
+        - Saques e Transferências
+  '/withdraws/{id}':
+    get:
+      operationId: getWithdrawsById
+      summary: Buscar pelo ID
+      description: Retorna os detalhes de um saque ou transferência específico usando seu ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - Saques e Transferências
+components:
+  schemas: {}
+  securitySchemes:
+    basicAuth:
+      description: 'Use o formato Authorization: Basic base64(''secret:'')'
+      scheme: basic
+      type: http
+tags:
+  - description: 'Gere cobranças, consulte o status dos pedidos e gerencie reembolsos.'
+    name: Pedidos
+  - description: Inicie e monitore saques e transferências para suas contas externas.
+    name: Saques e Transferências
+security:
+  - basicAuth: []
+webhooks:
+  Atualização do Pedido:
+    post:
+      requestBody:
+        description: Disparado quando o status de um pedido é alterado.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  description: Nome do evento do webhook
+                  type: string
+                  default: OrderCreated
+                  enum:
+                    - OrderCreated
+                    - OrderPending
+                    - OrderCompleted
+                    - OrderFailed
+                    - OrderRefunded
+                    - OrderChargeback
+                  examples:
+                    - OrderCreated
+                    - OrderCompleted
+                payload:
+                  type: object
+                  noValidate: true
+                  properties:
+                    id:
+                      description: ID do pedido no sistema
+                      type: string
+                      examples:
+                        - ord_abc123
+                    externalId:
+                      anyOf:
+                        - description: ID externo do pedido (fornecido pela sua integração)
+                          examples:
+                            - pedido_123
+                          type: string
+                        - type: 'null'
+                    externalIntegrationKey:
+                      description: Provedor utilizada para processar o pedido
+                      type: string
+                      examples:
+                        - PagarMe
+                        - Stripe
+                    externalIntegrationId:
+                      anyOf:
+                        - description: ID do pedido no provedor de pagamento
+                          examples:
+                            - pedido_123
+                          type: string
+                        - type: 'null'
+                    amount:
+                      description: Valor total do pedido
+                      type: number
+                      examples:
+                        - 150.45
+                    costFee:
+                      description: Taxa de custo aplicada ao pedido
+                      type: number
+                      examples:
+                        - 4.5
+                    pix:
+                      description: Dados do PIX
+                      type: object
+                      properties:
+                        copyAndPasteCode:
+                          description: Código copia e cola do PIX
+                          type: string
+                          examples:
+                            - 00020126580014br.gov.bcb.pix...
+                        qrCodeUrl:
+                          description: URL da imagem do QR Code PIX
+                          type: string
+                          examples:
+                            - 'https://example.com/qrcode.png'
+                        endToEndId:
+                          anyOf:
+                            - description: E2E ID do PIX
+                              examples:
+                                - E2EID1234567890
+                              type: string
+                            - type: 'null'
+                          nullable: true
+                      required:
+                        - copyAndPasteCode
+                        - qrCodeUrl
+                        - endToEndId
+                    bankSlip:
+                      type: object
+                      properties:
+                        barCode:
+                          description: Código de barras do boleto
+                          type: string
+                          examples:
+                            - '34191790010104351004791020150008291070026000'
+                        digitableLine:
+                          description: Linha digitável do boleto
+                          type: string
+                          examples:
+                            - 34191.79001 01043.510047 91020.150008 2 91070026000
+                        pdfUrl:
+                          description: URL do PDF do boleto
+                          type: string
+                          examples:
+                            - 'https://example.com/boleto.pdf'
+                      required:
+                        - barCode
+                        - digitableLine
+                    nuPay:
+                      type: object
+                      properties:
+                        paymentUrl:
+                          description: URL de pagamento NuPay
+                          type: string
+                          examples:
+                            - 'https://nupay.com.br/payment/123456'
+                      required:
+                        - paymentUrl
+                    picPay:
+                      type: object
+                      properties:
+                        copyAndPasteCode:
+                          description: Código copia e cola do PicPay
+                          type: string
+                          examples:
+                            - picpay.me/loja/abc123
+                        qrCodeUrl:
+                          description: URL da imagem do QR Code PicPay
+                          type: string
+                          examples:
+                            - 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...'
+                      required:
+                        - copyAndPasteCode
+                        - qrCodeUrl
+                    creditCard:
+                      type: object
+                      properties:
+                        authorizationCode:
+                          description: Código de autorização da transação
+                          type: string
+                          examples:
+                            - '123456'
+                    status:
+                      description: Status do pedido
+                      anyOf:
+                        - const: Generating
+                          type: string
+                        - const: Pending
+                          type: string
+                        - const: Completed
+                          type: string
+                        - const: Failed
+                          type: string
+                        - const: Canceled
+                          type: string
+                        - const: Refunding
+                          type: string
+                        - const: Refunded
+                          type: string
+                        - const: InDispute
+                          type: string
+                        - const: Chargeback
+                          type: string
+                      examples:
+                        - Pending
+                        - Completed
+                    paymentMethod:
+                      description: Método de pagamento utilizado no pedido
+                      anyOf:
+                        - const: Pix
+                          type: string
+                        - const: CreditCard
+                          type: string
+                        - const: DebitCard
+                          type: string
+                        - const: BankSlip
+                          type: string
+                        - const: Crypto
+                          type: string
+                        - const: ApplePay
+                          type: string
+                        - const: NuPay
+                          type: string
+                        - const: PicPay
+                          type: string
+                        - const: AmazonPay
+                          type: string
+                        - const: SepaDebit
+                          type: string
+                        - const: GooglePay
+                          type: string
+                      examples:
+                        - Pix
+                        - CreditCard
+                    payedAt:
+                      anyOf:
+                        - description: Data e hora em que o pedido foi pago (ISO 8601)
+                          examples:
+                            - '2024-01-01T12:00:00Z'
+                          type: string
+                        - type: 'null'
+                    errorCode:
+                      anyOf:
+                        - description: 'Código de erro, se houver'
+                          examples:
+                            - INSUFFICIENT_FUNDS
+                          type: string
+                        - type: 'null'
+                    errorMessage:
+                      anyOf:
+                        - description: 'Mensagem de erro, se houver'
+                          examples:
+                            - Saldo insuficiente
+                          type: string
+                        - type: 'null'
+                    orderItems:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          externalId:
+                            anyOf:
+                              - description: ID externo do item
+                                examples:
+                                  - prod_123
+                                type: string
+                              - type: 'null'
+                          id:
+                            description: ID do item no pedido
+                            type: string
+                            examples:
+                              - item_abc123
+                          name:
+                            description: Nome do produto/serviço
+                            type: string
+                            examples:
+                              - Camisa Polo
+                          qty:
+                            description: Quantidade
+                            type: number
+                            examples:
+                              - 2
+                          totalAmount:
+                            description: Valor total do item (quantidade × preço unitário)
+                            type: number
+                            examples:
+                              - 200
+                          totalNetAmount:
+                            description: Valor líquido total do item
+                            type: number
+                            examples:
+                              - 180
+                          unityPrice:
+                            description: Preço unitário
+                            type: number
+                            examples:
+                              - 100
+                        required:
+                          - externalId
+                          - id
+                          - name
+                          - qty
+                          - totalAmount
+                          - totalNetAmount
+                          - unityPrice
+                    session:
+                      anyOf:
+                        - type: object
+                          properties:
+                            sessionId:
+                              description: ID da sessão de checkout associada ao pedido
+                              type: string
+                          required:
+                            - sessionId
+                        - type: 'null'
+                      nullable: true
+                  required:
+                    - id
+                    - externalId
+                    - externalIntegrationKey
+                    - externalIntegrationId
+                    - amount
+                    - costFee
+                    - status
+                    - paymentMethod
+                    - payedAt
+                    - errorCode
+                    - errorMessage
+                    - orderItems
+              required:
+                - event
+                - payload
+  Atualização do Saque:
+    post:
+      requestBody:
+        description: Disparado quando o status de um saque é alterado.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                event:
+                  description: Nome do evento do webhook
+                  type: string
+                  default: WithdrawCreated
+                  enum:
+                    - WithdrawCreated
+                    - WithdrawCompleted
+                    - WithdrawFailed
+                    - WithdrawTransferring
+                  examples:
+                    - WithdrawCreated
+                    - WithdrawCompleted
+                payload:
+                  type: object
+                  noValidate: true
+                  properties:
+                    id:
+                      description: Identificador único do saque
+                      type: string
+                      examples:
+                        - wd_1234567890
+                    externalId:
+                      anyOf:
+                        - description: ID do saque no sistema no seu sistema
+                          examples:
+                            - external_withdraw_123
+                          type: string
+                        - type: 'null'
+                      nullable: true
+                    externalIntegrationKey:
+                      description: Chave do provedor utilizado para o saque
+                      type: string
+                      examples:
+                        - PagarMe
+                        - Asaas
+                    externalIntegrationId:
+                      anyOf:
+                        - description: ID do saque no provedor de pagamento
+                          examples:
+                            - withdraw_123
+                          type: string
+                        - type: 'null'
+                    costFee:
+                      description: Taxa de custo aplicada ao saque
+                      type: number
+                      examples:
+                        - 4.5
+                    status:
+                      description: Status do saque
+                      type: string
+                      default: Pending
+                      enum:
+                        - Pending
+                        - Transferring
+                        - Completed
+                        - Failed
+                      examples:
+                        - Pending
+                        - Completed
+                    errorCode:
+                      anyOf:
+                        - description: 'Código do erro, se houver'
+                          examples:
+                            - insufficient_funds
+                            - invalid_account
+                          type: string
+                        - type: 'null'
+                    errorMessage:
+                      anyOf:
+                        - type: 'null'
+                        - description: 'Mensagem descritiva do erro, se houver'
+                          examples:
+                            - Saldo insuficiente para completar o saque
+                            - Conta bancária inválida
+                          type: string
+                    payedAt:
+                      anyOf:
+                        - type: 'null'
+                        - description: Data e hora em que o saque foi pago (formato ISO 8601)
+                          examples:
+                            - '2024-01-01T12:00:00Z'
+                          anyOf:
+                            - description: Data e hora em que o saque foi pago (formato ISO 8601)
+                              examples:
+                                - '2024-01-01T12:00:00Z'
+                              type: Date
+                            - format: date-time
+                              type: string
+                            - format: date
+                              type: string
+                            - type: number
+                    payoutAccount:
+                      type: object
+                      properties:
+                        id:
+                          description: Identificador único da conta de pagamento
+                          type: string
+                          examples:
+                            - pa_1234567890
+                        ownerDocument:
+                          description: Documento do titular da conta (CPF ou CNPJ)
+                          type: string
+                          examples:
+                            - '12345678909'
+                            - '12345678000195'
+                          pattern: '^\d{11}$|^\d{14}$'
+                        ownerName:
+                          description: Nome do titular da conta
+                          type: string
+                          examples:
+                            - João da Silva
+                            - Empresa XYZ Ltda
+                        pixKey:
+                          description: Chave PIX utilizada para o saque
+                          type: string
+                          examples:
+                            - joao@example.com
+                            - '11999999999'
+                        pixType:
+                          description: Tipo da chave PIX
+                          type: string
+                          default: Cpf
+                          enum:
+                            - Cpf
+                            - Cnpj
+                            - Email
+                            - Phone
+                            - Random
+                          examples:
+                            - Email
+                            - Cpf
+                      required:
+                        - id
+                        - ownerDocument
+                        - ownerName
+                        - pixKey
+                        - pixType
+                  required:
+                    - id
+                    - externalId
+                    - externalIntegrationKey
+                    - externalIntegrationId
+                    - costFee
+                    - status
+                    - errorCode
+                    - errorMessage
+                    - payedAt
+                    - payoutAccount
+              required:
+                - event
+                - payload
