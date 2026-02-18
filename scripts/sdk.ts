@@ -7,15 +7,23 @@ const VERSIONS: Record<string, { apiUrl: string; languages: Record<string, { gen
   v1: {
     apiUrl: "https://app.payconductor.ai/api/v1/docs/json",
     languages: {
+      typescript: { generator: "typescript-axios", outputDir: "src/v1/typescript" },
+      javascript: { generator: "javascript", outputDir: "src/v1/javascript" },
       python: { generator: "python", outputDir: "src/v1/python" },
       csharp: { generator: "csharp", outputDir: "src/v1/csharp" },
       ruby: { generator: "ruby", outputDir: "src/v1/ruby" },
-      typescript: { generator: "typescript-axios", outputDir: "src/v1/typescript" },
       php: { generator: "php", outputDir: "src/v1/php" },
       lua: { generator: "lua", outputDir: "src/v1/lua" },
       go: { generator: "go", outputDir: "src/v1/go" },
       java: { generator: "java", outputDir: "src/v1/java" },
       kotlin: { generator: "kotlin", outputDir: "src/v1/kotlin" },
+      r: { generator: "r", outputDir: "src/v1/r" },
+      rust: { generator: "rust", outputDir: "src/v1/rust" },
+      perl: { generator: "perl", outputDir: "src/v1/perl" },
+      dart: { generator: "dart-dio", outputDir: "src/v1/dart" },
+      elixir: { generator: "elixir", outputDir: "src/v1/elixir" },
+      clojure: { generator: "clojure", outputDir: "src/v1/clojure" },
+      c: { generator: "c", outputDir: "src/v1/c" },
     },
   },
 };
@@ -30,9 +38,9 @@ const downloadOpenApi = async (version: string) => {
   const response = await fetch(config!.apiUrl);
   const data: any = await response.json();
   
-  if (data.servers && data.servers[0]) {
-    data.servers[0].url = "https://app.payconductor.ai/api/v1";
-  }
+  // if (data.servers && data.servers[0]) {
+  //   data.servers[0].url = "https://app.payconductor.ai/api/v1";
+  // }
   
   await Bun.write(outputJson, JSON.stringify(data, null,2));
   console.log(`Downloaded to ${outputJson}`);
@@ -58,7 +66,7 @@ const generateSdk = async (version: string, languages: string[]) => {
       "-g", langConfig.generator,
       "-o", langConfig.outputDir,
       "--skip-validate-spec",
-      "--additional-properties=packageName=payconductor-sdk,projectName=payconductor-sdk"
+      "--additional-properties=packageName=payconductor-sdk,projectName=payconductor-sdk,npmName=payconductor-sdk"
     ]);
     
     await proc.exited;
