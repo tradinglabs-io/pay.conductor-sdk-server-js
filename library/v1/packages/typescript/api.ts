@@ -23,10 +23,31 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
+
+export const AvailablePaymentMethods = {
+    Pix: 'Pix',
+    CreditCard: 'CreditCard',
+    DebitCard: 'DebitCard',
+    BankSlip: 'BankSlip',
+    Crypto: 'Crypto',
+    ApplePay: 'ApplePay',
+    NuPay: 'NuPay',
+    PicPay: 'PicPay',
+    AmazonPay: 'AmazonPay',
+    SepaDebit: 'SepaDebit',
+    GooglePay: 'GooglePay',
+    Draft: 'Draft'
+} as const;
+
+export type AvailablePaymentMethods = typeof AvailablePaymentMethods[keyof typeof AvailablePaymentMethods];
+
+
 export interface BankSlip {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'expirationInDays'?: BankSlipExpirationInDays;
 }
+
+
 /**
  * Days until bank slip expires
  */
@@ -58,7 +79,7 @@ export interface CompleteCardDataExpiration {
     'year': number;
 }
 export interface CreditCard {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'card': CreditCardCard;
     'installments': CreditCardInstallments;
     /**
@@ -66,6 +87,8 @@ export interface CreditCard {
      */
     'softDescriptor'?: string;
 }
+
+
 export interface CreditCardCard {
     /**
      * First 6 digits of the credit card
@@ -179,8 +202,8 @@ export interface CustomerAddress {
 }
 
 export const DocumentType = {
-    CPF: 'Cpf',
-    CNPJ: 'Cnpj'
+    Cpf: 'Cpf',
+    Cnpj: 'Cnpj'
 } as const;
 
 export type DocumentType = typeof DocumentType[keyof typeof DocumentType];
@@ -190,13 +213,15 @@ export type DocumentType = typeof DocumentType[keyof typeof DocumentType];
  * Used to create an order without generating a real payment. Use to create orders that will be paid later
  */
 export interface Draft {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'expirationInSeconds'?: DraftExpirationInSeconds;
     /**
      * Available payment methods for this order
      */
-    'availablePaymentMethods'?: Array<PaymentMethod>;
+    'availablePaymentMethods'?: Array<AvailablePaymentMethods>;
 }
+
+
 /**
  * Order expiration time in seconds
  */
@@ -204,16 +229,16 @@ export interface DraftExpirationInSeconds {
 }
 
 export const Event = {
-    ORDER_CREATED: 'OrderCreated',
-    ORDER_PENDING: 'OrderPending',
-    ORDER_COMPLETED: 'OrderCompleted',
-    ORDER_FAILED: 'OrderFailed',
-    ORDER_REFUNDED: 'OrderRefunded',
-    ORDER_CHARGEBACK: 'OrderChargeback',
-    WITHDRAW_CREATED: 'WithdrawCreated',
-    WITHDRAW_COMPLETED: 'WithdrawCompleted',
-    WITHDRAW_FAILED: 'WithdrawFailed',
-    WITHDRAW_TRANSFERRING: 'WithdrawTransferring'
+    OrderCreated: 'OrderCreated',
+    OrderPending: 'OrderPending',
+    OrderCompleted: 'OrderCompleted',
+    OrderFailed: 'OrderFailed',
+    OrderRefunded: 'OrderRefunded',
+    OrderChargeback: 'OrderChargeback',
+    WithdrawCreated: 'WithdrawCreated',
+    WithdrawCompleted: 'WithdrawCompleted',
+    WithdrawFailed: 'WithdrawFailed',
+    WithdrawTransferring: 'WithdrawTransferring'
 } as const;
 
 export type Event = typeof Event[keyof typeof Event];
@@ -237,9 +262,11 @@ export interface MerchantInput {
     'name': string;
 }
 export interface NuPay {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'nuPay': NuPayNuPay;
 }
+
+
 /**
  * Specific data for NuPay payment
  */
@@ -263,30 +290,34 @@ export interface NuPayNuPay {
 }
 
 export const PaymentMethod = {
-    PIX: 'Pix',
-    CREDIT_CARD: 'CreditCard',
-    DEBIT_CARD: 'DebitCard',
-    BANK_SLIP: 'BankSlip',
-    CRYPTO: 'Crypto',
-    APPLE_PAY: 'ApplePay',
-    NU_PAY: 'NuPay',
-    PIC_PAY: 'PicPay',
-    AMAZON_PAY: 'AmazonPay',
-    SEPA_DEBIT: 'SepaDebit',
-    GOOGLE_PAY: 'GooglePay',
-    DRAFT: 'Draft'
+    Pix: 'Pix',
+    CreditCard: 'CreditCard',
+    DebitCard: 'DebitCard',
+    BankSlip: 'BankSlip',
+    Crypto: 'Crypto',
+    ApplePay: 'ApplePay',
+    NuPay: 'NuPay',
+    PicPay: 'PicPay',
+    AmazonPay: 'AmazonPay',
+    SepaDebit: 'SepaDebit',
+    GooglePay: 'GooglePay',
+    Draft: 'Draft'
 } as const;
 
 export type PaymentMethod = typeof PaymentMethod[keyof typeof PaymentMethod];
 
 
 export interface PicPay {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
 }
+
+
 export interface Pix {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'expirationInSeconds'?: PixExpirationInSeconds;
 }
+
+
 /**
  * PIX expiration time in seconds
  */
@@ -294,11 +325,11 @@ export interface PixExpirationInSeconds {
 }
 
 export const PixType = {
-    CPF: 'Cpf',
-    CNPJ: 'Cnpj',
-    EMAIL: 'Email',
-    PHONE: 'Phone',
-    RANDOM: 'Random'
+    Cpf: 'Cpf',
+    Cnpj: 'Cnpj',
+    Email: 'Email',
+    Phone: 'Phone',
+    Random: 'Random'
 } as const;
 
 export type PixType = typeof PixType[keyof typeof PixType];
@@ -608,7 +639,7 @@ export interface PostOrdersRequestItemsInner {
  * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
  */
 export interface PostOrdersRequestPayment {
-    'paymentMethod': string;
+    'paymentMethod': PaymentMethod;
     'expirationInSeconds'?: DraftExpirationInSeconds;
     'card': CreditCardCard;
     'installments': CreditCardInstallments;
@@ -621,8 +652,10 @@ export interface PostOrdersRequestPayment {
     /**
      * Available payment methods for this order
      */
-    'availablePaymentMethods'?: Array<PaymentMethod>;
+    'availablePaymentMethods'?: Array<AvailablePaymentMethods>;
 }
+
+
 /**
  * If externalSessionId or sessionId is provided and an existing session exists, it will be updated with the new data. Otherwise, a new session will be created.
  */
@@ -736,16 +769,16 @@ export interface PostWithdrawsRequestPayoutAccount {
 
 
 export const Status = {
-    GENERATING: 'Generating',
-    PENDING: 'Pending',
-    COMPLETED: 'Completed',
-    FAILED: 'Failed',
-    CANCELED: 'Canceled',
-    REFUNDING: 'Refunding',
-    REFUNDED: 'Refunded',
-    IN_DISPUTE: 'InDispute',
-    CHARGEBACK: 'Chargeback',
-    TRANSFERRING: 'Transferring'
+    Generating: 'Generating',
+    Pending: 'Pending',
+    Completed: 'Completed',
+    Failed: 'Failed',
+    Canceled: 'Canceled',
+    Refunding: 'Refunding',
+    Refunded: 'Refunded',
+    InDispute: 'InDispute',
+    Chargeback: 'Chargeback',
+    Transferring: 'Transferring'
 } as const;
 
 export type Status = typeof Status[keyof typeof Status];

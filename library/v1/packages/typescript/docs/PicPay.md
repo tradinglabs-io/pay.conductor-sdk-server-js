@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | **string** |  | [default to undefined]
+**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [default to undefined]
 
 ## Example
 

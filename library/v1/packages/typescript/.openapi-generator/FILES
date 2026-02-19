@@ -6,6 +6,7 @@ api.ts
 base.ts
 common.ts
 configuration.ts
+docs/AvailablePaymentMethods.md
 docs/BankSlip.md
 docs/BankSlipExpirationInDays.md
 docs/CardTokenizationApi.md

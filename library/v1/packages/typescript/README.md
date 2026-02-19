@@ -68,6 +68,7 @@ Class | Method | HTTP request | Description
 
 ### Documentation For Models
 
+ - [AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
  - [BankSlip](docs/BankSlip.md)
  - [BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
  - [CompleteCardData](docs/CompleteCardData.md)

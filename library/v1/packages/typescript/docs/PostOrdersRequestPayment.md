@@ -6,14 +6,14 @@ Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | **string** |  | [default to undefined]
+**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [default to undefined]
 **expirationInSeconds** | [**DraftExpirationInSeconds**](DraftExpirationInSeconds.md) |  | [optional] [default to undefined]
 **card** | [**CreditCardCard**](CreditCardCard.md) |  | [default to undefined]
 **installments** | [**CreditCardInstallments**](CreditCardInstallments.md) |  | [default to undefined]
 **softDescriptor** | **string** | Text that will appear on the card statement (soft descriptor) | [optional] [default to undefined]
 **expirationInDays** | [**BankSlipExpirationInDays**](BankSlipExpirationInDays.md) |  | [optional] [default to undefined]
 **nuPay** | [**NuPayNuPay**](NuPayNuPay.md) |  | [default to undefined]
-**availablePaymentMethods** | [**Array&lt;PaymentMethod&gt;**](PaymentMethod.md) | Available payment methods for this order | [optional] [default to undefined]
+**availablePaymentMethods** | [**Array&lt;AvailablePaymentMethods&gt;**](AvailablePaymentMethods.md) | Available payment methods for this order | [optional] [default to undefined]
 
 ## Example
 
