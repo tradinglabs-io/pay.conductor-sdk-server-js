@@ -1,32 +1,36 @@
-import { Configuration, OrdersApi, CustomersApi, CardTokenizationApi, TransfersApi } from 'payconductor-sdk';
-
-const config = new Configuration({
-  username: process.env.PAYCONDUCTOR_CLIENT_ID || 'your_client_id',
-  password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
-});
-
-const orderApi = new OrdersApi(config);
-const customerApi = new CustomersApi(config);
-const cardTokenizationApi = new CardTokenizationApi(config);
-const transferApi = new TransfersApi(config);
+import { createPixOrder } from './order-pix';
+import { createCreditCardOrder } from './order-credit-card';
+import { createBankSlipOrder } from './order-bank-slip';
+import { createCustomer } from './customer';
+import { tokenizeCard } from './card-tokenization';
+import { createWithdraw } from './withdraw';
+import { listOrders } from './order-management';
 
 async function main() {
-  console.log('=== PayConductor SDK Examples ===\n');
-
-  // Example: Get all orders
-  console.log('1. Getting orders...');
   try {
-    const orders = await orderApi.getOrders(1, 10);
-    console.log('Orders:', JSON.stringify(orders.data, null, 2));
-  } catch (error: any) {
-    console.error('Error:', error.response?.data || error.message);
-  }
+    console.log('PayConductor SDK Examples\n');
 
-  // Example: Get all customers
-  console.log('\n2. Getting customers...');
-  try {
-    const customers = await customerApi.getCustomers(1, 10);
-    console.log('Customers:', JSON.stringify(customers.data, null, 2));
+    await createPixOrder();
+    console.log('\n---\n');
+
+    await createCreditCardOrder();
+    console.log('\n---\n');
+
+    await createBankSlipOrder();
+    console.log('\n---\n');
+
+    await createCustomer();
+    console.log('\n---\n');
+
+    await tokenizeCard();
+    console.log('\n---\n');
+
+    await createWithdraw();
+    console.log('\n---\n');
+
+    await listOrders();
+
+    console.log('\nAll examples completed!');
   } catch (error: any) {
     console.error('Error:', error.response?.data || error.message);
   }

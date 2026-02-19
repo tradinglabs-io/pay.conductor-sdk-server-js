@@ -8,8 +8,8 @@ PayConductor is a payment orchestration platform that provides APIs for:
 
 - **Card Tokenization** - Generate and manage credit card tokens
 - **Customers** - Create and manage customer data
-- **Orders** - Create and manage payment orders
-- **Withdrawals & Transfers** - Process withdrawals and transfers
+- **Orders** - Create and manage payment orders (PIX, Credit Card, Bank Slip, NuPay, PicPay)
+- **Withdrawals & Transfers** - Process withdrawals and transfers via PIX
 
 This repository contains generated SDKs in multiple programming languages to simplify integration with the PayConductor API.
 
@@ -24,44 +24,31 @@ This repository contains generated SDKs in multiple programming languages to sim
 
 ```
 pay.conductor-sdk/
-├── src/
-│   └── v1/                    # API Version
-│       ├── openapi.json       # OpenAPI specification (JSON)
-│       ├── openapi.yaml       # OpenAPI specification (YAML)
-│       ├── c/                 # C SDK
-│       ├── clojure/           # Clojure SDK
-│       ├── csharp/            # C# SDK
-│       ├── dart/              # Dart SDK
-│       ├── elixir/            # Elixir SDK
-│       ├── go/                # Go SDK
-│       ├── java/              # Java SDK
-│       ├── javascript/        # JavaScript SDK
-│       ├── kotlin/            # Kotlin SDK
-│       ├── lua/               # Lua SDK
-│       ├── perl/              # Perl SDK
-│       ├── php/               # PHP SDK
-│       ├── python/            # Python SDK
-│       ├── r/                 # R SDK
-│       ├── ruby/              # Ruby SDK
-│       ├── rust/              # Rust SDK
-│       └── typescript/        # TypeScript SDK
+├── library/
+│   └── v1/
+│       ├── packages/           # Generated SDK packages
+│       │   ├── typescript/     # TypeScript SDK
+│       │   ├── csharp/         # C# SDK
+│       │   ├── java/           # Java SDK
+│       │   ├── go/             # Go SDK
+│       │   └── ...
+│       └── examples/           # Usage examples
+│           └── typescript/     # TypeScript examples
 ├── scripts/
-│   └── sdk.ts                 # CLI for SDK generation
-├── examples/
-│   └── typescript/            # TypeScript usage examples
-├── package.json               # Node.js dependencies
-├── tsconfig.json              # TypeScript configuration
-└── README.md                  # This file
+│   └── sdk.ts                  # CLI for SDK generation
+├── package.json
+└── README.md
 ```
 
 ## Examples
 
-Check the [examples/typescript](./examples/typescript) folder for usage examples with TypeScript.
+Check the [library/v1/examples/typescript](./library/v1/examples/typescript) folder for complete usage examples.
 
 ```bash
-cd examples/typescript
+cd library/v1/examples/typescript
 bun install
-bun run index.ts
+bun run index.ts 1   # Run PIX order example
+bun run index.ts all # Run all examples
 ```
 
 ## Requirements
@@ -72,7 +59,6 @@ bun run index.ts
 ## Installation
 
 ```bash
-# Install dependencies
 bun install
 ```
 
@@ -81,84 +67,13 @@ bun install
 ### Download OpenAPI Specification
 
 ```bash
-# Interactive: select version
-bun run sdk
-
-# Or explicitly
 bun run sdk download
 ```
 
 ### Generate SDKs
 
 ```bash
-# Interactive: select version and languages (use space to multi-select)
 bun run sdk generate
-
-# Generate all SDKs for v1
-# (select "all" in the language prompt)
-```
-
-### Available Languages
-
-| Language | Directory |
-|----------|-----------|
-| C | `src/v1/c` |
-| C# | `src/v1/csharp` |
-| Clojure | `src/v1/clojure` |
-| Dart | `src/v1/dart` |
-| Elixir | `src/v1/elixir` |
-| Go | `src/v1/go` |
-| Java | `src/v1/java` |
-| JavaScript | `src/v1/javascript` |
-| Kotlin | `src/v1/kotlin` |
-| Lua | `src/v1/lua` |
-| Perl | `src/v1/perl` |
-| PHP | `src/v1/php` |
-| Python | `src/v1/python` |
-| R | `src/v1/r` |
-| Ruby | `src/v1/ruby` |
-| Rust | `src/v1/rust` |
-| TypeScript | `src/v1/typescript` |
-
-## Adding a New Language
-
-To add support for a new language:
-
-1. Edit `scripts/sdk.ts`
-2. Add the language to the `VERSIONS.v1.languages` object:
-
-```typescript
-const VERSIONS: Record<string, { apiUrl: string; languages: Record<string, { generator: string; outputDir: string }> }> = {
-  v1: {
-    apiUrl: "https://app.payconductor.ai/api/v1/docs/json",
-    languages: {
-      // Add new language here
-      newlang: { 
-        generator: "newlang",  // OpenAPI Generator name
-        outputDir: "src/v1/newlang" 
-      },
-    },
-  },
-};
-```
-
-3. Run `bun run sdk generate` to generate the new SDK
-
-## Adding a New Version
-
-To add a new API version:
-
-1. Edit `scripts/sdk.ts`
-2. Add the new version to the `VERSIONS` object:
-
-```typescript
-const VERSIONS: Record<string, { apiUrl: string; languages: Record<string, {...}> }> = {
-  v1: { ... },
-  v2: {
-    apiUrl: "https://app.payconductor.ai/api/v2/docs/json",
-    languages: { ... },
-  },
-};
 ```
 
 ## Authentication
@@ -168,127 +83,360 @@ The PayConductor API uses HTTP Basic Authentication. You'll need:
 1. **Client ID** - Your application's client identifier
 2. **Client Secret** - Your application's secret key
 
-### Example: Encoding Credentials
-
 ```javascript
 const clientId = 'your_client_id';
 const clientSecret = 'your_client_secret';
-
 const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64');
-// Result: "eW91cl9jbGllbnRfaWQ6eW91cl9jbGllbnRfc2VjcmV0"
 ```
-
-Then use in requests:
-
-```javascript
-fetch('https://app.payconductor.ai/api/v1/orders/', {
-  headers: {
-    'Authorization': `Basic ${credentials}`,
-    'Content-Type': 'application/json'
-  }
-});
-```
-
-## API Reference
-
-### Card Tokenization
-
-- `POST /cards/tokenization` - Generate a credit card token
-
-### Customers
-
-- `POST /customers/` - Create a new customer
-- `GET /customers/` - List customers (supports: page, pageSize, period, email, name, startDate, endDate)
-- `GET /customers/{id}` - Get customer by ID
-- `PATCH /customers/{id}` - Update customer
-- `DELETE /customers/{id}` - Delete customer
-
-### Orders
-
-- `POST /orders/` - Create a new payment order
-- `GET /orders/` - List orders (supports: period, page, pageSize, endDate, startDate, id, status)
-- `GET /orders/{id}` - Get order by ID
-- `POST /orders/{id}/refund` - Refund an order
-
-### Withdrawals & Transfers
-
-- `POST /withdraws/` - Create a withdrawal/transfer
-- `GET /withdraws/` - List withdrawals (supports: period, page, pageSize, endDate, startDate, id)
-- `GET /withdraws/{id}` - Get withdrawal by ID
 
 ## Code Examples
 
 ### TypeScript
 
 ```typescript
-import { Configuration, OrderApi, CustomerApi, CardTokenizationApi, TransferApi } from './src/v1/typescript';
+import { 
+  Configuration, 
+  OrdersApi, 
+  CustomersApi, 
+  CardTokenizationApi, 
+  TransfersApi,
+  DocumentType,
+  PaymentMethod,
+  PixType,
+  PostOrdersRequest,
+  Customer,
+  PostWithdrawsRequest,
+  PostCardTokenizationRequest,
+} from 'payconductor-sdk';
 
 const config = new Configuration({
   username: 'your_client_id',
   password: 'your_client_secret',
 });
 
-const orderApi = new OrderApi(config);
-const customerApi = new CustomerApi(config);
+const ordersApi = new OrdersApi(config);
+const customersApi = new CustomersApi(config);
 const cardTokenizationApi = new CardTokenizationApi(config);
-const transferApi = new TransferApi(config);
+const transfersApi = new TransfersApi(config);
 
-// Create an order
-const order = await orderApi.postOrders({
-  amount: 100.00,
-  currency: 'BRL',
-  payment: {
-    paymentMethod: 'credit_card',
-    // ... other payment details
-  },
-  items: [
-    {
-      name: 'Product 1',
-      quantity: 1,
-      price: 100.00,
+// Create PIX Order
+async function createPixOrder() {
+  const customer: Customer = {
+    documentNumber: '12345678900',
+    documentType: DocumentType.Cpf,
+    email: 'cliente@exemplo.com',
+    name: 'Joao da Silva',
+    phoneNumber: '+55 11 999999999',
+  };
+
+  const request: PostOrdersRequest = {
+    chargeAmount: 100.00,
+    clientIp: '192.168.1.1',
+    customer,
+    discountAmount: 0,
+    externalId: `order-${Date.now()}`,
+    payment: {
+      paymentMethod: PaymentMethod.Pix,
+      expirationInSeconds: 3600,
     },
-  ],
-});
+    shippingFee: 0,
+    taxFee: 0,
+    items: [
+      {
+        id: 'item-1',
+        isPhysical: false,
+        name: 'Produto Exemplo',
+        qty: 1,
+        unitPrice: 100.00,
+      },
+    ],
+  };
 
-// Get all orders
-const orders = await orderApi.getOrders('seven_days', 1, 10);
+  const response = await ordersApi.postOrders(request);
+  console.log('PIX Copy Paste:', response.data.pix?.copyAndPasteCode);
+  console.log('QR Code URL:', response.data.pix?.qrCodeUrl);
+}
 
-// Tokenize a credit card
-const tokenizedCard = await cardTokenizationApi.postCardTokenization({
-  customer: {
-    document: '12345678900',
-    documentType: 'cpf',
-    email: 'customer@example.com',
-    name: 'John Doe',
-  },
-  card: {
-    number: '4111111111111111',
-    holderName: 'John Doe',
-    cvv: '123',
-    expiration: {
-      month: 12,
-      year: 2025,
+// Create Credit Card Order
+async function createCreditCardOrder() {
+  const request: PostOrdersRequest = {
+    chargeAmount: 150.00,
+    clientIp: '192.168.1.1',
+    customer: {
+      documentNumber: '12345678900',
+      documentType: DocumentType.Cpf,
+      email: 'cliente@exemplo.com',
+      name: 'Joao da Silva',
     },
-  },
-});
+    discountAmount: 0,
+    externalId: `cc-order-${Date.now()}`,
+    payment: {
+      paymentMethod: 'CreditCard',
+      card: {
+        number: '4111111111111111',
+        holderName: 'JOAO DA SILVA',
+        cvv: '123',
+        expiration: { month: 12, year: 2028 },
+        token: '',
+      },
+      installments: 1,
+      softDescriptor: 'PAYCONDUCTOR',
+    } as any,
+    shippingFee: 0,
+    taxFee: 0,
+    items: [
+      {
+        id: 'item-1',
+        isPhysical: true,
+        name: 'Produto',
+        qty: 1,
+        unitPrice: 150.00,
+      },
+    ],
+  };
 
-// Create a withdrawal
-const withdrawal = await transferApi.postWithdraws({
-  amount: 50.00,
-  currency: 'BRL',
-  payoutAccount: {
-    // ... payout account details
-  },
-});
+  const response = await ordersApi.postOrders(request);
+  console.log('Order ID:', response.data.id);
+  console.log('Status:', response.data.status);
+}
+
+// Create Bank Slip Order
+async function createBankSlipOrder() {
+  const request: PostOrdersRequest = {
+    chargeAmount: 200.00,
+    clientIp: '192.168.1.1',
+    customer: {
+      documentNumber: '12345678900',
+      documentType: DocumentType.Cpf,
+      email: 'cliente@exemplo.com',
+      name: 'Joao da Silva',
+      address: {
+        street: 'Rua das Flores',
+        number: '123',
+        neighborhood: 'Centro',
+        city: 'Sao Paulo',
+        state: 'SP',
+        zipCode: '01234567',
+        country: 'BR',
+      },
+    },
+    discountAmount: 0,
+    externalId: `boleto-order-${Date.now()}`,
+    payment: {
+      paymentMethod: PaymentMethod.BankSlip,
+      expirationInDays: 7,
+    },
+    shippingFee: 0,
+    taxFee: 0,
+    items: [
+      {
+        id: 'item-1',
+        isPhysical: true,
+        name: 'Produto',
+        qty: 1,
+        unitPrice: 200.00,
+      },
+    ],
+  };
+
+  const response = await ordersApi.postOrders(request);
+  console.log('Barcode:', response.data.bankSlip?.barCode);
+  console.log('PDF URL:', response.data.bankSlip?.pdfUrl);
+}
+
+// Create Customer
+async function createCustomer() {
+  const response = await customersApi.postCustomers({
+    documentNumber: '12345678900',
+    documentType: DocumentType.Cpf,
+    email: 'cliente@exemplo.com',
+    name: 'Joao da Silva',
+    phoneNumber: '+55 11 999999999',
+    address: {
+      street: 'Rua das Flores',
+      number: '123',
+      neighborhood: 'Centro',
+      city: 'Sao Paulo',
+      state: 'SP',
+      zipCode: '01234567',
+      country: 'BR',
+    },
+  });
+  console.log('Customer created:', response.data);
+}
+
+// Tokenize Card
+async function tokenizeCard() {
+  const request: PostCardTokenizationRequest = {
+    card: {
+      number: '4111111111111111',
+      holderName: 'JOAO DA SILVA',
+      cvv: '123',
+      expiration: { month: 12, year: 2028 },
+    },
+    saveCard: true,
+    customer: {
+      documentNumber: '12345678900',
+      documentType: DocumentType.Cpf,
+      email: 'cliente@exemplo.com',
+      name: 'Joao da Silva',
+      id: '',
+    },
+  };
+
+  const response = await cardTokenizationApi.postCardTokenization(request);
+  console.log('Token:', response.data.token);
+  console.log('Customer ID:', response.data.customerId);
+}
+
+// Create Withdrawal (PIX)
+async function createWithdrawal() {
+  const request: PostWithdrawsRequest = {
+    amount: 50.00,
+    externalId: `withdraw-${Date.now()}`,
+    payoutAccount: {
+      ownerDocument: '12345678900',
+      ownerName: 'Joao da Silva',
+      pixKey: 'joao.silva@exemplo.com',
+      pixType: PixType.Email,
+    },
+  };
+
+  const response = await transfersApi.postWithdraws(request);
+  console.log('Withdrawal ID:', response.data.id);
+  console.log('Status:', response.data.status);
+}
+
+// List Orders
+async function listOrders() {
+  const response = await ordersApi.getOrders(1, 10);
+  console.log('Orders:', response.data);
+}
+
+// Refund Order
+async function refundOrder(orderId: string) {
+  const response = await ordersApi.postOrdersByIdRefund(orderId);
+  console.log('Refund status:', response.data);
+}
+```
+
+### Java
+
+```java
+import payconductor.sdk.ApiClient;
+import payconductor.sdk.ApiException;
+import payconductor.sdk.Configuration;
+import payconductor.sdk.api.OrdersApi;
+import payconductor.sdk.api.CustomersApi;
+import payconductor.sdk.api.CardTokenizationApi;
+import payconductor.sdk.api.TransfersApi;
+import payconductor.sdk.model.*;
+
+public class Example {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        defaultClient.setUsername("your_client_id");
+        defaultClient.setPassword("your_client_secret");
+
+        OrdersApi ordersApi = new OrdersApi(defaultClient);
+        CustomersApi customersApi = new CustomersApi(defaultClient);
+        CardTokenizationApi cardApi = new CardTokenizationApi(defaultClient);
+        TransfersApi transfersApi = new TransfersApi(defaultClient);
+
+        try {
+            // Create PIX Order
+            PostOrdersRequest pixOrder = new PostOrdersRequest()
+                .chargeAmount(100.0f)
+                .clientIp("192.168.1.1")
+                .customer(new Customer()
+                    .documentNumber("12345678900")
+                    .documentType(DocumentTypeEnum.CPF)
+                    .email("cliente@exemplo.com")
+                    .name("Joao da Silva"))
+                .discountAmount(0f)
+                .externalId("pix-order-123")
+                .payment(new Pix()
+                    .paymentMethod(PaymentMethodEnum.PIX)
+                    .expirationInSeconds(3600))
+                .shippingFee(0f)
+                .taxFee(0f);
+            
+            PostOrders200Response pixResponse = ordersApi.postOrders(pixOrder);
+            System.out.println("PIX Copy Paste: " + pixResponse.getPix().getCopyAndPasteCode());
+
+            // Create Credit Card Order
+            PostOrdersRequest ccOrder = new PostOrdersRequest()
+                .chargeAmount(150.0f)
+                .clientIp("192.168.1.1")
+                .customer(new Customer()
+                    .documentNumber("12345678900")
+                    .documentType(DocumentTypeEnum.CPF)
+                    .email("cliente@exemplo.com")
+                    .name("Joao da Silva"))
+                .discountAmount(0f)
+                .externalId("cc-order-123")
+                .payment(new CreditCard()
+                    .paymentMethod(PaymentMethodEnum.CREDIT_CARD)
+                    .card(new CreditCardCard()
+                        .number("4111111111111111")
+                        .holderName("JOAO DA SILVA")
+                        .cvv("123")
+                        .expiration(new CompleteCardDataExpiration()
+                            .month(12)
+                            .year(2028)))
+                    .installments(1))
+                .shippingFee(0f)
+                .taxFee(0f);
+            
+            PostOrders200Response ccResponse = ordersApi.postOrders(ccOrder);
+            System.out.println("Order ID: " + ccResponse.getId());
+
+            // Tokenize Card
+            PostCardTokenizationRequest tokenRequest = new PostCardTokenizationRequest()
+                .card(new CompleteCardData()
+                    .number("4111111111111111")
+                    .holderName("JOAO DA SILVA")
+                    .cvv("123")
+                    .expiration(new CompleteCardDataExpiration()
+                        .month(12)
+                        .year(2028)))
+                .saveCard(true)
+                .customer(new PostCardTokenizationRequestCustomer()
+                    .documentNumber("12345678900")
+                    .documentType(DocumentTypeEnum.CPF)
+                    .email("cliente@exemplo.com")
+                    .name("Joao da Silva"));
+            
+            PostCardTokenization200Response tokenResponse = cardApi.postCardTokenization(tokenRequest);
+            System.out.println("Token: " + tokenResponse.getToken());
+
+            // Create Withdrawal
+            PostWithdrawsRequest withdrawRequest = new PostWithdrawsRequest()
+                .amount(50.0f)
+                .externalId("withdraw-123")
+                .payoutAccount(new PostWithdrawsRequestPayoutAccount()
+                    .ownerDocument("12345678900")
+                    .ownerName("Joao da Silva")
+                    .pixKey("joao.silva@exemplo.com")
+                    .pixType(PixTypeEnum.EMAIL));
+            
+            PostWithdraws200Response withdrawResponse = transfersApi.postWithdraws(withdrawRequest);
+            System.out.println("Withdrawal ID: " + withdrawResponse.getId());
+
+        } catch (ApiException e) {
+            System.err.println("Exception: " + e.getMessage());
+        }
+    }
+}
 ```
 
 ### C#
 
 ```csharp
 using Microsoft.Extensions.DependencyInjection;
-using payconductor_sdk.Api;
-using payconductor_sdk.Client;
-using payconductor_sdk.Model;
+using Payconductor.Sdk.Api;
+using Payconductor.Sdk.Client;
+using Payconductor.Sdk.Model;
 
 var services = new ServiceCollection();
 
@@ -300,82 +448,238 @@ services.AddPayconductorApi((sp, options) =>
 
 var serviceProvider = services.BuildServiceProvider();
 
-// Order API
-var orderApi = serviceProvider.GetRequiredService<IOrderApi>();
-var orderResponse = await orderApi.PostOrdersAsync(new PostOrdersRequest
+// Get API instances
+var ordersApi = serviceProvider.GetRequiredService<IOrdersApi>();
+var customersApi = serviceProvider.GetRequiredService<ICustomersApi>();
+var cardApi = serviceProvider.GetRequiredService<ICardTokenizationApi>();
+var transfersApi = serviceProvider.GetRequiredService<ITransfersApi>();
+
+// Create PIX Order
+var pixOrder = new PostOrdersRequest
 {
-    Amount = 100.00m,
-    Currency = "BRL",
+    ChargeAmount = 100.00f,
+    ClientIp = "192.168.1.1",
+    Customer = new Customer
+    {
+        DocumentNumber = "12345678900",
+        DocumentType = DocumentTypeEnum.Cpf,
+        Email = "cliente@exemplo.com",
+        Name = "Joao da Silva"
+    },
+    DiscountAmount = 0f,
+    ExternalId = $"pix-order-{DateTime.Now.Ticks}",
+    Payment = new Pix
+    {
+        PaymentMethod = PaymentMethodEnum.Pix,
+        ExpirationInSeconds = 3600
+    },
+    ShippingFee = 0f,
+    TaxFee = 0f
+};
+
+var pixResponse = await ordersApi.PostOrdersAsync(pixOrder);
+Console.WriteLine($"PIX Copy Paste: {pixResponse.Pix.CopyAndPasteCode}");
+Console.WriteLine($"QR Code URL: {pixResponse.Pix.QrCodeUrl}");
+
+// Create Credit Card Order
+var ccOrder = new PostOrdersRequest
+{
+    ChargeAmount = 150.00f,
+    ClientIp = "192.168.1.1",
+    Customer = new Customer
+    {
+        DocumentNumber = "12345678900",
+        DocumentType = DocumentTypeEnum.Cpf,
+        Email = "cliente@exemplo.com",
+        Name = "Joao da Silva"
+    },
+    DiscountAmount = 0f,
+    ExternalId = $"cc-order-{DateTime.Now.Ticks}",
     Payment = new CreditCard
     {
-        PaymentMethod = "credit_card",
+        PaymentMethod = PaymentMethodEnum.CreditCard,
         Card = new CreditCardCard
         {
             Number = "4111111111111111",
-            HolderName = "John Doe",
+            HolderName = "JOAO DA SILVA",
             Cvv = "123",
             Expiration = new CompleteCardDataExpiration
             {
                 Month = 12,
-                Year = 2025
+                Year = 2028
             }
         },
-        Installments = new CreditCardInstallments
-        {
-            Value = 1
-        }
+        Installments = 1,
+        SoftDescriptor = "PAYCONDUCTOR"
     },
-    Items = new List<PostOrdersRequestItemsInner>
-    {
-        new PostOrdersRequestItemsInner
-        {
-            Name = "Product 1",
-            Quantity = 1,
-            Price = 100.00m
-        }
-    }
-});
+    ShippingFee = 0f,
+    TaxFee = 0f
+};
 
-// Customer API
-var customerApi = serviceProvider.GetRequiredService<ICustomerApi>();
-var customersResponse = await customerApi.GetCustomersAsync(page: 1, pageSize: 10, period: GetCustomersPeriodEnum.SevenDays);
+var ccResponse = await ordersApi.PostOrdersAsync(ccOrder);
+Console.WriteLine($"Order ID: {ccResponse.Id}");
+Console.WriteLine($"Status: {ccResponse.Status}");
 
-// Card Tokenization API
-var cardApi = serviceProvider.GetRequiredService<ICardTokenizationApi>();
-var cardResponse = await cardApi.PostCardTokenizationAsync(new PostCardTokenizationRequest
+// Create Bank Slip Order
+var bankSlipOrder = new PostOrdersRequest
 {
-    Customer = new PostCardTokenizationRequestCustomer
+    ChargeAmount = 200.00f,
+    ClientIp = "192.168.1.1",
+    Customer = new Customer
     {
-        Document = "12345678900",
-        DocumentType = PostCardTokenizationRequestCustomerDocumentTypeEnum.Cpf,
-        Email = "customer@example.com",
-        Name = "John Doe"
+        DocumentNumber = "12345678900",
+        DocumentType = DocumentTypeEnum.Cpf,
+        Email = "cliente@exemplo.com",
+        Name = "Joao da Silva",
+        Address = new CustomerAddress
+        {
+            Street = "Rua das Flores",
+            Number = "123",
+            Neighborhood = "Centro",
+            City = "Sao Paulo",
+            State = "SP",
+            ZipCode = "01234567",
+            Country = "BR"
+        }
     },
+    DiscountAmount = 0f,
+    ExternalId = $"boleto-order-{DateTime.Now.Ticks}",
+    Payment = new BankSlip
+    {
+        PaymentMethod = PaymentMethodEnum.BankSlip,
+        ExpirationInDays = 7
+    },
+    ShippingFee = 0f,
+    TaxFee = 0f
+};
+
+var bankSlipResponse = await ordersApi.PostOrdersAsync(bankSlipOrder);
+Console.WriteLine($"Barcode: {bankSlipResponse.BankSlip.BarCode}");
+Console.WriteLine($"PDF URL: {bankSlipResponse.BankSlip.PdfUrl}");
+
+// Create Customer
+var customerRequest = new Customer
+{
+    DocumentNumber = "12345678900",
+    DocumentType = DocumentTypeEnum.Cpf,
+    Email = "cliente@exemplo.com",
+    Name = "Joao da Silva",
+    PhoneNumber = "+55 11 999999999",
+    Address = new CustomerAddress
+    {
+        Street = "Rua das Flores",
+        Number = "123",
+        Neighborhood = "Centro",
+        City = "Sao Paulo",
+        State = "SP",
+        ZipCode = "01234567",
+        Country = "BR"
+    }
+};
+
+await customersApi.PostCustomersAsync(customerRequest);
+
+// Tokenize Card
+var tokenRequest = new PostCardTokenizationRequest
+{
     Card = new CompleteCardData
     {
         Number = "4111111111111111",
-        HolderName = "John Doe",
+        HolderName = "JOAO DA SILVA",
         Cvv = "123",
         Expiration = new CompleteCardDataExpiration
         {
             Month = 12,
-            Year = 2025
+            Year = 2028
         }
+    },
+    SaveCard = true,
+    Customer = new PostCardTokenizationRequestCustomer
+    {
+        DocumentNumber = "12345678900",
+        DocumentType = DocumentTypeEnum.Cpf,
+        Email = "cliente@exemplo.com",
+        Name = "Joao da Silva"
     }
-});
+};
 
-// Transfer API
-var transferApi = serviceProvider.GetRequiredService<ITransferApi>();
-var withdrawalResponse = await transferApi.PostWithdrawsAsync(new PostWithdrawsRequest
+var tokenResponse = await cardApi.PostCardTokenizationAsync(tokenRequest);
+Console.WriteLine($"Token: {tokenResponse.Token}");
+
+// Create Withdrawal
+var withdrawRequest = new PostWithdrawsRequest
 {
-    Amount = 50.00m,
-    Currency = "BRL",
+    Amount = 50.00f,
+    ExternalId = $"withdraw-{DateTime.Now.Ticks}",
     PayoutAccount = new PostWithdrawsRequestPayoutAccount
     {
-        // ... payout account details
+        OwnerDocument = "12345678900",
+        OwnerName = "Joao da Silva",
+        PixKey = "joao.silva@exemplo.com",
+        PixType = PixTypeEnum.Email
     }
-});
+};
+
+var withdrawResponse = await transfersApi.PostWithdrawsAsync(withdrawRequest);
+Console.WriteLine($"Withdrawal ID: {withdrawResponse.Id}");
+
+// List Orders
+var orders = await ordersApi.GetOrdersAsync(page: 1, pageSize: 10);
+Console.WriteLine($"Total orders: {orders.Count}");
+
+// Refund Order
+await ordersApi.PostOrdersByIdRefundAsync("order-id-here");
+Console.WriteLine("Order refunded successfully");
 ```
+
+## API Reference
+
+### Card Tokenization
+
+- `POST /card-tokenization/` - Generate a credit card token
+
+### Customers
+
+- `POST /customers/` - Create a new customer
+- `GET /customers/` - List customers (supports: page, pageSize, email, name, startDate, endDate)
+- `GET /customers/{id}` - Get customer by ID
+- `PATCH /customers/{id}` - Update customer
+
+### Orders
+
+- `POST /orders/` - Create a new payment order
+- `GET /orders/` - List orders (supports: page, pageSize, endDate, startDate, id, status)
+- `GET /orders/{id}` - Get order by ID
+- `POST /orders/{id}/confirm` - Confirm a draft order
+- `POST /orders/{id}/refund` - Refund an order
+
+### Withdrawals & Transfers
+
+- `POST /withdraws/` - Create a withdrawal/transfer via PIX
+- `GET /withdraws/` - List withdrawals (supports: page, pageSize, endDate, startDate, id)
+- `GET /withdraws/{id}` - Get withdrawal by ID
+
+## Payment Methods
+
+| Method | Description |
+|--------|-------------|
+| `Pix` | PIX instant payment |
+| `CreditCard` | Credit card payment |
+| `DebitCard` | Debit card payment |
+| `BankSlip` | Bank slip (Boleto) |
+| `NuPay` | NuPay payment |
+| `PicPay` | PicPay payment |
+| `Draft` | Draft order (pay later) |
+
+## PIX Types
+
+| Type | Description |
+|------|-------------|
+| `Cpf` | CPF key |
+| `Cnpj` | CNPJ key |
+| `Email` | Email key |
+| `Phone` | Phone key |
+| `Random` | Random UUID key |
 
 ## License
 

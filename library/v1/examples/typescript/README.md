@@ -1,6 +1,6 @@
-# PayConductor TypeScript Examples
+# PayConductor SDK - TypeScript Examples
 
-Examples of how to use the PayConductor SDK with TypeScript.
+Complete examples demonstrating how to use the PayConductor SDK for TypeScript.
 
 ## Prerequisites
 
@@ -22,26 +22,21 @@ export PAYCONDUCTOR_CLIENT_ID=your_client_id
 export PAYCONDUCTOR_CLIENT_SECRET=your_client_secret
 ```
 
-Or edit `index.ts` and replace the credentials directly.
-
 ## Running
 
 ```bash
 bun run index.ts
 ```
 
-## Example Code
+## Example Files
 
-```typescript
-import { Configuration, OrderApi, CustomerApi, GetOrdersPeriodEnum } from 'payconductor-sdk';
-
-const config = new Configuration({
-  username: process.env.PAYCONDUCTOR_CLIENT_ID,
-  password: process.env.PAYCONDUCTOR_CLIENT_SECRET,
-});
-
-const orderApi = new OrderApi(config);
-
-// Get orders
-const orders = await orderApi.getOrders(GetOrdersPeriodEnum.Last7Days, 1, 10);
-```
+| File | Description |
+|------|-------------|
+| `order-pix.ts` | PIX payment order example |
+| `order-credit-card.ts` | Credit card payment order example |
+| `order-bank-slip.ts` | Bank slip payment order example |
+| `customer.ts` | Customer CRUD operations |
+| `card-tokenization.ts` | Card tokenization example |
+| `withdraw.ts` | PIX withdrawal examples |
+| `order-management.ts` | Order listing, refund, confirmation |
+| `index.ts` | Main entry point |
