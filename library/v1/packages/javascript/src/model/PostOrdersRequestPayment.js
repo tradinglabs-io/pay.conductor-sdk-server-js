@@ -25,4 +25,222 @@ import NuPayNuPay from './NuPayNuPay';
 import PaymentMethod from './PaymentMethod';
 import PicPay from './PicPay';
 import Pix from './Pix';
-// TODO: add anyof model support
+
+/**
+ * The PostOrdersRequestPayment model module.
+ * @module model/PostOrdersRequestPayment
+ * @version 1.0.0
+ */
+class PostOrdersRequestPayment {
+    /**
+     * Constructs a new <code>PostOrdersRequestPayment</code>.
+     * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+     * @alias module:model/PostOrdersRequestPayment
+     * @param {(module:model/BankSlip|module:model/CreditCard|module:model/Draft|module:model/NuPay|module:model/PicPay|module:model/Pix)} instance The actual instance to initialize PostOrdersRequestPayment.
+     */
+    constructor(instance = null) {
+        if (instance === null) {
+            this.actualInstance = null;
+            return;
+        }
+        var match = 0;
+        var errorMessages = [];
+        try {
+            if (typeof instance === "Pix") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                Pix.validateJSON(instance); // throw an exception if no match
+                // create Pix from JS object
+                this.actualInstance = Pix.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into Pix
+            errorMessages.push("Failed to construct Pix: " + err)
+        }
+
+        try {
+            if (typeof instance === "CreditCard") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                CreditCard.validateJSON(instance); // throw an exception if no match
+                // create CreditCard from JS object
+                this.actualInstance = CreditCard.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into CreditCard
+            errorMessages.push("Failed to construct CreditCard: " + err)
+        }
+
+        try {
+            if (typeof instance === "BankSlip") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                BankSlip.validateJSON(instance); // throw an exception if no match
+                // create BankSlip from JS object
+                this.actualInstance = BankSlip.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into BankSlip
+            errorMessages.push("Failed to construct BankSlip: " + err)
+        }
+
+        try {
+            if (typeof instance === "NuPay") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                NuPay.validateJSON(instance); // throw an exception if no match
+                // create NuPay from JS object
+                this.actualInstance = NuPay.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into NuPay
+            errorMessages.push("Failed to construct NuPay: " + err)
+        }
+
+        try {
+            if (typeof instance === "PicPay") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                PicPay.validateJSON(instance); // throw an exception if no match
+                // create PicPay from JS object
+                this.actualInstance = PicPay.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into PicPay
+            errorMessages.push("Failed to construct PicPay: " + err)
+        }
+
+        try {
+            if (typeof instance === "Draft") {
+                this.actualInstance = instance;
+            } else {
+                // plain JS object
+                // validate the object
+                Draft.validateJSON(instance); // throw an exception if no match
+                // create Draft from JS object
+                this.actualInstance = Draft.constructFromObject(instance);
+            }
+            match++;
+        } catch(err) {
+            // json data failed to deserialize into Draft
+            errorMessages.push("Failed to construct Draft: " + err)
+        }
+
+        if (match > 1) {
+            throw new Error("Multiple matches found constructing `PostOrdersRequestPayment` with oneOf schemas BankSlip, CreditCard, Draft, NuPay, PicPay, Pix. Input: " + JSON.stringify(instance));
+        } else if (match === 0) {
+            this.actualInstance = null; // clear the actual instance in case there are multiple matches
+            throw new Error("No match found constructing `PostOrdersRequestPayment` with oneOf schemas BankSlip, CreditCard, Draft, NuPay, PicPay, Pix. Details: " +
+                            errorMessages.join(", "));
+        } else { // only 1 match
+            // the input is valid
+        }
+    }
+
+    /**
+     * Constructs a <code>PostOrdersRequestPayment</code> from a plain JavaScript object, optionally creating a new instance.
+     * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
+     * @param {Object} data The plain JavaScript object bearing properties of interest.
+     * @param {module:model/PostOrdersRequestPayment} obj Optional instance to populate.
+     * @return {module:model/PostOrdersRequestPayment} The populated <code>PostOrdersRequestPayment</code> instance.
+     */
+    static constructFromObject(data, obj) {
+        return new PostOrdersRequestPayment(data);
+    }
+
+    /**
+     * Gets the actual instance, which can be <code>BankSlip</code>, <code>CreditCard</code>, <code>Draft</code>, <code>NuPay</code>, <code>PicPay</code>, <code>Pix</code>.
+     * @return {(module:model/BankSlip|module:model/CreditCard|module:model/Draft|module:model/NuPay|module:model/PicPay|module:model/Pix)} The actual instance.
+     */
+    getActualInstance() {
+        return this.actualInstance;
+    }
+
+    /**
+     * Sets the actual instance, which can be <code>BankSlip</code>, <code>CreditCard</code>, <code>Draft</code>, <code>NuPay</code>, <code>PicPay</code>, <code>Pix</code>.
+     * @param {(module:model/BankSlip|module:model/CreditCard|module:model/Draft|module:model/NuPay|module:model/PicPay|module:model/Pix)} obj The actual instance.
+     */
+    setActualInstance(obj) {
+       this.actualInstance = PostOrdersRequestPayment.constructFromObject(obj).getActualInstance();
+    }
+
+    /**
+     * Returns the JSON representation of the actual instance.
+     * @return {string}
+     */
+    toJSON = function(){
+        return this.getActualInstance();
+    }
+
+    /**
+     * Create an instance of PostOrdersRequestPayment from a JSON string.
+     * @param {string} json_string JSON string.
+     * @return {module:model/PostOrdersRequestPayment} An instance of PostOrdersRequestPayment.
+     */
+    static fromJSON = function(json_string){
+        return PostOrdersRequestPayment.constructFromObject(JSON.parse(json_string));
+    }
+}
+
+/**
+ * @member {module:model/PaymentMethod} paymentMethod
+ */
+PostOrdersRequestPayment.prototype['paymentMethod'] = undefined;
+
+/**
+ * @member {module:model/DraftExpirationInSeconds} expirationInSeconds
+ */
+PostOrdersRequestPayment.prototype['expirationInSeconds'] = undefined;
+
+/**
+ * @member {module:model/CreditCardCard} card
+ */
+PostOrdersRequestPayment.prototype['card'] = undefined;
+
+/**
+ * @member {module:model/CreditCardInstallments} installments
+ */
+PostOrdersRequestPayment.prototype['installments'] = undefined;
+
+/**
+ * Text that will appear on the card statement (soft descriptor)
+ * @member {String} softDescriptor
+ */
+PostOrdersRequestPayment.prototype['softDescriptor'] = undefined;
+
+/**
+ * @member {module:model/BankSlipExpirationInDays} expirationInDays
+ */
+PostOrdersRequestPayment.prototype['expirationInDays'] = undefined;
+
+/**
+ * @member {module:model/NuPayNuPay} nuPay
+ */
+PostOrdersRequestPayment.prototype['nuPay'] = undefined;
+
+/**
+ * Available payment methods for this order
+ * @member {Array.<module:model/AvailablePaymentMethods>} availablePaymentMethods
+ */
+PostOrdersRequestPayment.prototype['availablePaymentMethods'] = undefined;
+
+
+PostOrdersRequestPayment.OneOf = ["BankSlip", "CreditCard", "Draft", "NuPay", "PicPay", "Pix"];
+
+export default PostOrdersRequestPayment;
+

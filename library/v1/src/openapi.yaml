@@ -1606,6 +1606,7 @@ paths:
                             - cmjizheco00002v6o7q72knwb
                       required:
                         - id
+              additionalProperties: false
               required:
                 - card
                 - saveCard
@@ -1628,6 +1629,7 @@ paths:
                     type: string
                     examples:
                       - card_019b4cb6-bc0b-730b-81e2-5a9eaa22975a
+                additionalProperties: false
                 noValidate: true
                 required:
                   - customerId
