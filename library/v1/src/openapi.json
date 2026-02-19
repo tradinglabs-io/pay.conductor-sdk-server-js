@@ -3516,7 +3516,8 @@
                   "card",
                   "saveCard",
                   "customer"
-                ]
+                ],
+                "additionalProperties": false
               }
             }
           },
@@ -3549,7 +3550,8 @@
                     "customerId",
                     "token"
                   ],
-                  "noValidate": true
+                  "noValidate": true,
+                  "additionalProperties": false
                 }
               }
             }
