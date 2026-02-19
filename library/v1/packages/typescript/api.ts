@@ -103,7 +103,7 @@ export interface Customer {
      * Customer CPF or CNPJ without formatting
      */
     'documentNumber': string;
-    'documentType': CustomerDocumentTypeEnum;
+    'documentType': DocumentType;
     /**
      * Customer email
      */
@@ -118,12 +118,6 @@ export interface Customer {
     'phoneNumber'?: string;
 }
 
-export const CustomerDocumentTypeEnum = {
-    Cpf: 'Cpf',
-    Cnpj: 'Cnpj'
-} as const;
-
-export type CustomerDocumentTypeEnum = typeof CustomerDocumentTypeEnum[keyof typeof CustomerDocumentTypeEnum];
 
 /**
  * Schema for creating a new customer
@@ -134,7 +128,7 @@ export interface Customer1 {
      * Customer CPF or CNPJ without formatting
      */
     'documentNumber'?: string;
-    'documentType'?: Customer1DocumentTypeEnum;
+    'documentType'?: DocumentType;
     /**
      * Customer email
      */
@@ -149,41 +143,7 @@ export interface Customer1 {
     'phoneNumber'?: string;
 }
 
-export const Customer1DocumentTypeEnum = {
-    Cpf: 'Cpf',
-    Cnpj: 'Cnpj'
-} as const;
 
-export type Customer1DocumentTypeEnum = typeof Customer1DocumentTypeEnum[keyof typeof Customer1DocumentTypeEnum];
-
-/**
- * Schema for creating a new customer
- */
-export interface Customer2 {
-    'address'?: CustomerAddress;
-    /**
-     * Customer CPF or CNPJ without formatting
-     */
-    'documentNumber': string;
-    'documentType': Customer2DocumentType;
-    /**
-     * Customer email
-     */
-    'email': string;
-    /**
-     * Customer full name
-     */
-    'name': string;
-    /**
-     * Customer phone number in +55 DD 9XXXXXXXX format
-     */
-    'phoneNumber'?: string;
-}
-/**
- * Document type: Cpf or Cnpj
- */
-export interface Customer2DocumentType {
-}
 /**
  * Schema for creating a new address
  */
@@ -217,6 +177,15 @@ export interface CustomerAddress {
      */
     'zipCode': string;
 }
+
+export const DocumentType = {
+    CPF: 'Cpf',
+    CNPJ: 'Cnpj'
+} as const;
+
+export type DocumentType = typeof DocumentType[keyof typeof DocumentType];
+
+
 /**
  * Used to create an order without generating a real payment. Use to create orders that will be paid later
  */
@@ -226,15 +195,30 @@ export interface Draft {
     /**
      * Available payment methods for this order
      */
-    'availablePaymentMethods'?: Array<DraftAvailablePaymentMethodsInner>;
-}
-export interface DraftAvailablePaymentMethodsInner {
+    'availablePaymentMethods'?: Array<PaymentMethod>;
 }
 /**
  * Order expiration time in seconds
  */
 export interface DraftExpirationInSeconds {
 }
+
+export const Event = {
+    ORDER_CREATED: 'OrderCreated',
+    ORDER_PENDING: 'OrderPending',
+    ORDER_COMPLETED: 'OrderCompleted',
+    ORDER_FAILED: 'OrderFailed',
+    ORDER_REFUNDED: 'OrderRefunded',
+    ORDER_CHARGEBACK: 'OrderChargeback',
+    WITHDRAW_CREATED: 'WithdrawCreated',
+    WITHDRAW_COMPLETED: 'WithdrawCompleted',
+    WITHDRAW_FAILED: 'WithdrawFailed',
+    WITHDRAW_TRANSFERRING: 'WithdrawTransferring'
+} as const;
+
+export type Event = typeof Event[keyof typeof Event];
+
+
 /**
  * Merchant data for order or withdrawal
  */
@@ -277,6 +261,25 @@ export interface NuPayNuPay {
      */
     'storeName'?: string;
 }
+
+export const PaymentMethod = {
+    PIX: 'Pix',
+    CREDIT_CARD: 'CreditCard',
+    DEBIT_CARD: 'DebitCard',
+    BANK_SLIP: 'BankSlip',
+    CRYPTO: 'Crypto',
+    APPLE_PAY: 'ApplePay',
+    NU_PAY: 'NuPay',
+    PIC_PAY: 'PicPay',
+    AMAZON_PAY: 'AmazonPay',
+    SEPA_DEBIT: 'SepaDebit',
+    GOOGLE_PAY: 'GooglePay',
+    DRAFT: 'Draft'
+} as const;
+
+export type PaymentMethod = typeof PaymentMethod[keyof typeof PaymentMethod];
+
+
 export interface PicPay {
     'paymentMethod': string;
 }
@@ -289,6 +292,18 @@ export interface Pix {
  */
 export interface PixExpirationInSeconds {
 }
+
+export const PixType = {
+    CPF: 'Cpf',
+    CNPJ: 'Cnpj',
+    EMAIL: 'Email',
+    PHONE: 'Phone',
+    RANDOM: 'Random'
+} as const;
+
+export type PixType = typeof PixType[keyof typeof PixType];
+
+
 export interface PostCardTokenization200Response {
     /**
      * ID of the customer associated with the created card
@@ -316,7 +331,7 @@ export interface PostCardTokenizationRequestCustomer {
      * Customer CPF or CNPJ without formatting
      */
     'documentNumber': string;
-    'documentType': Customer2DocumentType;
+    'documentType': DocumentType;
     /**
      * Customer email
      */
@@ -334,6 +349,8 @@ export interface PostCardTokenizationRequestCustomer {
      */
     'id': string;
 }
+
+
 export interface PostCardTokenizationRequestCustomerAnyOf {
     /**
      * ID do cliente existente
@@ -370,8 +387,8 @@ export interface PostOrders200Response {
     'nuPay'?: PostOrders200ResponseNuPay;
     'picPay'?: PostOrders200ResponsePicPay;
     'creditCard'?: PostOrders200ResponseCreditCard;
-    'status': PostOrders200ResponseStatusEnum;
-    'paymentMethod': PostOrders200ResponsePaymentMethodEnum;
+    'status': Status;
+    'paymentMethod': PaymentMethod;
     /**
      * Date and time when the order was paid (ISO 8601)
      */
@@ -388,35 +405,6 @@ export interface PostOrders200Response {
     'session'?: PostOrders200ResponseSession | null;
 }
 
-export const PostOrders200ResponseStatusEnum = {
-    Generating: 'Generating',
-    Pending: 'Pending',
-    Completed: 'Completed',
-    Failed: 'Failed',
-    Canceled: 'Canceled',
-    Refunding: 'Refunding',
-    Refunded: 'Refunded',
-    InDispute: 'InDispute',
-    Chargeback: 'Chargeback'
-} as const;
-
-export type PostOrders200ResponseStatusEnum = typeof PostOrders200ResponseStatusEnum[keyof typeof PostOrders200ResponseStatusEnum];
-export const PostOrders200ResponsePaymentMethodEnum = {
-    Pix: 'Pix',
-    CreditCard: 'CreditCard',
-    DebitCard: 'DebitCard',
-    BankSlip: 'BankSlip',
-    Crypto: 'Crypto',
-    ApplePay: 'ApplePay',
-    NuPay: 'NuPay',
-    PicPay: 'PicPay',
-    AmazonPay: 'AmazonPay',
-    SepaDebit: 'SepaDebit',
-    GooglePay: 'GooglePay',
-    Draft: 'Draft'
-} as const;
-
-export type PostOrders200ResponsePaymentMethodEnum = typeof PostOrders200ResponsePaymentMethodEnum[keyof typeof PostOrders200ResponsePaymentMethodEnum];
 
 export interface PostOrders200ResponseBankSlip {
     /**
@@ -528,8 +516,8 @@ export interface PostOrdersByIdConfirm200Response {
     'bankSlip'?: PostOrders200ResponseBankSlip;
     'nuPay'?: PostOrders200ResponseNuPay;
     'picPay'?: PostOrders200ResponsePicPay;
-    'status': PostOrdersByIdConfirm200ResponseStatusEnum;
-    'paymentMethod': PostOrdersByIdConfirm200ResponsePaymentMethodEnum;
+    'status': Status;
+    'paymentMethod': PaymentMethod;
     /**
      * Date and time when the order was paid (ISO 8601)
      */
@@ -544,35 +532,6 @@ export interface PostOrdersByIdConfirm200Response {
     'errorMessage': string | null;
 }
 
-export const PostOrdersByIdConfirm200ResponseStatusEnum = {
-    Generating: 'Generating',
-    Pending: 'Pending',
-    Completed: 'Completed',
-    Failed: 'Failed',
-    Canceled: 'Canceled',
-    Refunding: 'Refunding',
-    Refunded: 'Refunded',
-    InDispute: 'InDispute',
-    Chargeback: 'Chargeback'
-} as const;
-
-export type PostOrdersByIdConfirm200ResponseStatusEnum = typeof PostOrdersByIdConfirm200ResponseStatusEnum[keyof typeof PostOrdersByIdConfirm200ResponseStatusEnum];
-export const PostOrdersByIdConfirm200ResponsePaymentMethodEnum = {
-    Pix: 'Pix',
-    CreditCard: 'CreditCard',
-    DebitCard: 'DebitCard',
-    BankSlip: 'BankSlip',
-    Crypto: 'Crypto',
-    ApplePay: 'ApplePay',
-    NuPay: 'NuPay',
-    PicPay: 'PicPay',
-    AmazonPay: 'AmazonPay',
-    SepaDebit: 'SepaDebit',
-    GooglePay: 'GooglePay',
-    Draft: 'Draft'
-} as const;
-
-export type PostOrdersByIdConfirm200ResponsePaymentMethodEnum = typeof PostOrdersByIdConfirm200ResponsePaymentMethodEnum[keyof typeof PostOrdersByIdConfirm200ResponsePaymentMethodEnum];
 
 export interface PostOrdersRequest {
     /**
@@ -662,7 +621,7 @@ export interface PostOrdersRequestPayment {
     /**
      * Available payment methods for this order
      */
-    'availablePaymentMethods'?: Array<DraftAvailablePaymentMethodsInner>;
+    'availablePaymentMethods'?: Array<PaymentMethod>;
 }
 /**
  * If externalSessionId or sessionId is provided and an existing session exists, it will be updated with the new data. Otherwise, a new session will be created.
@@ -706,10 +665,7 @@ export interface PostWithdraws200Response {
      * Cost fee applied to the withdrawal
      */
     'costFee': number;
-    /**
-     * Withdrawal status
-     */
-    'status': PostWithdraws200ResponseStatusEnum;
+    'status': Status;
     /**
      * Error code, if any
      */
@@ -722,14 +678,6 @@ export interface PostWithdraws200Response {
     'payoutAccount': PostWithdraws200ResponsePayoutAccount;
 }
 
-export const PostWithdraws200ResponseStatusEnum = {
-    Pending: 'Pending',
-    Transferring: 'Transferring',
-    Completed: 'Completed',
-    Failed: 'Failed'
-} as const;
-
-export type PostWithdraws200ResponseStatusEnum = typeof PostWithdraws200ResponseStatusEnum[keyof typeof PostWithdraws200ResponseStatusEnum];
 
 /**
  * Date and time when the withdrawal was paid (ISO 8601 format)
@@ -753,21 +701,9 @@ export interface PostWithdraws200ResponsePayoutAccount {
      * PIX key used for the withdrawal
      */
     'pixKey': string;
-    /**
-     * PIX key type
-     */
-    'pixType': PostWithdraws200ResponsePayoutAccountPixTypeEnum;
+    'pixType': PixType;
 }
 
-export const PostWithdraws200ResponsePayoutAccountPixTypeEnum = {
-    Cpf: 'Cpf',
-    Cnpj: 'Cnpj',
-    Email: 'Email',
-    Phone: 'Phone',
-    Random: 'Random'
-} as const;
-
-export type PostWithdraws200ResponsePayoutAccountPixTypeEnum = typeof PostWithdraws200ResponsePayoutAccountPixTypeEnum[keyof typeof PostWithdraws200ResponsePayoutAccountPixTypeEnum];
 
 export interface PostWithdrawsRequest {
     /**
@@ -794,21 +730,26 @@ export interface PostWithdrawsRequestPayoutAccount {
      * PIX key for withdrawal
      */
     'pixKey': string;
-    /**
-     * PIX key type
-     */
-    'pixType': PostWithdrawsRequestPayoutAccountPixTypeEnum;
+    'pixType': PixType;
 }
 
-export const PostWithdrawsRequestPayoutAccountPixTypeEnum = {
-    Cnpj: 'Cnpj',
-    Cpf: 'Cpf',
-    Email: 'Email',
-    Phone: 'Phone',
-    Random: 'Random'
+
+
+export const Status = {
+    GENERATING: 'Generating',
+    PENDING: 'Pending',
+    COMPLETED: 'Completed',
+    FAILED: 'Failed',
+    CANCELED: 'Canceled',
+    REFUNDING: 'Refunding',
+    REFUNDED: 'Refunded',
+    IN_DISPUTE: 'InDispute',
+    CHARGEBACK: 'Chargeback',
+    TRANSFERRING: 'Transferring'
 } as const;
 
-export type PostWithdrawsRequestPayoutAccountPixTypeEnum = typeof PostWithdrawsRequestPayoutAccountPixTypeEnum[keyof typeof PostWithdrawsRequestPayoutAccountPixTypeEnum];
+export type Status = typeof Status[keyof typeof Status];
+
 
 export interface TokenizedCard {
     /**

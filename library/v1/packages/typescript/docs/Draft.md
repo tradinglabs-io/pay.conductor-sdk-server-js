@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **paymentMethod** | **string** |  | [default to undefined]
 **expirationInSeconds** | [**DraftExpirationInSeconds**](DraftExpirationInSeconds.md) |  | [optional] [default to undefined]
-**availablePaymentMethods** | [**Array&lt;DraftAvailablePaymentMethodsInner&gt;**](DraftAvailablePaymentMethodsInner.md) | Available payment methods for this order | [optional] [default to undefined]
+**availablePaymentMethods** | [**Array&lt;PaymentMethod&gt;**](PaymentMethod.md) | Available payment methods for this order | [optional] [default to undefined]
 
 ## Example
 

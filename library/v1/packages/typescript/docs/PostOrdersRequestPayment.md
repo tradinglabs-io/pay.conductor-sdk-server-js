@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **softDescriptor** | **string** | Text that will appear on the card statement (soft descriptor) | [optional] [default to undefined]
 **expirationInDays** | [**BankSlipExpirationInDays**](BankSlipExpirationInDays.md) |  | [optional] [default to undefined]
 **nuPay** | [**NuPayNuPay**](NuPayNuPay.md) |  | [default to undefined]
-**availablePaymentMethods** | [**Array&lt;DraftAvailablePaymentMethodsInner&gt;**](DraftAvailablePaymentMethodsInner.md) | Available payment methods for this order | [optional] [default to undefined]
+**availablePaymentMethods** | [**Array&lt;PaymentMethod&gt;**](PaymentMethod.md) | Available payment methods for this order | [optional] [default to undefined]
 
 ## Example
 
