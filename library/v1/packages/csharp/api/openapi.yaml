@@ -89,11 +89,11 @@ security:
 - basicAuth: []
 tags:
 - description: "Manage charges, check order status, and handle refunds."
-  name: Order
+  name: Orders
 - description: Initiate and monitor withdrawals and transfers to your external accounts.
-  name: Transfer
+  name: Transfers
 - description: "Manage customers, create, update, delete and list customers."
-  name: Customer
+  name: Customers
 - description: Tokenize credit cards for future charges.
   name: Card Tokenization
 paths:
@@ -103,24 +103,6 @@ paths:
         to refine results as needed.
       operationId: getOrders
       parameters:
-      - explode: true
-        in: query
-        name: period
-        required: true
-        schema:
-          default: Last7Days
-          description: Date filter period
-          enum:
-          - Today
-          - Yesterday
-          - Last7Days
-          - Last30Days
-          - ThisMonth
-          - LastMonth
-          - ThisYear
-          - Custom
-          type: string
-        style: form
       - explode: true
         in: query
         name: endDate
@@ -189,7 +171,7 @@ paths:
         style: form
       summary: List orders
       tags:
-      - Order
+      - Orders
     post:
       description: Create a new order for payment using the provided data
       operationId: postOrders
@@ -208,7 +190,7 @@ paths:
           description: Response for status 200
       summary: Create order
       tags:
-      - Order
+      - Orders
   /orders/{id}:
     get:
       description: Retrieve the complete data of an order by our ID
@@ -223,7 +205,38 @@ paths:
         style: simple
       summary: Get order by ID
       tags:
-      - Order
+      - Orders
+  /orders/{id}/confirm:
+    post:
+      description: "Confirms a Draft order, setting the payment method and processing\
+        \ the charges associated with the order."
+      operationId: postOrdersByIdConfirm
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/postOrders_request_payment"
+        description: "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay,\
+          \ etc...)"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/postOrdersByIdConfirm_200_response"
+          description: Response for status 200
+      summary: Confirm order
+      tags:
+      - Orders
   /orders/{id}/refund:
     post:
       description: Initiate a refund for the order specified by ID.
@@ -238,7 +251,7 @@ paths:
         style: simple
       summary: Refund order
       tags:
-      - Order
+      - Orders
   /withdraws/:
     get:
       description: "Returns a paginated list of withdrawals and transfers. Filter\
@@ -246,24 +259,6 @@ paths:
         \ or End2EndID)"
       operationId: getWithdraws
       parameters:
-      - explode: true
-        in: query
-        name: period
-        required: true
-        schema:
-          default: Last7Days
-          description: Date filter period
-          enum:
-          - Today
-          - Yesterday
-          - Last7Days
-          - Last30Days
-          - ThisMonth
-          - LastMonth
-          - ThisYear
-          - Custom
-          type: string
-        style: form
       - explode: true
         in: query
         name: endDate
@@ -316,7 +311,7 @@ paths:
         style: form
       summary: List withdrawals
       tags:
-      - Transfer
+      - Transfers
     post:
       description: Create a new withdrawal or transfer to the provided payment account
       operationId: postWithdraws
@@ -335,7 +330,7 @@ paths:
           description: Response for status 200
       summary: Create withdrawal
       tags:
-      - Transfer
+      - Transfers
   /withdraws/{id}:
     get:
       description: Returns the details of a specific withdrawal or transfer using
@@ -351,9 +346,11 @@ paths:
         style: simple
       summary: Get withdrawal by ID
       tags:
-      - Transfer
+      - Transfers
   /customers/:
     get:
+      description: "Retrieve a list of all customers associated with the organization,\
+        \ with support for filters and pagination."
       operationId: getCustomers
       parameters:
       - explode: true
@@ -398,24 +395,6 @@ paths:
         style: form
       - explode: true
         in: query
-        name: period
-        required: true
-        schema:
-          default: Last7Days
-          description: Date filter period
-          enum:
-          - Today
-          - Yesterday
-          - Last7Days
-          - Last30Days
-          - ThisMonth
-          - LastMonth
-          - ThisYear
-          - Custom
-          type: string
-        style: form
-      - explode: true
-        in: query
         name: endDate
         required: false
         schema:
@@ -432,9 +411,12 @@ paths:
           format: date-time
           type: string
         style: form
+      summary: Get all customers
       tags:
-      - Customer
+      - Customers
     post:
+      description: Create a new customer by providing the required data in the request
+        body.
       operationId: postCustomers
       requestBody:
         content:
@@ -443,22 +425,13 @@ paths:
               $ref: "#/components/schemas/Customer"
         description: Schema for creating a new customer
         required: true
+      summary: Create new customer
       tags:
-      - Customer
+      - Customers
   /customers/{id}:
-    delete:
-      operationId: deleteCustomersById
-      parameters:
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      tags:
-      - Customer
     get:
+      description: Retrieve the complete details of a specific customer using their
+        unique ID.
       operationId: getCustomersById
       parameters:
       - explode: false
@@ -468,9 +441,12 @@ paths:
         schema:
           type: string
         style: simple
+      summary: Get customer by ID
       tags:
-      - Customer
+      - Customers
     patch:
+      description: Update the information of an existing customer by providing the
+        new data in the request body.
       operationId: patchCustomersById
       parameters:
       - explode: false
@@ -487,8 +463,9 @@ paths:
               $ref: "#/components/schemas/Customer_1"
         description: Schema for creating a new customer
         required: true
+      summary: Update customer data
       tags:
-      - Customer
+      - Customers
   /card-tokenization/:
     post:
       description: Tokenize credit cards for future charges.
@@ -828,6 +805,47 @@ components:
       - paymentMethod
       title: PicPay
       type: object
+    Draft_expirationInSeconds:
+      anyOf:
+      - default: "0"
+        format: integer
+        type: string
+      - default: 3600
+        description: Order expiration time in seconds
+        type: integer
+      default: 3600
+      description: Order expiration time in seconds
+    Draft_availablePaymentMethods_inner:
+      anyOf:
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+      - type: string
+    Draft:
+      description: Used to create an order without generating a real payment. Use
+        to create orders that will be paid later
+      properties:
+        paymentMethod:
+          type: string
+        expirationInSeconds:
+          $ref: "#/components/schemas/Draft_expirationInSeconds"
+        availablePaymentMethods:
+          description: Available payment methods for this order
+          items:
+            $ref: "#/components/schemas/Draft_availablePaymentMethods_inner"
+          type: array
+      required:
+      - paymentMethod
+      title: Draft
+      type: object
     postOrders_request_payment:
       anyOf:
       - $ref: "#/components/schemas/Pix"
@@ -835,6 +853,7 @@ components:
       - $ref: "#/components/schemas/Bank_Slip"
       - $ref: "#/components/schemas/NuPay"
       - $ref: "#/components/schemas/PicPay"
+      - $ref: "#/components/schemas/Draft"
       description: "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay,\
         \ etc...)"
     postOrders_request_session:
@@ -1146,6 +1165,7 @@ components:
           - AmazonPay
           - SepaDebit
           - GooglePay
+          - Draft
           type: string
         payedAt:
           description: Date and time when the order was paid (ISO 8601)
@@ -1175,6 +1195,102 @@ components:
       - externalIntegrationKey
       - id
       - orderItems
+      - payedAt
+      - paymentMethod
+      - status
+      type: object
+    postOrdersByIdConfirm_200_response:
+      example:
+        amount: 0.8008281904610115
+        payedAt: payedAt
+        costFee: 6.027456183070403
+        nuPay:
+          paymentUrl: paymentUrl
+        errorMessage: errorMessage
+        externalId: externalId
+        errorCode: errorCode
+        picPay:
+          qrCodeUrl: qrCodeUrl
+          copyAndPasteCode: copyAndPasteCode
+        bankSlip:
+          pdfUrl: pdfUrl
+          barCode: barCode
+          digitableLine: digitableLine
+        paymentMethod: Pix
+        id: id
+        pix:
+          qrCodeUrl: qrCodeUrl
+          copyAndPasteCode: copyAndPasteCode
+          endToEndId: endToEndId
+        status: Generating
+      properties:
+        id:
+          description: Order ID in the system
+          type: string
+        externalId:
+          description: External order ID (provided by your integration)
+          nullable: true
+          type: string
+        amount:
+          description: Total order amount
+          type: number
+        costFee:
+          description: Cost fee applied to the order
+          type: number
+        pix:
+          $ref: "#/components/schemas/postOrders_200_response_pix"
+        bankSlip:
+          $ref: "#/components/schemas/postOrders_200_response_bankSlip"
+        nuPay:
+          $ref: "#/components/schemas/postOrders_200_response_nuPay"
+        picPay:
+          $ref: "#/components/schemas/postOrders_200_response_picPay"
+        status:
+          enum:
+          - Generating
+          - Pending
+          - Completed
+          - Failed
+          - Canceled
+          - Refunding
+          - Refunded
+          - InDispute
+          - Chargeback
+          type: string
+        paymentMethod:
+          enum:
+          - Pix
+          - CreditCard
+          - DebitCard
+          - BankSlip
+          - Crypto
+          - ApplePay
+          - NuPay
+          - PicPay
+          - AmazonPay
+          - SepaDebit
+          - GooglePay
+          - Draft
+          type: string
+        payedAt:
+          description: Date and time when the order was paid (ISO 8601)
+          nullable: true
+          type: string
+        errorCode:
+          description: "Error code, if any"
+          nullable: true
+          type: string
+        errorMessage:
+          description: "Error message, if any"
+          nullable: true
+          type: string
+      required:
+      - amount
+      - costFee
+      - errorCode
+      - errorMessage
+      - externalId
+      - id
       - payedAt
       - paymentMethod
       - status
@@ -1416,6 +1532,7 @@ components:
       - $ref: "#/components/schemas/Customer_2"
       - $ref: "#/components/schemas/postCard_tokenization_request_customer_anyOf"
     postCard_tokenization_request:
+      additionalProperties: false
       description: Data for creating a customer card
       properties:
         card:
@@ -1431,6 +1548,7 @@ components:
       - saveCard
       type: object
     postCard_tokenization_200_response:
+      additionalProperties: false
       example:
         customerId: customerId
         token: token
@@ -1450,3 +1568,4 @@ components:
       description: "Use the format Authorization: Basic base64('client_id:client_secret')"
       scheme: basic
       type: http
+
