@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**PaymentMethod** | **string** |  | 
 **ExpirationInSeconds** | Pointer to **float32** | Order expiration time in seconds | [optional] [default to 3600]
 **Card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **Installments** | **float32** | Number of installments | [default to 1]
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewOrderPaymentRequest
 
-`func NewOrderPaymentRequest(paymentMethod PaymentMethod, card OrderCreditCardPaymentRequestCard, installments float32, nuPay OrderNuPayPaymentRequestNuPay, ) *OrderPaymentRequest`
+`func NewOrderPaymentRequest(paymentMethod string, card OrderCreditCardPaymentRequestCard, installments float32, nuPay OrderNuPayPaymentRequestNuPay, ) *OrderPaymentRequest`
 
 NewOrderPaymentRequest instantiates a new OrderPaymentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -34,20 +34,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaymentMethod
 
-`func (o *OrderPaymentRequest) GetPaymentMethod() PaymentMethod`
+`func (o *OrderPaymentRequest) GetPaymentMethod() string`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *OrderPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool)`
+`func (o *OrderPaymentRequest) GetPaymentMethodOk() (*string, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *OrderPaymentRequest) SetPaymentMethod(v PaymentMethod)`
+`func (o *OrderPaymentRequest) SetPaymentMethod(v string)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 

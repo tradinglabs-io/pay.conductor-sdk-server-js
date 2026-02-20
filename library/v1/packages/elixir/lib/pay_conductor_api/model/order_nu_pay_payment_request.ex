@@ -13,7 +13,7 @@ defmodule PayConductorAPI.Model.OrderNuPayPaymentRequest do
   ]
 
   @type t :: %__MODULE__{
-    :paymentMethod => PayConductorAPI.Model.PaymentMethod.t,
+    :paymentMethod => String.t,
     :nuPay => PayConductorAPI.Model.OrderNuPayPaymentRequestNuPay.t
   }
 
@@ -21,7 +21,6 @@ defmodule PayConductorAPI.Model.OrderNuPayPaymentRequest do
 
   def decode(value) do
     value
-     |> Deserializer.deserialize(:paymentMethod, :struct, PayConductorAPI.Model.PaymentMethod)
      |> Deserializer.deserialize(:nuPay, :struct, PayConductorAPI.Model.OrderNuPayPaymentRequestNuPay)
   end
 end

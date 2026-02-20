@@ -3,7 +3,6 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:openapi/src/model/payment_method.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -16,8 +15,7 @@ part 'order_pic_pay_payment_request.g.dart';
 @BuiltValue()
 abstract class OrderPicPayPaymentRequest implements Built<OrderPicPayPaymentRequest, OrderPicPayPaymentRequestBuilder> {
   @BuiltValueField(wireName: r'paymentMethod')
-  PaymentMethod get paymentMethod;
-  // enum paymentMethodEnum {  Pix,  CreditCard,  DebitCard,  BankSlip,  Crypto,  ApplePay,  NuPay,  PicPay,  AmazonPay,  SepaDebit,  GooglePay,  Draft,  };
+  String get paymentMethod;
 
   OrderPicPayPaymentRequest._();
 
@@ -45,7 +43,7 @@ class _$OrderPicPayPaymentRequestSerializer implements PrimitiveSerializer<Order
     yield r'paymentMethod';
     yield serializers.serialize(
       object.paymentMethod,
-      specifiedType: const FullType(PaymentMethod),
+      specifiedType: const FullType(String),
     );
   }
 
@@ -73,8 +71,8 @@ class _$OrderPicPayPaymentRequestSerializer implements PrimitiveSerializer<Order
         case r'paymentMethod':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(PaymentMethod),
-          ) as PaymentMethod;
+            specifiedType: const FullType(String),
+          ) as String;
           result.paymentMethod = valueDes;
           break;
         default:

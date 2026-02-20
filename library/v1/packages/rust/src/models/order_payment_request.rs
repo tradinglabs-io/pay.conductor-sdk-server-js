@@ -15,23 +15,23 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 #[serde(tag = "paymentMethod")]
 pub enum OrderPaymentRequest {
-    #[serde(rename="OrderPIXPaymentRequest")]
-    OrderPixPaymentRequest(Box<models::OrderPixPaymentRequest>),
-    #[serde(rename="OrderCreditCardPaymentRequest")]
-    OrderCreditCardPaymentRequest(Box<models::OrderCreditCardPaymentRequest>),
-    #[serde(rename="OrderBankSlipPaymentRequest")]
-    OrderBankSlipPaymentRequest(Box<models::OrderBankSlipPaymentRequest>),
-    #[serde(rename="OrderNuPayPaymentRequest")]
-    OrderNuPayPaymentRequest(Box<models::OrderNuPayPaymentRequest>),
-    #[serde(rename="OrderPicPayPaymentRequest")]
-    OrderPicPayPaymentRequest(Box<models::OrderPicPayPaymentRequest>),
-    #[serde(rename="OrderDraftPaymentRequest")]
-    OrderDraftPaymentRequest(Box<models::OrderDraftPaymentRequest>),
+    #[serde(rename="Pix")]
+    Pix(Box<models::OrderPixPaymentRequest>),
+    #[serde(rename="CreditCard")]
+    CreditCard(Box<models::OrderCreditCardPaymentRequest>),
+    #[serde(rename="BankSlip")]
+    BankSlip(Box<models::OrderBankSlipPaymentRequest>),
+    #[serde(rename="NuPay")]
+    NuPay(Box<models::OrderNuPayPaymentRequest>),
+    #[serde(rename="PicPay")]
+    PicPay(Box<models::OrderPicPayPaymentRequest>),
+    #[serde(rename="Draft")]
+    Draft(Box<models::OrderDraftPaymentRequest>),
 }
 
 impl Default for OrderPaymentRequest {
     fn default() -> Self {
-        Self::OrderPixPaymentRequest(Default::default())
+        Self::Pix(Default::default())
     }
 }
 

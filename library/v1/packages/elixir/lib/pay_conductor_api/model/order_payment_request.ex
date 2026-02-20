@@ -19,7 +19,7 @@ defmodule PayConductorAPI.Model.OrderPaymentRequest do
   ]
 
   @type t :: %__MODULE__{
-    :paymentMethod => PayConductorAPI.Model.PaymentMethod.t,
+    :paymentMethod => String.t,
     :expirationInSeconds => number() | nil,
     :card => PayConductorAPI.Model.OrderCreditCardPaymentRequestCard.t,
     :installments => number(),
@@ -33,7 +33,6 @@ defmodule PayConductorAPI.Model.OrderPaymentRequest do
 
   def decode(value) do
     value
-     |> Deserializer.deserialize(:paymentMethod, :struct, PayConductorAPI.Model.PaymentMethod)
      |> Deserializer.deserialize(:card, :struct, PayConductorAPI.Model.OrderCreditCardPaymentRequestCard)
      |> Deserializer.deserialize(:nuPay, :struct, PayConductorAPI.Model.OrderNuPayPaymentRequestNuPay)
      |> Deserializer.deserialize(:availablePaymentMethods, :list, PayConductorAPI.Model.AvailablePaymentMethods)

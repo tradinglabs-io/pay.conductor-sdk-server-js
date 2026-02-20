@@ -13,7 +13,6 @@
 
 import ApiClient from '../ApiClient';
 import OrderCreditCardPaymentRequestCard from './OrderCreditCardPaymentRequestCard';
-import PaymentMethod from './PaymentMethod';
 
 /**
  * The OrderCreditCardPaymentRequest model module.
@@ -24,7 +23,7 @@ class OrderCreditCardPaymentRequest {
     /**
      * Constructs a new <code>OrderCreditCardPaymentRequest</code>.
      * @alias module:model/OrderCreditCardPaymentRequest
-     * @param paymentMethod {module:model/PaymentMethod} 
+     * @param paymentMethod {String} 
      * @param card {module:model/OrderCreditCardPaymentRequestCard} 
      * @param installments {Number} Number of installments
      */
@@ -56,7 +55,7 @@ class OrderCreditCardPaymentRequest {
             obj = obj || new OrderCreditCardPaymentRequest();
 
             if (data.hasOwnProperty('paymentMethod')) {
-                obj['paymentMethod'] = PaymentMethod.constructFromObject(data['paymentMethod']);
+                obj['paymentMethod'] = ApiClient.convertToType(data['paymentMethod'], 'String');
             }
             if (data.hasOwnProperty('card')) {
                 obj['card'] = OrderCreditCardPaymentRequestCard.constructFromObject(data['card']);
@@ -83,6 +82,10 @@ class OrderCreditCardPaymentRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['paymentMethod'] && !(typeof data['paymentMethod'] === 'string' || data['paymentMethod'] instanceof String)) {
+            throw new Error("Expected the field `paymentMethod` to be a primitive type in the JSON string but got " + data['paymentMethod']);
+        }
         // validate the optional field `card`
         if (data['card']) { // data not null
           OrderCreditCardPaymentRequestCard.validateJSON(data['card']);
@@ -101,7 +104,7 @@ class OrderCreditCardPaymentRequest {
 OrderCreditCardPaymentRequest.RequiredProperties = ["paymentMethod", "card", "installments"];
 
 /**
- * @member {module:model/PaymentMethod} paymentMethod
+ * @member {String} paymentMethod
  */
 OrderCreditCardPaymentRequest.prototype['paymentMethod'] = undefined;
 

@@ -57,7 +57,7 @@ class OrderCreditCardPaymentRequest implements ModelInterface, ArrayAccess, \Jso
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_method' => '\OpenAPI\Client\Model\PaymentMethod',
+        'payment_method' => 'string',
         'card' => '\OpenAPI\Client\Model\OrderCreditCardPaymentRequestCard',
         'installments' => 'float',
         'soft_descriptor' => 'string'
@@ -338,7 +338,7 @@ class OrderCreditCardPaymentRequest implements ModelInterface, ArrayAccess, \Jso
     /**
      * Gets payment_method
      *
-     * @return \OpenAPI\Client\Model\PaymentMethod
+     * @return string
      */
     public function getPaymentMethod()
     {
@@ -348,7 +348,7 @@ class OrderCreditCardPaymentRequest implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets payment_method
      *
-     * @param \OpenAPI\Client\Model\PaymentMethod $payment_method payment_method
+     * @param string $payment_method payment_method
      *
      * @return self
      */

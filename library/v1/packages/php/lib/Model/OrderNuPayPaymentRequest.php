@@ -57,7 +57,7 @@ class OrderNuPayPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_method' => '\OpenAPI\Client\Model\PaymentMethod',
+        'payment_method' => 'string',
         'nu_pay' => '\OpenAPI\Client\Model\OrderNuPayPaymentRequestNuPay'
     ];
 
@@ -305,7 +305,7 @@ class OrderNuPayPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets payment_method
      *
-     * @return \OpenAPI\Client\Model\PaymentMethod
+     * @return string
      */
     public function getPaymentMethod()
     {
@@ -315,7 +315,7 @@ class OrderNuPayPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets payment_method
      *
-     * @param \OpenAPI\Client\Model\PaymentMethod $payment_method payment_method
+     * @param string $payment_method payment_method
      *
      * @return self
      */

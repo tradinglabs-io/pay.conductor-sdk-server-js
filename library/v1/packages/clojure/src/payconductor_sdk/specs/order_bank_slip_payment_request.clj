@@ -1,14 +1,13 @@
 (ns payconductor-sdk.specs.order-bank-slip-payment-request
   (:require [clojure.spec.alpha :as s]
             [spec-tools.data-spec :as ds]
-            [payconductor-sdk.specs.payment-method :refer :all]
             )
   (:import (java.io File)))
 
 
 (def order-bank-slip-payment-request-data
   {
-   (ds/req :paymentMethod) payment-method-spec
+   (ds/req :paymentMethod) string?
    (ds/opt :expirationInDays) float?
    })
 

@@ -8,7 +8,7 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**paymentMethod** | **String** |  | 
 **expirationInSeconds** | **num** | Order expiration time in seconds | [optional] [default to 3600]
 **card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **installments** | **num** | Number of installments | [default to 1]

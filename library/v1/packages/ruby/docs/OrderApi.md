@@ -33,7 +33,7 @@ end
 
 api_instance = OpenapiClient::OrderApi.new
 id = 'id_example' # String | 
-order_payment_request = OpenapiClient::OrderBankSlipPaymentRequest.new({payment_method: OpenapiClient::PaymentMethod::Pix}) # OrderPaymentRequest | Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+order_payment_request = OpenapiClient::OrderBankSlipPaymentRequest.new({payment_method: 'payment_method_example'}) # OrderPaymentRequest | Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 begin
   # Confirm Order
@@ -104,7 +104,7 @@ OpenapiClient.configure do |config|
 end
 
 api_instance = OpenapiClient::OrderApi.new
-order_create_request = OpenapiClient::OrderCreateRequest.new({charge_amount: 3.56, client_ip: 'client_ip_example', customer: OpenapiClient::CustomerCreateRequest.new({document_number: 'document_number_example', document_type: OpenapiClient::DocumentType::Cpf, email: 'email_example', name: 'name_example'}), discount_amount: 3.56, external_id: 'external_id_example', payment: OpenapiClient::OrderBankSlipPaymentRequest.new({payment_method: OpenapiClient::PaymentMethod::Pix}), shipping_fee: 3.56, tax_fee: 3.56}) # OrderCreateRequest | Order data for payment processing
+order_create_request = OpenapiClient::OrderCreateRequest.new({charge_amount: 3.56, client_ip: 'client_ip_example', customer: OpenapiClient::CustomerCreateRequest.new({document_number: 'document_number_example', document_type: OpenapiClient::DocumentType::Cpf, email: 'email_example', name: 'name_example'}), discount_amount: 3.56, external_id: 'external_id_example', payment: OpenapiClient::OrderBankSlipPaymentRequest.new({payment_method: 'payment_method_example'}), shipping_fee: 3.56, tax_fee: 3.56}) # OrderCreateRequest | Order data for payment processing
 
 begin
   # Create Order

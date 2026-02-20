@@ -34,7 +34,7 @@ import (
 
 func main() {
 	id := "id_example" // string | 
-	orderPaymentRequest := openapiclient.Order_Payment_Request{OrderBankSlipPaymentRequest: openapiclient.NewOrderBankSlipPaymentRequest(openapiclient.PaymentMethod("Pix"))} // OrderPaymentRequest | Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+	orderPaymentRequest := openapiclient.Order_Payment_Request{OrderBankSlipPaymentRequest: openapiclient.NewOrderBankSlipPaymentRequest("PaymentMethod_example")} // OrderPaymentRequest | Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -105,7 +105,7 @@ import (
 )
 
 func main() {
-	orderCreateRequest := *openapiclient.NewOrderCreateRequest(float32(123), "ClientIp_example", *openapiclient.NewCustomerCreateRequest("DocumentNumber_example", openapiclient.DocumentType("Cpf"), "Email_example", "Name_example"), float32(123), "ExternalId_example", openapiclient.Order_Payment_Request{OrderBankSlipPaymentRequest: openapiclient.NewOrderBankSlipPaymentRequest(openapiclient.PaymentMethod("Pix"))}, float32(123), float32(123)) // OrderCreateRequest | Order data for payment processing
+	orderCreateRequest := *openapiclient.NewOrderCreateRequest(float32(123), "ClientIp_example", *openapiclient.NewCustomerCreateRequest("DocumentNumber_example", openapiclient.DocumentType("Cpf"), "Email_example", "Name_example"), float32(123), "ExternalId_example", openapiclient.Order_Payment_Request{OrderBankSlipPaymentRequest: openapiclient.NewOrderBankSlipPaymentRequest("PaymentMethod_example")}, float32(123), float32(123)) // OrderCreateRequest | Order data for payment processing
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

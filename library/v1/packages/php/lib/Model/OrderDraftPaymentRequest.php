@@ -58,7 +58,7 @@ class OrderDraftPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_method' => '\OpenAPI\Client\Model\PaymentMethod',
+        'payment_method' => 'string',
         'expiration_in_seconds' => 'float',
         'available_payment_methods' => '\OpenAPI\Client\Model\AvailablePaymentMethods[]'
     ];
@@ -310,7 +310,7 @@ class OrderDraftPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Gets payment_method
      *
-     * @return \OpenAPI\Client\Model\PaymentMethod
+     * @return string
      */
     public function getPaymentMethod()
     {
@@ -320,7 +320,7 @@ class OrderDraftPaymentRequest implements ModelInterface, ArrayAccess, \JsonSeri
     /**
      * Sets payment_method
      *
-     * @param \OpenAPI\Client\Model\PaymentMethod $payment_method payment_method
+     * @param string $payment_method payment_method
      *
      * @return self
      */

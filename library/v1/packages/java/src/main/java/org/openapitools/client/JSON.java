@@ -65,12 +65,12 @@ public class JSON {
                     @Override
                     public Class<? extends org.openapitools.client.model.OrderPaymentRequest> getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("OrderBankSlipPaymentRequest", org.openapitools.client.model.OrderBankSlipPaymentRequest.class);
-                        classByDiscriminatorValue.put("OrderCreditCardPaymentRequest", org.openapitools.client.model.OrderCreditCardPaymentRequest.class);
-                        classByDiscriminatorValue.put("OrderDraftPaymentRequest", org.openapitools.client.model.OrderDraftPaymentRequest.class);
-                        classByDiscriminatorValue.put("OrderNuPayPaymentRequest", org.openapitools.client.model.OrderNuPayPaymentRequest.class);
-                        classByDiscriminatorValue.put("OrderPIXPaymentRequest", org.openapitools.client.model.OrderPIXPaymentRequest.class);
-                        classByDiscriminatorValue.put("OrderPicPayPaymentRequest", org.openapitools.client.model.OrderPicPayPaymentRequest.class);
+                        classByDiscriminatorValue.put("BankSlip", org.openapitools.client.model.OrderBankSlipPaymentRequest.class);
+                        classByDiscriminatorValue.put("CreditCard", org.openapitools.client.model.OrderCreditCardPaymentRequest.class);
+                        classByDiscriminatorValue.put("Draft", org.openapitools.client.model.OrderDraftPaymentRequest.class);
+                        classByDiscriminatorValue.put("NuPay", org.openapitools.client.model.OrderNuPayPaymentRequest.class);
+                        classByDiscriminatorValue.put("PicPay", org.openapitools.client.model.OrderPicPayPaymentRequest.class);
+                        classByDiscriminatorValue.put("Pix", org.openapitools.client.model.OrderPIXPaymentRequest.class);
                         classByDiscriminatorValue.put("Order_Payment_Request", org.openapitools.client.model.OrderPaymentRequest.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "paymentMethod"));

@@ -36,7 +36,7 @@ namespace payconductor_sdk.Model
         /// <param name="paymentMethod">paymentMethod</param>
         /// <param name="nuPay">nuPay</param>
         [JsonConstructor]
-        public OrderNuPayPaymentRequest(PaymentMethod paymentMethod, OrderNuPayPaymentRequestNuPay nuPay)
+        public OrderNuPayPaymentRequest(string paymentMethod, OrderNuPayPaymentRequestNuPay nuPay)
         {
             PaymentMethod = paymentMethod;
             NuPay = nuPay;
@@ -49,7 +49,7 @@ namespace payconductor_sdk.Model
         /// Gets or Sets PaymentMethod
         /// </summary>
         [JsonPropertyName("paymentMethod")]
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Gets or Sets NuPay
@@ -104,7 +104,7 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
             Option<OrderNuPayPaymentRequestNuPay?> nuPay = default;
 
             while (utf8JsonReader.Read())
@@ -123,9 +123,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "nuPay":
                             nuPay = new Option<OrderNuPayPaymentRequestNuPay?>(JsonSerializer.Deserialize<OrderNuPayPaymentRequestNuPay>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -148,7 +146,7 @@ namespace payconductor_sdk.Model
             if (nuPay.IsSet && nuPay.Value == null)
                 throw new ArgumentNullException(nameof(nuPay), "Property is not nullable for class OrderNuPayPaymentRequest.");
 
-            return new OrderNuPayPaymentRequest(paymentMethod.Value!.Value!, nuPay.Value!);
+            return new OrderNuPayPaymentRequest(paymentMethod.Value!, nuPay.Value!);
         }
 
         /// <summary>
@@ -175,11 +173,13 @@ namespace payconductor_sdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OrderNuPayPaymentRequest orderNuPayPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (orderNuPayPaymentRequest.PaymentMethod == null)
+                throw new ArgumentNullException(nameof(orderNuPayPaymentRequest.PaymentMethod), "Property is required for class OrderNuPayPaymentRequest.");
+
             if (orderNuPayPaymentRequest.NuPay == null)
                 throw new ArgumentNullException(nameof(orderNuPayPaymentRequest.NuPay), "Property is required for class OrderNuPayPaymentRequest.");
 
-            var paymentMethodRawValue = PaymentMethodValueConverter.ToJsonValue(orderNuPayPaymentRequest.PaymentMethod);
-            writer.WriteString("paymentMethod", paymentMethodRawValue);
+            writer.WriteString("paymentMethod", orderNuPayPaymentRequest.PaymentMethod);
 
             writer.WritePropertyName("nuPay");
             JsonSerializer.Serialize(writer, orderNuPayPaymentRequest.NuPay, jsonSerializerOptions);

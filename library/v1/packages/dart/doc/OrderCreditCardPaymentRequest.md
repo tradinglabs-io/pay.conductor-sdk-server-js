@@ -8,7 +8,7 @@ import 'package:openapi/api.dart';
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**paymentMethod** | **String** |  | 
 **card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **installments** | **num** | Number of installments | [default to 1]
 **softDescriptor** | **String** | Text that will appear on the card statement (soft descriptor) | [optional] 

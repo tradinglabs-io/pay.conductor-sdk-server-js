@@ -7,7 +7,7 @@
 #' @title OrderCreditCardPaymentRequest
 #' @description OrderCreditCardPaymentRequest Class
 #' @format An \code{R6Class} generator object
-#' @field paymentMethod  \link{PaymentMethod}
+#' @field paymentMethod  character
 #' @field card  \link{OrderCreditCardPaymentRequestCard}
 #' @field installments Number of installments numeric
 #' @field softDescriptor Text that will appear on the card statement (soft descriptor) character [optional]
@@ -32,10 +32,9 @@ OrderCreditCardPaymentRequest <- R6::R6Class(
     #' @param ... Other optional arguments.
     initialize = function(`paymentMethod`, `card`, `installments`, `softDescriptor` = NULL, ...) {
       if (!missing(`paymentMethod`)) {
-        if (!(`paymentMethod` %in% c())) {
-          stop(paste("Error! \"", `paymentMethod`, "\" cannot be assigned to `paymentMethod`. Must be .", sep = ""))
+        if (!(is.character(`paymentMethod`) && length(`paymentMethod`) == 1)) {
+          stop(paste("Error! Invalid data for `paymentMethod`. Must be a string:", `paymentMethod`))
         }
-        stopifnot(R6::is.R6(`paymentMethod`))
         self$`paymentMethod` <- `paymentMethod`
       }
       if (!missing(`card`)) {
@@ -86,7 +85,7 @@ OrderCreditCardPaymentRequest <- R6::R6Class(
       OrderCreditCardPaymentRequestObject <- list()
       if (!is.null(self$`paymentMethod`)) {
         OrderCreditCardPaymentRequestObject[["paymentMethod"]] <-
-          self$extractSimpleType(self$`paymentMethod`)
+          self$`paymentMethod`
       }
       if (!is.null(self$`card`)) {
         OrderCreditCardPaymentRequestObject[["card"]] <-
@@ -134,9 +133,7 @@ OrderCreditCardPaymentRequest <- R6::R6Class(
     fromJSON = function(input_json) {
       this_object <- jsonlite::fromJSON(input_json)
       if (!is.null(this_object$`paymentMethod`)) {
-        `paymentmethod_object` <- PaymentMethod$new()
-        `paymentmethod_object`$fromJSON(jsonlite::toJSON(this_object$`paymentMethod`, auto_unbox = TRUE, digits = NA))
-        self$`paymentMethod` <- `paymentmethod_object`
+        self$`paymentMethod` <- this_object$`paymentMethod`
       }
       if (!is.null(this_object$`card`)) {
         `card_object` <- OrderCreditCardPaymentRequestCard$new()
@@ -170,7 +167,7 @@ OrderCreditCardPaymentRequest <- R6::R6Class(
     #' @return the instance of OrderCreditCardPaymentRequest
     fromJSONString = function(input_json) {
       this_object <- jsonlite::fromJSON(input_json)
-      self$`paymentMethod` <- PaymentMethod$new()$fromJSON(jsonlite::toJSON(this_object$`paymentMethod`, auto_unbox = TRUE, digits = NA))
+      self$`paymentMethod` <- this_object$`paymentMethod`
       self$`card` <- OrderCreditCardPaymentRequestCard$new()$fromJSON(jsonlite::toJSON(this_object$`card`, auto_unbox = TRUE, digits = NA))
       self$`installments` <- this_object$`installments`
       self$`softDescriptor` <- this_object$`softDescriptor`
@@ -185,7 +182,9 @@ OrderCreditCardPaymentRequest <- R6::R6Class(
       input_json <- jsonlite::fromJSON(input)
       # check the required field `paymentMethod`
       if (!is.null(input_json$`paymentMethod`)) {
-        stopifnot(R6::is.R6(input_json$`paymentMethod`))
+        if (!(is.character(input_json$`paymentMethod`) && length(input_json$`paymentMethod`) == 1)) {
+          stop(paste("Error! Invalid data for `paymentMethod`. Must be a string:", input_json$`paymentMethod`))
+        }
       } else {
         stop(paste("The JSON input `", input, "` is invalid for OrderCreditCardPaymentRequest: the required field `paymentMethod` is missing."))
       }

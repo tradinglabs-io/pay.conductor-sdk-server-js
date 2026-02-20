@@ -7,7 +7,7 @@ void main() {
   // TODO add properties to the builder and call build()
 
   group(OrderBankSlipPaymentRequest, () {
-    // PaymentMethod paymentMethod
+    // String paymentMethod
     test('to test the property `paymentMethod`', () async {
       // TODO
     });

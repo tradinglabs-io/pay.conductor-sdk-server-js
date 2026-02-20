@@ -14,14 +14,14 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderPixPaymentRequest {
     #[serde(rename = "paymentMethod")]
-    pub payment_method: models::PaymentMethod,
+    pub payment_method: String,
     /// PIX expiration time in seconds
     #[serde(rename = "expirationInSeconds", skip_serializing_if = "Option::is_none")]
     pub expiration_in_seconds: Option<f64>,
 }
 
 impl OrderPixPaymentRequest {
-    pub fn new(payment_method: models::PaymentMethod) -> OrderPixPaymentRequest {
+    pub fn new(payment_method: String) -> OrderPixPaymentRequest {
         OrderPixPaymentRequest {
             payment_method,
             expiration_in_seconds: None,

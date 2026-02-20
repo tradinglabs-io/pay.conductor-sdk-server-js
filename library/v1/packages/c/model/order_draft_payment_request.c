@@ -23,7 +23,7 @@ payconductor_api_order_draft_payment_request__e order_draft_payment_request_avai
 }
 
 static order_draft_payment_request_t *order_draft_payment_request_create_internal(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds,
     list_t *available_payment_methods
     ) {
@@ -40,7 +40,7 @@ static order_draft_payment_request_t *order_draft_payment_request_create_interna
 }
 
 __attribute__((deprecated)) order_draft_payment_request_t *order_draft_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds,
     list_t *available_payment_methods
     ) {
@@ -60,6 +60,10 @@ void order_draft_payment_request_free(order_draft_payment_request_t *order_draft
         return ;
     }
     listEntry_t *listEntry;
+    if (order_draft_payment_request->payment_method) {
+        free(order_draft_payment_request->payment_method);
+        order_draft_payment_request->payment_method = NULL;
+    }
     if (order_draft_payment_request->available_payment_methods) {
         list_ForEach(listEntry, order_draft_payment_request->available_payment_methods) {
             available_payment_methods_free(listEntry->data);
@@ -74,16 +78,11 @@ cJSON *order_draft_payment_request_convertToJSON(order_draft_payment_request_t *
     cJSON *item = cJSON_CreateObject();
 
     // order_draft_payment_request->payment_method
-    if (payconductor_api_payment_method__NULL == order_draft_payment_request->payment_method) {
+    if (!order_draft_payment_request->payment_method) {
         goto fail;
     }
-    cJSON *payment_method_local_JSON = payment_method_convertToJSON(order_draft_payment_request->payment_method);
-    if(payment_method_local_JSON == NULL) {
-        goto fail; // custom
-    }
-    cJSON_AddItemToObject(item, "paymentMethod", payment_method_local_JSON);
-    if(item->child == NULL) {
-        goto fail;
+    if(cJSON_AddStringToObject(item, "paymentMethod", order_draft_payment_request->payment_method) == NULL) {
+    goto fail; //String
     }
 
 
@@ -126,9 +125,6 @@ order_draft_payment_request_t *order_draft_payment_request_parseFromJSON(cJSON *
 
     order_draft_payment_request_t *order_draft_payment_request_local_var = NULL;
 
-    // define the local variable for order_draft_payment_request->payment_method
-    payconductor_api_payment_method__e payment_method_local_nonprim = 0;
-
     // define the local list for order_draft_payment_request->available_payment_methods
     list_t *available_payment_methodsList = NULL;
 
@@ -142,7 +138,10 @@ order_draft_payment_request_t *order_draft_payment_request_parseFromJSON(cJSON *
     }
 
     
-    payment_method_local_nonprim = payment_method_parseFromJSON(payment_method); //custom
+    if(!cJSON_IsString(payment_method))
+    {
+    goto end; //String
+    }
 
     // order_draft_payment_request->expiration_in_seconds
     cJSON *expiration_in_seconds = cJSON_GetObjectItemCaseSensitive(order_draft_payment_requestJSON, "expirationInSeconds");
@@ -182,16 +181,13 @@ order_draft_payment_request_t *order_draft_payment_request_parseFromJSON(cJSON *
 
 
     order_draft_payment_request_local_var = order_draft_payment_request_create_internal (
-        payment_method_local_nonprim,
+        strdup(payment_method->valuestring),
         expiration_in_seconds ? expiration_in_seconds->valuedouble : 0,
         available_payment_methods ? available_payment_methodsList : NULL
         );
 
     return order_draft_payment_request_local_var;
 end:
-    if (payment_method_local_nonprim) {
-        payment_method_local_nonprim = 0;
-    }
     if (available_payment_methodsList) {
         listEntry_t *listEntry = NULL;
         list_ForEach(listEntry, available_payment_methodsList) {

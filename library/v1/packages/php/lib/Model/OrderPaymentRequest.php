@@ -58,7 +58,7 @@ class OrderPaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializa
       * @var string[]
       */
     protected static $openAPITypes = [
-        'payment_method' => '\OpenAPI\Client\Model\PaymentMethod',
+        'payment_method' => 'string',
         'expiration_in_seconds' => 'float',
         'card' => '\OpenAPI\Client\Model\OrderCreditCardPaymentRequestCard',
         'installments' => 'float',
@@ -377,7 +377,7 @@ class OrderPaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Gets payment_method
      *
-     * @return \OpenAPI\Client\Model\PaymentMethod
+     * @return string
      */
     public function getPaymentMethod()
     {
@@ -387,7 +387,7 @@ class OrderPaymentRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     /**
      * Sets payment_method
      *
-     * @param \OpenAPI\Client\Model\PaymentMethod $payment_method payment_method
+     * @param string $payment_method payment_method
      *
      * @return self
      */

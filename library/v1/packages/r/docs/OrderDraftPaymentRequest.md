@@ -5,7 +5,7 @@ Used to create an order without generating a real payment. Use to create orders 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [Enum: ] 
+**paymentMethod** | **character** |  | 
 **expirationInSeconds** | **numeric** | Order expiration time in seconds | [optional] [default to 3600] 
 **availablePaymentMethods** | [**array[AvailablePaymentMethods]**](AvailablePaymentMethods.md) | Available payment methods for this order | [optional] 
 

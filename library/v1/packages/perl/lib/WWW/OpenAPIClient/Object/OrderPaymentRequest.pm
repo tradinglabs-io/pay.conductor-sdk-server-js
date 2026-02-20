@@ -39,7 +39,6 @@ use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequest;
 use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequestNuPay;
 use WWW::OpenAPIClient::Object::OrderPIXPaymentRequest;
 use WWW::OpenAPIClient::Object::OrderPicPayPaymentRequest;
-use WWW::OpenAPIClient::Object::PaymentMethod;
 
 use base ("Class::Accessor", "Class::Data::Inheritable");
 
@@ -230,7 +229,7 @@ __PACKAGE__->class_documentation({description => 'Payment data for the order (Pi
 
 __PACKAGE__->method_documentation({
     'payment_method' => {
-        datatype => 'PaymentMethod',
+        datatype => 'string',
         base_name => 'paymentMethod',
         description => '',
         format => '',
@@ -288,7 +287,7 @@ __PACKAGE__->method_documentation({
 });
 
 __PACKAGE__->openapi_types( {
-    'payment_method' => 'PaymentMethod',
+    'payment_method' => 'string',
     'expiration_in_seconds' => 'double',
     'card' => 'OrderCreditCardPaymentRequestCard',
     'installments' => 'double',

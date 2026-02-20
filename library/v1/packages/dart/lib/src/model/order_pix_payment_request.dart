@@ -3,7 +3,6 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:openapi/src/model/payment_method.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 
@@ -17,8 +16,7 @@ part 'order_pix_payment_request.g.dart';
 @BuiltValue()
 abstract class OrderPIXPaymentRequest implements Built<OrderPIXPaymentRequest, OrderPIXPaymentRequestBuilder> {
   @BuiltValueField(wireName: r'paymentMethod')
-  PaymentMethod get paymentMethod;
-  // enum paymentMethodEnum {  Pix,  CreditCard,  DebitCard,  BankSlip,  Crypto,  ApplePay,  NuPay,  PicPay,  AmazonPay,  SepaDebit,  GooglePay,  Draft,  };
+  String get paymentMethod;
 
   /// PIX expiration time in seconds
   @BuiltValueField(wireName: r'expirationInSeconds')
@@ -51,7 +49,7 @@ class _$OrderPIXPaymentRequestSerializer implements PrimitiveSerializer<OrderPIX
     yield r'paymentMethod';
     yield serializers.serialize(
       object.paymentMethod,
-      specifiedType: const FullType(PaymentMethod),
+      specifiedType: const FullType(String),
     );
     if (object.expirationInSeconds != null) {
       yield r'expirationInSeconds';
@@ -86,8 +84,8 @@ class _$OrderPIXPaymentRequestSerializer implements PrimitiveSerializer<OrderPIX
         case r'paymentMethod':
           final valueDes = serializers.deserialize(
             value,
-            specifiedType: const FullType(PaymentMethod),
-          ) as PaymentMethod;
+            specifiedType: const FullType(String),
+          ) as String;
           result.paymentMethod = valueDes;
           break;
         case r'expirationInSeconds':

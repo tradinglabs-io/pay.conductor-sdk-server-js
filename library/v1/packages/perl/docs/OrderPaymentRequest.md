@@ -8,7 +8,7 @@ use WWW::OpenAPIClient::Object::OrderPaymentRequest;
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**payment_method** | **string** |  | 
 **expiration_in_seconds** | **double** | Order expiration time in seconds | [optional] [default to 3600]
 **card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **installments** | **double** | Number of installments | [default to 1]

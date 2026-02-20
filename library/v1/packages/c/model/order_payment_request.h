@@ -24,7 +24,6 @@ typedef struct order_payment_request_t order_payment_request_t;
 #include "order_nu_pay_payment_request_nu_pay.h"
 #include "order_pic_pay_payment_request.h"
 #include "order_pix_payment_request.h"
-#include "payment_method.h"
 
 // Enum  for order_payment_request
 
@@ -37,7 +36,7 @@ payconductor_api_order_payment_request__e order_payment_request_available_paymen
 
 
 typedef struct order_payment_request_t {
-    payconductor_api_payment_method__e payment_method; //referenced enum
+    char *payment_method; // string
     double expiration_in_seconds; //numeric
     struct order_credit_card_payment_request_card_t *card; //model
     double installments; //numeric
@@ -50,7 +49,7 @@ typedef struct order_payment_request_t {
 } order_payment_request_t;
 
 __attribute__((deprecated)) order_payment_request_t *order_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds,
     order_credit_card_payment_request_card_t *card,
     double installments,

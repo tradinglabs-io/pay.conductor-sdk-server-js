@@ -28,7 +28,6 @@ import payconductor_sdk.models.OrderNuPayPaymentRequest
 import payconductor_sdk.models.OrderNuPayPaymentRequestNuPay
 import payconductor_sdk.models.OrderPIXPaymentRequest
 import payconductor_sdk.models.OrderPicPayPaymentRequest
-import payconductor_sdk.models.PaymentMethod
 
 class OrderPaymentRequestTest : ShouldSpec() {
     init {

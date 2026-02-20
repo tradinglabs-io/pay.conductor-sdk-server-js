@@ -35,14 +35,14 @@ class TestOrderCreditCardPaymentRequest(unittest.TestCase):
         model = OrderCreditCardPaymentRequest()
         if include_optional:
             return OrderCreditCardPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 card = None,
                 installments = 1,
                 soft_descriptor = '0'
             )
         else:
             return OrderCreditCardPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 card = None,
                 installments = 1,
         )

@@ -16,12 +16,11 @@
 typedef struct order_credit_card_payment_request_t order_credit_card_payment_request_t;
 
 #include "order_credit_card_payment_request_card.h"
-#include "payment_method.h"
 
 
 
 typedef struct order_credit_card_payment_request_t {
-    payconductor_api_payment_method__e payment_method; //referenced enum
+    char *payment_method; // string
     struct order_credit_card_payment_request_card_t *card; //model
     double installments; //numeric
     char *soft_descriptor; // string
@@ -30,7 +29,7 @@ typedef struct order_credit_card_payment_request_t {
 } order_credit_card_payment_request_t;
 
 __attribute__((deprecated)) order_credit_card_payment_request_t *order_credit_card_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     order_credit_card_payment_request_card_t *card,
     double installments,
     char *soft_descriptor

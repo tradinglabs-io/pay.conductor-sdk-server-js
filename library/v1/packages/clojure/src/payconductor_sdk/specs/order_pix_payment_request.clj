@@ -1,14 +1,13 @@
 (ns payconductor-sdk.specs.order-pix-payment-request
   (:require [clojure.spec.alpha :as s]
             [spec-tools.data-spec :as ds]
-            [payconductor-sdk.specs.payment-method :refer :all]
             )
   (:import (java.io File)))
 
 
 (def order-pix-payment-request-data
   {
-   (ds/req :paymentMethod) payment-method-spec
+   (ds/req :paymentMethod) string?
    (ds/opt :expirationInSeconds) float?
    })
 

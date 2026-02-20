@@ -16,7 +16,6 @@
 typedef struct order_draft_payment_request_t order_draft_payment_request_t;
 
 #include "available_payment_methods.h"
-#include "payment_method.h"
 
 // Enum  for order_draft_payment_request
 
@@ -29,7 +28,7 @@ payconductor_api_order_draft_payment_request__e order_draft_payment_request_avai
 
 
 typedef struct order_draft_payment_request_t {
-    payconductor_api_payment_method__e payment_method; //referenced enum
+    char *payment_method; // string
     double expiration_in_seconds; //numeric
     list_t *available_payment_methods; //nonprimitive container
 
@@ -37,7 +36,7 @@ typedef struct order_draft_payment_request_t {
 } order_draft_payment_request_t;
 
 __attribute__((deprecated)) order_draft_payment_request_t *order_draft_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds,
     list_t *available_payment_methods
 );

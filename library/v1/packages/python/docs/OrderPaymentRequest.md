@@ -6,7 +6,7 @@ Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**payment_method** | **str** |  | 
 **expiration_in_seconds** | **float** | Order expiration time in seconds | [optional] [default to 3600]
 **card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **installments** | **float** | Number of installments | [default to 1]

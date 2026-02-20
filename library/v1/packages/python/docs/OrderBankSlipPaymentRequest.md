@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**payment_method** | **str** |  | 
 **expiration_in_days** | **float** | Days until bank slip expires | [optional] [default to 7]
 
 ## Example

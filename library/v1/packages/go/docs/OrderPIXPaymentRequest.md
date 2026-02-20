@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**PaymentMethod** | **string** |  | 
 **ExpirationInSeconds** | Pointer to **float32** | PIX expiration time in seconds | [optional] [default to 3600]
 
 ## Methods
 
 ### NewOrderPIXPaymentRequest
 
-`func NewOrderPIXPaymentRequest(paymentMethod PaymentMethod, ) *OrderPIXPaymentRequest`
+`func NewOrderPIXPaymentRequest(paymentMethod string, ) *OrderPIXPaymentRequest`
 
 NewOrderPIXPaymentRequest instantiates a new OrderPIXPaymentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaymentMethod
 
-`func (o *OrderPIXPaymentRequest) GetPaymentMethod() PaymentMethod`
+`func (o *OrderPIXPaymentRequest) GetPaymentMethod() string`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *OrderPIXPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool)`
+`func (o *OrderPIXPaymentRequest) GetPaymentMethodOk() (*string, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *OrderPIXPaymentRequest) SetPaymentMethod(v PaymentMethod)`
+`func (o *OrderPIXPaymentRequest) SetPaymentMethod(v string)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 

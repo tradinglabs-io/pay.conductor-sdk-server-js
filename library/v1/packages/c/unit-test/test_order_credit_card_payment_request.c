@@ -23,14 +23,14 @@ order_credit_card_payment_request_t* instantiate_order_credit_card_payment_reque
   order_credit_card_payment_request_t* order_credit_card_payment_request = NULL;
   if (include_optional) {
     order_credit_card_payment_request = order_credit_card_payment_request_create(
-      payconductor_api_order_credit_card_payment_request__Pix,
+      "0",
       null,
       1,
       "0"
     );
   } else {
     order_credit_card_payment_request = order_credit_card_payment_request_create(
-      payconductor_api_order_credit_card_payment_request__Pix,
+      "0",
       null,
       1,
       "0"

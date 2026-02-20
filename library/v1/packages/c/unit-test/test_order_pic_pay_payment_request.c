@@ -22,11 +22,11 @@ order_pic_pay_payment_request_t* instantiate_order_pic_pay_payment_request(int i
   order_pic_pay_payment_request_t* order_pic_pay_payment_request = NULL;
   if (include_optional) {
     order_pic_pay_payment_request = order_pic_pay_payment_request_create(
-      payconductor_api_order_pic_pay_payment_request__Pix
+      "0"
     );
   } else {
     order_pic_pay_payment_request = order_pic_pay_payment_request_create(
-      payconductor_api_order_pic_pay_payment_request__Pix
+      "0"
     );
   }
 

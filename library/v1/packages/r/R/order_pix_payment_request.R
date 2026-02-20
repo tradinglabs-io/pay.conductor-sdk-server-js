@@ -7,7 +7,7 @@
 #' @title OrderPIXPaymentRequest
 #' @description OrderPIXPaymentRequest Class
 #' @format An \code{R6Class} generator object
-#' @field paymentMethod  \link{PaymentMethod}
+#' @field paymentMethod  character
 #' @field expirationInSeconds PIX expiration time in seconds numeric [optional]
 #' @importFrom R6 R6Class
 #' @importFrom jsonlite fromJSON toJSON
@@ -26,10 +26,9 @@ OrderPIXPaymentRequest <- R6::R6Class(
     #' @param ... Other optional arguments.
     initialize = function(`paymentMethod`, `expirationInSeconds` = 3600, ...) {
       if (!missing(`paymentMethod`)) {
-        if (!(`paymentMethod` %in% c())) {
-          stop(paste("Error! \"", `paymentMethod`, "\" cannot be assigned to `paymentMethod`. Must be .", sep = ""))
+        if (!(is.character(`paymentMethod`) && length(`paymentMethod`) == 1)) {
+          stop(paste("Error! Invalid data for `paymentMethod`. Must be a string:", `paymentMethod`))
         }
-        stopifnot(R6::is.R6(`paymentMethod`))
         self$`paymentMethod` <- `paymentMethod`
       }
       if (!is.null(`expirationInSeconds`)) {
@@ -70,36 +69,13 @@ OrderPIXPaymentRequest <- R6::R6Class(
       OrderPIXPaymentRequestObject <- list()
       if (!is.null(self$`paymentMethod`)) {
         OrderPIXPaymentRequestObject[["paymentMethod"]] <-
-          self$extractSimpleType(self$`paymentMethod`)
+          self$`paymentMethod`
       }
       if (!is.null(self$`expirationInSeconds`)) {
         OrderPIXPaymentRequestObject[["expirationInSeconds"]] <-
           self$`expirationInSeconds`
       }
       return(OrderPIXPaymentRequestObject)
-    },
-
-    extractSimpleType = function(x) {
-      if (R6::is.R6(x)) {
-        return(x$toSimpleType())
-      } else if (!self$hasNestedR6(x)) {
-        return(x)
-      }
-      lapply(x, self$extractSimpleType)
-    },
-
-    hasNestedR6 = function(x) {
-      if (R6::is.R6(x)) {
-        return(TRUE)
-      }
-      if (is.list(x)) {
-        for (item in x) {
-          if (self$hasNestedR6(item)) {
-            return(TRUE)
-          }
-        }
-      }
-      FALSE
     },
 
     #' @description
@@ -110,9 +86,7 @@ OrderPIXPaymentRequest <- R6::R6Class(
     fromJSON = function(input_json) {
       this_object <- jsonlite::fromJSON(input_json)
       if (!is.null(this_object$`paymentMethod`)) {
-        `paymentmethod_object` <- PaymentMethod$new()
-        `paymentmethod_object`$fromJSON(jsonlite::toJSON(this_object$`paymentMethod`, auto_unbox = TRUE, digits = NA))
-        self$`paymentMethod` <- `paymentmethod_object`
+        self$`paymentMethod` <- this_object$`paymentMethod`
       }
       if (!is.null(this_object$`expirationInSeconds`)) {
         self$`expirationInSeconds` <- this_object$`expirationInSeconds`
@@ -138,7 +112,7 @@ OrderPIXPaymentRequest <- R6::R6Class(
     #' @return the instance of OrderPIXPaymentRequest
     fromJSONString = function(input_json) {
       this_object <- jsonlite::fromJSON(input_json)
-      self$`paymentMethod` <- PaymentMethod$new()$fromJSON(jsonlite::toJSON(this_object$`paymentMethod`, auto_unbox = TRUE, digits = NA))
+      self$`paymentMethod` <- this_object$`paymentMethod`
       self$`expirationInSeconds` <- this_object$`expirationInSeconds`
       self
     },
@@ -151,7 +125,9 @@ OrderPIXPaymentRequest <- R6::R6Class(
       input_json <- jsonlite::fromJSON(input)
       # check the required field `paymentMethod`
       if (!is.null(input_json$`paymentMethod`)) {
-        stopifnot(R6::is.R6(input_json$`paymentMethod`))
+        if (!(is.character(input_json$`paymentMethod`) && length(input_json$`paymentMethod`) == 1)) {
+          stop(paste("Error! Invalid data for `paymentMethod`. Must be a string:", input_json$`paymentMethod`))
+        }
       } else {
         stop(paste("The JSON input `", input, "` is invalid for OrderPIXPaymentRequest: the required field `paymentMethod` is missing."))
       }

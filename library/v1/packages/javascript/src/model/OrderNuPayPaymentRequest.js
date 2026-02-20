@@ -13,7 +13,6 @@
 
 import ApiClient from '../ApiClient';
 import OrderNuPayPaymentRequestNuPay from './OrderNuPayPaymentRequestNuPay';
-import PaymentMethod from './PaymentMethod';
 
 /**
  * The OrderNuPayPaymentRequest model module.
@@ -24,7 +23,7 @@ class OrderNuPayPaymentRequest {
     /**
      * Constructs a new <code>OrderNuPayPaymentRequest</code>.
      * @alias module:model/OrderNuPayPaymentRequest
-     * @param paymentMethod {module:model/PaymentMethod} 
+     * @param paymentMethod {String} 
      * @param nuPay {module:model/OrderNuPayPaymentRequestNuPay} 
      */
     constructor(paymentMethod, nuPay) { 
@@ -54,7 +53,7 @@ class OrderNuPayPaymentRequest {
             obj = obj || new OrderNuPayPaymentRequest();
 
             if (data.hasOwnProperty('paymentMethod')) {
-                obj['paymentMethod'] = PaymentMethod.constructFromObject(data['paymentMethod']);
+                obj['paymentMethod'] = ApiClient.convertToType(data['paymentMethod'], 'String');
             }
             if (data.hasOwnProperty('nuPay')) {
                 obj['nuPay'] = OrderNuPayPaymentRequestNuPay.constructFromObject(data['nuPay']);
@@ -75,6 +74,10 @@ class OrderNuPayPaymentRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['paymentMethod'] && !(typeof data['paymentMethod'] === 'string' || data['paymentMethod'] instanceof String)) {
+            throw new Error("Expected the field `paymentMethod` to be a primitive type in the JSON string but got " + data['paymentMethod']);
+        }
         // validate the optional field `nuPay`
         if (data['nuPay']) { // data not null
           OrderNuPayPaymentRequestNuPay.validateJSON(data['nuPay']);
@@ -89,7 +92,7 @@ class OrderNuPayPaymentRequest {
 OrderNuPayPaymentRequest.RequiredProperties = ["paymentMethod", "nuPay"];
 
 /**
- * @member {module:model/PaymentMethod} paymentMethod
+ * @member {String} paymentMethod
  */
 OrderNuPayPaymentRequest.prototype['paymentMethod'] = undefined;
 

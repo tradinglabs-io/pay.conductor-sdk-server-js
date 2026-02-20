@@ -22,13 +22,13 @@ order_draft_payment_request_t* instantiate_order_draft_payment_request(int inclu
   order_draft_payment_request_t* order_draft_payment_request = NULL;
   if (include_optional) {
     order_draft_payment_request = order_draft_payment_request_create(
-      payconductor_api_order_draft_payment_request__Pix,
+      "0",
       1.337,
       list_createList()
     );
   } else {
     order_draft_payment_request = order_draft_payment_request_create(
-      payconductor_api_order_draft_payment_request__Pix,
+      "0",
       1.337,
       list_createList()
     );

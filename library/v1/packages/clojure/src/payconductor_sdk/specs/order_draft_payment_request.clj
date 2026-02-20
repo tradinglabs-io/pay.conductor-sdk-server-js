@@ -1,7 +1,6 @@
 (ns payconductor-sdk.specs.order-draft-payment-request
   (:require [clojure.spec.alpha :as s]
             [spec-tools.data-spec :as ds]
-            [payconductor-sdk.specs.payment-method :refer :all]
             [payconductor-sdk.specs.available-payment-methods :refer :all]
             )
   (:import (java.io File)))
@@ -9,7 +8,7 @@
 
 (def order-draft-payment-request-data
   {
-   (ds/req :paymentMethod) payment-method-spec
+   (ds/req :paymentMethod) string?
    (ds/opt :expirationInSeconds) float?
    (ds/opt :availablePaymentMethods) (s/coll-of available-payment-methods-spec)
    })

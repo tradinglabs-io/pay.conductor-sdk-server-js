@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**PaymentMethod** | **string** |  | 
 **ExpirationInDays** | Pointer to **float32** | Days until bank slip expires | [optional] [default to 7]
 
 ## Methods
 
 ### NewOrderBankSlipPaymentRequest
 
-`func NewOrderBankSlipPaymentRequest(paymentMethod PaymentMethod, ) *OrderBankSlipPaymentRequest`
+`func NewOrderBankSlipPaymentRequest(paymentMethod string, ) *OrderBankSlipPaymentRequest`
 
 NewOrderBankSlipPaymentRequest instantiates a new OrderBankSlipPaymentRequest object
 This constructor will assign default values to properties that have it defined,
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaymentMethod
 
-`func (o *OrderBankSlipPaymentRequest) GetPaymentMethod() PaymentMethod`
+`func (o *OrderBankSlipPaymentRequest) GetPaymentMethod() string`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *OrderBankSlipPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool)`
+`func (o *OrderBankSlipPaymentRequest) GetPaymentMethodOk() (*string, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *OrderBankSlipPaymentRequest) SetPaymentMethod(v PaymentMethod)`
+`func (o *OrderBankSlipPaymentRequest) SetPaymentMethod(v string)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 

@@ -20,7 +20,6 @@ import io.kotlintest.specs.ShouldSpec
 
 import payconductor_sdk.models.OrderCreditCardPaymentRequest
 import payconductor_sdk.models.OrderCreditCardPaymentRequestCard
-import payconductor_sdk.models.PaymentMethod
 
 class OrderCreditCardPaymentRequestTest : ShouldSpec() {
     init {

@@ -177,14 +177,14 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
 
             OrderBankSlipPaymentRequest? orderBankSlipPaymentRequest = null;
             OrderCreditCardPaymentRequest? orderCreditCardPaymentRequest = null;
             OrderDraftPaymentRequest? orderDraftPaymentRequest = null;
             OrderNuPayPaymentRequest? orderNuPayPaymentRequest = null;
-            OrderPIXPaymentRequest? orderPIXPaymentRequest = null;
             OrderPicPayPaymentRequest? orderPicPayPaymentRequest = null;
+            OrderPIXPaymentRequest? orderPIXPaymentRequest = null;
 
             Utf8JsonReader utf8JsonReaderDiscriminator = utf8JsonReader;
             while (utf8JsonReaderDiscriminator.Read())
@@ -202,35 +202,35 @@ namespace payconductor_sdk.Model
                     if (localVarJsonPropertyName?.Equals("paymentMethod") ?? false)
                     {
                         string? discriminator = utf8JsonReaderDiscriminator.GetString();
-                        if (discriminator?.Equals("OrderBankSlipPaymentRequest") ?? false)
+                        if (discriminator?.Equals("BankSlip") ?? false)
                         {
                             Utf8JsonReader utf8JsonReaderOrderBankSlipPaymentRequest = utf8JsonReader;
                             orderBankSlipPaymentRequest = JsonSerializer.Deserialize<OrderBankSlipPaymentRequest>(ref utf8JsonReaderOrderBankSlipPaymentRequest, jsonSerializerOptions);
                         }
-                        if (discriminator?.Equals("OrderCreditCardPaymentRequest") ?? false)
+                        if (discriminator?.Equals("CreditCard") ?? false)
                         {
                             Utf8JsonReader utf8JsonReaderOrderCreditCardPaymentRequest = utf8JsonReader;
                             orderCreditCardPaymentRequest = JsonSerializer.Deserialize<OrderCreditCardPaymentRequest>(ref utf8JsonReaderOrderCreditCardPaymentRequest, jsonSerializerOptions);
                         }
-                        if (discriminator?.Equals("OrderDraftPaymentRequest") ?? false)
+                        if (discriminator?.Equals("Draft") ?? false)
                         {
                             Utf8JsonReader utf8JsonReaderOrderDraftPaymentRequest = utf8JsonReader;
                             orderDraftPaymentRequest = JsonSerializer.Deserialize<OrderDraftPaymentRequest>(ref utf8JsonReaderOrderDraftPaymentRequest, jsonSerializerOptions);
                         }
-                        if (discriminator?.Equals("OrderNuPayPaymentRequest") ?? false)
+                        if (discriminator?.Equals("NuPay") ?? false)
                         {
                             Utf8JsonReader utf8JsonReaderOrderNuPayPaymentRequest = utf8JsonReader;
                             orderNuPayPaymentRequest = JsonSerializer.Deserialize<OrderNuPayPaymentRequest>(ref utf8JsonReaderOrderNuPayPaymentRequest, jsonSerializerOptions);
                         }
-                        if (discriminator?.Equals("OrderPIXPaymentRequest") ?? false)
-                        {
-                            Utf8JsonReader utf8JsonReaderOrderPIXPaymentRequest = utf8JsonReader;
-                            orderPIXPaymentRequest = JsonSerializer.Deserialize<OrderPIXPaymentRequest>(ref utf8JsonReaderOrderPIXPaymentRequest, jsonSerializerOptions);
-                        }
-                        if (discriminator?.Equals("OrderPicPayPaymentRequest") ?? false)
+                        if (discriminator?.Equals("PicPay") ?? false)
                         {
                             Utf8JsonReader utf8JsonReaderOrderPicPayPaymentRequest = utf8JsonReader;
                             orderPicPayPaymentRequest = JsonSerializer.Deserialize<OrderPicPayPaymentRequest>(ref utf8JsonReaderOrderPicPayPaymentRequest, jsonSerializerOptions);
+                        }
+                        if (discriminator?.Equals("Pix") ?? false)
+                        {
+                            Utf8JsonReader utf8JsonReaderOrderPIXPaymentRequest = utf8JsonReader;
+                            orderPIXPaymentRequest = JsonSerializer.Deserialize<OrderPIXPaymentRequest>(ref utf8JsonReaderOrderPIXPaymentRequest, jsonSerializerOptions);
                         }
                     }
                 }
@@ -252,9 +252,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -280,11 +278,11 @@ namespace payconductor_sdk.Model
             if (orderNuPayPaymentRequest != null)
                 return new OrderPaymentRequest(orderNuPayPaymentRequest);
 
-            if (orderPIXPaymentRequest != null)
-                return new OrderPaymentRequest(orderPIXPaymentRequest);
-
             if (orderPicPayPaymentRequest != null)
                 return new OrderPaymentRequest(orderPicPayPaymentRequest);
+
+            if (orderPIXPaymentRequest != null)
+                return new OrderPaymentRequest(orderPIXPaymentRequest);
 
             throw new JsonException();
         }

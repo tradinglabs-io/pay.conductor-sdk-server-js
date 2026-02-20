@@ -35,7 +35,7 @@ class TestOrderDraftPaymentRequest(unittest.TestCase):
         model = OrderDraftPaymentRequest()
         if include_optional:
             return OrderDraftPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 expiration_in_seconds = 1.337,
                 available_payment_methods = [
                     'Pix'
@@ -43,7 +43,7 @@ class TestOrderDraftPaymentRequest(unittest.TestCase):
             )
         else:
             return OrderDraftPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
         )
         """
 

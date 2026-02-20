@@ -22,12 +22,12 @@ order_bank_slip_payment_request_t* instantiate_order_bank_slip_payment_request(i
   order_bank_slip_payment_request_t* order_bank_slip_payment_request = NULL;
   if (include_optional) {
     order_bank_slip_payment_request = order_bank_slip_payment_request_create(
-      payconductor_api_order_bank_slip_payment_request__Pix,
+      "0",
       1
     );
   } else {
     order_bank_slip_payment_request = order_bank_slip_payment_request_create(
-      payconductor_api_order_bank_slip_payment_request__Pix,
+      "0",
       1
     );
   }

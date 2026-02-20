@@ -21,7 +21,6 @@ import OrderNuPayPaymentRequest from './OrderNuPayPaymentRequest';
 import OrderNuPayPaymentRequestNuPay from './OrderNuPayPaymentRequestNuPay';
 import OrderPIXPaymentRequest from './OrderPIXPaymentRequest';
 import OrderPicPayPaymentRequest from './OrderPicPayPaymentRequest';
-import PaymentMethod from './PaymentMethod';
 
 /**
  * The OrderPaymentRequest model module.
@@ -195,7 +194,7 @@ class OrderPaymentRequest {
 }
 
 /**
- * @member {module:model/PaymentMethod} paymentMethod
+ * @member {String} paymentMethod
  */
 OrderPaymentRequest.prototype['paymentMethod'] = undefined;
 

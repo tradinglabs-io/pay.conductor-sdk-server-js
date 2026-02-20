@@ -15,7 +15,6 @@
 
 package payconductor_sdk.models
 
-import payconductor_sdk.models.PaymentMethod
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -30,7 +29,7 @@ import com.squareup.moshi.JsonClass
 data class OrderPicPayPaymentRequest (
 
     @Json(name = "paymentMethod")
-    val paymentMethod: PaymentMethod
+    val paymentMethod: kotlin.String
 
 ) {
 

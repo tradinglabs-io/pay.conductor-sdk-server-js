@@ -20,7 +20,6 @@ import io.kotlintest.specs.ShouldSpec
 
 import payconductor_sdk.models.OrderNuPayPaymentRequest
 import payconductor_sdk.models.OrderNuPayPaymentRequestNuPay
-import payconductor_sdk.models.PaymentMethod
 
 class OrderNuPayPaymentRequestTest : ShouldSpec() {
     init {

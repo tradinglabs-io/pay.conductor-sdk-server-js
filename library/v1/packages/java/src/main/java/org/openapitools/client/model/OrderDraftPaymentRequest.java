@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.openapitools.client.model.AvailablePaymentMethods;
-import org.openapitools.client.model.PaymentMethod;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -53,12 +52,12 @@ import org.openapitools.client.JSON;
 /**
  * Used to create an order without generating a real payment. Use to create orders that will be paid later
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-19T23:03:30.894187300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-20T01:38:45.063857300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
 public class OrderDraftPaymentRequest {
   public static final String SERIALIZED_NAME_PAYMENT_METHOD = "paymentMethod";
   @SerializedName(SERIALIZED_NAME_PAYMENT_METHOD)
   @javax.annotation.Nonnull
-  private PaymentMethod paymentMethod;
+  private String paymentMethod;
 
   public static final String SERIALIZED_NAME_EXPIRATION_IN_SECONDS = "expirationInSeconds";
   @SerializedName(SERIALIZED_NAME_EXPIRATION_IN_SECONDS)
@@ -73,7 +72,7 @@ public class OrderDraftPaymentRequest {
   public OrderDraftPaymentRequest() {
   }
 
-  public OrderDraftPaymentRequest paymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public OrderDraftPaymentRequest paymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
     return this;
   }
@@ -83,11 +82,11 @@ public class OrderDraftPaymentRequest {
    * @return paymentMethod
    */
   @javax.annotation.Nonnull
-  public PaymentMethod getPaymentMethod() {
+  public String getPaymentMethod() {
     return paymentMethod;
   }
 
-  public void setPaymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public void setPaymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
   }
 
@@ -220,8 +219,9 @@ public class OrderDraftPaymentRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `paymentMethod`
-      PaymentMethod.validateJsonElement(jsonObj.get("paymentMethod"));
+      if (!jsonObj.get("paymentMethod").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `paymentMethod` to be a primitive type in the JSON string but got `%s`", jsonObj.get("paymentMethod").toString()));
+      }
       // ensure the optional json data is an array if present
       if (jsonObj.get("availablePaymentMethods") != null && !jsonObj.get("availablePaymentMethods").isJsonNull() && !jsonObj.get("availablePaymentMethods").isJsonArray()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `availablePaymentMethods` to be an array in the JSON string but got `%s`", jsonObj.get("availablePaymentMethods").toString()));

@@ -15,19 +15,18 @@
 
 typedef struct order_pix_payment_request_t order_pix_payment_request_t;
 
-#include "payment_method.h"
 
 
 
 typedef struct order_pix_payment_request_t {
-    payconductor_api_payment_method__e payment_method; //referenced enum
+    char *payment_method; // string
     double expiration_in_seconds; //numeric
 
     int _library_owned; // Is the library responsible for freeing this object?
 } order_pix_payment_request_t;
 
 __attribute__((deprecated)) order_pix_payment_request_t *order_pix_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds
 );
 

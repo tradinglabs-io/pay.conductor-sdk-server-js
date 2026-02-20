@@ -8,7 +8,7 @@ Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**paymentMethod** | **PaymentMethod** |  |  |
+|**paymentMethod** | **String** |  |  |
 |**expirationInSeconds** | **BigDecimal** | Order expiration time in seconds |  [optional] |
 |**card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  |  |
 |**installments** | **BigDecimal** | Number of installments |  |

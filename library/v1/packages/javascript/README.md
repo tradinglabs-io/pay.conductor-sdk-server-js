@@ -205,71 +205,71 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PayconductorSdk.CardTokenizationApi* | [**cardTokenize**](docs/CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card
-*PayconductorSdk.CustomerApi* | [**customerCreate**](docs/CustomerApi.md#customerCreate) | **POST** /customers/ | Create New Customer
-*PayconductorSdk.CustomerApi* | [**customerListCustom**](docs/CustomerApi.md#customerListCustom) | **GET** /customers/ | Get All Customers
-*PayconductorSdk.CustomerApi* | [**customerRead**](docs/CustomerApi.md#customerRead) | **GET** /customers/{id} | Get Customer By ID
-*PayconductorSdk.CustomerApi* | [**customerUpdate**](docs/CustomerApi.md#customerUpdate) | **PATCH** /customers/{id} | Update Customer Data
-*PayconductorSdk.OrderApi* | [**orderConfirm**](docs/OrderApi.md#orderConfirm) | **POST** /orders/{id}/confirm | Confirm Order
-*PayconductorSdk.OrderApi* | [**orderCreate**](docs/OrderApi.md#orderCreate) | **POST** /orders/ | Create Order
-*PayconductorSdk.OrderApi* | [**orderList**](docs/OrderApi.md#orderList) | **GET** /orders/ | List Orders
-*PayconductorSdk.OrderApi* | [**orderRead**](docs/OrderApi.md#orderRead) | **GET** /orders/{id} | Get Order By ID
-*PayconductorSdk.OrderApi* | [**orderRefund**](docs/OrderApi.md#orderRefund) | **POST** /orders/{id}/refund | Refund Order
-*PayconductorSdk.WithdrawApi* | [**withdrawCreate**](docs/WithdrawApi.md#withdrawCreate) | **POST** /withdraws/ | Create Withdrawal
-*PayconductorSdk.WithdrawApi* | [**withdrawList**](docs/WithdrawApi.md#withdrawList) | **GET** /withdraws/ | List Withdrawals
-*PayconductorSdk.WithdrawApi* | [**withdrawRead**](docs/WithdrawApi.md#withdrawRead) | **GET** /withdraws/{id} | Get Withdrawal By ID
+*PayconductorSdk.CardTokenizationApi* | [**cardTokenize**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card
+*PayconductorSdk.CustomerApi* | [**customerCreate**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerApi.md#customerCreate) | **POST** /customers/ | Create New Customer
+*PayconductorSdk.CustomerApi* | [**customerListCustom**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerApi.md#customerListCustom) | **GET** /customers/ | Get All Customers
+*PayconductorSdk.CustomerApi* | [**customerRead**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerApi.md#customerRead) | **GET** /customers/{id} | Get Customer By ID
+*PayconductorSdk.CustomerApi* | [**customerUpdate**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerApi.md#customerUpdate) | **PATCH** /customers/{id} | Update Customer Data
+*PayconductorSdk.OrderApi* | [**orderConfirm**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderApi.md#orderConfirm) | **POST** /orders/{id}/confirm | Confirm Order
+*PayconductorSdk.OrderApi* | [**orderCreate**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderApi.md#orderCreate) | **POST** /orders/ | Create Order
+*PayconductorSdk.OrderApi* | [**orderList**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderApi.md#orderList) | **GET** /orders/ | List Orders
+*PayconductorSdk.OrderApi* | [**orderRead**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderApi.md#orderRead) | **GET** /orders/{id} | Get Order By ID
+*PayconductorSdk.OrderApi* | [**orderRefund**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderApi.md#orderRefund) | **POST** /orders/{id}/refund | Refund Order
+*PayconductorSdk.WithdrawApi* | [**withdrawCreate**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawApi.md#withdrawCreate) | **POST** /withdraws/ | Create Withdrawal
+*PayconductorSdk.WithdrawApi* | [**withdrawList**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawApi.md#withdrawList) | **GET** /withdraws/ | List Withdrawals
+*PayconductorSdk.WithdrawApi* | [**withdrawRead**](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawApi.md#withdrawRead) | **GET** /withdraws/{id} | Get Withdrawal By ID
 
 
 ## Documentation for Models
 
- - [PayconductorSdk.AddressCreateRequest](docs/AddressCreateRequest.md)
- - [PayconductorSdk.AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
- - [PayconductorSdk.CardCreateRequest](docs/CardCreateRequest.md)
- - [PayconductorSdk.CardExpirationData](docs/CardExpirationData.md)
- - [PayconductorSdk.CardTokenizationCreateRequest](docs/CardTokenizationCreateRequest.md)
- - [PayconductorSdk.CardTokenizationCreateRequestCustomer](docs/CardTokenizationCreateRequestCustomer.md)
- - [PayconductorSdk.CardTokenizationCreateResponse](docs/CardTokenizationCreateResponse.md)
- - [PayconductorSdk.CardTokenizationCustomerByIdData](docs/CardTokenizationCustomerByIdData.md)
- - [PayconductorSdk.CustomerAddressResponse](docs/CustomerAddressResponse.md)
- - [PayconductorSdk.CustomerCreateRequest](docs/CustomerCreateRequest.md)
- - [PayconductorSdk.CustomerListPagination](docs/CustomerListPagination.md)
- - [PayconductorSdk.CustomerListResponse](docs/CustomerListResponse.md)
- - [PayconductorSdk.CustomerReadResponse](docs/CustomerReadResponse.md)
- - [PayconductorSdk.CustomerUpdateRequest](docs/CustomerUpdateRequest.md)
- - [PayconductorSdk.DocumentType](docs/DocumentType.md)
- - [PayconductorSdk.Event](docs/Event.md)
- - [PayconductorSdk.MerchantInput](docs/MerchantInput.md)
- - [PayconductorSdk.OrderBankSlipInfo](docs/OrderBankSlipInfo.md)
- - [PayconductorSdk.OrderBankSlipPaymentRequest](docs/OrderBankSlipPaymentRequest.md)
- - [PayconductorSdk.OrderConfirmResponse](docs/OrderConfirmResponse.md)
- - [PayconductorSdk.OrderCreateRequest](docs/OrderCreateRequest.md)
- - [PayconductorSdk.OrderCreateRequestSession](docs/OrderCreateRequestSession.md)
- - [PayconductorSdk.OrderCreateResponse](docs/OrderCreateResponse.md)
- - [PayconductorSdk.OrderCreateResponseOrderItemsInner](docs/OrderCreateResponseOrderItemsInner.md)
- - [PayconductorSdk.OrderCreateResponseSession](docs/OrderCreateResponseSession.md)
- - [PayconductorSdk.OrderCreditCardInfo](docs/OrderCreditCardInfo.md)
- - [PayconductorSdk.OrderCreditCardPaymentRequest](docs/OrderCreditCardPaymentRequest.md)
- - [PayconductorSdk.OrderCreditCardPaymentRequestCard](docs/OrderCreditCardPaymentRequestCard.md)
- - [PayconductorSdk.OrderDraftPaymentRequest](docs/OrderDraftPaymentRequest.md)
- - [PayconductorSdk.OrderFraudFingerprints](docs/OrderFraudFingerprints.md)
- - [PayconductorSdk.OrderItemData](docs/OrderItemData.md)
- - [PayconductorSdk.OrderNuPayInfo](docs/OrderNuPayInfo.md)
- - [PayconductorSdk.OrderNuPayPaymentRequest](docs/OrderNuPayPaymentRequest.md)
- - [PayconductorSdk.OrderNuPayPaymentRequestNuPay](docs/OrderNuPayPaymentRequestNuPay.md)
- - [PayconductorSdk.OrderPIXInfo](docs/OrderPIXInfo.md)
- - [PayconductorSdk.OrderPIXPaymentRequest](docs/OrderPIXPaymentRequest.md)
- - [PayconductorSdk.OrderPaymentRequest](docs/OrderPaymentRequest.md)
- - [PayconductorSdk.OrderPicPayInfo](docs/OrderPicPayInfo.md)
- - [PayconductorSdk.OrderPicPayPaymentRequest](docs/OrderPicPayPaymentRequest.md)
- - [PayconductorSdk.OrderTokenizedCardData](docs/OrderTokenizedCardData.md)
- - [PayconductorSdk.PaymentMethod](docs/PaymentMethod.md)
- - [PayconductorSdk.PixType](docs/PixType.md)
- - [PayconductorSdk.Status](docs/Status.md)
- - [PayconductorSdk.WithdrawCreateRequest](docs/WithdrawCreateRequest.md)
- - [PayconductorSdk.WithdrawCreateResponse](docs/WithdrawCreateResponse.md)
- - [PayconductorSdk.WithdrawCreateResponsePayedAt](docs/WithdrawCreateResponsePayedAt.md)
- - [PayconductorSdk.WithdrawCreateResponsePayoutAccount](docs/WithdrawCreateResponsePayoutAccount.md)
- - [PayconductorSdk.WithdrawPayoutAccountData](docs/WithdrawPayoutAccountData.md)
+ - [PayconductorSdk.AddressCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/AddressCreateRequest.md)
+ - [PayconductorSdk.AvailablePaymentMethods](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/AvailablePaymentMethods.md)
+ - [PayconductorSdk.CardCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardCreateRequest.md)
+ - [PayconductorSdk.CardExpirationData](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardExpirationData.md)
+ - [PayconductorSdk.CardTokenizationCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardTokenizationCreateRequest.md)
+ - [PayconductorSdk.CardTokenizationCreateRequestCustomer](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardTokenizationCreateRequestCustomer.md)
+ - [PayconductorSdk.CardTokenizationCreateResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardTokenizationCreateResponse.md)
+ - [PayconductorSdk.CardTokenizationCustomerByIdData](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CardTokenizationCustomerByIdData.md)
+ - [PayconductorSdk.CustomerAddressResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerAddressResponse.md)
+ - [PayconductorSdk.CustomerCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerCreateRequest.md)
+ - [PayconductorSdk.CustomerListPagination](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerListPagination.md)
+ - [PayconductorSdk.CustomerListResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerListResponse.md)
+ - [PayconductorSdk.CustomerReadResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerReadResponse.md)
+ - [PayconductorSdk.CustomerUpdateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/CustomerUpdateRequest.md)
+ - [PayconductorSdk.DocumentType](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/DocumentType.md)
+ - [PayconductorSdk.Event](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/Event.md)
+ - [PayconductorSdk.MerchantInput](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/MerchantInput.md)
+ - [PayconductorSdk.OrderBankSlipInfo](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderBankSlipInfo.md)
+ - [PayconductorSdk.OrderBankSlipPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderBankSlipPaymentRequest.md)
+ - [PayconductorSdk.OrderConfirmResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderConfirmResponse.md)
+ - [PayconductorSdk.OrderCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreateRequest.md)
+ - [PayconductorSdk.OrderCreateRequestSession](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreateRequestSession.md)
+ - [PayconductorSdk.OrderCreateResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreateResponse.md)
+ - [PayconductorSdk.OrderCreateResponseOrderItemsInner](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreateResponseOrderItemsInner.md)
+ - [PayconductorSdk.OrderCreateResponseSession](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreateResponseSession.md)
+ - [PayconductorSdk.OrderCreditCardInfo](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreditCardInfo.md)
+ - [PayconductorSdk.OrderCreditCardPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreditCardPaymentRequest.md)
+ - [PayconductorSdk.OrderCreditCardPaymentRequestCard](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderCreditCardPaymentRequestCard.md)
+ - [PayconductorSdk.OrderDraftPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderDraftPaymentRequest.md)
+ - [PayconductorSdk.OrderFraudFingerprints](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderFraudFingerprints.md)
+ - [PayconductorSdk.OrderItemData](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderItemData.md)
+ - [PayconductorSdk.OrderNuPayInfo](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderNuPayInfo.md)
+ - [PayconductorSdk.OrderNuPayPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderNuPayPaymentRequest.md)
+ - [PayconductorSdk.OrderNuPayPaymentRequestNuPay](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderNuPayPaymentRequestNuPay.md)
+ - [PayconductorSdk.OrderPIXInfo](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderPIXInfo.md)
+ - [PayconductorSdk.OrderPIXPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderPIXPaymentRequest.md)
+ - [PayconductorSdk.OrderPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderPaymentRequest.md)
+ - [PayconductorSdk.OrderPicPayInfo](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderPicPayInfo.md)
+ - [PayconductorSdk.OrderPicPayPaymentRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderPicPayPaymentRequest.md)
+ - [PayconductorSdk.OrderTokenizedCardData](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/OrderTokenizedCardData.md)
+ - [PayconductorSdk.PaymentMethod](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/PaymentMethod.md)
+ - [PayconductorSdk.PixType](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/PixType.md)
+ - [PayconductorSdk.Status](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/Status.md)
+ - [PayconductorSdk.WithdrawCreateRequest](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawCreateRequest.md)
+ - [PayconductorSdk.WithdrawCreateResponse](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawCreateResponse.md)
+ - [PayconductorSdk.WithdrawCreateResponsePayedAt](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawCreateResponsePayedAt.md)
+ - [PayconductorSdk.WithdrawCreateResponsePayoutAccount](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawCreateResponsePayoutAccount.md)
+ - [PayconductorSdk.WithdrawPayoutAccountData](https://github.com/payconductor-ai/payconductor-sdk/blob/main/library/v1/packages/javascript/docs/WithdrawPayoutAccountData.md)
 
 
 ## Documentation for Authorization

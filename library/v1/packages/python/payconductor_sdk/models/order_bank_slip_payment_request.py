@@ -17,10 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
-from payconductor_sdk.models.payment_method import PaymentMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +27,7 @@ class OrderBankSlipPaymentRequest(BaseModel):
     """
     OrderBankSlipPaymentRequest
     """ # noqa: E501
-    payment_method: PaymentMethod = Field(alias="paymentMethod")
+    payment_method: StrictStr = Field(alias="paymentMethod")
     expiration_in_days: Optional[Union[Annotated[float, Field(multiple_of=1, strict=True, ge=1)], Annotated[int, Field(strict=True, ge=1)]]] = Field(default=7, description="Days until bank slip expires", alias="expirationInDays")
     __properties: ClassVar[List[str]] = ["paymentMethod", "expirationInDays"]
 

@@ -35,12 +35,12 @@ class TestOrderBankSlipPaymentRequest(unittest.TestCase):
         model = OrderBankSlipPaymentRequest()
         if include_optional:
             return OrderBankSlipPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 expiration_in_days = 1
             )
         else:
             return OrderBankSlipPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
         )
         """
 

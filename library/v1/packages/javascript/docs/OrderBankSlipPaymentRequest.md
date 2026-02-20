@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**paymentMethod** | **String** |  | 
 **expirationInDays** | **Number** | Days until bank slip expires | [optional] [default to 7]
 
 

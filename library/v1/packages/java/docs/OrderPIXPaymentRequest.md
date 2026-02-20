@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**paymentMethod** | **PaymentMethod** |  |  |
+|**paymentMethod** | **String** |  |  |
 |**expirationInSeconds** | **BigDecimal** | PIX expiration time in seconds |  [optional] |
 
 

@@ -14,14 +14,14 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderBankSlipPaymentRequest {
     #[serde(rename = "paymentMethod")]
-    pub payment_method: models::PaymentMethod,
+    pub payment_method: String,
     /// Days until bank slip expires
     #[serde(rename = "expirationInDays", skip_serializing_if = "Option::is_none")]
     pub expiration_in_days: Option<f64>,
 }
 
 impl OrderBankSlipPaymentRequest {
-    pub fn new(payment_method: models::PaymentMethod) -> OrderBankSlipPaymentRequest {
+    pub fn new(payment_method: String) -> OrderBankSlipPaymentRequest {
         OrderBankSlipPaymentRequest {
             payment_method,
             expiration_in_days: None,

@@ -6,7 +6,7 @@ context("Test OrderDraftPaymentRequest")
 model_instance <- OrderDraftPaymentRequest$new()
 
 test_that("paymentMethod", {
-  # tests for the property `paymentMethod` (PaymentMethod)
+  # tests for the property `paymentMethod` (character)
 
   # uncomment below to test the property
   #expect_equal(model.instance$`paymentMethod`, "EXPECTED_RESULT")

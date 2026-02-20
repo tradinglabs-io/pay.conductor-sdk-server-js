@@ -37,12 +37,12 @@ module OpenapiClient
       # Discriminator's mapping (OpenAPI v3)
       def openapi_discriminator_mapping
         {
-          :'OrderBankSlipPaymentRequest' => :'OrderBankSlipPaymentRequest',
-          :'OrderCreditCardPaymentRequest' => :'OrderCreditCardPaymentRequest',
-          :'OrderDraftPaymentRequest' => :'OrderDraftPaymentRequest',
-          :'OrderNuPayPaymentRequest' => :'OrderNuPayPaymentRequest',
-          :'OrderPIXPaymentRequest' => :'OrderPIXPaymentRequest',
-          :'OrderPicPayPaymentRequest' => :'OrderPicPayPaymentRequest'
+          :'BankSlip' => :'OrderBankSlipPaymentRequest',
+          :'CreditCard' => :'OrderCreditCardPaymentRequest',
+          :'Draft' => :'OrderDraftPaymentRequest',
+          :'NuPay' => :'OrderNuPayPaymentRequest',
+          :'PicPay' => :'OrderPicPayPaymentRequest',
+          :'Pix' => :'OrderPIXPaymentRequest'
         }
       end
 

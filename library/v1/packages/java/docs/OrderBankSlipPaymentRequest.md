@@ -7,7 +7,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**paymentMethod** | **PaymentMethod** |  |  |
+|**paymentMethod** | **String** |  |  |
 |**expirationInDays** | **BigDecimal** | Days until bank slip expires |  [optional] |
 
 

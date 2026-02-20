@@ -35,12 +35,12 @@ class TestOrderPIXPaymentRequest(unittest.TestCase):
         model = OrderPIXPaymentRequest()
         if include_optional:
             return OrderPIXPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 expiration_in_seconds = 3600
             )
         else:
             return OrderPIXPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
         )
         """
 

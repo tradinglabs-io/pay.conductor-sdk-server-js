@@ -6,7 +6,7 @@
 
 
 static order_pix_payment_request_t *order_pix_payment_request_create_internal(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds
     ) {
     order_pix_payment_request_t *order_pix_payment_request_local_var = malloc(sizeof(order_pix_payment_request_t));
@@ -21,7 +21,7 @@ static order_pix_payment_request_t *order_pix_payment_request_create_internal(
 }
 
 __attribute__((deprecated)) order_pix_payment_request_t *order_pix_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_seconds
     ) {
     return order_pix_payment_request_create_internal (
@@ -39,6 +39,10 @@ void order_pix_payment_request_free(order_pix_payment_request_t *order_pix_payme
         return ;
     }
     listEntry_t *listEntry;
+    if (order_pix_payment_request->payment_method) {
+        free(order_pix_payment_request->payment_method);
+        order_pix_payment_request->payment_method = NULL;
+    }
     free(order_pix_payment_request);
 }
 
@@ -46,16 +50,11 @@ cJSON *order_pix_payment_request_convertToJSON(order_pix_payment_request_t *orde
     cJSON *item = cJSON_CreateObject();
 
     // order_pix_payment_request->payment_method
-    if (payconductor_api_payment_method__NULL == order_pix_payment_request->payment_method) {
+    if (!order_pix_payment_request->payment_method) {
         goto fail;
     }
-    cJSON *payment_method_local_JSON = payment_method_convertToJSON(order_pix_payment_request->payment_method);
-    if(payment_method_local_JSON == NULL) {
-        goto fail; // custom
-    }
-    cJSON_AddItemToObject(item, "paymentMethod", payment_method_local_JSON);
-    if(item->child == NULL) {
-        goto fail;
+    if(cJSON_AddStringToObject(item, "paymentMethod", order_pix_payment_request->payment_method) == NULL) {
+    goto fail; //String
     }
 
 
@@ -78,9 +77,6 @@ order_pix_payment_request_t *order_pix_payment_request_parseFromJSON(cJSON *orde
 
     order_pix_payment_request_t *order_pix_payment_request_local_var = NULL;
 
-    // define the local variable for order_pix_payment_request->payment_method
-    payconductor_api_payment_method__e payment_method_local_nonprim = 0;
-
     // order_pix_payment_request->payment_method
     cJSON *payment_method = cJSON_GetObjectItemCaseSensitive(order_pix_payment_requestJSON, "paymentMethod");
     if (cJSON_IsNull(payment_method)) {
@@ -91,7 +87,10 @@ order_pix_payment_request_t *order_pix_payment_request_parseFromJSON(cJSON *orde
     }
 
     
-    payment_method_local_nonprim = payment_method_parseFromJSON(payment_method); //custom
+    if(!cJSON_IsString(payment_method))
+    {
+    goto end; //String
+    }
 
     // order_pix_payment_request->expiration_in_seconds
     cJSON *expiration_in_seconds = cJSON_GetObjectItemCaseSensitive(order_pix_payment_requestJSON, "expirationInSeconds");
@@ -107,15 +106,12 @@ order_pix_payment_request_t *order_pix_payment_request_parseFromJSON(cJSON *orde
 
 
     order_pix_payment_request_local_var = order_pix_payment_request_create_internal (
-        payment_method_local_nonprim,
+        strdup(payment_method->valuestring),
         expiration_in_seconds ? expiration_in_seconds->valuedouble : 0
         );
 
     return order_pix_payment_request_local_var;
 end:
-    if (payment_method_local_nonprim) {
-        payment_method_local_nonprim = 0;
-    }
     return NULL;
 
 }

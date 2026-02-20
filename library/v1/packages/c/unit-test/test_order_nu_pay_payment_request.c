@@ -23,13 +23,13 @@ order_nu_pay_payment_request_t* instantiate_order_nu_pay_payment_request(int inc
   order_nu_pay_payment_request_t* order_nu_pay_payment_request = NULL;
   if (include_optional) {
     order_nu_pay_payment_request = order_nu_pay_payment_request_create(
-      payconductor_api_order_nu_pay_payment_request__Pix,
+      "0",
        // false, not to have infinite recursion
       instantiate_order_nu_pay_payment_request_nu_pay(0)
     );
   } else {
     order_nu_pay_payment_request = order_nu_pay_payment_request_create(
-      payconductor_api_order_nu_pay_payment_request__Pix,
+      "0",
       NULL
     );
   }

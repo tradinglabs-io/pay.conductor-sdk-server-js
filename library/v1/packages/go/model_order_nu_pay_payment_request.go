@@ -21,7 +21,7 @@ var _ MappedNullable = &OrderNuPayPaymentRequest{}
 
 // OrderNuPayPaymentRequest struct for OrderNuPayPaymentRequest
 type OrderNuPayPaymentRequest struct {
-	PaymentMethod PaymentMethod `json:"paymentMethod"`
+	PaymentMethod string `json:"paymentMethod"`
 	NuPay OrderNuPayPaymentRequestNuPay `json:"nuPay"`
 }
 
@@ -31,7 +31,7 @@ type _OrderNuPayPaymentRequest OrderNuPayPaymentRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderNuPayPaymentRequest(paymentMethod PaymentMethod, nuPay OrderNuPayPaymentRequestNuPay) *OrderNuPayPaymentRequest {
+func NewOrderNuPayPaymentRequest(paymentMethod string, nuPay OrderNuPayPaymentRequestNuPay) *OrderNuPayPaymentRequest {
 	this := OrderNuPayPaymentRequest{}
 	this.PaymentMethod = paymentMethod
 	this.NuPay = nuPay
@@ -47,9 +47,9 @@ func NewOrderNuPayPaymentRequestWithDefaults() *OrderNuPayPaymentRequest {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *OrderNuPayPaymentRequest) GetPaymentMethod() PaymentMethod {
+func (o *OrderNuPayPaymentRequest) GetPaymentMethod() string {
 	if o == nil {
-		var ret PaymentMethod
+		var ret string
 		return ret
 	}
 
@@ -58,7 +58,7 @@ func (o *OrderNuPayPaymentRequest) GetPaymentMethod() PaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *OrderNuPayPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
+func (o *OrderNuPayPaymentRequest) GetPaymentMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *OrderNuPayPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
 }
 
 // SetPaymentMethod sets field value
-func (o *OrderNuPayPaymentRequest) SetPaymentMethod(v PaymentMethod) {
+func (o *OrderNuPayPaymentRequest) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 

@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  |  |
+| **paymentMethod** | **kotlin.String** |  |  |
 | **card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  |  |
 | **installments** | [**java.math.BigDecimal**](java.math.BigDecimal.md) | Number of installments |  |
 | **nuPay** | [**OrderNuPayPaymentRequestNuPay**](OrderNuPayPaymentRequestNuPay.md) |  |  |

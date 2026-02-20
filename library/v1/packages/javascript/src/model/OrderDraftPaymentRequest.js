@@ -13,7 +13,6 @@
 
 import ApiClient from '../ApiClient';
 import AvailablePaymentMethods from './AvailablePaymentMethods';
-import PaymentMethod from './PaymentMethod';
 
 /**
  * The OrderDraftPaymentRequest model module.
@@ -25,7 +24,7 @@ class OrderDraftPaymentRequest {
      * Constructs a new <code>OrderDraftPaymentRequest</code>.
      * Used to create an order without generating a real payment. Use to create orders that will be paid later
      * @alias module:model/OrderDraftPaymentRequest
-     * @param paymentMethod {module:model/PaymentMethod} 
+     * @param paymentMethod {String} 
      */
     constructor(paymentMethod) { 
         
@@ -54,7 +53,7 @@ class OrderDraftPaymentRequest {
             obj = obj || new OrderDraftPaymentRequest();
 
             if (data.hasOwnProperty('paymentMethod')) {
-                obj['paymentMethod'] = PaymentMethod.constructFromObject(data['paymentMethod']);
+                obj['paymentMethod'] = ApiClient.convertToType(data['paymentMethod'], 'String');
             }
             if (data.hasOwnProperty('expirationInSeconds')) {
                 obj['expirationInSeconds'] = ApiClient.convertToType(data['expirationInSeconds'], 'Number');
@@ -78,6 +77,10 @@ class OrderDraftPaymentRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['paymentMethod'] && !(typeof data['paymentMethod'] === 'string' || data['paymentMethod'] instanceof String)) {
+            throw new Error("Expected the field `paymentMethod` to be a primitive type in the JSON string but got " + data['paymentMethod']);
+        }
         // ensure the json data is an array
         if (!Array.isArray(data['availablePaymentMethods'])) {
             throw new Error("Expected the field `availablePaymentMethods` to be an array in the JSON data but got " + data['availablePaymentMethods']);
@@ -92,7 +95,7 @@ class OrderDraftPaymentRequest {
 OrderDraftPaymentRequest.RequiredProperties = ["paymentMethod"];
 
 /**
- * @member {module:model/PaymentMethod} paymentMethod
+ * @member {String} paymentMethod
  */
 OrderDraftPaymentRequest.prototype['paymentMethod'] = undefined;
 

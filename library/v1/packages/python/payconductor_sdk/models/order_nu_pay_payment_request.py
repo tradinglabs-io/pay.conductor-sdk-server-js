@@ -17,10 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
 from payconductor_sdk.models.order_nu_pay_payment_request_nu_pay import OrderNuPayPaymentRequestNuPay
-from payconductor_sdk.models.payment_method import PaymentMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +27,7 @@ class OrderNuPayPaymentRequest(BaseModel):
     """
     OrderNuPayPaymentRequest
     """ # noqa: E501
-    payment_method: PaymentMethod = Field(alias="paymentMethod")
+    payment_method: StrictStr = Field(alias="paymentMethod")
     nu_pay: OrderNuPayPaymentRequestNuPay = Field(alias="nuPay")
     __properties: ClassVar[List[str]] = ["paymentMethod", "nuPay"]
 

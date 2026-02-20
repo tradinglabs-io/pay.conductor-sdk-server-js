@@ -24,7 +24,7 @@ order_payment_request_t* instantiate_order_payment_request(int include_optional)
   order_payment_request_t* order_payment_request = NULL;
   if (include_optional) {
     order_payment_request = order_payment_request_create(
-      payconductor_api_order_payment_request__Pix,
+      "0",
       1.337,
       null,
       1,
@@ -36,7 +36,7 @@ order_payment_request_t* instantiate_order_payment_request(int include_optional)
     );
   } else {
     order_payment_request = order_payment_request_create(
-      payconductor_api_order_payment_request__Pix,
+      "0",
       1.337,
       null,
       1,

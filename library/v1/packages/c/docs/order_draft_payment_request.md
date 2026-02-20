@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | **payment_method_t \*** |  | 
+**payment_method** | **char \*** |  | 
 **expiration_in_seconds** | **double** | Order expiration time in seconds | [optional] [default to 3600]
 **available_payment_methods** | [**list_t**](available_payment_methods.md) \* | Available payment methods for this order | [optional] 
 

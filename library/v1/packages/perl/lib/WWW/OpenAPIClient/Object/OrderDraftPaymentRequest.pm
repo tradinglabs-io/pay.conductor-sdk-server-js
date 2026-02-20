@@ -31,7 +31,6 @@ use Date::Parse;
 use DateTime;
 
 use WWW::OpenAPIClient::Object::AvailablePaymentMethods;
-use WWW::OpenAPIClient::Object::PaymentMethod;
 
 use base ("Class::Accessor", "Class::Data::Inheritable");
 
@@ -222,7 +221,7 @@ __PACKAGE__->class_documentation({description => 'Used to create an order withou
 
 __PACKAGE__->method_documentation({
     'payment_method' => {
-        datatype => 'PaymentMethod',
+        datatype => 'string',
         base_name => 'paymentMethod',
         description => '',
         format => '',
@@ -245,7 +244,7 @@ __PACKAGE__->method_documentation({
 });
 
 __PACKAGE__->openapi_types( {
-    'payment_method' => 'PaymentMethod',
+    'payment_method' => 'string',
     'expiration_in_seconds' => 'double',
     'available_payment_methods' => 'ARRAY[AvailablePaymentMethods]'
 } );

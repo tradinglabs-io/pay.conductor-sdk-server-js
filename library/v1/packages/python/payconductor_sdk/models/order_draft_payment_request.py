@@ -17,11 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from payconductor_sdk.models.available_payment_methods import AvailablePaymentMethods
-from payconductor_sdk.models.payment_method import PaymentMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +28,7 @@ class OrderDraftPaymentRequest(BaseModel):
     """
     Used to create an order without generating a real payment. Use to create orders that will be paid later
     """ # noqa: E501
-    payment_method: PaymentMethod = Field(alias="paymentMethod")
+    payment_method: StrictStr = Field(alias="paymentMethod")
     expiration_in_seconds: Optional[Union[Annotated[float, Field(multiple_of=1, strict=True)], Annotated[int, Field(strict=True)]]] = Field(default=3600, description="Order expiration time in seconds", alias="expirationInSeconds")
     available_payment_methods: Optional[List[AvailablePaymentMethods]] = Field(default=None, description="Available payment methods for this order", alias="availablePaymentMethods")
     __properties: ClassVar[List[str]] = ["paymentMethod", "expirationInSeconds", "availablePaymentMethods"]

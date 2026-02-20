@@ -32,7 +32,6 @@ import org.openapitools.client.model.OrderNuPayPaymentRequest;
 import org.openapitools.client.model.OrderNuPayPaymentRequestNuPay;
 import org.openapitools.client.model.OrderPIXPaymentRequest;
 import org.openapitools.client.model.OrderPicPayPaymentRequest;
-import org.openapitools.client.model.PaymentMethod;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

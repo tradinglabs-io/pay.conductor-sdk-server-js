@@ -14,11 +14,11 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderPicPayPaymentRequest {
     #[serde(rename = "paymentMethod")]
-    pub payment_method: models::PaymentMethod,
+    pub payment_method: String,
 }
 
 impl OrderPicPayPaymentRequest {
-    pub fn new(payment_method: models::PaymentMethod) -> OrderPicPayPaymentRequest {
+    pub fn new(payment_method: String) -> OrderPicPayPaymentRequest {
         OrderPicPayPaymentRequest {
             payment_method,
         }

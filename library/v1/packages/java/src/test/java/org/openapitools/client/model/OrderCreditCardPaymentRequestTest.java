@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import org.openapitools.client.model.OrderCreditCardPaymentRequestCard;
-import org.openapitools.client.model.PaymentMethod;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

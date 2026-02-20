@@ -12,7 +12,6 @@
  */
 
 import ApiClient from '../ApiClient';
-import PaymentMethod from './PaymentMethod';
 
 /**
  * The OrderBankSlipPaymentRequest model module.
@@ -23,7 +22,7 @@ class OrderBankSlipPaymentRequest {
     /**
      * Constructs a new <code>OrderBankSlipPaymentRequest</code>.
      * @alias module:model/OrderBankSlipPaymentRequest
-     * @param paymentMethod {module:model/PaymentMethod} 
+     * @param paymentMethod {String} 
      */
     constructor(paymentMethod) { 
         
@@ -52,7 +51,7 @@ class OrderBankSlipPaymentRequest {
             obj = obj || new OrderBankSlipPaymentRequest();
 
             if (data.hasOwnProperty('paymentMethod')) {
-                obj['paymentMethod'] = PaymentMethod.constructFromObject(data['paymentMethod']);
+                obj['paymentMethod'] = ApiClient.convertToType(data['paymentMethod'], 'String');
             }
             if (data.hasOwnProperty('expirationInDays')) {
                 obj['expirationInDays'] = ApiClient.convertToType(data['expirationInDays'], 'Number');
@@ -73,6 +72,10 @@ class OrderBankSlipPaymentRequest {
                 throw new Error("The required field `" + property + "` is not found in the JSON data: " + JSON.stringify(data));
             }
         }
+        // ensure the json data is a string
+        if (data['paymentMethod'] && !(typeof data['paymentMethod'] === 'string' || data['paymentMethod'] instanceof String)) {
+            throw new Error("Expected the field `paymentMethod` to be a primitive type in the JSON string but got " + data['paymentMethod']);
+        }
 
         return true;
     }
@@ -83,7 +86,7 @@ class OrderBankSlipPaymentRequest {
 OrderBankSlipPaymentRequest.RequiredProperties = ["paymentMethod"];
 
 /**
- * @member {module:model/PaymentMethod} paymentMethod
+ * @member {String} paymentMethod
  */
 OrderBankSlipPaymentRequest.prototype['paymentMethod'] = undefined;
 

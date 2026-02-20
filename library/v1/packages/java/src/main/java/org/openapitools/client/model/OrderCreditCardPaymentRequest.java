@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import org.openapitools.client.model.OrderCreditCardPaymentRequestCard;
-import org.openapitools.client.model.PaymentMethod;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -51,12 +50,12 @@ import org.openapitools.client.JSON;
 /**
  * OrderCreditCardPaymentRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-19T23:03:30.894187300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-20T01:38:45.063857300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
 public class OrderCreditCardPaymentRequest {
   public static final String SERIALIZED_NAME_PAYMENT_METHOD = "paymentMethod";
   @SerializedName(SERIALIZED_NAME_PAYMENT_METHOD)
   @javax.annotation.Nonnull
-  private PaymentMethod paymentMethod;
+  private String paymentMethod;
 
   public static final String SERIALIZED_NAME_CARD = "card";
   @SerializedName(SERIALIZED_NAME_CARD)
@@ -76,7 +75,7 @@ public class OrderCreditCardPaymentRequest {
   public OrderCreditCardPaymentRequest() {
   }
 
-  public OrderCreditCardPaymentRequest paymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public OrderCreditCardPaymentRequest paymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
     return this;
   }
@@ -86,11 +85,11 @@ public class OrderCreditCardPaymentRequest {
    * @return paymentMethod
    */
   @javax.annotation.Nonnull
-  public PaymentMethod getPaymentMethod() {
+  public String getPaymentMethod() {
     return paymentMethod;
   }
 
-  public void setPaymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public void setPaymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
   }
 
@@ -238,8 +237,9 @@ public class OrderCreditCardPaymentRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `paymentMethod`
-      PaymentMethod.validateJsonElement(jsonObj.get("paymentMethod"));
+      if (!jsonObj.get("paymentMethod").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `paymentMethod` to be a primitive type in the JSON string but got `%s`", jsonObj.get("paymentMethod").toString()));
+      }
       // validate the required field `card`
       OrderCreditCardPaymentRequestCard.validateJsonElement(jsonObj.get("card"));
       if ((jsonObj.get("softDescriptor") != null && !jsonObj.get("softDescriptor").isJsonNull()) && !jsonObj.get("softDescriptor").isJsonPrimitive()) {

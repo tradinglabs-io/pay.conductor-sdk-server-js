@@ -21,7 +21,7 @@ var _ MappedNullable = &OrderDraftPaymentRequest{}
 
 // OrderDraftPaymentRequest Used to create an order without generating a real payment. Use to create orders that will be paid later
 type OrderDraftPaymentRequest struct {
-	PaymentMethod PaymentMethod `json:"paymentMethod"`
+	PaymentMethod string `json:"paymentMethod"`
 	// Order expiration time in seconds
 	ExpirationInSeconds *float32 `json:"expirationInSeconds,omitempty"`
 	// Available payment methods for this order
@@ -34,7 +34,7 @@ type _OrderDraftPaymentRequest OrderDraftPaymentRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderDraftPaymentRequest(paymentMethod PaymentMethod) *OrderDraftPaymentRequest {
+func NewOrderDraftPaymentRequest(paymentMethod string) *OrderDraftPaymentRequest {
 	this := OrderDraftPaymentRequest{}
 	this.PaymentMethod = paymentMethod
 	var expirationInSeconds float32 = 3600
@@ -53,9 +53,9 @@ func NewOrderDraftPaymentRequestWithDefaults() *OrderDraftPaymentRequest {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *OrderDraftPaymentRequest) GetPaymentMethod() PaymentMethod {
+func (o *OrderDraftPaymentRequest) GetPaymentMethod() string {
 	if o == nil {
-		var ret PaymentMethod
+		var ret string
 		return ret
 	}
 
@@ -64,7 +64,7 @@ func (o *OrderDraftPaymentRequest) GetPaymentMethod() PaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *OrderDraftPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
+func (o *OrderDraftPaymentRequest) GetPaymentMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -72,7 +72,7 @@ func (o *OrderDraftPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
 }
 
 // SetPaymentMethod sets field value
-func (o *OrderDraftPaymentRequest) SetPaymentMethod(v PaymentMethod) {
+func (o *OrderDraftPaymentRequest) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 

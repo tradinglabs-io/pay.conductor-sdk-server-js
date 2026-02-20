@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  |  |
+| **paymentMethod** | **kotlin.String** |  |  |
 | **nuPay** | [**OrderNuPayPaymentRequestNuPay**](OrderNuPayPaymentRequestNuPay.md) |  |  |
 
 

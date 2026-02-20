@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentMethod** | **PaymentMethod** |  | 
+**PaymentMethod** | **string** |  | 
 **Card** | [**OrderCreditCardPaymentRequestCard**](OrderCreditCardPaymentRequestCard.md) |  | 
 **Installments** | **decimal** | Number of installments | [default to 1M]
 **SoftDescriptor** | **string** | Text that will appear on the card statement (soft descriptor) | [optional] 

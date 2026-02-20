@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**paymentMethod** | **String** |  | 
 **expirationInSeconds** | **Number** | Order expiration time in seconds | [optional] [default to 3600]
 **availablePaymentMethods** | [**[AvailablePaymentMethods]**](AvailablePaymentMethods.md) | Available payment methods for this order | [optional] 
 

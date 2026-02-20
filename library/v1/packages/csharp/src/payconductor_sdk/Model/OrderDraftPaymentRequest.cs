@@ -37,7 +37,7 @@ namespace payconductor_sdk.Model
         /// <param name="expirationInSeconds">Order expiration time in seconds (default to 3600M)</param>
         /// <param name="availablePaymentMethods">Available payment methods for this order</param>
         [JsonConstructor]
-        public OrderDraftPaymentRequest(PaymentMethod paymentMethod, Option<decimal?> expirationInSeconds = default, Option<List<AvailablePaymentMethods>?> availablePaymentMethods = default)
+        public OrderDraftPaymentRequest(string paymentMethod, Option<decimal?> expirationInSeconds = default, Option<List<AvailablePaymentMethods>?> availablePaymentMethods = default)
         {
             PaymentMethod = paymentMethod;
             ExpirationInSecondsOption = expirationInSeconds;
@@ -51,7 +51,7 @@ namespace payconductor_sdk.Model
         /// Gets or Sets PaymentMethod
         /// </summary>
         [JsonPropertyName("paymentMethod")]
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Used to track the state of ExpirationInSeconds
@@ -129,7 +129,7 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
             Option<decimal?> expirationInSeconds = default;
             Option<List<AvailablePaymentMethods>?> availablePaymentMethods = default;
 
@@ -149,9 +149,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "expirationInSeconds":
                             expirationInSeconds = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
@@ -177,7 +175,7 @@ namespace payconductor_sdk.Model
             if (availablePaymentMethods.IsSet && availablePaymentMethods.Value == null)
                 throw new ArgumentNullException(nameof(availablePaymentMethods), "Property is not nullable for class OrderDraftPaymentRequest.");
 
-            return new OrderDraftPaymentRequest(paymentMethod.Value!.Value!, expirationInSeconds, availablePaymentMethods);
+            return new OrderDraftPaymentRequest(paymentMethod.Value!, expirationInSeconds, availablePaymentMethods);
         }
 
         /// <summary>
@@ -204,11 +202,13 @@ namespace payconductor_sdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OrderDraftPaymentRequest orderDraftPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (orderDraftPaymentRequest.PaymentMethod == null)
+                throw new ArgumentNullException(nameof(orderDraftPaymentRequest.PaymentMethod), "Property is required for class OrderDraftPaymentRequest.");
+
             if (orderDraftPaymentRequest.AvailablePaymentMethodsOption.IsSet && orderDraftPaymentRequest.AvailablePaymentMethods == null)
                 throw new ArgumentNullException(nameof(orderDraftPaymentRequest.AvailablePaymentMethods), "Property is required for class OrderDraftPaymentRequest.");
 
-            var paymentMethodRawValue = PaymentMethodValueConverter.ToJsonValue(orderDraftPaymentRequest.PaymentMethod);
-            writer.WriteString("paymentMethod", paymentMethodRawValue);
+            writer.WriteString("paymentMethod", orderDraftPaymentRequest.PaymentMethod);
 
             if (orderDraftPaymentRequest.ExpirationInSecondsOption.IsSet)
                 writer.WriteNumber("expirationInSeconds", orderDraftPaymentRequest.ExpirationInSecondsOption.Value!.Value);

@@ -36,7 +36,7 @@ namespace payconductor_sdk.Model
         /// <param name="paymentMethod">paymentMethod</param>
         /// <param name="expirationInSeconds">PIX expiration time in seconds (default to 3600M)</param>
         [JsonConstructor]
-        public OrderPIXPaymentRequest(PaymentMethod paymentMethod, Option<decimal?> expirationInSeconds = default)
+        public OrderPIXPaymentRequest(string paymentMethod, Option<decimal?> expirationInSeconds = default)
         {
             PaymentMethod = paymentMethod;
             ExpirationInSecondsOption = expirationInSeconds;
@@ -49,7 +49,7 @@ namespace payconductor_sdk.Model
         /// Gets or Sets PaymentMethod
         /// </summary>
         [JsonPropertyName("paymentMethod")]
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Used to track the state of ExpirationInSeconds
@@ -118,7 +118,7 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
             Option<decimal?> expirationInSeconds = default;
 
             while (utf8JsonReader.Read())
@@ -137,9 +137,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "expirationInSeconds":
                             expirationInSeconds = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
@@ -159,7 +157,7 @@ namespace payconductor_sdk.Model
             if (expirationInSeconds.IsSet && expirationInSeconds.Value == null)
                 throw new ArgumentNullException(nameof(expirationInSeconds), "Property is not nullable for class OrderPIXPaymentRequest.");
 
-            return new OrderPIXPaymentRequest(paymentMethod.Value!.Value!, expirationInSeconds);
+            return new OrderPIXPaymentRequest(paymentMethod.Value!, expirationInSeconds);
         }
 
         /// <summary>
@@ -186,8 +184,10 @@ namespace payconductor_sdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OrderPIXPaymentRequest orderPIXPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            var paymentMethodRawValue = PaymentMethodValueConverter.ToJsonValue(orderPIXPaymentRequest.PaymentMethod);
-            writer.WriteString("paymentMethod", paymentMethodRawValue);
+            if (orderPIXPaymentRequest.PaymentMethod == null)
+                throw new ArgumentNullException(nameof(orderPIXPaymentRequest.PaymentMethod), "Property is required for class OrderPIXPaymentRequest.");
+
+            writer.WriteString("paymentMethod", orderPIXPaymentRequest.PaymentMethod);
 
             if (orderPIXPaymentRequest.ExpirationInSecondsOption.IsSet)
                 writer.WriteNumber("expirationInSeconds", orderPIXPaymentRequest.ExpirationInSecondsOption.Value!.Value);

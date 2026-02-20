@@ -15,7 +15,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderDraftPaymentRequest {
     #[serde(rename = "paymentMethod")]
-    pub payment_method: models::PaymentMethod,
+    pub payment_method: String,
     /// Order expiration time in seconds
     #[serde(rename = "expirationInSeconds", skip_serializing_if = "Option::is_none")]
     pub expiration_in_seconds: Option<f64>,
@@ -26,7 +26,7 @@ pub struct OrderDraftPaymentRequest {
 
 impl OrderDraftPaymentRequest {
     /// Used to create an order without generating a real payment. Use to create orders that will be paid later
-    pub fn new(payment_method: models::PaymentMethod) -> OrderDraftPaymentRequest {
+    pub fn new(payment_method: String) -> OrderDraftPaymentRequest {
         OrderDraftPaymentRequest {
             payment_method,
             expiration_in_seconds: None,

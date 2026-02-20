@@ -717,7 +717,7 @@ components:
     OrderPIXPaymentRequest:
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
         expirationInSeconds:
           default: 3600
           description: PIX expiration time in seconds
@@ -731,7 +731,7 @@ components:
     OrderCreditCardPaymentRequest:
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
         card:
           $ref: "#/components/schemas/OrderCreditCardPaymentRequest_card"
         installments:
@@ -755,7 +755,7 @@ components:
     OrderBankSlipPaymentRequest:
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
         expirationInDays:
           default: 7
           description: Days until bank slip expires
@@ -769,7 +769,7 @@ components:
     OrderNuPayPaymentRequest:
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
         nuPay:
           $ref: "#/components/schemas/OrderNuPayPaymentRequest_nuPay"
       required:
@@ -780,7 +780,7 @@ components:
     OrderPicPayPaymentRequest:
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
       required:
       - paymentMethod
       title: Order PicPay Payment Request
@@ -790,7 +790,7 @@ components:
         to create orders that will be paid later
       properties:
         paymentMethod:
-          $ref: "#/components/schemas/PaymentMethod"
+          type: string
         expirationInSeconds:
           default: 3600
           description: Order expiration time in seconds
@@ -996,12 +996,12 @@ components:
         \ etc...)"
       discriminator:
         mapping:
-          OrderPIXPaymentRequest: "#/components/schemas/OrderPIXPaymentRequest"
-          OrderCreditCardPaymentRequest: "#/components/schemas/OrderCreditCardPaymentRequest"
-          OrderBankSlipPaymentRequest: "#/components/schemas/OrderBankSlipPaymentRequest"
-          OrderNuPayPaymentRequest: "#/components/schemas/OrderNuPayPaymentRequest"
-          OrderPicPayPaymentRequest: "#/components/schemas/OrderPicPayPaymentRequest"
-          OrderDraftPaymentRequest: "#/components/schemas/OrderDraftPaymentRequest"
+          Pix: "#/components/schemas/OrderPIXPaymentRequest"
+          CreditCard: "#/components/schemas/OrderCreditCardPaymentRequest"
+          BankSlip: "#/components/schemas/OrderBankSlipPaymentRequest"
+          NuPay: "#/components/schemas/OrderNuPayPaymentRequest"
+          PicPay: "#/components/schemas/OrderPicPayPaymentRequest"
+          Draft: "#/components/schemas/OrderDraftPaymentRequest"
         propertyName: paymentMethod
       oneOf:
       - $ref: "#/components/schemas/OrderPIXPaymentRequest"

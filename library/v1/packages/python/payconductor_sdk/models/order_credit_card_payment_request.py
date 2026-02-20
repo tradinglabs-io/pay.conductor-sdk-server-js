@@ -17,11 +17,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from payconductor_sdk.models.order_credit_card_payment_request_card import OrderCreditCardPaymentRequestCard
-from payconductor_sdk.models.payment_method import PaymentMethod
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +28,7 @@ class OrderCreditCardPaymentRequest(BaseModel):
     """
     OrderCreditCardPaymentRequest
     """ # noqa: E501
-    payment_method: PaymentMethod = Field(alias="paymentMethod")
+    payment_method: StrictStr = Field(alias="paymentMethod")
     card: OrderCreditCardPaymentRequestCard
     installments: Union[Annotated[float, Field(multiple_of=1, le=12, strict=True, ge=1)], Annotated[int, Field(le=12, strict=True, ge=1)]] = Field(description="Number of installments")
     soft_descriptor: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=22)]] = Field(default=None, description="Text that will appear on the card statement (soft descriptor)", alias="softDescriptor")

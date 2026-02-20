@@ -21,7 +21,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Arrays;
-import org.openapitools.client.model.PaymentMethod;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,17 +48,17 @@ import org.openapitools.client.JSON;
 /**
  * OrderPicPayPaymentRequest
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-19T23:03:30.894187300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2026-02-20T01:38:45.063857300-03:00[America/Sao_Paulo]", comments = "Generator version: 7.20.0")
 public class OrderPicPayPaymentRequest {
   public static final String SERIALIZED_NAME_PAYMENT_METHOD = "paymentMethod";
   @SerializedName(SERIALIZED_NAME_PAYMENT_METHOD)
   @javax.annotation.Nonnull
-  private PaymentMethod paymentMethod;
+  private String paymentMethod;
 
   public OrderPicPayPaymentRequest() {
   }
 
-  public OrderPicPayPaymentRequest paymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public OrderPicPayPaymentRequest paymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
     return this;
   }
@@ -69,11 +68,11 @@ public class OrderPicPayPaymentRequest {
    * @return paymentMethod
    */
   @javax.annotation.Nonnull
-  public PaymentMethod getPaymentMethod() {
+  public String getPaymentMethod() {
     return paymentMethod;
   }
 
-  public void setPaymentMethod(@javax.annotation.Nonnull PaymentMethod paymentMethod) {
+  public void setPaymentMethod(@javax.annotation.Nonnull String paymentMethod) {
     this.paymentMethod = paymentMethod;
   }
 
@@ -156,8 +155,9 @@ public class OrderPicPayPaymentRequest {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the required field `paymentMethod`
-      PaymentMethod.validateJsonElement(jsonObj.get("paymentMethod"));
+      if (!jsonObj.get("paymentMethod").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `paymentMethod` to be a primitive type in the JSON string but got `%s`", jsonObj.get("paymentMethod").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {

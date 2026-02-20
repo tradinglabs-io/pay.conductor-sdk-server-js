@@ -4,7 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | [**PaymentMethod**](PaymentMethod.md) |  | [Enum: ] 
+**paymentMethod** | **character** |  | 
 **nuPay** | [**OrderNuPayPaymentRequestNuPay**](OrderNuPayPaymentRequest_nuPay.md) |  | 
 
 

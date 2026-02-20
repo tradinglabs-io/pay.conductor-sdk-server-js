@@ -19,7 +19,6 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import payconductor_sdk.models.OrderPicPayPaymentRequest
-import payconductor_sdk.models.PaymentMethod
 
 class OrderPicPayPaymentRequestTest : ShouldSpec() {
     init {

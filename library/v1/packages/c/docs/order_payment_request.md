@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | **payment_method_t \*** |  | 
+**payment_method** | **char \*** |  | 
 **expiration_in_seconds** | **double** | Order expiration time in seconds | [optional] [default to 3600]
 **card** | [**order_credit_card_payment_request_card_t**](order_credit_card_payment_request_card.md) \* |  | 
 **installments** | **double** | Number of installments | [default to 1]

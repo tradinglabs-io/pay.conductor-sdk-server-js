@@ -12,7 +12,6 @@ import 'package:openapi/src/model/order_nu_pay_payment_request_nu_pay.dart';
 import 'package:openapi/src/model/available_payment_methods.dart';
 import 'package:openapi/src/model/order_bank_slip_payment_request.dart';
 import 'package:openapi/src/model/order_nu_pay_payment_request.dart';
-import 'package:openapi/src/model/payment_method.dart';
 import 'package:openapi/src/model/order_draft_payment_request.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
@@ -39,12 +38,12 @@ abstract class OrderPaymentRequest implements Built<OrderPaymentRequest, OrderPa
   static const String discriminatorFieldName = r'paymentMethod';
 
   static const Map<String, Type> discriminatorMapping = {
-    r'OrderBankSlipPaymentRequest': OrderBankSlipPaymentRequest,
-    r'OrderCreditCardPaymentRequest': OrderCreditCardPaymentRequest,
-    r'OrderDraftPaymentRequest': OrderDraftPaymentRequest,
-    r'OrderNuPayPaymentRequest': OrderNuPayPaymentRequest,
-    r'OrderPIXPaymentRequest': OrderPIXPaymentRequest,
-    r'OrderPicPayPaymentRequest': OrderPicPayPaymentRequest,
+    r'BankSlip': OrderBankSlipPaymentRequest,
+    r'CreditCard': OrderCreditCardPaymentRequest,
+    r'Draft': OrderDraftPaymentRequest,
+    r'NuPay': OrderNuPayPaymentRequest,
+    r'PicPay': OrderPicPayPaymentRequest,
+    r'Pix': OrderPIXPaymentRequest,
   };
 
   OrderPaymentRequest._();
@@ -61,22 +60,22 @@ abstract class OrderPaymentRequest implements Built<OrderPaymentRequest, OrderPa
 extension OrderPaymentRequestDiscriminatorExt on OrderPaymentRequest {
     String? get discriminatorValue {
         if (this is OrderBankSlipPaymentRequest) {
-            return r'OrderBankSlipPaymentRequest';
+            return r'BankSlip';
         }
         if (this is OrderCreditCardPaymentRequest) {
-            return r'OrderCreditCardPaymentRequest';
+            return r'CreditCard';
         }
         if (this is OrderDraftPaymentRequest) {
-            return r'OrderDraftPaymentRequest';
+            return r'Draft';
         }
         if (this is OrderNuPayPaymentRequest) {
-            return r'OrderNuPayPaymentRequest';
-        }
-        if (this is OrderPIXPaymentRequest) {
-            return r'OrderPIXPaymentRequest';
+            return r'NuPay';
         }
         if (this is OrderPicPayPaymentRequest) {
-            return r'OrderPicPayPaymentRequest';
+            return r'PicPay';
+        }
+        if (this is OrderPIXPaymentRequest) {
+            return r'Pix';
         }
         return null;
     }
@@ -84,22 +83,22 @@ extension OrderPaymentRequestDiscriminatorExt on OrderPaymentRequest {
 extension OrderPaymentRequestBuilderDiscriminatorExt on OrderPaymentRequestBuilder {
     String? get discriminatorValue {
         if (this is OrderBankSlipPaymentRequestBuilder) {
-            return r'OrderBankSlipPaymentRequest';
+            return r'BankSlip';
         }
         if (this is OrderCreditCardPaymentRequestBuilder) {
-            return r'OrderCreditCardPaymentRequest';
+            return r'CreditCard';
         }
         if (this is OrderDraftPaymentRequestBuilder) {
-            return r'OrderDraftPaymentRequest';
+            return r'Draft';
         }
         if (this is OrderNuPayPaymentRequestBuilder) {
-            return r'OrderNuPayPaymentRequest';
-        }
-        if (this is OrderPIXPaymentRequestBuilder) {
-            return r'OrderPIXPaymentRequest';
+            return r'NuPay';
         }
         if (this is OrderPicPayPaymentRequestBuilder) {
-            return r'OrderPicPayPaymentRequest';
+            return r'PicPay';
+        }
+        if (this is OrderPIXPaymentRequestBuilder) {
+            return r'Pix';
         }
         return null;
     }
@@ -141,51 +140,51 @@ class _$OrderPaymentRequestSerializer implements PrimitiveSerializer<OrderPaymen
     final discIndex = serializedList.indexOf(OrderPaymentRequest.discriminatorFieldName) + 1;
     final discValue = serializers.deserialize(serializedList[discIndex], specifiedType: FullType(String)) as String;
     oneOfDataSrc = serialized;
-    final oneOfTypes = [OrderBankSlipPaymentRequest, OrderCreditCardPaymentRequest, OrderDraftPaymentRequest, OrderNuPayPaymentRequest, OrderPIXPaymentRequest, OrderPicPayPaymentRequest, ];
+    final oneOfTypes = [OrderBankSlipPaymentRequest, OrderCreditCardPaymentRequest, OrderDraftPaymentRequest, OrderNuPayPaymentRequest, OrderPicPayPaymentRequest, OrderPIXPaymentRequest, ];
     Object oneOfResult;
     Type oneOfType;
     switch (discValue) {
-      case r'OrderBankSlipPaymentRequest':
+      case r'BankSlip':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(OrderBankSlipPaymentRequest),
         ) as OrderBankSlipPaymentRequest;
         oneOfType = OrderBankSlipPaymentRequest;
         break;
-      case r'OrderCreditCardPaymentRequest':
+      case r'CreditCard':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(OrderCreditCardPaymentRequest),
         ) as OrderCreditCardPaymentRequest;
         oneOfType = OrderCreditCardPaymentRequest;
         break;
-      case r'OrderDraftPaymentRequest':
+      case r'Draft':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(OrderDraftPaymentRequest),
         ) as OrderDraftPaymentRequest;
         oneOfType = OrderDraftPaymentRequest;
         break;
-      case r'OrderNuPayPaymentRequest':
+      case r'NuPay':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(OrderNuPayPaymentRequest),
         ) as OrderNuPayPaymentRequest;
         oneOfType = OrderNuPayPaymentRequest;
         break;
-      case r'OrderPIXPaymentRequest':
-        oneOfResult = serializers.deserialize(
-          oneOfDataSrc,
-          specifiedType: FullType(OrderPIXPaymentRequest),
-        ) as OrderPIXPaymentRequest;
-        oneOfType = OrderPIXPaymentRequest;
-        break;
-      case r'OrderPicPayPaymentRequest':
+      case r'PicPay':
         oneOfResult = serializers.deserialize(
           oneOfDataSrc,
           specifiedType: FullType(OrderPicPayPaymentRequest),
         ) as OrderPicPayPaymentRequest;
         oneOfType = OrderPicPayPaymentRequest;
+        break;
+      case r'Pix':
+        oneOfResult = serializers.deserialize(
+          oneOfDataSrc,
+          specifiedType: FullType(OrderPIXPaymentRequest),
+        ) as OrderPIXPaymentRequest;
+        oneOfType = OrderPIXPaymentRequest;
         break;
       default:
         throw UnsupportedError("Couldn't deserialize oneOf for the discriminator value: ${discValue}");

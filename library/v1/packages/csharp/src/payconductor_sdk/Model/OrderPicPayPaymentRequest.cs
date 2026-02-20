@@ -35,7 +35,7 @@ namespace payconductor_sdk.Model
         /// </summary>
         /// <param name="paymentMethod">paymentMethod</param>
         [JsonConstructor]
-        public OrderPicPayPaymentRequest(PaymentMethod paymentMethod)
+        public OrderPicPayPaymentRequest(string paymentMethod)
         {
             PaymentMethod = paymentMethod;
             OnCreated();
@@ -47,7 +47,7 @@ namespace payconductor_sdk.Model
         /// Gets or Sets PaymentMethod
         /// </summary>
         [JsonPropertyName("paymentMethod")]
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -95,7 +95,7 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
 
             while (utf8JsonReader.Read())
             {
@@ -113,9 +113,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -129,7 +127,7 @@ namespace payconductor_sdk.Model
             if (paymentMethod.IsSet && paymentMethod.Value == null)
                 throw new ArgumentNullException(nameof(paymentMethod), "Property is not nullable for class OrderPicPayPaymentRequest.");
 
-            return new OrderPicPayPaymentRequest(paymentMethod.Value!.Value!);
+            return new OrderPicPayPaymentRequest(paymentMethod.Value!);
         }
 
         /// <summary>
@@ -156,8 +154,10 @@ namespace payconductor_sdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OrderPicPayPaymentRequest orderPicPayPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            var paymentMethodRawValue = PaymentMethodValueConverter.ToJsonValue(orderPicPayPaymentRequest.PaymentMethod);
-            writer.WriteString("paymentMethod", paymentMethodRawValue);
+            if (orderPicPayPaymentRequest.PaymentMethod == null)
+                throw new ArgumentNullException(nameof(orderPicPayPaymentRequest.PaymentMethod), "Property is required for class OrderPicPayPaymentRequest.");
+
+            writer.WriteString("paymentMethod", orderPicPayPaymentRequest.PaymentMethod);
         }
     }
 }

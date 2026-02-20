@@ -21,7 +21,7 @@ var _ MappedNullable = &OrderCreditCardPaymentRequest{}
 
 // OrderCreditCardPaymentRequest struct for OrderCreditCardPaymentRequest
 type OrderCreditCardPaymentRequest struct {
-	PaymentMethod PaymentMethod `json:"paymentMethod"`
+	PaymentMethod string `json:"paymentMethod"`
 	Card OrderCreditCardPaymentRequestCard `json:"card"`
 	// Number of installments
 	Installments float32 `json:"installments"`
@@ -35,7 +35,7 @@ type _OrderCreditCardPaymentRequest OrderCreditCardPaymentRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderCreditCardPaymentRequest(paymentMethod PaymentMethod, card OrderCreditCardPaymentRequestCard, installments float32) *OrderCreditCardPaymentRequest {
+func NewOrderCreditCardPaymentRequest(paymentMethod string, card OrderCreditCardPaymentRequestCard, installments float32) *OrderCreditCardPaymentRequest {
 	this := OrderCreditCardPaymentRequest{}
 	this.PaymentMethod = paymentMethod
 	this.Card = card
@@ -54,9 +54,9 @@ func NewOrderCreditCardPaymentRequestWithDefaults() *OrderCreditCardPaymentReque
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *OrderCreditCardPaymentRequest) GetPaymentMethod() PaymentMethod {
+func (o *OrderCreditCardPaymentRequest) GetPaymentMethod() string {
 	if o == nil {
-		var ret PaymentMethod
+		var ret string
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *OrderCreditCardPaymentRequest) GetPaymentMethod() PaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *OrderCreditCardPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
+func (o *OrderCreditCardPaymentRequest) GetPaymentMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *OrderCreditCardPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bo
 }
 
 // SetPaymentMethod sets field value
-func (o *OrderCreditCardPaymentRequest) SetPaymentMethod(v PaymentMethod) {
+func (o *OrderCreditCardPaymentRequest) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 

@@ -35,7 +35,7 @@ class TestOrderNuPayPaymentRequest(unittest.TestCase):
         model = OrderNuPayPaymentRequest()
         if include_optional:
             return OrderNuPayPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 nu_pay = payconductor_sdk.models.order_nu_pay_payment_request_nu_pay.OrderNuPayPaymentRequest_nuPay(
                     cancel_url = '', 
                     merchant_name = '', 
@@ -44,7 +44,7 @@ class TestOrderNuPayPaymentRequest(unittest.TestCase):
             )
         else:
             return OrderNuPayPaymentRequest(
-                payment_method = 'Pix',
+                payment_method = '',
                 nu_pay = payconductor_sdk.models.order_nu_pay_payment_request_nu_pay.OrderNuPayPaymentRequest_nuPay(
                     cancel_url = '', 
                     merchant_name = '', 

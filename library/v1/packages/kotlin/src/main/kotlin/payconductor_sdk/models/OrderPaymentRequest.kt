@@ -24,7 +24,6 @@ import payconductor_sdk.models.OrderNuPayPaymentRequest
 import payconductor_sdk.models.OrderNuPayPaymentRequestNuPay
 import payconductor_sdk.models.OrderPIXPaymentRequest
 import payconductor_sdk.models.OrderPicPayPaymentRequest
-import payconductor_sdk.models.PaymentMethod
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -46,7 +45,7 @@ import com.squareup.moshi.JsonClass
 interface OrderPaymentRequest {
 
     @Json(name = "paymentMethod")
-    val paymentMethod: PaymentMethod
+    val paymentMethod: kotlin.String
     @Json(name = "card")
     val card: OrderCreditCardPaymentRequestCard
     /* Number of installments */

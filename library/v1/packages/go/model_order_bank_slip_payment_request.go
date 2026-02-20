@@ -21,7 +21,7 @@ var _ MappedNullable = &OrderBankSlipPaymentRequest{}
 
 // OrderBankSlipPaymentRequest struct for OrderBankSlipPaymentRequest
 type OrderBankSlipPaymentRequest struct {
-	PaymentMethod PaymentMethod `json:"paymentMethod"`
+	PaymentMethod string `json:"paymentMethod"`
 	// Days until bank slip expires
 	ExpirationInDays *float32 `json:"expirationInDays,omitempty"`
 }
@@ -32,7 +32,7 @@ type _OrderBankSlipPaymentRequest OrderBankSlipPaymentRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderBankSlipPaymentRequest(paymentMethod PaymentMethod) *OrderBankSlipPaymentRequest {
+func NewOrderBankSlipPaymentRequest(paymentMethod string) *OrderBankSlipPaymentRequest {
 	this := OrderBankSlipPaymentRequest{}
 	this.PaymentMethod = paymentMethod
 	var expirationInDays float32 = 7
@@ -51,9 +51,9 @@ func NewOrderBankSlipPaymentRequestWithDefaults() *OrderBankSlipPaymentRequest {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
-func (o *OrderBankSlipPaymentRequest) GetPaymentMethod() PaymentMethod {
+func (o *OrderBankSlipPaymentRequest) GetPaymentMethod() string {
 	if o == nil {
-		var ret PaymentMethod
+		var ret string
 		return ret
 	}
 
@@ -62,7 +62,7 @@ func (o *OrderBankSlipPaymentRequest) GetPaymentMethod() PaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value
 // and a boolean to check if the value has been set.
-func (o *OrderBankSlipPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool) {
+func (o *OrderBankSlipPaymentRequest) GetPaymentMethodOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -70,7 +70,7 @@ func (o *OrderBankSlipPaymentRequest) GetPaymentMethodOk() (*PaymentMethod, bool
 }
 
 // SetPaymentMethod sets field value
-func (o *OrderBankSlipPaymentRequest) SetPaymentMethod(v PaymentMethod) {
+func (o *OrderBankSlipPaymentRequest) SetPaymentMethod(v string) {
 	o.PaymentMethod = v
 }
 

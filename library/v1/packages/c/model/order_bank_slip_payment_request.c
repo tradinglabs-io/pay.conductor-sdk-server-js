@@ -6,7 +6,7 @@
 
 
 static order_bank_slip_payment_request_t *order_bank_slip_payment_request_create_internal(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_days
     ) {
     order_bank_slip_payment_request_t *order_bank_slip_payment_request_local_var = malloc(sizeof(order_bank_slip_payment_request_t));
@@ -21,7 +21,7 @@ static order_bank_slip_payment_request_t *order_bank_slip_payment_request_create
 }
 
 __attribute__((deprecated)) order_bank_slip_payment_request_t *order_bank_slip_payment_request_create(
-    payconductor_api_payment_method__e payment_method,
+    char *payment_method,
     double expiration_in_days
     ) {
     return order_bank_slip_payment_request_create_internal (
@@ -39,6 +39,10 @@ void order_bank_slip_payment_request_free(order_bank_slip_payment_request_t *ord
         return ;
     }
     listEntry_t *listEntry;
+    if (order_bank_slip_payment_request->payment_method) {
+        free(order_bank_slip_payment_request->payment_method);
+        order_bank_slip_payment_request->payment_method = NULL;
+    }
     free(order_bank_slip_payment_request);
 }
 
@@ -46,16 +50,11 @@ cJSON *order_bank_slip_payment_request_convertToJSON(order_bank_slip_payment_req
     cJSON *item = cJSON_CreateObject();
 
     // order_bank_slip_payment_request->payment_method
-    if (payconductor_api_payment_method__NULL == order_bank_slip_payment_request->payment_method) {
+    if (!order_bank_slip_payment_request->payment_method) {
         goto fail;
     }
-    cJSON *payment_method_local_JSON = payment_method_convertToJSON(order_bank_slip_payment_request->payment_method);
-    if(payment_method_local_JSON == NULL) {
-        goto fail; // custom
-    }
-    cJSON_AddItemToObject(item, "paymentMethod", payment_method_local_JSON);
-    if(item->child == NULL) {
-        goto fail;
+    if(cJSON_AddStringToObject(item, "paymentMethod", order_bank_slip_payment_request->payment_method) == NULL) {
+    goto fail; //String
     }
 
 
@@ -78,9 +77,6 @@ order_bank_slip_payment_request_t *order_bank_slip_payment_request_parseFromJSON
 
     order_bank_slip_payment_request_t *order_bank_slip_payment_request_local_var = NULL;
 
-    // define the local variable for order_bank_slip_payment_request->payment_method
-    payconductor_api_payment_method__e payment_method_local_nonprim = 0;
-
     // order_bank_slip_payment_request->payment_method
     cJSON *payment_method = cJSON_GetObjectItemCaseSensitive(order_bank_slip_payment_requestJSON, "paymentMethod");
     if (cJSON_IsNull(payment_method)) {
@@ -91,7 +87,10 @@ order_bank_slip_payment_request_t *order_bank_slip_payment_request_parseFromJSON
     }
 
     
-    payment_method_local_nonprim = payment_method_parseFromJSON(payment_method); //custom
+    if(!cJSON_IsString(payment_method))
+    {
+    goto end; //String
+    }
 
     // order_bank_slip_payment_request->expiration_in_days
     cJSON *expiration_in_days = cJSON_GetObjectItemCaseSensitive(order_bank_slip_payment_requestJSON, "expirationInDays");
@@ -107,15 +106,12 @@ order_bank_slip_payment_request_t *order_bank_slip_payment_request_parseFromJSON
 
 
     order_bank_slip_payment_request_local_var = order_bank_slip_payment_request_create_internal (
-        payment_method_local_nonprim,
+        strdup(payment_method->valuestring),
         expiration_in_days ? expiration_in_days->valuedouble : 0
         );
 
     return order_bank_slip_payment_request_local_var;
 end:
-    if (payment_method_local_nonprim) {
-        payment_method_local_nonprim = 0;
-    }
     return NULL;
 
 }

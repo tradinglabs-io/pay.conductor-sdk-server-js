@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | [**PaymentMethod**](PaymentMethod.md) |  | 
+**payment_method** | **str** |  | 
 **expiration_in_seconds** | **float** | PIX expiration time in seconds | [optional] [default to 3600]
 
 ## Example

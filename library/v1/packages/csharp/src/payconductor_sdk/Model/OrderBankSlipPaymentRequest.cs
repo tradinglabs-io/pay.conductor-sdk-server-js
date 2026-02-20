@@ -36,7 +36,7 @@ namespace payconductor_sdk.Model
         /// <param name="paymentMethod">paymentMethod</param>
         /// <param name="expirationInDays">Days until bank slip expires (default to 7M)</param>
         [JsonConstructor]
-        public OrderBankSlipPaymentRequest(PaymentMethod paymentMethod, Option<decimal?> expirationInDays = default)
+        public OrderBankSlipPaymentRequest(string paymentMethod, Option<decimal?> expirationInDays = default)
         {
             PaymentMethod = paymentMethod;
             ExpirationInDaysOption = expirationInDays;
@@ -49,7 +49,7 @@ namespace payconductor_sdk.Model
         /// Gets or Sets PaymentMethod
         /// </summary>
         [JsonPropertyName("paymentMethod")]
-        public PaymentMethod PaymentMethod { get; set; }
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// Used to track the state of ExpirationInDays
@@ -118,7 +118,7 @@ namespace payconductor_sdk.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<PaymentMethod?> paymentMethod = default;
+            Option<string?> paymentMethod = default;
             Option<decimal?> expirationInDays = default;
 
             while (utf8JsonReader.Read())
@@ -137,9 +137,7 @@ namespace payconductor_sdk.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "paymentMethod":
-                            string? paymentMethodRawValue = utf8JsonReader.GetString();
-                            if (paymentMethodRawValue != null)
-                                paymentMethod = new Option<PaymentMethod?>(PaymentMethodValueConverter.FromStringOrDefault(paymentMethodRawValue));
+                            paymentMethod = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "expirationInDays":
                             expirationInDays = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
@@ -159,7 +157,7 @@ namespace payconductor_sdk.Model
             if (expirationInDays.IsSet && expirationInDays.Value == null)
                 throw new ArgumentNullException(nameof(expirationInDays), "Property is not nullable for class OrderBankSlipPaymentRequest.");
 
-            return new OrderBankSlipPaymentRequest(paymentMethod.Value!.Value!, expirationInDays);
+            return new OrderBankSlipPaymentRequest(paymentMethod.Value!, expirationInDays);
         }
 
         /// <summary>
@@ -186,8 +184,10 @@ namespace payconductor_sdk.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OrderBankSlipPaymentRequest orderBankSlipPaymentRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            var paymentMethodRawValue = PaymentMethodValueConverter.ToJsonValue(orderBankSlipPaymentRequest.PaymentMethod);
-            writer.WriteString("paymentMethod", paymentMethodRawValue);
+            if (orderBankSlipPaymentRequest.PaymentMethod == null)
+                throw new ArgumentNullException(nameof(orderBankSlipPaymentRequest.PaymentMethod), "Property is required for class OrderBankSlipPaymentRequest.");
+
+            writer.WriteString("paymentMethod", orderBankSlipPaymentRequest.PaymentMethod);
 
             if (orderBankSlipPaymentRequest.ExpirationInDaysOption.IsSet)
                 writer.WriteNumber("expirationInDays", orderBankSlipPaymentRequest.ExpirationInDaysOption.Value!.Value);
