@@ -1,11 +1,11 @@
 {
   "name": "payconductor-sdk",
   "version": "1.0.0",
-  "description": "OpenAPI client for payconductor-sdk",
-  "author": "OpenAPI-Generator Contributors",
+  "description": "PayConductor SDK for Node.js",
+  "author": "PayConductor",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+    "url": "git+https://github.com/payconductor-ai/payconductor-sdk.git"
   },
   "keywords": [
     "axios",
@@ -27,5 +27,9 @@
   "devDependencies": {
     "@types/node": "12.11.5 - 12.20.42",
     "typescript": "^4.0 || ^5.0"
+  },
+  "homepage": "https://github.com/payconductor-ai/payconductor-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/payconductor-ai/payconductor-sdk/issues"
   }
 }
