@@ -1,9 +1,9 @@
 import {
   Configuration,
-  CustomersApi,
-  type Customer,
-  type CustomerAddress,
-  type Customer1,
+  CustomerApi,
+  type CustomerCreateRequest,
+  type CustomerUpdateRequest,
+  type AddressCreateRequest,
   DocumentType,
 } from 'payconductor-sdk';
 
@@ -12,12 +12,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const customersApi = new CustomersApi(config);
+const customerApi = new CustomerApi(config);
 
 export async function createCustomer() {
   console.log('=== Creating Customer ===\n');
 
-  const address: CustomerAddress = {
+  const address: AddressCreateRequest = {
     street: 'Main Street',
     number: '123',
     neighborhood: 'Downtown',
@@ -27,7 +27,7 @@ export async function createCustomer() {
     country: 'BR',
   };
 
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'john.doe@example.com',
@@ -37,13 +37,13 @@ export async function createCustomer() {
   };
 
   try {
-    const response = await customersApi.postCustomers(customer);
-    const data = response.data as any;
+    const response = await customerApi.customerCreate(customer);
+    const data = response.data;
 
     console.log('Customer created successfully!');
-    console.log('Customer ID:', data?.id);
-    console.log('Name:', data?.name);
-    console.log('Email:', data?.email);
+    console.log('Customer ID:', data.id);
+    console.log('Name:', data.name);
+    console.log('Email:', data.email);
 
     return data;
   } catch (error: any) {
@@ -56,10 +56,10 @@ export async function listCustomers() {
   console.log('=== Listing Customers ===\n');
 
   try {
-    const response = await customersApi.getCustomers(1, 10);
-    const data = response.data as any;
+    const response = await customerApi.customerListCustom(1, 10);
+    const data = response.data;
 
-    console.log('Customers found:', data?.length || 0);
+    console.log('Customers found:', data.data?.length || 0);
     return data;
   } catch (error: any) {
     console.error('Error listing customers:', error.response?.data || error.message);
@@ -71,13 +71,13 @@ export async function getCustomerById(customerId: string) {
   console.log('=== Getting Customer by ID ===\n');
 
   try {
-    const response = await customersApi.getCustomersById(customerId);
-    const data = response.data as any;
+    const response = await customerApi.customerRead(customerId);
+    const data = response.data;
 
     console.log('Customer found:');
-    console.log('ID:', data?.id);
-    console.log('Name:', data?.name);
-    console.log('Email:', data?.email);
+    console.log('ID:', data.id);
+    console.log('Name:', data.name);
+    console.log('Email:', data.email);
 
     return data;
   } catch (error: any) {
@@ -89,17 +89,17 @@ export async function getCustomerById(customerId: string) {
 export async function updateCustomer(customerId: string) {
   console.log('=== Updating Customer ===\n');
 
-  const updateData: Customer1 = {
+  const updateData: CustomerUpdateRequest = {
     email: 'new.email@example.com',
     phoneNumber: '+55 11 888888888',
   };
 
   try {
-    const response = await customersApi.patchCustomersById(customerId, updateData);
-    const data = response.data as any;
+    const response = await customerApi.customerUpdate(customerId, updateData);
+    const data = response.data;
 
     console.log('Customer updated successfully!');
-    console.log('New Email:', data?.email);
+    console.log('New Email:', data.email);
 
     return data;
   } catch (error: any) {

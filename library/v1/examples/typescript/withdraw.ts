@@ -1,7 +1,7 @@
 import {
   Configuration,
-  TransfersApi,
-  type PostWithdrawsRequest,
+  WithdrawApi,
+  type WithdrawCreateRequest,
   PixType,
 } from 'payconductor-sdk';
 
@@ -10,12 +10,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const transfersApi = new TransfersApi(config);
+const withdrawApi = new WithdrawApi(config);
 
 export async function createWithdraw() {
   console.log('=== Creating PIX Withdrawal ===\n');
 
-  const request: PostWithdrawsRequest = {
+  const request: WithdrawCreateRequest = {
     amount: 50.00,
     externalId: `withdraw-${Date.now()}`,
     payoutAccount: {
@@ -27,7 +27,7 @@ export async function createWithdraw() {
   };
 
   try {
-    const response = await transfersApi.postWithdraws(request);
+    const response = await withdrawApi.withdrawCreate(request);
     const data = response.data;
 
     console.log('Withdrawal created successfully!');
@@ -44,7 +44,7 @@ export async function createWithdraw() {
 export async function createWithdrawWithCPF() {
   console.log('=== Creating Withdrawal with CPF PIX Key ===\n');
 
-  const request: PostWithdrawsRequest = {
+  const request: WithdrawCreateRequest = {
     amount: 100.00,
     externalId: `withdraw-cpf-${Date.now()}`,
     payoutAccount: {
@@ -56,7 +56,7 @@ export async function createWithdrawWithCPF() {
   };
 
   try {
-    const response = await transfersApi.postWithdraws(request);
+    const response = await withdrawApi.withdrawCreate(request);
     return response.data;
   } catch (error: any) {
     console.error('Error creating withdrawal:', error.response?.data || error.message);
@@ -67,7 +67,7 @@ export async function createWithdrawWithCPF() {
 export async function createWithdrawWithPhone() {
   console.log('=== Creating Withdrawal with Phone PIX Key ===\n');
 
-  const request: PostWithdrawsRequest = {
+  const request: WithdrawCreateRequest = {
     amount: 75.50,
     externalId: `withdraw-phone-${Date.now()}`,
     payoutAccount: {
@@ -79,7 +79,7 @@ export async function createWithdrawWithPhone() {
   };
 
   try {
-    const response = await transfersApi.postWithdraws(request);
+    const response = await withdrawApi.withdrawCreate(request);
     return response.data;
   } catch (error: any) {
     console.error('Error creating withdrawal:', error.response?.data || error.message);
@@ -90,7 +90,7 @@ export async function createWithdrawWithPhone() {
 export async function createWithdrawWithRandomKey() {
   console.log('=== Creating Withdrawal with Random PIX Key ===\n');
 
-  const request: PostWithdrawsRequest = {
+  const request: WithdrawCreateRequest = {
     amount: 200.00,
     externalId: `withdraw-random-${Date.now()}`,
     payoutAccount: {
@@ -102,7 +102,7 @@ export async function createWithdrawWithRandomKey() {
   };
 
   try {
-    const response = await transfersApi.postWithdraws(request);
+    const response = await withdrawApi.withdrawCreate(request);
     return response.data;
   } catch (error: any) {
     console.error('Error creating withdrawal:', error.response?.data || error.message);
@@ -114,7 +114,7 @@ export async function listWithdraws() {
   console.log('=== Listing Withdrawals ===\n');
 
   try {
-    const response = await transfersApi.getWithdraws(1, 10);
+    const response = await withdrawApi.withdrawList(1, 10);
     const data = response.data as any;
 
     console.log('Withdrawals found:', data?.length || 0);
@@ -129,7 +129,7 @@ export async function getWithdrawById(withdrawId: string) {
   console.log('=== Getting Withdrawal by ID ===\n');
 
   try {
-    const response = await transfersApi.getWithdrawsById(withdrawId);
+    const response = await withdrawApi.withdrawRead(withdrawId);
     return response.data as any;
   } catch (error: any) {
     console.error('Error getting withdrawal:', error.response?.data || error.message);

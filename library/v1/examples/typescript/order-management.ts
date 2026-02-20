@@ -1,6 +1,7 @@
 import {
   Configuration,
-  OrdersApi,
+  OrderApi,
+  type OrderPIXPaymentRequest,
   PaymentMethod,
 } from 'payconductor-sdk';
 
@@ -9,12 +10,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const ordersApi = new OrdersApi(config);
+const orderApi = new OrderApi(config);
 
 export async function getOrderById(orderId: string) {
   console.log('=== Getting Order by ID ===\n');
 
-  const response = await ordersApi.getOrdersById(orderId);
+  const response = await orderApi.orderRead(orderId);
   const data = response.data as any;
 
   console.log('Order found:');
@@ -29,7 +30,7 @@ export async function getOrderById(orderId: string) {
 export async function listOrders() {
   console.log('=== Listing Orders ===\n');
 
-  const response = await ordersApi.getOrders(1, 10);
+  const response = await orderApi.orderList(1, 10);
   const data = response.data as any;
 
   console.log('Orders found:', data?.length || 0);
@@ -39,7 +40,7 @@ export async function listOrders() {
 export async function refundOrder(orderId: string) {
   console.log('=== Refunding Order ===\n');
 
-  const response = await ordersApi.postOrdersByIdRefund(orderId);
+  const response = await orderApi.orderRefund(orderId);
   const data = response.data as any;
 
   console.log('Order refunded successfully!');
@@ -52,14 +53,16 @@ export async function refundOrder(orderId: string) {
 export async function confirmOrder(orderId: string) {
   console.log('=== Confirming Order ===\n');
 
-  const response = await ordersApi.postOrdersByIdConfirm(orderId, {
+  const payment: OrderPIXPaymentRequest = {
     paymentMethod: PaymentMethod.Pix,
-  });
-  const data = response.data as any;
+  };
+
+  const response = await orderApi.orderConfirm(orderId, payment as any);
+  const data = response.data;
 
   console.log('Order confirmed successfully!');
-  console.log('Order ID:', data?.id);
-  console.log('Status:', data?.status);
+  console.log('Order ID:', data.id);
+  console.log('Status:', data.status);
 
   return data;
 }

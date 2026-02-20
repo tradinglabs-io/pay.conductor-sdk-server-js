@@ -1,10 +1,10 @@
 import {
   Configuration,
-  OrdersApi,
-  type Customer,
+  OrderApi,
+  type CustomerCreateRequest,
+  type OrderPIXPaymentRequest,
   DocumentType,
   PaymentMethod,
-  type PostOrdersRequest,
 } from 'payconductor-sdk';
 
 const config = new Configuration({
@@ -12,12 +12,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const ordersApi = new OrdersApi(config);
+const orderApi = new OrderApi(config);
 
 export async function createPixOrder() {
   console.log('=== Creating PIX Order ===\n');
 
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'customer@example.com',
@@ -25,16 +25,18 @@ export async function createPixOrder() {
     phoneNumber: '+55 11 999999999',
   };
 
-  const orderRequest: PostOrdersRequest = {
+  const payment: OrderPIXPaymentRequest = {
+    paymentMethod: PaymentMethod.Pix,
+    expirationInSeconds: 3600,
+  };
+
+  const orderRequest = {
     chargeAmount: 100.00,
     clientIp: '192.168.1.1',
     customer,
     discountAmount: 0,
     externalId: `pix-order-${Date.now()}`,
-    payment: {
-      paymentMethod: PaymentMethod.Pix,
-      expirationInSeconds: 3600,
-    },
+    payment,
     shippingFee: 0,
     taxFee: 0,
     items: [
@@ -49,7 +51,7 @@ export async function createPixOrder() {
   };
 
   try {
-    const response = await ordersApi.postOrders(orderRequest);
+    const response = await orderApi.orderCreate(orderRequest as any);
     const data = response.data;
 
     console.log('PIX order created successfully!');

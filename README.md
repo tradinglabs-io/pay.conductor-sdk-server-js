@@ -96,17 +96,20 @@ const credentials = Buffer.from(`${clientId}:${clientSecret}`).toString('base64'
 ```typescript
 import { 
   Configuration, 
-  OrdersApi, 
-  CustomersApi, 
+  OrderApi, 
+  CustomerApi, 
   CardTokenizationApi, 
-  TransfersApi,
+  WithdrawApi,
   DocumentType,
   PaymentMethod,
   PixType,
-  PostOrdersRequest,
-  Customer,
-  PostWithdrawsRequest,
-  PostCardTokenizationRequest,
+  OrderCreateRequest,
+  CustomerCreateRequest,
+  WithdrawCreateRequest,
+  CardTokenizationCreateRequest,
+  OrderPIXPaymentRequest,
+  OrderCreditCardPaymentRequest,
+  OrderBankSlipPaymentRequest,
 } from 'payconductor-sdk';
 
 const config = new Configuration({
@@ -114,14 +117,14 @@ const config = new Configuration({
   password: 'your_client_secret',
 });
 
-const ordersApi = new OrdersApi(config);
-const customersApi = new CustomersApi(config);
+const orderApi = new OrderApi(config);
+const customerApi = new CustomerApi(config);
 const cardTokenizationApi = new CardTokenizationApi(config);
-const transfersApi = new TransfersApi(config);
+const withdrawApi = new WithdrawApi(config);
 
 // Create PIX Order
 async function createPixOrder() {
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'cliente@exemplo.com',
@@ -129,16 +132,18 @@ async function createPixOrder() {
     phoneNumber: '+55 11 999999999',
   };
 
-  const request: PostOrdersRequest = {
+  const payment: OrderPIXPaymentRequest = {
+    paymentMethod: PaymentMethod.Pix,
+    expirationInSeconds: 3600,
+  };
+
+  const request = {
     chargeAmount: 100.00,
     clientIp: '192.168.1.1',
     customer,
     discountAmount: 0,
     externalId: `order-${Date.now()}`,
-    payment: {
-      paymentMethod: PaymentMethod.Pix,
-      expirationInSeconds: 3600,
-    },
+    payment,
     shippingFee: 0,
     taxFee: 0,
     items: [
@@ -152,36 +157,39 @@ async function createPixOrder() {
     ],
   };
 
-  const response = await ordersApi.postOrders(request);
+  const response = await orderApi.orderCreate(request as any);
   console.log('PIX Copy Paste:', response.data.pix?.copyAndPasteCode);
   console.log('QR Code URL:', response.data.pix?.qrCodeUrl);
 }
 
 // Create Credit Card Order
 async function createCreditCardOrder() {
-  const request: PostOrdersRequest = {
+  const customer: CustomerCreateRequest = {
+    documentNumber: '12345678900',
+    documentType: DocumentType.Cpf,
+    email: 'cliente@exemplo.com',
+    name: 'Joao da Silva',
+  };
+
+  const payment: OrderCreditCardPaymentRequest = {
+    paymentMethod: PaymentMethod.CreditCard,
+    card: {
+      number: '4111111111111111',
+      holderName: 'JOAO DA SILVA',
+      cvv: '123',
+      expiration: { month: 12, year: 2028 },
+    },
+    installments: 1,
+    softDescriptor: 'PAYCONDUCTOR',
+  };
+
+  const request = {
     chargeAmount: 150.00,
     clientIp: '192.168.1.1',
-    customer: {
-      documentNumber: '12345678900',
-      documentType: DocumentType.Cpf,
-      email: 'cliente@exemplo.com',
-      name: 'Joao da Silva',
-    },
+    customer,
     discountAmount: 0,
     externalId: `cc-order-${Date.now()}`,
-    payment: {
-      paymentMethod: 'CreditCard',
-      card: {
-        number: '4111111111111111',
-        holderName: 'JOAO DA SILVA',
-        cvv: '123',
-        expiration: { month: 12, year: 2028 },
-        token: '',
-      },
-      installments: 1,
-      softDescriptor: 'PAYCONDUCTOR',
-    } as any,
+    payment,
     shippingFee: 0,
     taxFee: 0,
     items: [
@@ -195,37 +203,41 @@ async function createCreditCardOrder() {
     ],
   };
 
-  const response = await ordersApi.postOrders(request);
+  const response = await orderApi.orderCreate(request as any);
   console.log('Order ID:', response.data.id);
   console.log('Status:', response.data.status);
 }
 
 // Create Bank Slip Order
 async function createBankSlipOrder() {
-  const request: PostOrdersRequest = {
+  const customer: CustomerCreateRequest = {
+    documentNumber: '12345678900',
+    documentType: DocumentType.Cpf,
+    email: 'cliente@exemplo.com',
+    name: 'Joao da Silva',
+    address: {
+      street: 'Rua das Flores',
+      number: '123',
+      neighborhood: 'Centro',
+      city: 'Sao Paulo',
+      state: 'SP',
+      zipCode: '01234567',
+      country: 'BR',
+    },
+  };
+
+  const payment: OrderBankSlipPaymentRequest = {
+    paymentMethod: PaymentMethod.BankSlip,
+    expirationInDays: 7,
+  };
+
+  const request = {
     chargeAmount: 200.00,
     clientIp: '192.168.1.1',
-    customer: {
-      documentNumber: '12345678900',
-      documentType: DocumentType.Cpf,
-      email: 'cliente@exemplo.com',
-      name: 'Joao da Silva',
-      address: {
-        street: 'Rua das Flores',
-        number: '123',
-        neighborhood: 'Centro',
-        city: 'Sao Paulo',
-        state: 'SP',
-        zipCode: '01234567',
-        country: 'BR',
-      },
-    },
+    customer,
     discountAmount: 0,
     externalId: `boleto-order-${Date.now()}`,
-    payment: {
-      paymentMethod: PaymentMethod.BankSlip,
-      expirationInDays: 7,
-    },
+    payment,
     shippingFee: 0,
     taxFee: 0,
     items: [
@@ -239,14 +251,14 @@ async function createBankSlipOrder() {
     ],
   };
 
-  const response = await ordersApi.postOrders(request);
+  const response = await orderApi.orderCreate(request as any);
   console.log('Barcode:', response.data.bankSlip?.barCode);
   console.log('PDF URL:', response.data.bankSlip?.pdfUrl);
 }
 
 // Create Customer
 async function createCustomer() {
-  const response = await customersApi.postCustomers({
+  const response = await customerApi.customerCreate({
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'cliente@exemplo.com',
@@ -267,7 +279,7 @@ async function createCustomer() {
 
 // Tokenize Card
 async function tokenizeCard() {
-  const request: PostCardTokenizationRequest = {
+  const request: CardTokenizationCreateRequest = {
     card: {
       number: '4111111111111111',
       holderName: 'JOAO DA SILVA',
@@ -280,18 +292,17 @@ async function tokenizeCard() {
       documentType: DocumentType.Cpf,
       email: 'cliente@exemplo.com',
       name: 'Joao da Silva',
-      id: '',
     },
   };
 
-  const response = await cardTokenizationApi.postCardTokenization(request);
+  const response = await cardTokenizationApi.cardTokenize(request);
   console.log('Token:', response.data.token);
   console.log('Customer ID:', response.data.customerId);
 }
 
 // Create Withdrawal (PIX)
 async function createWithdrawal() {
-  const request: PostWithdrawsRequest = {
+  const request: WithdrawCreateRequest = {
     amount: 50.00,
     externalId: `withdraw-${Date.now()}`,
     payoutAccount: {
@@ -302,20 +313,20 @@ async function createWithdrawal() {
     },
   };
 
-  const response = await transfersApi.postWithdraws(request);
+  const response = await withdrawApi.withdrawCreate(request);
   console.log('Withdrawal ID:', response.data.id);
   console.log('Status:', response.data.status);
 }
 
 // List Orders
 async function listOrders() {
-  const response = await ordersApi.getOrders(1, 10);
+  const response = await orderApi.orderList(1, 10);
   console.log('Orders:', response.data);
 }
 
 // Refund Order
 async function refundOrder(orderId: string) {
-  const response = await ordersApi.postOrdersByIdRefund(orderId);
+  const response = await orderApi.orderRefund(orderId);
   console.log('Refund status:', response.data);
 }
 ```

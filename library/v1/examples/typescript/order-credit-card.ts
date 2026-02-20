@@ -1,9 +1,10 @@
 import {
   Configuration,
-  OrdersApi,
-  type Customer,
+  OrderApi,
+  type CustomerCreateRequest,
+  type OrderCreditCardPaymentRequest,
   DocumentType,
-  type PostOrdersRequest,
+  PaymentMethod,
 } from 'payconductor-sdk';
 
 const config = new Configuration({
@@ -11,12 +12,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const ordersApi = new OrdersApi(config);
+const orderApi = new OrderApi(config);
 
 export async function createCreditCardOrder() {
   console.log('=== Creating Credit Card Order ===\n');
 
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'customer@example.com',
@@ -24,24 +25,25 @@ export async function createCreditCardOrder() {
     phoneNumber: '+55 11 999999999',
   };
 
-  const orderRequest: PostOrdersRequest = {
+  const payment: OrderCreditCardPaymentRequest = {
+    paymentMethod: PaymentMethod.CreditCard,    
+    card: {
+      number: '4111111111111111',
+      holderName: 'JOHN DOE',
+      cvv: '123',
+      expiration: { month: 12, year: 2028 },
+    },
+    installments: 1,
+    softDescriptor: 'PAYCONDUCTOR',
+  };
+
+  const orderRequest = {
     chargeAmount: 150.00,
     clientIp: '192.168.1.1',
     customer,
     discountAmount: 0,
     externalId: `cc-order-${Date.now()}`,
-    payment: {
-      paymentMethod: 'CreditCard',
-      card: {
-        number: '4111111111111111',
-        holderName: 'JOHN DOE',
-        cvv: '123',
-        expiration: { month: 12, year: 2028 },
-        token: '',
-      },
-      installments: 1,
-      softDescriptor: 'PAYCONDUCTOR',
-    } as any,
+    payment,
     shippingFee: 10.00,
     taxFee: 0,
     items: [
@@ -56,8 +58,8 @@ export async function createCreditCardOrder() {
   };
 
   try {
-    const response = await ordersApi.postOrders(orderRequest);
-    const data = response.data as any;
+    const response = await orderApi.orderCreate(orderRequest as any);
+    const data = response.data;
 
     console.log('Credit card order created successfully!');
     console.log('Order ID:', data.id);
@@ -75,30 +77,28 @@ export async function createCreditCardOrder() {
 export async function createCreditCardOrderWithTokenizedCard(token: string) {
   console.log('=== Creating Order with Tokenized Card ===\n');
 
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'customer@example.com',
     name: 'John Doe',
   };
 
-  const orderRequest: PostOrdersRequest = {
+  const payment: OrderCreditCardPaymentRequest = {
+    paymentMethod: PaymentMethod.CreditCard,
+    card: {
+      token,
+    },
+    installments: 3,
+  };
+
+  const orderRequest = {
     chargeAmount: 300.00,
     clientIp: '192.168.1.1',
     customer,
     discountAmount: 0,
     externalId: `cc-token-order-${Date.now()}`,
-    payment: {
-      paymentMethod: 'CreditCard',
-      card: {
-        token,
-        cvv: '123',
-        expiration: { month: 12, year: 2028 },
-        holderName: 'JOHN DOE',
-        number: '',
-      },
-      installments: 3,
-    } as any,
+    payment,
     shippingFee: 0,
     taxFee: 0,
     items: [
@@ -113,8 +113,8 @@ export async function createCreditCardOrderWithTokenizedCard(token: string) {
   };
 
   try {
-    const response = await ordersApi.postOrders(orderRequest);
-    const data = response.data as any;
+    const response = await orderApi.orderCreate(orderRequest as any);
+    const data = response.data;
 
     console.log('Tokenized card order created successfully!');
     console.log('Order ID:', data.id);

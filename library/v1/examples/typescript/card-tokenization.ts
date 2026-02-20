@@ -1,7 +1,7 @@
 import {
   Configuration,
   CardTokenizationApi,
-  type CreateCustomerCard,
+  type CardTokenizationCreateRequest,
   DocumentType,
 } from 'payconductor-sdk';
 
@@ -15,7 +15,7 @@ const cardTokenizationApi = new CardTokenizationApi(config);
 export async function tokenizeCard() {
   console.log('=== Tokenizing Credit Card ===\n');
 
-  const request: CreateCustomerCard = {
+  const request: CardTokenizationCreateRequest = {
     card: {
       number: '4111111111111111',
       holderName: 'JOHN DOE',
@@ -31,11 +31,11 @@ export async function tokenizeCard() {
       documentType: DocumentType.Cpf,
       email: 'john.doe@example.com',
       name: 'John Doe',
-    },    
+    },
   };
 
   try {
-    const response = await cardTokenizationApi.postCardTokenization(request);
+    const response = await cardTokenizationApi.cardTokenize(request);
     const data = response.data;
 
     console.log('Card tokenized successfully!');
@@ -52,7 +52,7 @@ export async function tokenizeCard() {
 export async function tokenizeCardWithExistingCustomer(customerId: string) {
   console.log('=== Tokenizing Card for Existing Customer ===\n');
 
-  const request: CreateCustomerCard = {
+  const request: CardTokenizationCreateRequest = {
     card: {
       number: '5500000000000004',
       holderName: 'JOHN DOE',
@@ -69,7 +69,7 @@ export async function tokenizeCardWithExistingCustomer(customerId: string) {
   };
 
   try {
-    const response = await cardTokenizationApi.postCardTokenization(request);
+    const response = await cardTokenizationApi.cardTokenize(request);
     const data = response.data;
 
     console.log('Card tokenized successfully!');

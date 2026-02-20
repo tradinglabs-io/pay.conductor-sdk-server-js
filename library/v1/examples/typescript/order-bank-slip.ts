@@ -1,11 +1,11 @@
 import {
   Configuration,
-  OrdersApi,
-  type Customer,
-  type CustomerAddress,
+  OrderApi,
+  type CustomerCreateRequest,
+  type AddressCreateRequest,
+  type OrderBankSlipPaymentRequest,
   DocumentType,
   PaymentMethod,
-  type PostOrdersRequest,
 } from 'payconductor-sdk';
 
 const config = new Configuration({
@@ -13,12 +13,12 @@ const config = new Configuration({
   password: process.env.PAYCONDUCTOR_CLIENT_SECRET || 'your_client_secret',
 });
 
-const ordersApi = new OrdersApi(config);
+const orderApi = new OrderApi(config);
 
 export async function createBankSlipOrder() {
   console.log('=== Creating Bank Slip Order ===\n');
 
-  const address: CustomerAddress = {
+  const address: AddressCreateRequest = {
     street: 'Main Street',
     number: '123',
     neighborhood: 'Downtown',
@@ -28,7 +28,7 @@ export async function createBankSlipOrder() {
     country: 'BR',
   };
 
-  const customer: Customer = {
+  const customer: CustomerCreateRequest = {
     documentNumber: '12345678900',
     documentType: DocumentType.Cpf,
     email: 'customer@example.com',
@@ -37,16 +37,18 @@ export async function createBankSlipOrder() {
     address,
   };
 
-  const orderRequest: PostOrdersRequest = {
+  const payment: OrderBankSlipPaymentRequest = {
+    paymentMethod: PaymentMethod.BankSlip,
+    expirationInDays: 7,
+  };
+
+  const orderRequest = {
     chargeAmount: 200.00,
     clientIp: '192.168.1.1',
     customer,
     discountAmount: 10.00,
     externalId: `boleto-order-${Date.now()}`,
-    payment: {
-      paymentMethod: PaymentMethod.BankSlip,
-      expirationInDays: 7,
-    },
+    payment,
     shippingFee: 15.00,
     taxFee: 0,
     items: [
@@ -61,8 +63,8 @@ export async function createBankSlipOrder() {
   };
 
   try {
-    const response = await ordersApi.postOrders(orderRequest);
-    const data = response.data as any;
+    const response = await orderApi.orderCreate(orderRequest as any);
+    const data = response.data;
 
     console.log('Bank slip order created successfully!');
     console.log('Order ID:', data.id);
