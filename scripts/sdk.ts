@@ -307,7 +307,7 @@ const generateSdk = async (version: string, languages: string[]) => {
       "-g", langConfig.generator,
       "-o", langConfig.outputDir,
       "--skip-validate-spec",
-      "--additional-properties=packageName=payconductor_sdk,projectName=payconductor-sdk,npmName=payconductor-sdk,npmRepository=https://github.com/payconductor-ai/payconductor-sdk.git",
+      "--additional-properties=packageName=payconductor_sdk,projectName=payconductor-sdk,npmName=payconductor-sdk,npmVersion=1.0.0,licenseName=MIT,npmRepository=https://github.com/payconductor-ai/payconductor-sdk.git",
     ]);
 
     await proc.exited;

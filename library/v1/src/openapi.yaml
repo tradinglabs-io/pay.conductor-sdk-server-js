@@ -89,7 +89,7 @@ paths:
   /orders/:
     post:
       operationId: postOrders
-      summary: Create order
+      summary: Create Order
       description: Create a new order for payment using the provided data
       requestBody:
         description: Order data for payment processing
@@ -173,7 +173,7 @@ paths:
                         - state
                         - street
                         - zipCode
-                      title: Customer Address
+                      title: Address Create Request
                     documentNumber:
                       description: Customer CPF or CNPJ without formatting
                       type: string
@@ -206,7 +206,7 @@ paths:
                     - documentType
                     - email
                     - name
-                  title: Customer
+                  title: Customer Create Request
                 discountAmount:
                   description: Discount amount
                   type: number
@@ -225,12 +225,12 @@ paths:
                       type: string
                       examples:
                         - tmx_fingerprint_abc123
-                  title: Fraud Fingerprints
+                  title: Order Fraud Fingerprints
                 items:
                   description: List of products or services in the order
                   type: array
                   items:
-                    title: Order Item
+                    title: Order Item Data
                     description: Product or service item in the order
                     type: object
                     properties:
@@ -304,21 +304,21 @@ paths:
                   discriminator:
                     propertyName: paymentMethod
                     mapping:
-                      PIXPayment: '#/components/schemas/PIXPayment'
-                      CreditCardPayment: '#/components/schemas/CreditCardPayment'
-                      BankSlipPayment: '#/components/schemas/BankSlipPayment'
-                      NuPayPayment: '#/components/schemas/NuPayPayment'
-                      PicPayPayment: '#/components/schemas/PicPayPayment'
-                      DraftPayment: '#/components/schemas/DraftPayment'
+                      OrderPIXPaymentRequest: '#/components/schemas/OrderPIXPaymentRequest'
+                      OrderCreditCardPaymentRequest: '#/components/schemas/OrderCreditCardPaymentRequest'
+                      OrderBankSlipPaymentRequest: '#/components/schemas/OrderBankSlipPaymentRequest'
+                      OrderNuPayPaymentRequest: '#/components/schemas/OrderNuPayPaymentRequest'
+                      OrderPicPayPaymentRequest: '#/components/schemas/OrderPicPayPaymentRequest'
+                      OrderDraftPaymentRequest: '#/components/schemas/OrderDraftPaymentRequest'
                   noValidate: true
                   oneOf:
-                    - $ref: '#/components/schemas/PIXPayment'
-                    - $ref: '#/components/schemas/CreditCardPayment'
-                    - $ref: '#/components/schemas/BankSlipPayment'
-                    - $ref: '#/components/schemas/NuPayPayment'
-                    - $ref: '#/components/schemas/PicPayPayment'
-                    - $ref: '#/components/schemas/DraftPayment'
-                  title: Payment Data
+                    - $ref: '#/components/schemas/OrderPIXPaymentRequest'
+                    - $ref: '#/components/schemas/OrderCreditCardPaymentRequest'
+                    - $ref: '#/components/schemas/OrderBankSlipPaymentRequest'
+                    - $ref: '#/components/schemas/OrderNuPayPaymentRequest'
+                    - $ref: '#/components/schemas/OrderPicPayPaymentRequest'
+                    - $ref: '#/components/schemas/OrderDraftPaymentRequest'
+                  title: Order Payment Request
                 splitAmountTotal:
                   description: 'Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)'
                   type: number
@@ -374,13 +374,14 @@ paths:
                 - payment
                 - shippingFee
                 - taxFee
-              title: Order
+              title: Order Create Request
       responses:
         '200':
-          description: Response for status 200
+          description: Response after creating an order
           content:
             application/json:
               schema:
+                description: Response after creating an order
                 type: object
                 properties:
                   id:
@@ -444,7 +445,7 @@ paths:
                       - copyAndPasteCode
                       - qrCodeUrl
                       - endToEndId
-                    title: PIX Info
+                    title: Order PIX Info
                   bankSlip:
                     description: Bank slip payment data
                     type: object
@@ -467,7 +468,7 @@ paths:
                     required:
                       - barCode
                       - digitableLine
-                    title: Bank Slip Info
+                    title: Order Bank Slip Info
                   nuPay:
                     description: NuPay payment data
                     type: object
@@ -479,7 +480,7 @@ paths:
                           - 'https://nupay.com.br/payment/123456'
                     required:
                       - paymentUrl
-                    title: NuPay Info
+                    title: Order NuPay Info
                   picPay:
                     description: PicPay payment data
                     type: object
@@ -497,7 +498,7 @@ paths:
                     required:
                       - copyAndPasteCode
                       - qrCodeUrl
-                    title: PicPay Info
+                    title: Order PicPay Info
                   creditCard:
                     description: Credit card payment data
                     type: object
@@ -507,7 +508,7 @@ paths:
                         type: string
                         examples:
                           - '123456'
-                    title: Credit Card Info
+                    title: Order Credit Card Info
                   status:
                     $ref: '#/components/schemas/Status'
                   paymentMethod:
@@ -609,11 +610,12 @@ paths:
                   - errorCode
                   - errorMessage
                   - orderItems
+                title: Order Create Response
       tags:
         - Orders
     get:
       operationId: getOrders
-      summary: List orders
+      summary: List Orders
       description: Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.
       parameters:
         - name: endDate
@@ -687,7 +689,7 @@ paths:
   '/orders/{id}':
     get:
       operationId: getOrdersById
-      summary: Get order by ID
+      summary: Get Order By ID
       description: Retrieve the complete data of an order by our ID
       parameters:
         - name: id
@@ -700,7 +702,7 @@ paths:
   '/orders/{id}/confirm':
     post:
       operationId: postOrdersByIdConfirm
-      summary: Confirm order
+      summary: Confirm Order
       description: 'Confirms a Draft order, setting the payment method and processing the charges associated with the order.'
       parameters:
         - name: id
@@ -718,27 +720,28 @@ paths:
               discriminator:
                 propertyName: paymentMethod
                 mapping:
-                  PIXPayment: '#/components/schemas/PIXPayment'
-                  CreditCardPayment: '#/components/schemas/CreditCardPayment'
-                  BankSlipPayment: '#/components/schemas/BankSlipPayment'
-                  NuPayPayment: '#/components/schemas/NuPayPayment'
-                  PicPayPayment: '#/components/schemas/PicPayPayment'
-                  DraftPayment: '#/components/schemas/DraftPayment'
+                  OrderPIXPaymentRequest: '#/components/schemas/OrderPIXPaymentRequest'
+                  OrderCreditCardPaymentRequest: '#/components/schemas/OrderCreditCardPaymentRequest'
+                  OrderBankSlipPaymentRequest: '#/components/schemas/OrderBankSlipPaymentRequest'
+                  OrderNuPayPaymentRequest: '#/components/schemas/OrderNuPayPaymentRequest'
+                  OrderPicPayPaymentRequest: '#/components/schemas/OrderPicPayPaymentRequest'
+                  OrderDraftPaymentRequest: '#/components/schemas/OrderDraftPaymentRequest'
               noValidate: true
               oneOf:
-                - $ref: '#/components/schemas/PIXPayment'
-                - $ref: '#/components/schemas/CreditCardPayment'
-                - $ref: '#/components/schemas/BankSlipPayment'
-                - $ref: '#/components/schemas/NuPayPayment'
-                - $ref: '#/components/schemas/PicPayPayment'
-                - $ref: '#/components/schemas/DraftPayment'
-              title: Payment Data
+                - $ref: '#/components/schemas/OrderPIXPaymentRequest'
+                - $ref: '#/components/schemas/OrderCreditCardPaymentRequest'
+                - $ref: '#/components/schemas/OrderBankSlipPaymentRequest'
+                - $ref: '#/components/schemas/OrderNuPayPaymentRequest'
+                - $ref: '#/components/schemas/OrderPicPayPaymentRequest'
+                - $ref: '#/components/schemas/OrderDraftPaymentRequest'
+              title: Order Payment Request
       responses:
         '200':
-          description: Response for status 200
+          description: Response after confirming a draft order
           content:
             application/json:
               schema:
+                description: Response after confirming a draft order
                 type: object
                 properties:
                   id:
@@ -789,7 +792,7 @@ paths:
                       - copyAndPasteCode
                       - qrCodeUrl
                       - endToEndId
-                    title: PIX Info
+                    title: Order PIX Info
                   bankSlip:
                     description: Bank slip payment data
                     type: object
@@ -812,7 +815,7 @@ paths:
                     required:
                       - barCode
                       - digitableLine
-                    title: Bank Slip Info
+                    title: Order Bank Slip Info
                   nuPay:
                     description: NuPay payment data
                     type: object
@@ -824,7 +827,7 @@ paths:
                           - 'https://nupay.com.br/payment/123456'
                     required:
                       - paymentUrl
-                    title: NuPay Info
+                    title: Order NuPay Info
                   picPay:
                     description: PicPay payment data
                     type: object
@@ -842,7 +845,7 @@ paths:
                     required:
                       - copyAndPasteCode
                       - qrCodeUrl
-                    title: PicPay Info
+                    title: Order PicPay Info
                   status:
                     $ref: '#/components/schemas/Status'
                   paymentMethod:
@@ -879,12 +882,13 @@ paths:
                   - payedAt
                   - errorCode
                   - errorMessage
+                title: Order Confirm Response
       tags:
         - Orders
   '/orders/{id}/refund':
     post:
       operationId: postOrdersByIdRefund
-      summary: Refund order
+      summary: Refund Order
       description: Initiate a refund for the order specified by ID.
       parameters:
         - name: id
@@ -897,7 +901,7 @@ paths:
   /withdraws/:
     post:
       operationId: postWithdraws
-      summary: Create withdrawal
+      summary: Create Withdrawal
       description: Create a new withdrawal or transfer to the provided payment account
       requestBody:
         description: Withdrawal or transfer request data
@@ -966,18 +970,18 @@ paths:
                     - ownerName
                     - pixKey
                     - pixType
-                  title: Payout Account
-              additionalProperties: false
+                  title: Withdraw Payout Account Data
               required:
                 - amount
                 - payoutAccount
-              title: Withdraw
+              title: Withdraw Create Request
       responses:
         '200':
-          description: Response for status 200
+          description: Response after creating a withdrawal or transfer
           content:
             application/json:
               schema:
+                description: Response after creating a withdrawal or transfer
                 type: object
                 properties:
                   id:
@@ -1080,7 +1084,6 @@ paths:
                       - ownerName
                       - pixKey
                       - pixType
-                additionalProperties: false
                 noValidate: true
                 required:
                   - id
@@ -1093,11 +1096,12 @@ paths:
                   - errorMessage
                   - payedAt
                   - payoutAccount
+                title: Withdraw Create Response
       tags:
         - Transfers
     get:
       operationId: getWithdraws
-      summary: List withdrawals
+      summary: List Withdrawals
       description: 'Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)'
       parameters:
         - name: endDate
@@ -1156,7 +1160,7 @@ paths:
   '/withdraws/{id}':
     get:
       operationId: getWithdrawsById
-      summary: Get withdrawal by ID
+      summary: Get Withdrawal By ID
       description: Returns the details of a specific withdrawal or transfer using its ID
       parameters:
         - name: id
@@ -1169,7 +1173,7 @@ paths:
   /customers/:
     get:
       operationId: getCustomers
-      summary: Get all customers
+      summary: Get All Customers
       description: 'Retrieve a list of all customers associated with the organization, with support for filters and pagination.'
       parameters:
         - name: email
@@ -1245,7 +1249,7 @@ paths:
                     description: List of customers
                     type: array
                     items:
-                      title: Customer Response
+                      title: Customer Read Response
                       description: Customer response with complete information
                       type: object
                       properties:
@@ -1287,7 +1291,7 @@ paths:
                         address:
                           description: Customer address information
                           anyOf:
-                            - title: Customer Address
+                            - title: Customer Address Response
                               description: Customer address information
                               type: object
                               properties:
@@ -1397,7 +1401,7 @@ paths:
                       - pageSize
                       - totalItems
                       - totalPages
-                    title: Customer Pagination
+                    title: Customer List Pagination
                 required:
                   - data
                   - pagination
@@ -1406,7 +1410,7 @@ paths:
         - Customers
     post:
       operationId: postCustomers
-      summary: Create new customer
+      summary: Create New Customer
       description: Create a new customer by providing the required data in the request body.
       requestBody:
         description: Schema for creating a new customer
@@ -1476,7 +1480,7 @@ paths:
                     - state
                     - street
                     - zipCode
-                  title: Customer Address
+                  title: Address Create Request
                 documentNumber:
                   description: Customer CPF or CNPJ without formatting
                   type: string
@@ -1509,7 +1513,7 @@ paths:
                 - documentType
                 - email
                 - name
-              title: Customer
+              title: Customer Create Request
       responses:
         '200':
           description: Customer response with complete information
@@ -1557,7 +1561,7 @@ paths:
                   address:
                     description: Customer address information
                     anyOf:
-                      - title: Customer Address
+                      - title: Customer Address Response
                         description: Customer address information
                         type: object
                         properties:
@@ -1638,13 +1642,13 @@ paths:
                   - address
                   - createdAt
                   - updatedAt
-                title: Customer Response
+                title: Customer Read Response
       tags:
         - Customers
   '/customers/{id}':
     get:
       operationId: getCustomersById
-      summary: Get customer by ID
+      summary: Get Customer By ID
       description: Retrieve the complete details of a specific customer using their unique ID.
       parameters:
         - name: id
@@ -1699,7 +1703,7 @@ paths:
                   address:
                     description: Customer address information
                     anyOf:
-                      - title: Customer Address
+                      - title: Customer Address Response
                         description: Customer address information
                         type: object
                         properties:
@@ -1780,12 +1784,12 @@ paths:
                   - address
                   - createdAt
                   - updatedAt
-                title: Customer Response
+                title: Customer Read Response
       tags:
         - Customers
     patch:
       operationId: patchCustomersById
-      summary: Update customer data
+      summary: Update Customer Data
       description: Update the information of an existing customer by providing the new data in the request body.
       parameters:
         - name: id
@@ -1861,7 +1865,7 @@ paths:
                     - state
                     - street
                     - zipCode
-                  title: Customer Address
+                  title: Address Create Request
                 documentNumber:
                   description: Customer CPF or CNPJ without formatting
                   type: string
@@ -1889,7 +1893,7 @@ paths:
                   examples:
                     - +55 11 987654321
                   pattern: '^\+(\d{1,2}) (\d{2}) (\d{8,9})$'
-              title: Update Customer
+              title: Customer Update Request
       responses:
         '200':
           description: Customer response with complete information
@@ -1937,7 +1941,7 @@ paths:
                   address:
                     description: Customer address information
                     anyOf:
-                      - title: Customer Address
+                      - title: Customer Address Response
                         description: Customer address information
                         type: object
                         properties:
@@ -2018,13 +2022,13 @@ paths:
                   - address
                   - createdAt
                   - updatedAt
-                title: Customer Response
+                title: Customer Read Response
       tags:
         - Customers
   /card-tokenization/:
     post:
       operationId: postCard-tokenization
-      summary: Tokenize card
+      summary: Tokenize Card
       description: Tokenize credit cards for future charges.
       requestBody:
         description: Data for creating a customer card with customer information
@@ -2069,7 +2073,7 @@ paths:
                       required:
                         - month
                         - year
-                      title: Card Expiration
+                      title: Card Expiration Data
                     holderName:
                       description: Card holder name
                       type: string
@@ -2085,7 +2089,7 @@ paths:
                     - expiration
                     - holderName
                     - number
-                  title: Create Card Data
+                  title: Card Create Request
                 saveCard:
                   description: Indicates if the card should be saved for future use
                   type: boolean
@@ -2094,13 +2098,13 @@ paths:
                     - false
                 customer:
                   oneOf:
-                    - $ref: '#/components/schemas/Customer'
-                    - $ref: '#/components/schemas/CustomerByID'
+                    - $ref: '#/components/schemas/CustomerCreateRequest'
+                    - $ref: '#/components/schemas/CardTokenizationCustomerByIdData'
               required:
                 - card
                 - saveCard
                 - customer
-              title: Create Customer Card
+              title: Card Tokenization Create Request
       responses:
         '200':
           description: Response containing customer ID and card token
@@ -2124,7 +2128,7 @@ paths:
                 required:
                   - customerId
                   - token
-                title: Create Customer Card Response
+                title: Card Tokenization Create Response
       tags:
         - Card Tokenization
 components:
@@ -2255,7 +2259,7 @@ components:
         - SepaDebit
         - GooglePay
         - Draft
-    TokenizedCard:
+    OrderTokenizedCardData:
       type: object
       properties:
         firstSixCardNumber:
@@ -2268,8 +2272,8 @@ components:
           type: string
       required:
         - token
-      title: Tokenized Card
-    CreateCardData:
+      title: Order Tokenized Card Data
+    CardCreateRequest:
       description: Complete card data for payment processing
       type: object
       properties:
@@ -2303,7 +2307,7 @@ components:
           required:
             - month
             - year
-          title: Card Expiration
+          title: Card Expiration Data
         holderName:
           description: Card holder name
           type: string
@@ -2319,8 +2323,8 @@ components:
         - expiration
         - holderName
         - number
-      title: Create Card Data
-    PIXPayment:
+      title: Card Create Request
+    OrderPIXPaymentRequest:
       type: object
       properties:
         paymentMethod:
@@ -2336,16 +2340,16 @@ components:
           multipleOf: 1
       required:
         - paymentMethod
-      title: PIX Payment
-    CreditCardPayment:
+      title: Order PIX Payment Request
+    OrderCreditCardPaymentRequest:
       type: object
       properties:
         paymentMethod:
           $ref: '#/components/schemas/PaymentMethod'
         card:
           oneOf:
-            - $ref: '#/components/schemas/TokenizedCard'
-            - $ref: '#/components/schemas/CreateCardData'
+            - $ref: '#/components/schemas/OrderTokenizedCardData'
+            - $ref: '#/components/schemas/CardCreateRequest'
         installments:
           description: Number of installments
           type: number
@@ -2364,8 +2368,8 @@ components:
         - paymentMethod
         - card
         - installments
-      title: Credit Card Payment
-    BankSlipPayment:
+      title: Order Credit Card Payment Request
+    OrderBankSlipPaymentRequest:
       type: object
       properties:
         paymentMethod:
@@ -2382,8 +2386,8 @@ components:
           multipleOf: 1
       required:
         - paymentMethod
-      title: Bank Slip Payment
-    NuPayPayment:
+      title: Order Bank Slip Payment Request
+    OrderNuPayPaymentRequest:
       type: object
       properties:
         paymentMethod:
@@ -2419,16 +2423,16 @@ components:
       required:
         - paymentMethod
         - nuPay
-      title: NuPay Payment
-    PicPayPayment:
+      title: Order NuPay Payment Request
+    OrderPicPayPaymentRequest:
       type: object
       properties:
         paymentMethod:
           $ref: '#/components/schemas/PaymentMethod'
       required:
         - paymentMethod
-      title: PicPay Payment
-    DraftPayment:
+      title: Order PicPay Payment Request
+    OrderDraftPaymentRequest:
       description: Used to create an order without generating a real payment. Use to create orders that will be paid later
       type: object
       properties:
@@ -2449,8 +2453,8 @@ components:
             $ref: '#/components/schemas/AvailablePaymentMethods'
       required:
         - paymentMethod
-      title: Draft Payment
-    Customer:
+      title: Order Draft Payment Request
+    CustomerCreateRequest:
       description: Schema for creating a new customer
       type: object
       properties:
@@ -2513,7 +2517,7 @@ components:
             - state
             - street
             - zipCode
-          title: Customer Address
+          title: Address Create Request
         documentNumber:
           description: Customer CPF or CNPJ without formatting
           type: string
@@ -2546,8 +2550,8 @@ components:
         - documentType
         - email
         - name
-      title: Customer
-    CustomerByID:
+      title: Customer Create Request
+    CardTokenizationCustomerByIdData:
       description: Reference to an existing customer by ID
       type: object
       properties:
@@ -2558,7 +2562,7 @@ components:
             - cmjizheco00002v6o7q72knwb
       required:
         - id
-      title: Customer By ID
+      title: Card Tokenization Customer By Id Data
   securitySchemes:
     basicAuth:
       description: 'Use the format Authorization: Basic base64(''client_id:client_secret'')'
@@ -2583,11 +2587,13 @@ webhooks:
         content:
           application/json:
             schema:
+              description: Webhook event payload for order status changes
               type: object
               properties:
                 event:
                   $ref: '#/components/schemas/Event'
                 payload:
+                  description: Response after creating an order
                   type: object
                   noValidate: true
                   properties:
@@ -2652,7 +2658,7 @@ webhooks:
                         - copyAndPasteCode
                         - qrCodeUrl
                         - endToEndId
-                      title: PIX Info
+                      title: Order PIX Info
                     bankSlip:
                       description: Bank slip payment data
                       type: object
@@ -2675,7 +2681,7 @@ webhooks:
                       required:
                         - barCode
                         - digitableLine
-                      title: Bank Slip Info
+                      title: Order Bank Slip Info
                     nuPay:
                       description: NuPay payment data
                       type: object
@@ -2687,7 +2693,7 @@ webhooks:
                             - 'https://nupay.com.br/payment/123456'
                       required:
                         - paymentUrl
-                      title: NuPay Info
+                      title: Order NuPay Info
                     picPay:
                       description: PicPay payment data
                       type: object
@@ -2705,7 +2711,7 @@ webhooks:
                       required:
                         - copyAndPasteCode
                         - qrCodeUrl
-                      title: PicPay Info
+                      title: Order PicPay Info
                     creditCard:
                       description: Credit card payment data
                       type: object
@@ -2715,7 +2721,7 @@ webhooks:
                           type: string
                           examples:
                             - '123456'
-                      title: Credit Card Info
+                      title: Order Credit Card Info
                     status:
                       $ref: '#/components/schemas/Status'
                     paymentMethod:
@@ -2815,9 +2821,11 @@ webhooks:
                     - errorCode
                     - errorMessage
                     - orderItems
+                  title: Order Create Response
               required:
                 - event
                 - payload
+              title: Order Webhook Event
   Withdraw Update:
     post:
       requestBody:
@@ -2825,11 +2833,13 @@ webhooks:
         content:
           application/json:
             schema:
+              description: Webhook event payload for withdrawal status changes
               type: object
               properties:
                 event:
                   $ref: '#/components/schemas/Event'
                 payload:
+                  description: Response after creating a withdrawal or transfer
                   type: object
                   noValidate: true
                   properties:
@@ -2944,6 +2954,8 @@ webhooks:
                     - errorMessage
                     - payedAt
                     - payoutAccount
+                  title: Withdraw Create Response
               required:
                 - event
                 - payload
+              title: Withdraw Webhook Event

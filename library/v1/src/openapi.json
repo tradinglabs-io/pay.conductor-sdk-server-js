@@ -13,12 +13,16 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Order Webhook Event",
+                "description": "Webhook event payload for order status changes",
                 "type": "object",
                 "properties": {
                   "event": {
                     "$ref": "#/components/schemas/Event"
                   },
                   "payload": {
+                    "title": "Order Create Response",
+                    "description": "Response after creating an order",
                     "type": "object",
                     "properties": {
                       "id": {
@@ -79,7 +83,7 @@
                         "type": "number"
                       },
                       "pix": {
-                        "title": "PIX Info",
+                        "title": "Order PIX Info",
                         "description": "PIX payment data and QR code information",
                         "type": "object",
                         "properties": {
@@ -120,7 +124,7 @@
                         ]
                       },
                       "bankSlip": {
-                        "title": "Bank Slip Info",
+                        "title": "Order Bank Slip Info",
                         "description": "Bank slip payment data",
                         "type": "object",
                         "properties": {
@@ -152,7 +156,7 @@
                         ]
                       },
                       "nuPay": {
-                        "title": "NuPay Info",
+                        "title": "Order NuPay Info",
                         "description": "NuPay payment data",
                         "type": "object",
                         "properties": {
@@ -169,7 +173,7 @@
                         ]
                       },
                       "picPay": {
-                        "title": "PicPay Info",
+                        "title": "Order PicPay Info",
                         "description": "PicPay payment data",
                         "type": "object",
                         "properties": {
@@ -194,7 +198,7 @@
                         ]
                       },
                       "creditCard": {
-                        "title": "Credit Card Info",
+                        "title": "Order Credit Card Info",
                         "description": "Credit card payment data",
                         "type": "object",
                         "properties": {
@@ -383,12 +387,16 @@
           "content": {
             "application/json": {
               "schema": {
+                "title": "Withdraw Webhook Event",
+                "description": "Webhook event payload for withdrawal status changes",
                 "type": "object",
                 "properties": {
                   "event": {
                     "$ref": "#/components/schemas/Event"
                   },
                   "payload": {
+                    "title": "Withdraw Create Response",
+                    "description": "Response after creating a withdrawal or transfer",
                     "type": "object",
                     "properties": {
                       "id": {
@@ -735,8 +743,8 @@
           "Draft"
         ]
       },
-      "TokenizedCard": {
-        "title": "Tokenized Card",
+      "OrderTokenizedCardData": {
+        "title": "Order Tokenized Card Data",
         "type": "object",
         "properties": {
           "firstSixCardNumber": {
@@ -755,8 +763,8 @@
           "token"
         ]
       },
-      "CreateCardData": {
-        "title": "Create Card Data",
+      "CardCreateRequest": {
+        "title": "Card Create Request",
         "description": "Complete card data for payment processing",
         "type": "object",
         "properties": {
@@ -771,7 +779,7 @@
             "type": "string"
           },
           "expiration": {
-            "title": "Card Expiration",
+            "title": "Card Expiration Data",
             "description": "Card expiration date",
             "type": "object",
             "properties": {
@@ -822,8 +830,8 @@
           "number"
         ]
       },
-      "PIXPayment": {
-        "title": "PIX Payment",
+      "OrderPIXPaymentRequest": {
+        "title": "Order PIX Payment Request",
         "type": "object",
         "properties": {
           "paymentMethod": {
@@ -845,8 +853,8 @@
           "paymentMethod"
         ]
       },
-      "CreditCardPayment": {
-        "title": "Credit Card Payment",
+      "OrderCreditCardPaymentRequest": {
+        "title": "Order Credit Card Payment Request",
         "type": "object",
         "properties": {
           "paymentMethod": {
@@ -855,10 +863,10 @@
           "card": {
             "oneOf": [
               {
-                "$ref": "#/components/schemas/TokenizedCard"
+                "$ref": "#/components/schemas/OrderTokenizedCardData"
               },
               {
-                "$ref": "#/components/schemas/CreateCardData"
+                "$ref": "#/components/schemas/CardCreateRequest"
               }
             ]
           },
@@ -886,8 +894,8 @@
           "installments"
         ]
       },
-      "BankSlipPayment": {
-        "title": "Bank Slip Payment",
+      "OrderBankSlipPaymentRequest": {
+        "title": "Order Bank Slip Payment Request",
         "type": "object",
         "properties": {
           "paymentMethod": {
@@ -910,8 +918,8 @@
           "paymentMethod"
         ]
       },
-      "NuPayPayment": {
-        "title": "NuPay Payment",
+      "OrderNuPayPaymentRequest": {
+        "title": "Order NuPay Payment Request",
         "type": "object",
         "properties": {
           "paymentMethod": {
@@ -962,8 +970,8 @@
           "nuPay"
         ]
       },
-      "PicPayPayment": {
-        "title": "PicPay Payment",
+      "OrderPicPayPaymentRequest": {
+        "title": "Order PicPay Payment Request",
         "type": "object",
         "properties": {
           "paymentMethod": {
@@ -974,8 +982,8 @@
           "paymentMethod"
         ]
       },
-      "DraftPayment": {
-        "title": "Draft Payment",
+      "OrderDraftPaymentRequest": {
+        "title": "Order Draft Payment Request",
         "description": "Used to create an order without generating a real payment. Use to create orders that will be paid later",
         "type": "object",
         "properties": {
@@ -1004,13 +1012,13 @@
           "paymentMethod"
         ]
       },
-      "Customer": {
+      "CustomerCreateRequest": {
         "description": "Schema for creating a new customer",
-        "title": "Customer",
+        "title": "Customer Create Request",
         "type": "object",
         "properties": {
           "address": {
-            "title": "Customer Address",
+            "title": "Address Create Request",
             "description": "Schema for creating a new address",
             "type": "object",
             "properties": {
@@ -1130,8 +1138,8 @@
           "name"
         ]
       },
-      "CustomerByID": {
-        "title": "Customer By ID",
+      "CardTokenizationCustomerByIdData": {
+        "title": "Card Tokenization Customer By Id Data",
         "description": "Reference to an existing customer by ID",
         "type": "object",
         "properties": {
@@ -1184,13 +1192,13 @@
           "Orders"
         ],
         "description": "Create a new order for payment using the provided data",
-        "summary": "Create order",
+        "summary": "Create Order",
         "requestBody": {
           "description": "Order data for payment processing",
           "content": {
             "application/json": {
               "schema": {
-                "title": "Order",
+                "title": "Order Create Request",
                 "description": "Order data for payment processing",
                 "type": "object",
                 "properties": {
@@ -1210,11 +1218,11 @@
                   },
                   "customer": {
                     "description": "Schema for creating a new customer",
-                    "title": "Customer",
+                    "title": "Customer Create Request",
                     "type": "object",
                     "properties": {
                       "address": {
-                        "title": "Customer Address",
+                        "title": "Address Create Request",
                         "description": "Schema for creating a new address",
                         "type": "object",
                         "properties": {
@@ -1347,7 +1355,7 @@
                     "type": "string"
                   },
                   "fingerprints": {
-                    "title": "Fraud Fingerprints",
+                    "title": "Order Fraud Fingerprints",
                     "description": "Fraud analysis fingerprint data",
                     "type": "object",
                     "properties": {
@@ -1365,7 +1373,7 @@
                     "maxItems": 20,
                     "type": "array",
                     "items": {
-                      "title": "Order Item",
+                      "title": "Order Item Data",
                       "description": "Product or service item in the order",
                       "type": "object",
                       "properties": {
@@ -1457,38 +1465,38 @@
                     ]
                   },
                   "payment": {
-                    "title": "Payment Data",
+                    "title": "Order Payment Request",
                     "description": "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)",
                     "noValidate": true,
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/PIXPayment"
+                        "$ref": "#/components/schemas/OrderPIXPaymentRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/CreditCardPayment"
+                        "$ref": "#/components/schemas/OrderCreditCardPaymentRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/BankSlipPayment"
+                        "$ref": "#/components/schemas/OrderBankSlipPaymentRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/NuPayPayment"
+                        "$ref": "#/components/schemas/OrderNuPayPaymentRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/PicPayPayment"
+                        "$ref": "#/components/schemas/OrderPicPayPaymentRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/DraftPayment"
+                        "$ref": "#/components/schemas/OrderDraftPaymentRequest"
                       }
                     ],
                     "discriminator": {
                       "propertyName": "paymentMethod",
                       "mapping": {
-                        "PIXPayment": "#/components/schemas/PIXPayment",
-                        "CreditCardPayment": "#/components/schemas/CreditCardPayment",
-                        "BankSlipPayment": "#/components/schemas/BankSlipPayment",
-                        "NuPayPayment": "#/components/schemas/NuPayPayment",
-                        "PicPayPayment": "#/components/schemas/PicPayPayment",
-                        "DraftPayment": "#/components/schemas/DraftPayment"
+                        "OrderPIXPaymentRequest": "#/components/schemas/OrderPIXPaymentRequest",
+                        "OrderCreditCardPaymentRequest": "#/components/schemas/OrderCreditCardPaymentRequest",
+                        "OrderBankSlipPaymentRequest": "#/components/schemas/OrderBankSlipPaymentRequest",
+                        "OrderNuPayPaymentRequest": "#/components/schemas/OrderNuPayPaymentRequest",
+                        "OrderPicPayPaymentRequest": "#/components/schemas/OrderPicPayPaymentRequest",
+                        "OrderDraftPaymentRequest": "#/components/schemas/OrderDraftPaymentRequest"
                       }
                     }
                   },
@@ -1570,10 +1578,12 @@
         },
         "responses": {
           "200": {
-            "description": "Response for status 200",
+            "description": "Response after creating an order",
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "Order Create Response",
+                  "description": "Response after creating an order",
                   "type": "object",
                   "properties": {
                     "id": {
@@ -1634,7 +1644,7 @@
                       "type": "number"
                     },
                     "pix": {
-                      "title": "PIX Info",
+                      "title": "Order PIX Info",
                       "description": "PIX payment data and QR code information",
                       "type": "object",
                       "properties": {
@@ -1675,7 +1685,7 @@
                       ]
                     },
                     "bankSlip": {
-                      "title": "Bank Slip Info",
+                      "title": "Order Bank Slip Info",
                       "description": "Bank slip payment data",
                       "type": "object",
                       "properties": {
@@ -1707,7 +1717,7 @@
                       ]
                     },
                     "nuPay": {
-                      "title": "NuPay Info",
+                      "title": "Order NuPay Info",
                       "description": "NuPay payment data",
                       "type": "object",
                       "properties": {
@@ -1724,7 +1734,7 @@
                       ]
                     },
                     "picPay": {
-                      "title": "PicPay Info",
+                      "title": "Order PicPay Info",
                       "description": "PicPay payment data",
                       "type": "object",
                       "properties": {
@@ -1749,7 +1759,7 @@
                       ]
                     },
                     "creditCard": {
-                      "title": "Credit Card Info",
+                      "title": "Order Credit Card Info",
                       "description": "Credit card payment data",
                       "type": "object",
                       "properties": {
@@ -1932,7 +1942,7 @@
           "Orders"
         ],
         "description": "Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.",
-        "summary": "List orders",
+        "summary": "List Orders",
         "parameters": [
           {
             "name": "endDate",
@@ -2033,7 +2043,7 @@
           "Orders"
         ],
         "description": "Retrieve the complete data of an order by our ID",
-        "summary": "Get order by ID",
+        "summary": "Get Order By ID",
         "parameters": [
           {
             "name": "id",
@@ -2053,7 +2063,7 @@
           "Orders"
         ],
         "description": "Confirms a Draft order, setting the payment method and processing the charges associated with the order.",
-        "summary": "Confirm order",
+        "summary": "Confirm Order",
         "parameters": [
           {
             "name": "id",
@@ -2069,38 +2079,38 @@
           "content": {
             "application/json": {
               "schema": {
-                "title": "Payment Data",
+                "title": "Order Payment Request",
                 "description": "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)",
                 "noValidate": true,
                 "oneOf": [
                   {
-                    "$ref": "#/components/schemas/PIXPayment"
+                    "$ref": "#/components/schemas/OrderPIXPaymentRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/CreditCardPayment"
+                    "$ref": "#/components/schemas/OrderCreditCardPaymentRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/BankSlipPayment"
+                    "$ref": "#/components/schemas/OrderBankSlipPaymentRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/NuPayPayment"
+                    "$ref": "#/components/schemas/OrderNuPayPaymentRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/PicPayPayment"
+                    "$ref": "#/components/schemas/OrderPicPayPaymentRequest"
                   },
                   {
-                    "$ref": "#/components/schemas/DraftPayment"
+                    "$ref": "#/components/schemas/OrderDraftPaymentRequest"
                   }
                 ],
                 "discriminator": {
                   "propertyName": "paymentMethod",
                   "mapping": {
-                    "PIXPayment": "#/components/schemas/PIXPayment",
-                    "CreditCardPayment": "#/components/schemas/CreditCardPayment",
-                    "BankSlipPayment": "#/components/schemas/BankSlipPayment",
-                    "NuPayPayment": "#/components/schemas/NuPayPayment",
-                    "PicPayPayment": "#/components/schemas/PicPayPayment",
-                    "DraftPayment": "#/components/schemas/DraftPayment"
+                    "OrderPIXPaymentRequest": "#/components/schemas/OrderPIXPaymentRequest",
+                    "OrderCreditCardPaymentRequest": "#/components/schemas/OrderCreditCardPaymentRequest",
+                    "OrderBankSlipPaymentRequest": "#/components/schemas/OrderBankSlipPaymentRequest",
+                    "OrderNuPayPaymentRequest": "#/components/schemas/OrderNuPayPaymentRequest",
+                    "OrderPicPayPaymentRequest": "#/components/schemas/OrderPicPayPaymentRequest",
+                    "OrderDraftPaymentRequest": "#/components/schemas/OrderDraftPaymentRequest"
                   }
                 }
               }
@@ -2110,10 +2120,12 @@
         },
         "responses": {
           "200": {
-            "description": "Response for status 200",
+            "description": "Response after confirming a draft order",
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "Order Confirm Response",
+                  "description": "Response after confirming a draft order",
                   "type": "object",
                   "properties": {
                     "id": {
@@ -2152,7 +2164,7 @@
                       "type": "number"
                     },
                     "pix": {
-                      "title": "PIX Info",
+                      "title": "Order PIX Info",
                       "description": "PIX payment data and QR code information",
                       "type": "object",
                       "properties": {
@@ -2193,7 +2205,7 @@
                       ]
                     },
                     "bankSlip": {
-                      "title": "Bank Slip Info",
+                      "title": "Order Bank Slip Info",
                       "description": "Bank slip payment data",
                       "type": "object",
                       "properties": {
@@ -2225,7 +2237,7 @@
                       ]
                     },
                     "nuPay": {
-                      "title": "NuPay Info",
+                      "title": "Order NuPay Info",
                       "description": "NuPay payment data",
                       "type": "object",
                       "properties": {
@@ -2242,7 +2254,7 @@
                       ]
                     },
                     "picPay": {
-                      "title": "PicPay Info",
+                      "title": "Order PicPay Info",
                       "description": "PicPay payment data",
                       "type": "object",
                       "properties": {
@@ -2341,7 +2353,7 @@
           "Orders"
         ],
         "description": "Initiate a refund for the order specified by ID.",
-        "summary": "Refund order",
+        "summary": "Refund Order",
         "parameters": [
           {
             "name": "id",
@@ -2361,13 +2373,13 @@
           "Transfers"
         ],
         "description": "Create a new withdrawal or transfer to the provided payment account",
-        "summary": "Create withdrawal",
+        "summary": "Create Withdrawal",
         "requestBody": {
           "description": "Withdrawal or transfer request data",
           "content": {
             "application/json": {
               "schema": {
-                "title": "Withdraw",
+                "title": "Withdraw Create Request",
                 "description": "Withdrawal or transfer request data",
                 "type": "object",
                 "properties": {
@@ -2422,7 +2434,7 @@
                     ]
                   },
                   "payoutAccount": {
-                    "title": "Payout Account",
+                    "title": "Withdraw Payout Account Data",
                     "description": "Bank account information for withdrawal",
                     "type": "object",
                     "properties": {
@@ -2453,8 +2465,7 @@
                 "required": [
                   "amount",
                   "payoutAccount"
-                ],
-                "additionalProperties": false
+                ]
               }
             }
           },
@@ -2462,10 +2473,12 @@
         },
         "responses": {
           "200": {
-            "description": "Response for status 200",
+            "description": "Response after creating a withdrawal or transfer",
             "content": {
               "application/json": {
                 "schema": {
+                  "title": "Withdraw Create Response",
+                  "description": "Response after creating a withdrawal or transfer",
                   "type": "object",
                   "properties": {
                     "id": {
@@ -2645,8 +2658,7 @@
                     "payedAt",
                     "payoutAccount"
                   ],
-                  "noValidate": true,
-                  "additionalProperties": false
+                  "noValidate": true
                 }
               }
             }
@@ -2659,7 +2671,7 @@
           "Transfers"
         ],
         "description": "Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)",
-        "summary": "List withdrawals",
+        "summary": "List Withdrawals",
         "parameters": [
           {
             "name": "endDate",
@@ -2741,7 +2753,7 @@
           "Transfers"
         ],
         "description": "Returns the details of a specific withdrawal or transfer using its ID",
-        "summary": "Get withdrawal by ID",
+        "summary": "Get Withdrawal By ID",
         "parameters": [
           {
             "name": "id",
@@ -2761,7 +2773,7 @@
           "Customers"
         ],
         "description": "Retrieve a list of all customers associated with the organization, with support for filters and pagination.",
-        "summary": "Get all customers",
+        "summary": "Get All Customers",
         "parameters": [
           {
             "name": "email",
@@ -2860,7 +2872,7 @@
                       "description": "List of customers",
                       "type": "array",
                       "items": {
-                        "title": "Customer Response",
+                        "title": "Customer Read Response",
                         "description": "Customer response with complete information",
                         "type": "object",
                         "properties": {
@@ -2924,7 +2936,7 @@
                             "description": "Customer address information",
                             "anyOf": [
                               {
-                                "title": "Customer Address",
+                                "title": "Customer Address Response",
                                 "description": "Customer address information",
                                 "type": "object",
                                 "properties": {
@@ -3037,7 +3049,7 @@
                       }
                     },
                     "pagination": {
-                      "title": "Customer Pagination",
+                      "title": "Customer List Pagination",
                       "description": "Pagination information for customer list",
                       "type": "object",
                       "properties": {
@@ -3094,18 +3106,18 @@
           "Customers"
         ],
         "description": "Create a new customer by providing the required data in the request body.",
-        "summary": "Create new customer",
+        "summary": "Create New Customer",
         "requestBody": {
           "description": "Schema for creating a new customer",
           "content": {
             "application/json": {
               "schema": {
                 "description": "Schema for creating a new customer",
-                "title": "Customer",
+                "title": "Customer Create Request",
                 "type": "object",
                 "properties": {
                   "address": {
-                    "title": "Customer Address",
+                    "title": "Address Create Request",
                     "description": "Schema for creating a new address",
                     "type": "object",
                     "properties": {
@@ -3235,7 +3247,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Customer Response",
+                  "title": "Customer Read Response",
                   "description": "Customer response with complete information",
                   "type": "object",
                   "properties": {
@@ -3299,7 +3311,7 @@
                       "description": "Customer address information",
                       "anyOf": [
                         {
-                          "title": "Customer Address",
+                          "title": "Customer Address Response",
                           "description": "Customer address information",
                           "type": "object",
                           "properties": {
@@ -3423,7 +3435,7 @@
           "Customers"
         ],
         "description": "Retrieve the complete details of a specific customer using their unique ID.",
-        "summary": "Get customer by ID",
+        "summary": "Get Customer By ID",
         "parameters": [
           {
             "name": "id",
@@ -3440,7 +3452,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Customer Response",
+                  "title": "Customer Read Response",
                   "description": "Customer response with complete information",
                   "type": "object",
                   "properties": {
@@ -3504,7 +3516,7 @@
                       "description": "Customer address information",
                       "anyOf": [
                         {
-                          "title": "Customer Address",
+                          "title": "Customer Address Response",
                           "description": "Customer address information",
                           "type": "object",
                           "properties": {
@@ -3626,7 +3638,7 @@
           "Customers"
         ],
         "description": "Update the information of an existing customer by providing the new data in the request body.",
-        "summary": "Update customer data",
+        "summary": "Update Customer Data",
         "parameters": [
           {
             "name": "id",
@@ -3643,11 +3655,11 @@
             "application/json": {
               "schema": {
                 "description": "Schema for updating customer information",
-                "title": "Update Customer",
+                "title": "Customer Update Request",
                 "type": "object",
                 "properties": {
                   "address": {
-                    "title": "Customer Address",
+                    "title": "Address Create Request",
                     "description": "Schema for creating a new address",
                     "type": "object",
                     "properties": {
@@ -3771,7 +3783,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Customer Response",
+                  "title": "Customer Read Response",
                   "description": "Customer response with complete information",
                   "type": "object",
                   "properties": {
@@ -3835,7 +3847,7 @@
                       "description": "Customer address information",
                       "anyOf": [
                         {
-                          "title": "Customer Address",
+                          "title": "Customer Address Response",
                           "description": "Customer address information",
                           "type": "object",
                           "properties": {
@@ -3959,18 +3971,18 @@
           "Card Tokenization"
         ],
         "description": "Tokenize credit cards for future charges.",
-        "summary": "Tokenize card",
+        "summary": "Tokenize Card",
         "requestBody": {
           "description": "Data for creating a customer card with customer information",
           "content": {
             "application/json": {
               "schema": {
-                "title": "Create Customer Card",
+                "title": "Card Tokenization Create Request",
                 "description": "Data for creating a customer card with customer information",
                 "type": "object",
                 "properties": {
                   "card": {
-                    "title": "Create Card Data",
+                    "title": "Card Create Request",
                     "description": "Complete card data for payment processing",
                     "type": "object",
                     "properties": {
@@ -3985,7 +3997,7 @@
                         "type": "string"
                       },
                       "expiration": {
-                        "title": "Card Expiration",
+                        "title": "Card Expiration Data",
                         "description": "Card expiration date",
                         "type": "object",
                         "properties": {
@@ -4047,10 +4059,10 @@
                   "customer": {
                     "oneOf": [
                       {
-                        "$ref": "#/components/schemas/Customer"
+                        "$ref": "#/components/schemas/CustomerCreateRequest"
                       },
                       {
-                        "$ref": "#/components/schemas/CustomerByID"
+                        "$ref": "#/components/schemas/CardTokenizationCustomerByIdData"
                       }
                     ]
                   }
@@ -4071,7 +4083,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "title": "Create Customer Card Response",
+                  "title": "Card Tokenization Create Response",
                   "description": "Response containing customer ID and card token",
                   "type": "object",
                   "properties": {
