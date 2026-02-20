@@ -49,33 +49,33 @@ sub new {
 
 
 #
-# post_card_tokenization
+# card_tokenize
 #
-# Tokenize card
+# Tokenize Card
 #
-# @param PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
+# @param CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
 {
     my $params = {
-    'post_card_tokenization_request' => {
-        data_type => 'PostCardTokenizationRequest',
-        description => 'Data for creating a customer card',
+    'card_tokenization_create_request' => {
+        data_type => 'CardTokenizationCreateRequest',
+        description => 'Data for creating a customer card with customer information',
         required => '1',
     },
     };
-    __PACKAGE__->method_documentation->{ 'post_card_tokenization' } = {
-        summary => 'Tokenize card',
+    __PACKAGE__->method_documentation->{ 'card_tokenize' } = {
+        summary => 'Tokenize Card',
         params => $params,
-        returns => 'PostCardTokenization200Response',
+        returns => 'CardTokenizationCreateResponse',
         };
 }
-# @return PostCardTokenization200Response
+# @return CardTokenizationCreateResponse
 #
-sub post_card_tokenization {
+sub card_tokenize {
     my ($self, %args) = @_;
 
-    # verify the required parameter 'post_card_tokenization_request' is set
-    unless (exists $args{'post_card_tokenization_request'}) {
-      croak("Missing the required parameter 'post_card_tokenization_request' when calling post_card_tokenization");
+    # verify the required parameter 'card_tokenization_create_request' is set
+    unless (exists $args{'card_tokenization_create_request'}) {
+      croak("Missing the required parameter 'card_tokenization_create_request' when calling card_tokenize");
     }
 
     # parse inputs
@@ -95,8 +95,8 @@ sub post_card_tokenization {
 
     my $_body_data;
     # body params
-    if ( exists $args{'post_card_tokenization_request'}) {
-        $_body_data = $args{'post_card_tokenization_request'};
+    if ( exists $args{'card_tokenization_create_request'}) {
+        $_body_data = $args{'card_tokenization_create_request'};
     }
 
     # authentication setting, if any
@@ -109,7 +109,7 @@ sub post_card_tokenization {
     if (!$response) {
         return;
     }
-    my $_response_object = $self->{api_client}->deserialize('PostCardTokenization200Response', $response);
+    my $_response_object = $self->{api_client}->deserialize('CardTokenizationCreateResponse', $response);
     return $_response_object;
 }
 

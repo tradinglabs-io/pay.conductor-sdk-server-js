@@ -19,8 +19,8 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
-import payconductor_sdk.models.PostCardTokenization200Response
-import payconductor_sdk.models.PostCardTokenizationRequest
+import payconductor_sdk.models.CardTokenizationCreateRequest
+import payconductor_sdk.models.CardTokenizationCreateResponse
 
 import com.squareup.moshi.Json
 
@@ -48,10 +48,10 @@ open class CardTokenizationApi(basePath: kotlin.String = defaultBasePath, client
 
     /**
      * POST /card-tokenization/
-     * Tokenize card
+     * Tokenize Card
      * Tokenize credit cards for future charges.
-     * @param postCardTokenizationRequest Data for creating a customer card
-     * @return PostCardTokenization200Response
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information
+     * @return CardTokenizationCreateResponse
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      * @throws UnsupportedOperationException If the API returns an informational or redirection response
@@ -60,11 +60,11 @@ open class CardTokenizationApi(basePath: kotlin.String = defaultBasePath, client
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun postCardTokenization(postCardTokenizationRequest: PostCardTokenizationRequest) : PostCardTokenization200Response {
-        val localVarResponse = postCardTokenizationWithHttpInfo(postCardTokenizationRequest = postCardTokenizationRequest)
+    fun cardTokenize(cardTokenizationCreateRequest: CardTokenizationCreateRequest) : CardTokenizationCreateResponse {
+        val localVarResponse = cardTokenizeWithHttpInfo(cardTokenizationCreateRequest = cardTokenizationCreateRequest)
 
         return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as PostCardTokenization200Response
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CardTokenizationCreateResponse
             ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
             ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
             ResponseType.ClientError -> {
@@ -80,31 +80,31 @@ open class CardTokenizationApi(basePath: kotlin.String = defaultBasePath, client
 
     /**
      * POST /card-tokenization/
-     * Tokenize card
+     * Tokenize Card
      * Tokenize credit cards for future charges.
-     * @param postCardTokenizationRequest Data for creating a customer card
-     * @return ApiResponse<PostCardTokenization200Response?>
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information
+     * @return ApiResponse<CardTokenizationCreateResponse?>
      * @throws IllegalStateException If the request is not correctly configured
      * @throws IOException Rethrows the OkHttp execute method exception
      */
     @Suppress("UNCHECKED_CAST")
     @Throws(IllegalStateException::class, IOException::class)
-    fun postCardTokenizationWithHttpInfo(postCardTokenizationRequest: PostCardTokenizationRequest) : ApiResponse<PostCardTokenization200Response?> {
-        val localVariableConfig = postCardTokenizationRequestConfig(postCardTokenizationRequest = postCardTokenizationRequest)
+    fun cardTokenizeWithHttpInfo(cardTokenizationCreateRequest: CardTokenizationCreateRequest) : ApiResponse<CardTokenizationCreateResponse?> {
+        val localVariableConfig = cardTokenizeRequestConfig(cardTokenizationCreateRequest = cardTokenizationCreateRequest)
 
-        return request<PostCardTokenizationRequest, PostCardTokenization200Response>(
+        return request<CardTokenizationCreateRequest, CardTokenizationCreateResponse>(
             localVariableConfig
         )
     }
 
     /**
-     * To obtain the request config of the operation postCardTokenization
+     * To obtain the request config of the operation cardTokenize
      *
-     * @param postCardTokenizationRequest Data for creating a customer card
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information
      * @return RequestConfig
      */
-    fun postCardTokenizationRequestConfig(postCardTokenizationRequest: PostCardTokenizationRequest) : RequestConfig<PostCardTokenizationRequest> {
-        val localVariableBody = postCardTokenizationRequest
+    fun cardTokenizeRequestConfig(cardTokenizationCreateRequest: CardTokenizationCreateRequest) : RequestConfig<CardTokenizationCreateRequest> {
+        val localVariableBody = cardTokenizationCreateRequest
         val localVariableQuery: MultiValueMap = mutableMapOf()
         val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
         localVariableHeaders["Content-Type"] = "application/json"

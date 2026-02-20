@@ -27,8 +27,8 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 
 
-import org.openapitools.client.model.PostCardTokenization200Response;
-import org.openapitools.client.model.PostCardTokenizationRequest;
+import org.openapitools.client.model.CardTokenizationCreateRequest;
+import org.openapitools.client.model.CardTokenizationCreateResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -74,8 +74,8 @@ public class CardTokenizationApi {
     }
 
     /**
-     * Build call for postCardTokenization
-     * @param postCardTokenizationRequest Data for creating a customer card (required)
+     * Build call for cardTokenize
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -83,10 +83,10 @@ public class CardTokenizationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Response for status 200 </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Response containing customer ID and card token </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call postCardTokenizationCall(@javax.annotation.Nonnull PostCardTokenizationRequest postCardTokenizationRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call cardTokenizeCall(@javax.annotation.Nonnull CardTokenizationCreateRequest cardTokenizationCreateRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -100,7 +100,7 @@ public class CardTokenizationApi {
             basePath = null;
         }
 
-        Object localVarPostBody = postCardTokenizationRequest;
+        Object localVarPostBody = cardTokenizationCreateRequest;
 
         // create path and map variables
         String localVarPath = "/card-tokenization/";
@@ -132,57 +132,57 @@ public class CardTokenizationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call postCardTokenizationValidateBeforeCall(@javax.annotation.Nonnull PostCardTokenizationRequest postCardTokenizationRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'postCardTokenizationRequest' is set
-        if (postCardTokenizationRequest == null) {
-            throw new ApiException("Missing the required parameter 'postCardTokenizationRequest' when calling postCardTokenization(Async)");
+    private okhttp3.Call cardTokenizeValidateBeforeCall(@javax.annotation.Nonnull CardTokenizationCreateRequest cardTokenizationCreateRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'cardTokenizationCreateRequest' is set
+        if (cardTokenizationCreateRequest == null) {
+            throw new ApiException("Missing the required parameter 'cardTokenizationCreateRequest' when calling cardTokenize(Async)");
         }
 
-        return postCardTokenizationCall(postCardTokenizationRequest, _callback);
+        return cardTokenizeCall(cardTokenizationCreateRequest, _callback);
 
     }
 
     /**
-     * Tokenize card
+     * Tokenize Card
      * Tokenize credit cards for future charges.
-     * @param postCardTokenizationRequest Data for creating a customer card (required)
-     * @return PostCardTokenization200Response
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information (required)
+     * @return CardTokenizationCreateResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Response for status 200 </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Response containing customer ID and card token </td><td>  -  </td></tr>
      </table>
      */
-    public PostCardTokenization200Response postCardTokenization(@javax.annotation.Nonnull PostCardTokenizationRequest postCardTokenizationRequest) throws ApiException {
-        ApiResponse<PostCardTokenization200Response> localVarResp = postCardTokenizationWithHttpInfo(postCardTokenizationRequest);
+    public CardTokenizationCreateResponse cardTokenize(@javax.annotation.Nonnull CardTokenizationCreateRequest cardTokenizationCreateRequest) throws ApiException {
+        ApiResponse<CardTokenizationCreateResponse> localVarResp = cardTokenizeWithHttpInfo(cardTokenizationCreateRequest);
         return localVarResp.getData();
     }
 
     /**
-     * Tokenize card
+     * Tokenize Card
      * Tokenize credit cards for future charges.
-     * @param postCardTokenizationRequest Data for creating a customer card (required)
-     * @return ApiResponse&lt;PostCardTokenization200Response&gt;
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information (required)
+     * @return ApiResponse&lt;CardTokenizationCreateResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Response for status 200 </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Response containing customer ID and card token </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<PostCardTokenization200Response> postCardTokenizationWithHttpInfo(@javax.annotation.Nonnull PostCardTokenizationRequest postCardTokenizationRequest) throws ApiException {
-        okhttp3.Call localVarCall = postCardTokenizationValidateBeforeCall(postCardTokenizationRequest, null);
-        Type localVarReturnType = new TypeToken<PostCardTokenization200Response>(){}.getType();
+    public ApiResponse<CardTokenizationCreateResponse> cardTokenizeWithHttpInfo(@javax.annotation.Nonnull CardTokenizationCreateRequest cardTokenizationCreateRequest) throws ApiException {
+        okhttp3.Call localVarCall = cardTokenizeValidateBeforeCall(cardTokenizationCreateRequest, null);
+        Type localVarReturnType = new TypeToken<CardTokenizationCreateResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Tokenize card (asynchronously)
+     * Tokenize Card (asynchronously)
      * Tokenize credit cards for future charges.
-     * @param postCardTokenizationRequest Data for creating a customer card (required)
+     * @param cardTokenizationCreateRequest Data for creating a customer card with customer information (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -190,13 +190,13 @@ public class CardTokenizationApi {
      <table border="1">
        <caption>Response Details</caption>
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Response for status 200 </td><td>  -  </td></tr>
+        <tr><td> 200 </td><td> Response containing customer ID and card token </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call postCardTokenizationAsync(@javax.annotation.Nonnull PostCardTokenizationRequest postCardTokenizationRequest, final ApiCallback<PostCardTokenization200Response> _callback) throws ApiException {
+    public okhttp3.Call cardTokenizeAsync(@javax.annotation.Nonnull CardTokenizationCreateRequest cardTokenizationCreateRequest, final ApiCallback<CardTokenizationCreateResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = postCardTokenizationValidateBeforeCall(postCardTokenizationRequest, _callback);
-        Type localVarReturnType = new TypeToken<PostCardTokenization200Response>(){}.getType();
+        okhttp3.Call localVarCall = cardTokenizeValidateBeforeCall(cardTokenizationCreateRequest, _callback);
+        Type localVarReturnType = new TypeToken<CardTokenizationCreateResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }

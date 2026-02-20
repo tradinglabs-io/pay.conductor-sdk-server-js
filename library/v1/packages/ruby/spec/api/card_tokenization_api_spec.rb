@@ -32,13 +32,13 @@ describe 'CardTokenizationApi' do
     end
   end
 
-  # unit tests for post_card_tokenization
-  # Tokenize card
+  # unit tests for card_tokenize
+  # Tokenize Card
   # Tokenize credit cards for future charges.
-  # @param post_card_tokenization_request Data for creating a customer card
+  # @param card_tokenization_create_request Data for creating a customer card with customer information
   # @param [Hash] opts the optional parameters
-  # @return [PostCardTokenization200Response]
-  describe 'post_card_tokenization test' do
+  # @return [CardTokenizationCreateResponse]
+  describe 'card_tokenize test' do
     it 'should work' do
       # assertion here. ref: https://rspec.info/features/3-12/rspec-expectations/built-in-matchers/
     end

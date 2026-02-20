@@ -1,0 +1,12 @@
+# payconductor_sdk.Model.CardExpirationData
+Card expiration date
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Month** | **decimal** | Card expiration month | 
+**Year** | **decimal** | Card expiration year | 
+
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+

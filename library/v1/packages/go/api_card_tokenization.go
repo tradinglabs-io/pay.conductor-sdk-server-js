@@ -22,48 +22,48 @@ import (
 // CardTokenizationAPIService CardTokenizationAPI service
 type CardTokenizationAPIService service
 
-type ApiPostCardTokenizationRequest struct {
+type ApiCardTokenizeRequest struct {
 	ctx context.Context
 	ApiService *CardTokenizationAPIService
-	postCardTokenizationRequest *PostCardTokenizationRequest
+	cardTokenizationCreateRequest *CardTokenizationCreateRequest
 }
 
-// Data for creating a customer card
-func (r ApiPostCardTokenizationRequest) PostCardTokenizationRequest(postCardTokenizationRequest PostCardTokenizationRequest) ApiPostCardTokenizationRequest {
-	r.postCardTokenizationRequest = &postCardTokenizationRequest
+// Data for creating a customer card with customer information
+func (r ApiCardTokenizeRequest) CardTokenizationCreateRequest(cardTokenizationCreateRequest CardTokenizationCreateRequest) ApiCardTokenizeRequest {
+	r.cardTokenizationCreateRequest = &cardTokenizationCreateRequest
 	return r
 }
 
-func (r ApiPostCardTokenizationRequest) Execute() (*PostCardTokenization200Response, *http.Response, error) {
-	return r.ApiService.PostCardTokenizationExecute(r)
+func (r ApiCardTokenizeRequest) Execute() (*CardTokenizationCreateResponse, *http.Response, error) {
+	return r.ApiService.CardTokenizeExecute(r)
 }
 
 /*
-PostCardTokenization Tokenize card
+CardTokenize Tokenize Card
 
 Tokenize credit cards for future charges.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiPostCardTokenizationRequest
+ @return ApiCardTokenizeRequest
 */
-func (a *CardTokenizationAPIService) PostCardTokenization(ctx context.Context) ApiPostCardTokenizationRequest {
-	return ApiPostCardTokenizationRequest{
+func (a *CardTokenizationAPIService) CardTokenize(ctx context.Context) ApiCardTokenizeRequest {
+	return ApiCardTokenizeRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return PostCardTokenization200Response
-func (a *CardTokenizationAPIService) PostCardTokenizationExecute(r ApiPostCardTokenizationRequest) (*PostCardTokenization200Response, *http.Response, error) {
+//  @return CardTokenizationCreateResponse
+func (a *CardTokenizationAPIService) CardTokenizeExecute(r ApiCardTokenizeRequest) (*CardTokenizationCreateResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *PostCardTokenization200Response
+		localVarReturnValue  *CardTokenizationCreateResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CardTokenizationAPIService.PostCardTokenization")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CardTokenizationAPIService.CardTokenize")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -73,8 +73,8 @@ func (a *CardTokenizationAPIService) PostCardTokenizationExecute(r ApiPostCardTo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.postCardTokenizationRequest == nil {
-		return localVarReturnValue, nil, reportError("postCardTokenizationRequest is required and must be specified")
+	if r.cardTokenizationCreateRequest == nil {
+		return localVarReturnValue, nil, reportError("cardTokenizationCreateRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -95,7 +95,7 @@ func (a *CardTokenizationAPIService) PostCardTokenizationExecute(r ApiPostCardTo
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.postCardTokenizationRequest
+	localVarPostBody = r.cardTokenizationCreateRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

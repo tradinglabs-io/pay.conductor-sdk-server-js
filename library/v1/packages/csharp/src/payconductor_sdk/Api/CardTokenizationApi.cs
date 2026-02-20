@@ -38,33 +38,33 @@ namespace payconductor_sdk.Api
         CardTokenizationApiEvents Events { get; }
 
         /// <summary>
-        /// Tokenize card
+        /// Tokenize Card
         /// </summary>
         /// <remarks>
         /// Tokenize credit cards for future charges.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="postCardTokenizationRequest">Data for creating a customer card</param>
+        /// <param name="cardTokenizationCreateRequest">Data for creating a customer card with customer information</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IPostCardTokenizationApiResponse"/>&gt;</returns>
-        Task<IPostCardTokenizationApiResponse> PostCardTokenizationAsync(PostCardTokenizationRequest postCardTokenizationRequest, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="ICardTokenizeApiResponse"/>&gt;</returns>
+        Task<ICardTokenizeApiResponse> CardTokenizeAsync(CardTokenizationCreateRequest cardTokenizationCreateRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Tokenize card
+        /// Tokenize Card
         /// </summary>
         /// <remarks>
         /// Tokenize credit cards for future charges.
         /// </remarks>
-        /// <param name="postCardTokenizationRequest">Data for creating a customer card</param>
+        /// <param name="cardTokenizationCreateRequest">Data for creating a customer card with customer information</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IPostCardTokenizationApiResponse"/>?&gt;</returns>
-        Task<IPostCardTokenizationApiResponse?> PostCardTokenizationOrDefaultAsync(PostCardTokenizationRequest postCardTokenizationRequest, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns><see cref="Task"/>&lt;<see cref="ICardTokenizeApiResponse"/>?&gt;</returns>
+        Task<ICardTokenizeApiResponse?> CardTokenizeOrDefaultAsync(CardTokenizationCreateRequest cardTokenizationCreateRequest, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
-    /// The <see cref="IPostCardTokenizationApiResponse"/>
+    /// The <see cref="ICardTokenizeApiResponse"/>
     /// </summary>
-    public interface IPostCardTokenizationApiResponse : payconductor_sdk.Client.IApiResponse, IOk<payconductor_sdk.Model.PostCardTokenization200Response?>
+    public interface ICardTokenizeApiResponse : payconductor_sdk.Client.IApiResponse, IOk<payconductor_sdk.Model.CardTokenizationCreateResponse?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -81,21 +81,21 @@ namespace payconductor_sdk.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnPostCardTokenization;
+        public event EventHandler<ApiResponseEventArgs>? OnCardTokenize;
 
         /// <summary>
         /// The event raised after an error querying the server
         /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorPostCardTokenization;
+        public event EventHandler<ExceptionEventArgs>? OnErrorCardTokenize;
 
-        internal void ExecuteOnPostCardTokenization(CardTokenizationApi.PostCardTokenizationApiResponse apiResponse)
+        internal void ExecuteOnCardTokenize(CardTokenizationApi.CardTokenizeApiResponse apiResponse)
         {
-            OnPostCardTokenization?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+            OnCardTokenize?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
 
-        internal void ExecuteOnErrorPostCardTokenization(Exception exception)
+        internal void ExecuteOnErrorCardTokenize(Exception exception)
         {
-            OnErrorPostCardTokenization?.Invoke(this, new ExceptionEventArgs(exception));
+            OnErrorCardTokenize?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -146,28 +146,28 @@ namespace payconductor_sdk.Api
             BasicTokenProvider = basicTokenProvider;
         }
 
-        partial void FormatPostCardTokenization(PostCardTokenizationRequest postCardTokenizationRequest);
+        partial void FormatCardTokenize(CardTokenizationCreateRequest cardTokenizationCreateRequest);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="postCardTokenizationRequest"></param>
+        /// <param name="cardTokenizationCreateRequest"></param>
         /// <returns></returns>
-        private void ValidatePostCardTokenization(PostCardTokenizationRequest postCardTokenizationRequest)
+        private void ValidateCardTokenize(CardTokenizationCreateRequest cardTokenizationCreateRequest)
         {
-            if (postCardTokenizationRequest == null)
-                throw new ArgumentNullException(nameof(postCardTokenizationRequest));
+            if (cardTokenizationCreateRequest == null)
+                throw new ArgumentNullException(nameof(cardTokenizationCreateRequest));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="postCardTokenizationRequest"></param>
-        private void AfterPostCardTokenizationDefaultImplementation(IPostCardTokenizationApiResponse apiResponseLocalVar, PostCardTokenizationRequest postCardTokenizationRequest)
+        /// <param name="cardTokenizationCreateRequest"></param>
+        private void AfterCardTokenizeDefaultImplementation(ICardTokenizeApiResponse apiResponseLocalVar, CardTokenizationCreateRequest cardTokenizationCreateRequest)
         {
             bool suppressDefaultLog = false;
-            AfterPostCardTokenization(ref suppressDefaultLog, apiResponseLocalVar, postCardTokenizationRequest);
+            AfterCardTokenize(ref suppressDefaultLog, apiResponseLocalVar, cardTokenizationCreateRequest);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -177,8 +177,8 @@ namespace payconductor_sdk.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="postCardTokenizationRequest"></param>
-        partial void AfterPostCardTokenization(ref bool suppressDefaultLog, IPostCardTokenizationApiResponse apiResponseLocalVar, PostCardTokenizationRequest postCardTokenizationRequest);
+        /// <param name="cardTokenizationCreateRequest"></param>
+        partial void AfterCardTokenize(ref bool suppressDefaultLog, ICardTokenizeApiResponse apiResponseLocalVar, CardTokenizationCreateRequest cardTokenizationCreateRequest);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -186,11 +186,11 @@ namespace payconductor_sdk.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="postCardTokenizationRequest"></param>
-        private void OnErrorPostCardTokenizationDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, PostCardTokenizationRequest postCardTokenizationRequest)
+        /// <param name="cardTokenizationCreateRequest"></param>
+        private void OnErrorCardTokenizeDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, CardTokenizationCreateRequest cardTokenizationCreateRequest)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorPostCardTokenization(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, postCardTokenizationRequest);
+            OnErrorCardTokenize(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, cardTokenizationCreateRequest);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -202,20 +202,20 @@ namespace payconductor_sdk.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="postCardTokenizationRequest"></param>
-        partial void OnErrorPostCardTokenization(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, PostCardTokenizationRequest postCardTokenizationRequest);
+        /// <param name="cardTokenizationCreateRequest"></param>
+        partial void OnErrorCardTokenize(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, CardTokenizationCreateRequest cardTokenizationCreateRequest);
 
         /// <summary>
-        /// Tokenize card Tokenize credit cards for future charges.
+        /// Tokenize Card Tokenize credit cards for future charges.
         /// </summary>
-        /// <param name="postCardTokenizationRequest">Data for creating a customer card</param>
+        /// <param name="cardTokenizationCreateRequest">Data for creating a customer card with customer information</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IPostCardTokenizationApiResponse"/>&gt;</returns>
-        public async Task<IPostCardTokenizationApiResponse?> PostCardTokenizationOrDefaultAsync(PostCardTokenizationRequest postCardTokenizationRequest, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="ICardTokenizeApiResponse"/>&gt;</returns>
+        public async Task<ICardTokenizeApiResponse?> CardTokenizeOrDefaultAsync(CardTokenizationCreateRequest cardTokenizationCreateRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await PostCardTokenizationAsync(postCardTokenizationRequest, cancellationToken).ConfigureAwait(false);
+                return await CardTokenizeAsync(cardTokenizationCreateRequest, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -224,21 +224,21 @@ namespace payconductor_sdk.Api
         }
 
         /// <summary>
-        /// Tokenize card Tokenize credit cards for future charges.
+        /// Tokenize Card Tokenize credit cards for future charges.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="postCardTokenizationRequest">Data for creating a customer card</param>
+        /// <param name="cardTokenizationCreateRequest">Data for creating a customer card with customer information</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IPostCardTokenizationApiResponse"/>&gt;</returns>
-        public async Task<IPostCardTokenizationApiResponse> PostCardTokenizationAsync(PostCardTokenizationRequest postCardTokenizationRequest, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns><see cref="Task"/>&lt;<see cref="ICardTokenizeApiResponse"/>&gt;</returns>
+        public async Task<ICardTokenizeApiResponse> CardTokenizeAsync(CardTokenizationCreateRequest cardTokenizationCreateRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidatePostCardTokenization(postCardTokenizationRequest);
+                ValidateCardTokenize(cardTokenizationCreateRequest);
 
-                FormatPostCardTokenization(postCardTokenizationRequest);
+                FormatCardTokenize(cardTokenizationCreateRequest);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -249,9 +249,9 @@ namespace payconductor_sdk.Api
                         ? "/card-tokenization/"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/card-tokenization/");
 
-                    httpRequestMessageLocalVar.Content = (postCardTokenizationRequest as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (cardTokenizationCreateRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(postCardTokenizationRequest, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(cardTokenizationCreateRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -286,8 +286,8 @@ namespace payconductor_sdk.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<PostCardTokenizationApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<PostCardTokenizationApiResponse>();
-                        PostCardTokenizationApiResponse apiResponseLocalVar;
+                        ILogger<CardTokenizeApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<CardTokenizeApiResponse>();
+                        CardTokenizeApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -298,9 +298,9 @@ namespace payconductor_sdk.Api
                             }
                         }
 
-                        AfterPostCardTokenizationDefaultImplementation(apiResponseLocalVar, postCardTokenizationRequest);
+                        AfterCardTokenizeDefaultImplementation(apiResponseLocalVar, cardTokenizationCreateRequest);
 
-                        Events.ExecuteOnPostCardTokenization(apiResponseLocalVar);
+                        Events.ExecuteOnCardTokenize(apiResponseLocalVar);
 
                         if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
                             foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
@@ -312,24 +312,24 @@ namespace payconductor_sdk.Api
             }
             catch(Exception e)
             {
-                OnErrorPostCardTokenizationDefaultImplementation(e, "/card-tokenization/", uriBuilderLocalVar.Path, postCardTokenizationRequest);
-                Events.ExecuteOnErrorPostCardTokenization(e);
+                OnErrorCardTokenizeDefaultImplementation(e, "/card-tokenization/", uriBuilderLocalVar.Path, cardTokenizationCreateRequest);
+                Events.ExecuteOnErrorCardTokenize(e);
                 throw;
             }
         }
 
         /// <summary>
-        /// The <see cref="PostCardTokenizationApiResponse"/>
+        /// The <see cref="CardTokenizeApiResponse"/>
         /// </summary>
-        public partial class PostCardTokenizationApiResponse : payconductor_sdk.Client.ApiResponse, IPostCardTokenizationApiResponse
+        public partial class CardTokenizeApiResponse : payconductor_sdk.Client.ApiResponse, ICardTokenizeApiResponse
         {
             /// <summary>
             /// The logger
             /// </summary>
-            public ILogger<PostCardTokenizationApiResponse> Logger { get; }
+            public ILogger<CardTokenizeApiResponse> Logger { get; }
 
             /// <summary>
-            /// The <see cref="PostCardTokenizationApiResponse"/>
+            /// The <see cref="CardTokenizeApiResponse"/>
             /// </summary>
             /// <param name="logger"></param>
             /// <param name="httpRequestMessage"></param>
@@ -338,14 +338,14 @@ namespace payconductor_sdk.Api
             /// <param name="path"></param>
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
-            public PostCardTokenizationApiResponse(ILogger<PostCardTokenizationApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            public CardTokenizeApiResponse(ILogger<CardTokenizeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);
             }
 
             /// <summary>
-            /// The <see cref="PostCardTokenizationApiResponse"/>
+            /// The <see cref="CardTokenizeApiResponse"/>
             /// </summary>
             /// <param name="logger"></param>
             /// <param name="httpRequestMessage"></param>
@@ -354,7 +354,7 @@ namespace payconductor_sdk.Api
             /// <param name="path"></param>
             /// <param name="requestedAt"></param>
             /// <param name="jsonSerializerOptions"></param>
-            public PostCardTokenizationApiResponse(ILogger<PostCardTokenizationApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            public CardTokenizeApiResponse(ILogger<CardTokenizeApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
             {
                 Logger = logger;
                 OnCreated(httpRequestMessage, httpResponseMessage);
@@ -372,11 +372,11 @@ namespace payconductor_sdk.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public payconductor_sdk.Model.PostCardTokenization200Response? Ok()
+            public payconductor_sdk.Model.CardTokenizationCreateResponse? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<payconductor_sdk.Model.PostCardTokenization200Response>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<payconductor_sdk.Model.CardTokenizationCreateResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -385,7 +385,7 @@ namespace payconductor_sdk.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out payconductor_sdk.Model.PostCardTokenization200Response? result)
+            public bool TryOk([NotNullWhen(true)]out payconductor_sdk.Model.CardTokenizationCreateResponse? result)
             {
                 result = null;
 

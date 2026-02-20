@@ -1,0 +1,26 @@
+# OpenapiClient::WithdrawCreateResponsePayoutAccount
+
+## Properties
+
+| Name | Type | Description | Notes |
+| ---- | ---- | ----------- | ----- |
+| **id** | **String** | Unique payment account identifier |  |
+| **owner_document** | **String** | Account holder document (CPF or CNPJ) |  |
+| **owner_name** | **String** | Account holder name |  |
+| **pix_key** | **String** | PIX key used for the withdrawal |  |
+| **pix_type** | [**PixType**](PixType.md) |  |  |
+
+## Example
+
+```ruby
+require 'openapi_client'
+
+instance = OpenapiClient::WithdrawCreateResponsePayoutAccount.new(
+  id: null,
+  owner_document: null,
+  owner_name: null,
+  pix_key: null,
+  pix_type: null
+)
+```
+

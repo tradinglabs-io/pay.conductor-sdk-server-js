@@ -16,8 +16,8 @@ local dkjson = require "dkjson"
 local basexx = require "basexx"
 
 -- model import
-local payconductor_sdk_post_card_tokenization_200_response = require "payconductor_sdk.model.post_card_tokenization_200_response"
-local payconductor_sdk_post_card_tokenization_request = require "payconductor_sdk.model.post_card_tokenization_request"
+local payconductor_sdk_card_tokenization_create_response = require "payconductor_sdk.model.card_tokenization_create_response"
+local payconductor_sdk_card_tokenization_create_request = require "payconductor_sdk.model.card_tokenization_create_request"
 
 local card_tokenization_api = {}
 local card_tokenization_api_mt = {
@@ -45,7 +45,7 @@ local function new_card_tokenization_api(authority, basePath, schemes)
 	}, card_tokenization_api_mt)
 end
 
-function card_tokenization_api:post_card_tokenization(post_card_tokenization_request)
+function card_tokenization_api:card_tokenize(card_tokenization_create_request)
 	local req = http_request.new_from_uri({
 		scheme = self.default_scheme;
 		host = self.host;
@@ -64,7 +64,7 @@ function card_tokenization_api:post_card_tokenization(post_card_tokenization_req
 	--local var_accept = { "application/json" }
 	req.headers:upsert("content-type", "application/json")
 
-	req:set_body(dkjson.encode(post_card_tokenization_request))
+	req:set_body(dkjson.encode(card_tokenization_create_request))
 
 	-- HTTP basic auth
 	req.readers:upsert("authorization", "Basic " .. basexx.to_base64(self.http_username .. " " .. self.http_password))
@@ -87,7 +87,7 @@ function card_tokenization_api:post_card_tokenization(post_card_tokenization_req
 		if result == nil then
 			return nil, err3
 		end
-		return payconductor_sdk_post_card_tokenization_200_response.cast(result), headers
+		return payconductor_sdk_card_tokenization_create_response.cast(result), headers
 	else
 		local body, err, errno2 = stream:get_body_as_string()
 		if not body then

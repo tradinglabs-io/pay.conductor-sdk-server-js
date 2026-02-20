@@ -144,14 +144,14 @@ OpenapiClient.configure do |config|
 end
 
 api_instance = OpenapiClient::CardTokenizationApi.new
-post_card_tokenization_request = OpenapiClient::PostCardTokenizationRequest.new({card: OpenapiClient::CompleteCardData.new({cvv: 'cvv_example', expiration: OpenapiClient::CompleteCardDataExpiration.new({month: 3.56, year: 3.56}), holder_name: 'holder_name_example', number: 'number_example'}), save_card: false, customer: OpenapiClient::PostCardTokenizationRequestCustomer.new({document_number: 'document_number_example', document_type: OpenapiClient::DocumentType::Cpf, email: 'email_example', name: 'name_example', id: 'id_example'})}) # PostCardTokenizationRequest | Data for creating a customer card
+card_tokenization_create_request = OpenapiClient::CardTokenizationCreateRequest.new({card: OpenapiClient::CardCreateRequest.new({cvv: 'cvv_example', expiration: OpenapiClient::CardExpirationData.new({month: 3.56, year: 3.56}), holder_name: 'holder_name_example', number: 'number_example'}), save_card: false, customer: OpenapiClient::CardTokenizationCustomerByIdData.new({id: 'id_example'})}) # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 begin
-  #Tokenize card
-  result = api_instance.post_card_tokenization(post_card_tokenization_request)
+  #Tokenize Card
+  result = api_instance.card_tokenize(card_tokenization_create_request)
   p result
 rescue OpenapiClient::ApiError => e
-  puts "Exception when calling CardTokenizationApi->post_card_tokenization: #{e}"
+  puts "Exception when calling CardTokenizationApi->card_tokenize: #{e}"
 end
 
 ```
@@ -162,71 +162,71 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OpenapiClient::CardTokenizationApi* | [**post_card_tokenization**](docs/CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
-*OpenapiClient::CustomersApi* | [**get_customers**](docs/CustomersApi.md#get_customers) | **GET** /customers/ | Get all customers
-*OpenapiClient::CustomersApi* | [**get_customers_by_id**](docs/CustomersApi.md#get_customers_by_id) | **GET** /customers/{id} | Get customer by ID
-*OpenapiClient::CustomersApi* | [**patch_customers_by_id**](docs/CustomersApi.md#patch_customers_by_id) | **PATCH** /customers/{id} | Update customer data
-*OpenapiClient::CustomersApi* | [**post_customers**](docs/CustomersApi.md#post_customers) | **POST** /customers/ | Create new customer
-*OpenapiClient::OrdersApi* | [**get_orders**](docs/OrdersApi.md#get_orders) | **GET** /orders/ | List orders
-*OpenapiClient::OrdersApi* | [**get_orders_by_id**](docs/OrdersApi.md#get_orders_by_id) | **GET** /orders/{id} | Get order by ID
-*OpenapiClient::OrdersApi* | [**post_orders**](docs/OrdersApi.md#post_orders) | **POST** /orders/ | Create order
-*OpenapiClient::OrdersApi* | [**post_orders_by_id_confirm**](docs/OrdersApi.md#post_orders_by_id_confirm) | **POST** /orders/{id}/confirm | Confirm order
-*OpenapiClient::OrdersApi* | [**post_orders_by_id_refund**](docs/OrdersApi.md#post_orders_by_id_refund) | **POST** /orders/{id}/refund | Refund order
-*OpenapiClient::TransfersApi* | [**get_withdraws**](docs/TransfersApi.md#get_withdraws) | **GET** /withdraws/ | List withdrawals
-*OpenapiClient::TransfersApi* | [**get_withdraws_by_id**](docs/TransfersApi.md#get_withdraws_by_id) | **GET** /withdraws/{id} | Get withdrawal by ID
-*OpenapiClient::TransfersApi* | [**post_withdraws**](docs/TransfersApi.md#post_withdraws) | **POST** /withdraws/ | Create withdrawal
+*OpenapiClient::CardTokenizationApi* | [**card_tokenize**](docs/CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card
+*OpenapiClient::CustomerApi* | [**customer_create**](docs/CustomerApi.md#customer_create) | **POST** /customers/ | Create New Customer
+*OpenapiClient::CustomerApi* | [**customer_list_custom**](docs/CustomerApi.md#customer_list_custom) | **GET** /customers/ | Get All Customers
+*OpenapiClient::CustomerApi* | [**customer_read**](docs/CustomerApi.md#customer_read) | **GET** /customers/{id} | Get Customer By ID
+*OpenapiClient::CustomerApi* | [**customer_update**](docs/CustomerApi.md#customer_update) | **PATCH** /customers/{id} | Update Customer Data
+*OpenapiClient::OrderApi* | [**order_confirm**](docs/OrderApi.md#order_confirm) | **POST** /orders/{id}/confirm | Confirm Order
+*OpenapiClient::OrderApi* | [**order_create**](docs/OrderApi.md#order_create) | **POST** /orders/ | Create Order
+*OpenapiClient::OrderApi* | [**order_list**](docs/OrderApi.md#order_list) | **GET** /orders/ | List Orders
+*OpenapiClient::OrderApi* | [**order_read**](docs/OrderApi.md#order_read) | **GET** /orders/{id} | Get Order By ID
+*OpenapiClient::OrderApi* | [**order_refund**](docs/OrderApi.md#order_refund) | **POST** /orders/{id}/refund | Refund Order
+*OpenapiClient::WithdrawApi* | [**withdraw_create**](docs/WithdrawApi.md#withdraw_create) | **POST** /withdraws/ | Create Withdrawal
+*OpenapiClient::WithdrawApi* | [**withdraw_list**](docs/WithdrawApi.md#withdraw_list) | **GET** /withdraws/ | List Withdrawals
+*OpenapiClient::WithdrawApi* | [**withdraw_read**](docs/WithdrawApi.md#withdraw_read) | **GET** /withdraws/{id} | Get Withdrawal By ID
 
 
 ## Documentation for Models
 
+ - [OpenapiClient::AddressCreateRequest](docs/AddressCreateRequest.md)
  - [OpenapiClient::AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
- - [OpenapiClient::BankSlip](docs/BankSlip.md)
- - [OpenapiClient::BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
- - [OpenapiClient::CompleteCardData](docs/CompleteCardData.md)
- - [OpenapiClient::CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
- - [OpenapiClient::CreditCard](docs/CreditCard.md)
- - [OpenapiClient::CreditCardCard](docs/CreditCardCard.md)
- - [OpenapiClient::CreditCardInstallments](docs/CreditCardInstallments.md)
- - [OpenapiClient::Customer](docs/Customer.md)
- - [OpenapiClient::Customer1](docs/Customer1.md)
- - [OpenapiClient::CustomerAddress](docs/CustomerAddress.md)
+ - [OpenapiClient::CardCreateRequest](docs/CardCreateRequest.md)
+ - [OpenapiClient::CardExpirationData](docs/CardExpirationData.md)
+ - [OpenapiClient::CardTokenizationCreateRequest](docs/CardTokenizationCreateRequest.md)
+ - [OpenapiClient::CardTokenizationCreateRequestCustomer](docs/CardTokenizationCreateRequestCustomer.md)
+ - [OpenapiClient::CardTokenizationCreateResponse](docs/CardTokenizationCreateResponse.md)
+ - [OpenapiClient::CardTokenizationCustomerByIdData](docs/CardTokenizationCustomerByIdData.md)
+ - [OpenapiClient::CustomerAddressResponse](docs/CustomerAddressResponse.md)
+ - [OpenapiClient::CustomerCreateRequest](docs/CustomerCreateRequest.md)
+ - [OpenapiClient::CustomerListPagination](docs/CustomerListPagination.md)
+ - [OpenapiClient::CustomerListResponse](docs/CustomerListResponse.md)
+ - [OpenapiClient::CustomerReadResponse](docs/CustomerReadResponse.md)
+ - [OpenapiClient::CustomerUpdateRequest](docs/CustomerUpdateRequest.md)
  - [OpenapiClient::DocumentType](docs/DocumentType.md)
- - [OpenapiClient::Draft](docs/Draft.md)
- - [OpenapiClient::DraftExpirationInSeconds](docs/DraftExpirationInSeconds.md)
  - [OpenapiClient::Event](docs/Event.md)
  - [OpenapiClient::MerchantInput](docs/MerchantInput.md)
- - [OpenapiClient::NuPay](docs/NuPay.md)
- - [OpenapiClient::NuPayNuPay](docs/NuPayNuPay.md)
+ - [OpenapiClient::OrderBankSlipInfo](docs/OrderBankSlipInfo.md)
+ - [OpenapiClient::OrderBankSlipPaymentRequest](docs/OrderBankSlipPaymentRequest.md)
+ - [OpenapiClient::OrderConfirmResponse](docs/OrderConfirmResponse.md)
+ - [OpenapiClient::OrderCreateRequest](docs/OrderCreateRequest.md)
+ - [OpenapiClient::OrderCreateRequestSession](docs/OrderCreateRequestSession.md)
+ - [OpenapiClient::OrderCreateResponse](docs/OrderCreateResponse.md)
+ - [OpenapiClient::OrderCreateResponseOrderItemsInner](docs/OrderCreateResponseOrderItemsInner.md)
+ - [OpenapiClient::OrderCreateResponseSession](docs/OrderCreateResponseSession.md)
+ - [OpenapiClient::OrderCreditCardInfo](docs/OrderCreditCardInfo.md)
+ - [OpenapiClient::OrderCreditCardPaymentRequest](docs/OrderCreditCardPaymentRequest.md)
+ - [OpenapiClient::OrderCreditCardPaymentRequestCard](docs/OrderCreditCardPaymentRequestCard.md)
+ - [OpenapiClient::OrderDraftPaymentRequest](docs/OrderDraftPaymentRequest.md)
+ - [OpenapiClient::OrderFraudFingerprints](docs/OrderFraudFingerprints.md)
+ - [OpenapiClient::OrderItemData](docs/OrderItemData.md)
+ - [OpenapiClient::OrderNuPayInfo](docs/OrderNuPayInfo.md)
+ - [OpenapiClient::OrderNuPayPaymentRequest](docs/OrderNuPayPaymentRequest.md)
+ - [OpenapiClient::OrderNuPayPaymentRequestNuPay](docs/OrderNuPayPaymentRequestNuPay.md)
+ - [OpenapiClient::OrderPIXInfo](docs/OrderPIXInfo.md)
+ - [OpenapiClient::OrderPIXPaymentRequest](docs/OrderPIXPaymentRequest.md)
+ - [OpenapiClient::OrderPaymentRequest](docs/OrderPaymentRequest.md)
+ - [OpenapiClient::OrderPicPayInfo](docs/OrderPicPayInfo.md)
+ - [OpenapiClient::OrderPicPayPaymentRequest](docs/OrderPicPayPaymentRequest.md)
+ - [OpenapiClient::OrderTokenizedCardData](docs/OrderTokenizedCardData.md)
  - [OpenapiClient::PaymentMethod](docs/PaymentMethod.md)
- - [OpenapiClient::PicPay](docs/PicPay.md)
- - [OpenapiClient::Pix](docs/Pix.md)
- - [OpenapiClient::PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
  - [OpenapiClient::PixType](docs/PixType.md)
- - [OpenapiClient::PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
- - [OpenapiClient::PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
- - [OpenapiClient::PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
- - [OpenapiClient::PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
- - [OpenapiClient::PostOrders200Response](docs/PostOrders200Response.md)
- - [OpenapiClient::PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
- - [OpenapiClient::PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
- - [OpenapiClient::PostOrders200ResponseNuPay](docs/PostOrders200ResponseNuPay.md)
- - [OpenapiClient::PostOrders200ResponseOrderItemsInner](docs/PostOrders200ResponseOrderItemsInner.md)
- - [OpenapiClient::PostOrders200ResponsePicPay](docs/PostOrders200ResponsePicPay.md)
- - [OpenapiClient::PostOrders200ResponsePix](docs/PostOrders200ResponsePix.md)
- - [OpenapiClient::PostOrders200ResponseSession](docs/PostOrders200ResponseSession.md)
- - [OpenapiClient::PostOrdersByIdConfirm200Response](docs/PostOrdersByIdConfirm200Response.md)
- - [OpenapiClient::PostOrdersRequest](docs/PostOrdersRequest.md)
- - [OpenapiClient::PostOrdersRequestFingerprints](docs/PostOrdersRequestFingerprints.md)
- - [OpenapiClient::PostOrdersRequestItemsInner](docs/PostOrdersRequestItemsInner.md)
- - [OpenapiClient::PostOrdersRequestPayment](docs/PostOrdersRequestPayment.md)
- - [OpenapiClient::PostOrdersRequestSession](docs/PostOrdersRequestSession.md)
- - [OpenapiClient::PostWithdraws200Response](docs/PostWithdraws200Response.md)
- - [OpenapiClient::PostWithdraws200ResponsePayedAt](docs/PostWithdraws200ResponsePayedAt.md)
- - [OpenapiClient::PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
- - [OpenapiClient::PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
- - [OpenapiClient::PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
  - [OpenapiClient::Status](docs/Status.md)
- - [OpenapiClient::TokenizedCard](docs/TokenizedCard.md)
+ - [OpenapiClient::WithdrawCreateRequest](docs/WithdrawCreateRequest.md)
+ - [OpenapiClient::WithdrawCreateResponse](docs/WithdrawCreateResponse.md)
+ - [OpenapiClient::WithdrawCreateResponsePayedAt](docs/WithdrawCreateResponsePayedAt.md)
+ - [OpenapiClient::WithdrawCreateResponsePayoutAccount](docs/WithdrawCreateResponsePayoutAccount.md)
+ - [OpenapiClient::WithdrawPayoutAccountData](docs/WithdrawPayoutAccountData.md)
 
 
 ## Documentation for Authorization

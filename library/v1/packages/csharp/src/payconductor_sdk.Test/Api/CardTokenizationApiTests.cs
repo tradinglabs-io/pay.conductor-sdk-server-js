@@ -51,15 +51,15 @@ namespace payconductor_sdk.Test.Api
         }
 
         /// <summary>
-        /// Test PostCardTokenization
+        /// Test CardTokenize
         /// </summary>
         [Fact (Skip = "not implemented")]
-        public async Task PostCardTokenizationAsyncTest()
+        public async Task CardTokenizeAsyncTest()
         {
-            PostCardTokenizationRequest postCardTokenizationRequest = default!;
-            var response = await _instance.PostCardTokenizationAsync(postCardTokenizationRequest);
+            CardTokenizationCreateRequest cardTokenizationCreateRequest = default!;
+            var response = await _instance.CardTokenizeAsync(cardTokenizationCreateRequest);
             var model = response.Ok();
-            Assert.IsType<PostCardTokenization200Response>(model);
+            Assert.IsType<CardTokenizationCreateResponse>(model);
         }
     }
 }

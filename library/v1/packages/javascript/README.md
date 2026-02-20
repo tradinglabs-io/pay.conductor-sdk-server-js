@@ -187,7 +187,7 @@ basicAuth.username = 'YOUR USERNAME'
 basicAuth.password = 'YOUR PASSWORD'
 
 var api = new PayconductorSdk.CardTokenizationApi()
-var postCardTokenizationRequest = new PayconductorSdk.PostCardTokenizationRequest(); // {PostCardTokenizationRequest} Data for creating a customer card
+var cardTokenizationCreateRequest = new PayconductorSdk.CardTokenizationCreateRequest(); // {CardTokenizationCreateRequest} Data for creating a customer card with customer information
 var callback = function(error, data, response) {
   if (error) {
     console.error(error);
@@ -195,7 +195,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.postCardTokenization(postCardTokenizationRequest, callback);
+api.cardTokenize(cardTokenizationCreateRequest, callback);
 
 ```
 
@@ -205,71 +205,71 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*PayconductorSdk.CardTokenizationApi* | [**postCardTokenization**](docs/CardTokenizationApi.md#postCardTokenization) | **POST** /card-tokenization/ | Tokenize card
-*PayconductorSdk.CustomersApi* | [**getCustomers**](docs/CustomersApi.md#getCustomers) | **GET** /customers/ | Get all customers
-*PayconductorSdk.CustomersApi* | [**getCustomersById**](docs/CustomersApi.md#getCustomersById) | **GET** /customers/{id} | Get customer by ID
-*PayconductorSdk.CustomersApi* | [**patchCustomersById**](docs/CustomersApi.md#patchCustomersById) | **PATCH** /customers/{id} | Update customer data
-*PayconductorSdk.CustomersApi* | [**postCustomers**](docs/CustomersApi.md#postCustomers) | **POST** /customers/ | Create new customer
-*PayconductorSdk.OrdersApi* | [**getOrders**](docs/OrdersApi.md#getOrders) | **GET** /orders/ | List orders
-*PayconductorSdk.OrdersApi* | [**getOrdersById**](docs/OrdersApi.md#getOrdersById) | **GET** /orders/{id} | Get order by ID
-*PayconductorSdk.OrdersApi* | [**postOrders**](docs/OrdersApi.md#postOrders) | **POST** /orders/ | Create order
-*PayconductorSdk.OrdersApi* | [**postOrdersByIdConfirm**](docs/OrdersApi.md#postOrdersByIdConfirm) | **POST** /orders/{id}/confirm | Confirm order
-*PayconductorSdk.OrdersApi* | [**postOrdersByIdRefund**](docs/OrdersApi.md#postOrdersByIdRefund) | **POST** /orders/{id}/refund | Refund order
-*PayconductorSdk.TransfersApi* | [**getWithdraws**](docs/TransfersApi.md#getWithdraws) | **GET** /withdraws/ | List withdrawals
-*PayconductorSdk.TransfersApi* | [**getWithdrawsById**](docs/TransfersApi.md#getWithdrawsById) | **GET** /withdraws/{id} | Get withdrawal by ID
-*PayconductorSdk.TransfersApi* | [**postWithdraws**](docs/TransfersApi.md#postWithdraws) | **POST** /withdraws/ | Create withdrawal
+*PayconductorSdk.CardTokenizationApi* | [**cardTokenize**](docs/CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card
+*PayconductorSdk.CustomerApi* | [**customerCreate**](docs/CustomerApi.md#customerCreate) | **POST** /customers/ | Create New Customer
+*PayconductorSdk.CustomerApi* | [**customerListCustom**](docs/CustomerApi.md#customerListCustom) | **GET** /customers/ | Get All Customers
+*PayconductorSdk.CustomerApi* | [**customerRead**](docs/CustomerApi.md#customerRead) | **GET** /customers/{id} | Get Customer By ID
+*PayconductorSdk.CustomerApi* | [**customerUpdate**](docs/CustomerApi.md#customerUpdate) | **PATCH** /customers/{id} | Update Customer Data
+*PayconductorSdk.OrderApi* | [**orderConfirm**](docs/OrderApi.md#orderConfirm) | **POST** /orders/{id}/confirm | Confirm Order
+*PayconductorSdk.OrderApi* | [**orderCreate**](docs/OrderApi.md#orderCreate) | **POST** /orders/ | Create Order
+*PayconductorSdk.OrderApi* | [**orderList**](docs/OrderApi.md#orderList) | **GET** /orders/ | List Orders
+*PayconductorSdk.OrderApi* | [**orderRead**](docs/OrderApi.md#orderRead) | **GET** /orders/{id} | Get Order By ID
+*PayconductorSdk.OrderApi* | [**orderRefund**](docs/OrderApi.md#orderRefund) | **POST** /orders/{id}/refund | Refund Order
+*PayconductorSdk.WithdrawApi* | [**withdrawCreate**](docs/WithdrawApi.md#withdrawCreate) | **POST** /withdraws/ | Create Withdrawal
+*PayconductorSdk.WithdrawApi* | [**withdrawList**](docs/WithdrawApi.md#withdrawList) | **GET** /withdraws/ | List Withdrawals
+*PayconductorSdk.WithdrawApi* | [**withdrawRead**](docs/WithdrawApi.md#withdrawRead) | **GET** /withdraws/{id} | Get Withdrawal By ID
 
 
 ## Documentation for Models
 
+ - [PayconductorSdk.AddressCreateRequest](docs/AddressCreateRequest.md)
  - [PayconductorSdk.AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
- - [PayconductorSdk.BankSlip](docs/BankSlip.md)
- - [PayconductorSdk.BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
- - [PayconductorSdk.CompleteCardData](docs/CompleteCardData.md)
- - [PayconductorSdk.CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
- - [PayconductorSdk.CreditCard](docs/CreditCard.md)
- - [PayconductorSdk.CreditCardCard](docs/CreditCardCard.md)
- - [PayconductorSdk.CreditCardInstallments](docs/CreditCardInstallments.md)
- - [PayconductorSdk.Customer](docs/Customer.md)
- - [PayconductorSdk.Customer1](docs/Customer1.md)
- - [PayconductorSdk.CustomerAddress](docs/CustomerAddress.md)
+ - [PayconductorSdk.CardCreateRequest](docs/CardCreateRequest.md)
+ - [PayconductorSdk.CardExpirationData](docs/CardExpirationData.md)
+ - [PayconductorSdk.CardTokenizationCreateRequest](docs/CardTokenizationCreateRequest.md)
+ - [PayconductorSdk.CardTokenizationCreateRequestCustomer](docs/CardTokenizationCreateRequestCustomer.md)
+ - [PayconductorSdk.CardTokenizationCreateResponse](docs/CardTokenizationCreateResponse.md)
+ - [PayconductorSdk.CardTokenizationCustomerByIdData](docs/CardTokenizationCustomerByIdData.md)
+ - [PayconductorSdk.CustomerAddressResponse](docs/CustomerAddressResponse.md)
+ - [PayconductorSdk.CustomerCreateRequest](docs/CustomerCreateRequest.md)
+ - [PayconductorSdk.CustomerListPagination](docs/CustomerListPagination.md)
+ - [PayconductorSdk.CustomerListResponse](docs/CustomerListResponse.md)
+ - [PayconductorSdk.CustomerReadResponse](docs/CustomerReadResponse.md)
+ - [PayconductorSdk.CustomerUpdateRequest](docs/CustomerUpdateRequest.md)
  - [PayconductorSdk.DocumentType](docs/DocumentType.md)
- - [PayconductorSdk.Draft](docs/Draft.md)
- - [PayconductorSdk.DraftExpirationInSeconds](docs/DraftExpirationInSeconds.md)
  - [PayconductorSdk.Event](docs/Event.md)
  - [PayconductorSdk.MerchantInput](docs/MerchantInput.md)
- - [PayconductorSdk.NuPay](docs/NuPay.md)
- - [PayconductorSdk.NuPayNuPay](docs/NuPayNuPay.md)
+ - [PayconductorSdk.OrderBankSlipInfo](docs/OrderBankSlipInfo.md)
+ - [PayconductorSdk.OrderBankSlipPaymentRequest](docs/OrderBankSlipPaymentRequest.md)
+ - [PayconductorSdk.OrderConfirmResponse](docs/OrderConfirmResponse.md)
+ - [PayconductorSdk.OrderCreateRequest](docs/OrderCreateRequest.md)
+ - [PayconductorSdk.OrderCreateRequestSession](docs/OrderCreateRequestSession.md)
+ - [PayconductorSdk.OrderCreateResponse](docs/OrderCreateResponse.md)
+ - [PayconductorSdk.OrderCreateResponseOrderItemsInner](docs/OrderCreateResponseOrderItemsInner.md)
+ - [PayconductorSdk.OrderCreateResponseSession](docs/OrderCreateResponseSession.md)
+ - [PayconductorSdk.OrderCreditCardInfo](docs/OrderCreditCardInfo.md)
+ - [PayconductorSdk.OrderCreditCardPaymentRequest](docs/OrderCreditCardPaymentRequest.md)
+ - [PayconductorSdk.OrderCreditCardPaymentRequestCard](docs/OrderCreditCardPaymentRequestCard.md)
+ - [PayconductorSdk.OrderDraftPaymentRequest](docs/OrderDraftPaymentRequest.md)
+ - [PayconductorSdk.OrderFraudFingerprints](docs/OrderFraudFingerprints.md)
+ - [PayconductorSdk.OrderItemData](docs/OrderItemData.md)
+ - [PayconductorSdk.OrderNuPayInfo](docs/OrderNuPayInfo.md)
+ - [PayconductorSdk.OrderNuPayPaymentRequest](docs/OrderNuPayPaymentRequest.md)
+ - [PayconductorSdk.OrderNuPayPaymentRequestNuPay](docs/OrderNuPayPaymentRequestNuPay.md)
+ - [PayconductorSdk.OrderPIXInfo](docs/OrderPIXInfo.md)
+ - [PayconductorSdk.OrderPIXPaymentRequest](docs/OrderPIXPaymentRequest.md)
+ - [PayconductorSdk.OrderPaymentRequest](docs/OrderPaymentRequest.md)
+ - [PayconductorSdk.OrderPicPayInfo](docs/OrderPicPayInfo.md)
+ - [PayconductorSdk.OrderPicPayPaymentRequest](docs/OrderPicPayPaymentRequest.md)
+ - [PayconductorSdk.OrderTokenizedCardData](docs/OrderTokenizedCardData.md)
  - [PayconductorSdk.PaymentMethod](docs/PaymentMethod.md)
- - [PayconductorSdk.PicPay](docs/PicPay.md)
- - [PayconductorSdk.Pix](docs/Pix.md)
- - [PayconductorSdk.PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
  - [PayconductorSdk.PixType](docs/PixType.md)
- - [PayconductorSdk.PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
- - [PayconductorSdk.PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
- - [PayconductorSdk.PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
- - [PayconductorSdk.PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
- - [PayconductorSdk.PostOrders200Response](docs/PostOrders200Response.md)
- - [PayconductorSdk.PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
- - [PayconductorSdk.PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
- - [PayconductorSdk.PostOrders200ResponseNuPay](docs/PostOrders200ResponseNuPay.md)
- - [PayconductorSdk.PostOrders200ResponseOrderItemsInner](docs/PostOrders200ResponseOrderItemsInner.md)
- - [PayconductorSdk.PostOrders200ResponsePicPay](docs/PostOrders200ResponsePicPay.md)
- - [PayconductorSdk.PostOrders200ResponsePix](docs/PostOrders200ResponsePix.md)
- - [PayconductorSdk.PostOrders200ResponseSession](docs/PostOrders200ResponseSession.md)
- - [PayconductorSdk.PostOrdersByIdConfirm200Response](docs/PostOrdersByIdConfirm200Response.md)
- - [PayconductorSdk.PostOrdersRequest](docs/PostOrdersRequest.md)
- - [PayconductorSdk.PostOrdersRequestFingerprints](docs/PostOrdersRequestFingerprints.md)
- - [PayconductorSdk.PostOrdersRequestItemsInner](docs/PostOrdersRequestItemsInner.md)
- - [PayconductorSdk.PostOrdersRequestPayment](docs/PostOrdersRequestPayment.md)
- - [PayconductorSdk.PostOrdersRequestSession](docs/PostOrdersRequestSession.md)
- - [PayconductorSdk.PostWithdraws200Response](docs/PostWithdraws200Response.md)
- - [PayconductorSdk.PostWithdraws200ResponsePayedAt](docs/PostWithdraws200ResponsePayedAt.md)
- - [PayconductorSdk.PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
- - [PayconductorSdk.PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
- - [PayconductorSdk.PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
  - [PayconductorSdk.Status](docs/Status.md)
- - [PayconductorSdk.TokenizedCard](docs/TokenizedCard.md)
+ - [PayconductorSdk.WithdrawCreateRequest](docs/WithdrawCreateRequest.md)
+ - [PayconductorSdk.WithdrawCreateResponse](docs/WithdrawCreateResponse.md)
+ - [PayconductorSdk.WithdrawCreateResponsePayedAt](docs/WithdrawCreateResponsePayedAt.md)
+ - [PayconductorSdk.WithdrawCreateResponsePayoutAccount](docs/WithdrawCreateResponsePayoutAccount.md)
+ - [PayconductorSdk.WithdrawPayoutAccountData](docs/WithdrawPayoutAccountData.md)
 
 
 ## Documentation for Authorization

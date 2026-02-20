@@ -14,8 +14,8 @@
 package org.openapitools.client.api;
 
 import org.openapitools.client.ApiException;
-import org.openapitools.client.model.PostCardTokenization200Response;
-import org.openapitools.client.model.PostCardTokenizationRequest;
+import org.openapitools.client.model.CardTokenizationCreateRequest;
+import org.openapitools.client.model.CardTokenizationCreateResponse;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -33,16 +33,16 @@ public class CardTokenizationApiTest {
     private final CardTokenizationApi api = new CardTokenizationApi();
 
     /**
-     * Tokenize card
+     * Tokenize Card
      *
      * Tokenize credit cards for future charges.
      *
      * @throws ApiException if the Api call fails
      */
     @Test
-    public void postCardTokenizationTest() throws ApiException {
-        PostCardTokenizationRequest postCardTokenizationRequest = null;
-        PostCardTokenization200Response response = api.postCardTokenization(postCardTokenizationRequest);
+    public void cardTokenizeTest() throws ApiException {
+        CardTokenizationCreateRequest cardTokenizationCreateRequest = null;
+        CardTokenizationCreateResponse response = api.cardTokenize(cardTokenizationCreateRequest);
         // TODO: test validations
     }
 

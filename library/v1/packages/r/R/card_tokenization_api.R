@@ -13,12 +13,12 @@
 #'
 #' @examples
 #' \dontrun{
-#' ####################  PostCardTokenization  ####################
+#' ####################  CardTokenize  ####################
 #'
 #' library(payconductor_sdk)
-#' var_post_card_tokenization_request <- postCard_tokenization_request$new(Complete_card_data$new("cvv_example", Complete_card_data_expiration$new(123, 123), "holderName_example", "number_example"), "saveCard_example", postCard_tokenization_request_customer$new("documentNumber_example", DocumentType$new(), "email_example", "name_example", "id_example", Customer_address$new("city_example", "country_example", "neighborhood_example", "number_example", "state_example", "street_example", "zipCode_example"), "phoneNumber_example")) # PostCardTokenizationRequest | Data for creating a customer card
+#' var_card_tokenization_create_request <- Card_Tokenization_Create_Request$new(Card_Create_Request$new("cvv_example", Card_Expiration_Data$new(123, 123), "holderName_example", "number_example"), "saveCard_example", Card_Tokenization_Create_Request_customer$new("documentNumber_example", DocumentType$new(), "email_example", "name_example", "id_example", Address_Create_Request$new("city_example", "country_example", "neighborhood_example", "number_example", "state_example", "street_example", "zipCode_example"), "phoneNumber_example")) # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 #'
-#' #Tokenize card
+#' #Tokenize Card
 #' api_instance <- CardTokenizationApi$new()
 #'
 #' # Configure HTTP basic authorization: basicAuth
@@ -26,8 +26,8 @@
 #' api_instance$api_client$password <- Sys.getenv("PASSWORD")
 #'
 #' # to save the result into a file, simply add the optional `data_file` parameter, e.g.
-#' # result <- api_instance$PostCardTokenization(var_post_card_tokenization_requestdata_file = "result.txt")
-#' result <- api_instance$PostCardTokenization(var_post_card_tokenization_request)
+#' # result <- api_instance$CardTokenize(var_card_tokenization_create_requestdata_file = "result.txt")
+#' result <- api_instance$CardTokenize(var_card_tokenization_create_request)
 #' dput(result)
 #'
 #'
@@ -53,16 +53,16 @@ CardTokenizationApi <- R6::R6Class(
     },
 
     #' @description
-    #' Tokenize card
+    #' Tokenize Card
     #'
-    #' @param post_card_tokenization_request Data for creating a customer card
+    #' @param card_tokenization_create_request Data for creating a customer card with customer information
     #' @param data_file (optional) name of the data file to save the result
     #' @param ... Other optional arguments
     #' @param .parse Logical. If \code{TRUE} then the response will be parsed to a generated type. If \code{FALSE} the response will be returned as unparsed text.
     #'
-    #' @return PostCardTokenization200Response
-    PostCardTokenization = function(post_card_tokenization_request, data_file = NULL, ..., .parse = TRUE) {
-      local_var_response <- self$PostCardTokenizationWithHttpInfo(post_card_tokenization_request, data_file = data_file, ..., .parse = .parse)
+    #' @return CardTokenizationCreateResponse
+    CardTokenize = function(card_tokenization_create_request, data_file = NULL, ..., .parse = TRUE) {
+      local_var_response <- self$CardTokenizeWithHttpInfo(card_tokenization_create_request, data_file = data_file, ..., .parse = .parse)
       if (local_var_response$status_code >= 200 && local_var_response$status_code <= 299) {
         return(local_var_response$content)
       } else if (local_var_response$status_code >= 300 && local_var_response$status_code <= 399) {
@@ -75,15 +75,15 @@ CardTokenizationApi <- R6::R6Class(
     },
 
     #' @description
-    #' Tokenize card
+    #' Tokenize Card
     #'
-    #' @param post_card_tokenization_request Data for creating a customer card
+    #' @param card_tokenization_create_request Data for creating a customer card with customer information
     #' @param data_file (optional) name of the data file to save the result
     #' @param ... Other optional arguments
     #' @param .parse Logical. If \code{TRUE} then the response will be parsed to a generated type. If \code{FALSE} the response will be returned as unparsed text.
     #'
-    #' @return API response (PostCardTokenization200Response) with additional information such as HTTP status code, headers
-    PostCardTokenizationWithHttpInfo = function(post_card_tokenization_request, data_file = NULL, ..., .parse = TRUE) {
+    #' @return API response (CardTokenizationCreateResponse) with additional information such as HTTP status code, headers
+    CardTokenizeWithHttpInfo = function(card_tokenization_create_request, data_file = NULL, ..., .parse = TRUE) {
       args <- list(...)
       query_params <- list()
       header_params <- c()
@@ -93,16 +93,16 @@ CardTokenizationApi <- R6::R6Class(
       oauth_scopes <- NULL
       is_oauth <- FALSE
 
-      if (missing(`post_card_tokenization_request`)) {
-        stop("Missing required parameter `post_card_tokenization_request`.")
+      if (missing(`card_tokenization_create_request`)) {
+        stop("Missing required parameter `card_tokenization_create_request`.")
       }
 
-      if (!missing(`post_card_tokenization_request`) && is.null(`post_card_tokenization_request`)) {
-        stop("Invalid value for `post_card_tokenization_request` when calling CardTokenizationApi$PostCardTokenization, `post_card_tokenization_request` is not nullable")
+      if (!missing(`card_tokenization_create_request`) && is.null(`card_tokenization_create_request`)) {
+        stop("Invalid value for `card_tokenization_create_request` when calling CardTokenizationApi$CardTokenize, `card_tokenization_create_request` is not nullable")
       }
 
-      if (!is.null(`post_card_tokenization_request`)) {
-        local_var_body <- `post_card_tokenization_request`$toJSONString()
+      if (!is.null(`card_tokenization_create_request`)) {
+        local_var_body <- `card_tokenization_create_request`$toJSONString()
       } else {
         local_var_body <- NULL
       }
@@ -143,7 +143,7 @@ CardTokenizationApi <- R6::R6Class(
         }
 
         deserialized_resp_obj <- tryCatch(
-          self$api_client$DeserializeResponse(local_var_resp, "PostCardTokenization200Response"),
+          self$api_client$DeserializeResponse(local_var_resp, "CardTokenizationCreateResponse"),
           error = function(e) {
             stop("Failed to deserialize response")
           }

@@ -48,10 +48,10 @@
   }
 
   describe('CardTokenizationApi', function() {
-    describe('postCardTokenization', function() {
-      it('should call postCardTokenization successfully', function(done) {
-        //uncomment below and update the code to test postCardTokenization
-        //instance.postCardTokenization(function(error) {
+    describe('cardTokenize', function() {
+      it('should call cardTokenize successfully', function(done) {
+        //uncomment below and update the code to test cardTokenize
+        //instance.cardTokenize(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

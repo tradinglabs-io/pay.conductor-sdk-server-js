@@ -8,8 +8,8 @@ import 'package:built_value/json_object.dart';
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 
-import 'package:openapi/src/model/post_card_tokenization200_response.dart';
-import 'package:openapi/src/model/post_card_tokenization_request.dart';
+import 'package:openapi/src/model/card_tokenization_create_request.dart';
+import 'package:openapi/src/model/card_tokenization_create_response.dart';
 
 class CardTokenizationApi {
 
@@ -19,11 +19,11 @@ class CardTokenizationApi {
 
   const CardTokenizationApi(this._dio, this._serializers);
 
-  /// Tokenize card
+  /// Tokenize Card
   /// Tokenize credit cards for future charges.
   ///
   /// Parameters:
-  /// * [postCardTokenizationRequest] - Data for creating a customer card
+  /// * [cardTokenizationCreateRequest] - Data for creating a customer card with customer information
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -31,10 +31,10 @@ class CardTokenizationApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [PostCardTokenization200Response] as data
+  /// Returns a [Future] containing a [Response] with a [CardTokenizationCreateResponse] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<PostCardTokenization200Response>> postCardTokenization({ 
-    required PostCardTokenizationRequest postCardTokenizationRequest,
+  Future<Response<CardTokenizationCreateResponse>> cardTokenize({ 
+    required CardTokenizationCreateRequest cardTokenizationCreateRequest,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -65,8 +65,8 @@ class CardTokenizationApi {
     dynamic _bodyData;
 
     try {
-      const _type = FullType(PostCardTokenizationRequest);
-      _bodyData = _serializers.serialize(postCardTokenizationRequest, specifiedType: _type);
+      const _type = FullType(CardTokenizationCreateRequest);
+      _bodyData = _serializers.serialize(cardTokenizationCreateRequest, specifiedType: _type);
 
     } catch(error, stackTrace) {
       throw DioException(
@@ -89,14 +89,14 @@ class CardTokenizationApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    PostCardTokenization200Response? _responseData;
+    CardTokenizationCreateResponse? _responseData;
 
     try {
       final rawResponse = _response.data;
       _responseData = rawResponse == null ? null : _serializers.deserialize(
         rawResponse,
-        specifiedType: const FullType(PostCardTokenization200Response),
-      ) as PostCardTokenization200Response;
+        specifiedType: const FullType(CardTokenizationCreateResponse),
+      ) as CardTokenizationCreateResponse;
 
     } catch (error, stackTrace) {
       throw DioException(
@@ -108,7 +108,7 @@ class CardTokenizationApi {
       );
     }
 
-    return Response<PostCardTokenization200Response>(
+    return Response<CardTokenizationCreateResponse>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

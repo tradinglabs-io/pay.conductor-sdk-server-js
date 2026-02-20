@@ -9,13 +9,13 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**post_card_tokenization**](CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
+[**card_tokenize**](CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
-# **post_card_tokenization**
-> PostCardTokenization200Response post_card_tokenization(post_card_tokenization_request => $post_card_tokenization_request)
+# **card_tokenize**
+> CardTokenizationCreateResponse card_tokenize(card_tokenization_create_request => $card_tokenization_create_request)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -31,14 +31,14 @@ my $api_instance = WWW::OpenAPIClient::CardTokenizationApi->new(
     
 );
 
-my $post_card_tokenization_request = WWW::OpenAPIClient::Object::PostCardTokenizationRequest->new(); # PostCardTokenizationRequest | Data for creating a customer card
+my $card_tokenization_create_request = WWW::OpenAPIClient::Object::CardTokenizationCreateRequest->new(); # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 eval {
-    my $result = $api_instance->post_card_tokenization(post_card_tokenization_request => $post_card_tokenization_request);
+    my $result = $api_instance->card_tokenize(card_tokenization_create_request => $card_tokenization_create_request);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling CardTokenizationApi->post_card_tokenization: $@\n";
+    warn "Exception when calling CardTokenizationApi->card_tokenize: $@\n";
 }
 ```
 
@@ -46,11 +46,11 @@ if ($@) {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_card_tokenization_request** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | 
+ **card_tokenization_create_request** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

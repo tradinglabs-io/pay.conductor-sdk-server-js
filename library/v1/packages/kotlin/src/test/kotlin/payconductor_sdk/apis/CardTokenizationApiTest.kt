@@ -19,19 +19,19 @@ import io.kotlintest.shouldBe
 import io.kotlintest.specs.ShouldSpec
 
 import payconductor_sdk.apis.CardTokenizationApi
-import payconductor_sdk.models.PostCardTokenization200Response
-import payconductor_sdk.models.PostCardTokenizationRequest
+import payconductor_sdk.models.CardTokenizationCreateRequest
+import payconductor_sdk.models.CardTokenizationCreateResponse
 
 class CardTokenizationApiTest : ShouldSpec() {
     init {
         // uncomment below to create an instance of CardTokenizationApi
         //val apiInstance = CardTokenizationApi()
 
-        // to test postCardTokenization
-        should("test postCardTokenization") {
-            // uncomment below to test postCardTokenization
-            //val postCardTokenizationRequest : PostCardTokenizationRequest =  // PostCardTokenizationRequest | Data for creating a customer card
-            //val result : PostCardTokenization200Response = apiInstance.postCardTokenization(postCardTokenizationRequest)
+        // to test cardTokenize
+        should("test cardTokenize") {
+            // uncomment below to test cardTokenize
+            //val cardTokenizationCreateRequest : CardTokenizationCreateRequest =  // CardTokenizationCreateRequest | Data for creating a customer card with customer information
+            //val result : CardTokenizationCreateResponse = apiInstance.cardTokenize(cardTokenizationCreateRequest)
             //result shouldBe ("TODO")
         }
 

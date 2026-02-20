@@ -4,14 +4,14 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**postCardTokenization**](CardTokenizationApi.md#postCardTokenization) | **POST** /card-tokenization/ | Tokenize card |
+| [**cardTokenize**](CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card |
 
 
-<a id="postCardTokenization"></a>
-# **postCardTokenization**
-> PostCardTokenization200Response postCardTokenization(postCardTokenizationRequest)
+<a id="cardTokenize"></a>
+# **cardTokenize**
+> CardTokenizationCreateResponse cardTokenize(cardTokenizationCreateRequest)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -22,15 +22,15 @@ Tokenize credit cards for future charges.
 //import payconductor_sdk.models.*
 
 val apiInstance = CardTokenizationApi()
-val postCardTokenizationRequest : PostCardTokenizationRequest =  // PostCardTokenizationRequest | Data for creating a customer card
+val cardTokenizationCreateRequest : CardTokenizationCreateRequest =  // CardTokenizationCreateRequest | Data for creating a customer card with customer information
 try {
-    val result : PostCardTokenization200Response = apiInstance.postCardTokenization(postCardTokenizationRequest)
+    val result : CardTokenizationCreateResponse = apiInstance.cardTokenize(cardTokenizationCreateRequest)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling CardTokenizationApi#postCardTokenization")
+    println("4xx response calling CardTokenizationApi#cardTokenize")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling CardTokenizationApi#postCardTokenization")
+    println("5xx response calling CardTokenizationApi#cardTokenize")
     e.printStackTrace()
 }
 ```
@@ -38,11 +38,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | |
+| **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | |
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

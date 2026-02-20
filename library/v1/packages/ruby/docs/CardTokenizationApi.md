@@ -4,14 +4,14 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 | Method | HTTP request | Description |
 | ------ | ------------ | ----------- |
-| [**post_card_tokenization**](CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card |
+| [**card_tokenize**](CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card |
 
 
-## post_card_tokenization
+## card_tokenize
 
-> <PostCardTokenization200Response> post_card_tokenization(post_card_tokenization_request)
+> <CardTokenizationCreateResponse> card_tokenize(card_tokenization_create_request)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -28,32 +28,32 @@ OpenapiClient.configure do |config|
 end
 
 api_instance = OpenapiClient::CardTokenizationApi.new
-post_card_tokenization_request = OpenapiClient::PostCardTokenizationRequest.new({card: OpenapiClient::CompleteCardData.new({cvv: 'cvv_example', expiration: OpenapiClient::CompleteCardDataExpiration.new({month: 3.56, year: 3.56}), holder_name: 'holder_name_example', number: 'number_example'}), save_card: false, customer: OpenapiClient::PostCardTokenizationRequestCustomer.new({document_number: 'document_number_example', document_type: OpenapiClient::DocumentType::Cpf, email: 'email_example', name: 'name_example', id: 'id_example'})}) # PostCardTokenizationRequest | Data for creating a customer card
+card_tokenization_create_request = OpenapiClient::CardTokenizationCreateRequest.new({card: OpenapiClient::CardCreateRequest.new({cvv: 'cvv_example', expiration: OpenapiClient::CardExpirationData.new({month: 3.56, year: 3.56}), holder_name: 'holder_name_example', number: 'number_example'}), save_card: false, customer: OpenapiClient::CardTokenizationCustomerByIdData.new({id: 'id_example'})}) # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 begin
-  # Tokenize card
-  result = api_instance.post_card_tokenization(post_card_tokenization_request)
+  # Tokenize Card
+  result = api_instance.card_tokenize(card_tokenization_create_request)
   p result
 rescue OpenapiClient::ApiError => e
-  puts "Error when calling CardTokenizationApi->post_card_tokenization: #{e}"
+  puts "Error when calling CardTokenizationApi->card_tokenize: #{e}"
 end
 ```
 
-#### Using the post_card_tokenization_with_http_info variant
+#### Using the card_tokenize_with_http_info variant
 
 This returns an Array which contains the response data, status code and headers.
 
-> <Array(<PostCardTokenization200Response>, Integer, Hash)> post_card_tokenization_with_http_info(post_card_tokenization_request)
+> <Array(<CardTokenizationCreateResponse>, Integer, Hash)> card_tokenize_with_http_info(card_tokenization_create_request)
 
 ```ruby
 begin
-  # Tokenize card
-  data, status_code, headers = api_instance.post_card_tokenization_with_http_info(post_card_tokenization_request)
+  # Tokenize Card
+  data, status_code, headers = api_instance.card_tokenize_with_http_info(card_tokenization_create_request)
   p status_code # => 2xx
   p headers # => { ... }
-  p data # => <PostCardTokenization200Response>
+  p data # => <CardTokenizationCreateResponse>
 rescue OpenapiClient::ApiError => e
-  puts "Error when calling CardTokenizationApi->post_card_tokenization_with_http_info: #{e}"
+  puts "Error when calling CardTokenizationApi->card_tokenize_with_http_info: #{e}"
 end
 ```
 
@@ -61,11 +61,11 @@ end
 
 | Name | Type | Description | Notes |
 | ---- | ---- | ----------- | ----- |
-| **post_card_tokenization_request** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md) | Data for creating a customer card |  |
+| **card_tokenization_create_request** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md) | Data for creating a customer card with customer information |  |
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

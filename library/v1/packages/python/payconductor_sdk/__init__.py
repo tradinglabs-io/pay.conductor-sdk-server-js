@@ -19,9 +19,9 @@ __version__ = "1.0.0"
 # Define package exports
 __all__ = [
     "CardTokenizationApi",
-    "CustomersApi",
-    "OrdersApi",
-    "TransfersApi",
+    "CustomerApi",
+    "OrderApi",
+    "WithdrawApi",
     "ApiResponse",
     "ApiClient",
     "Configuration",
@@ -31,61 +31,61 @@ __all__ = [
     "ApiKeyError",
     "ApiAttributeError",
     "ApiException",
+    "AddressCreateRequest",
     "AvailablePaymentMethods",
-    "BankSlip",
-    "BankSlipExpirationInDays",
-    "CompleteCardData",
-    "CompleteCardDataExpiration",
-    "CreditCard",
-    "CreditCardCard",
-    "CreditCardInstallments",
-    "Customer",
-    "Customer1",
-    "CustomerAddress",
+    "CardCreateRequest",
+    "CardExpirationData",
+    "CardTokenizationCreateRequest",
+    "CardTokenizationCreateRequestCustomer",
+    "CardTokenizationCreateResponse",
+    "CardTokenizationCustomerByIdData",
+    "CustomerAddressResponse",
+    "CustomerCreateRequest",
+    "CustomerListPagination",
+    "CustomerListResponse",
+    "CustomerReadResponse",
+    "CustomerUpdateRequest",
     "DocumentType",
-    "Draft",
-    "DraftExpirationInSeconds",
     "Event",
     "MerchantInput",
-    "NuPay",
-    "NuPayNuPay",
+    "OrderBankSlipInfo",
+    "OrderBankSlipPaymentRequest",
+    "OrderConfirmResponse",
+    "OrderCreateRequest",
+    "OrderCreateRequestSession",
+    "OrderCreateResponse",
+    "OrderCreateResponseOrderItemsInner",
+    "OrderCreateResponseSession",
+    "OrderCreditCardInfo",
+    "OrderCreditCardPaymentRequest",
+    "OrderCreditCardPaymentRequestCard",
+    "OrderDraftPaymentRequest",
+    "OrderFraudFingerprints",
+    "OrderItemData",
+    "OrderNuPayInfo",
+    "OrderNuPayPaymentRequest",
+    "OrderNuPayPaymentRequestNuPay",
+    "OrderPIXInfo",
+    "OrderPIXPaymentRequest",
+    "OrderPaymentRequest",
+    "OrderPicPayInfo",
+    "OrderPicPayPaymentRequest",
+    "OrderTokenizedCardData",
     "PaymentMethod",
-    "PicPay",
-    "Pix",
-    "PixExpirationInSeconds",
     "PixType",
-    "PostCardTokenization200Response",
-    "PostCardTokenizationRequest",
-    "PostCardTokenizationRequestCustomer",
-    "PostCardTokenizationRequestCustomerAnyOf",
-    "PostOrders200Response",
-    "PostOrders200ResponseBankSlip",
-    "PostOrders200ResponseCreditCard",
-    "PostOrders200ResponseNuPay",
-    "PostOrders200ResponseOrderItemsInner",
-    "PostOrders200ResponsePicPay",
-    "PostOrders200ResponsePix",
-    "PostOrders200ResponseSession",
-    "PostOrdersByIdConfirm200Response",
-    "PostOrdersRequest",
-    "PostOrdersRequestFingerprints",
-    "PostOrdersRequestItemsInner",
-    "PostOrdersRequestPayment",
-    "PostOrdersRequestSession",
-    "PostWithdraws200Response",
-    "PostWithdraws200ResponsePayedAt",
-    "PostWithdraws200ResponsePayoutAccount",
-    "PostWithdrawsRequest",
-    "PostWithdrawsRequestPayoutAccount",
     "Status",
-    "TokenizedCard",
+    "WithdrawCreateRequest",
+    "WithdrawCreateResponse",
+    "WithdrawCreateResponsePayedAt",
+    "WithdrawCreateResponsePayoutAccount",
+    "WithdrawPayoutAccountData",
 ]
 
 # import apis into sdk package
 from payconductor_sdk.api.card_tokenization_api import CardTokenizationApi as CardTokenizationApi
-from payconductor_sdk.api.customers_api import CustomersApi as CustomersApi
-from payconductor_sdk.api.orders_api import OrdersApi as OrdersApi
-from payconductor_sdk.api.transfers_api import TransfersApi as TransfersApi
+from payconductor_sdk.api.customer_api import CustomerApi as CustomerApi
+from payconductor_sdk.api.order_api import OrderApi as OrderApi
+from payconductor_sdk.api.withdraw_api import WithdrawApi as WithdrawApi
 
 # import ApiClient
 from payconductor_sdk.api_response import ApiResponse as ApiResponse
@@ -99,52 +99,52 @@ from payconductor_sdk.exceptions import ApiAttributeError as ApiAttributeError
 from payconductor_sdk.exceptions import ApiException as ApiException
 
 # import models into sdk package
+from payconductor_sdk.models.address_create_request import AddressCreateRequest as AddressCreateRequest
 from payconductor_sdk.models.available_payment_methods import AvailablePaymentMethods as AvailablePaymentMethods
-from payconductor_sdk.models.bank_slip import BankSlip as BankSlip
-from payconductor_sdk.models.bank_slip_expiration_in_days import BankSlipExpirationInDays as BankSlipExpirationInDays
-from payconductor_sdk.models.complete_card_data import CompleteCardData as CompleteCardData
-from payconductor_sdk.models.complete_card_data_expiration import CompleteCardDataExpiration as CompleteCardDataExpiration
-from payconductor_sdk.models.credit_card import CreditCard as CreditCard
-from payconductor_sdk.models.credit_card_card import CreditCardCard as CreditCardCard
-from payconductor_sdk.models.credit_card_installments import CreditCardInstallments as CreditCardInstallments
-from payconductor_sdk.models.customer import Customer as Customer
-from payconductor_sdk.models.customer1 import Customer1 as Customer1
-from payconductor_sdk.models.customer_address import CustomerAddress as CustomerAddress
+from payconductor_sdk.models.card_create_request import CardCreateRequest as CardCreateRequest
+from payconductor_sdk.models.card_expiration_data import CardExpirationData as CardExpirationData
+from payconductor_sdk.models.card_tokenization_create_request import CardTokenizationCreateRequest as CardTokenizationCreateRequest
+from payconductor_sdk.models.card_tokenization_create_request_customer import CardTokenizationCreateRequestCustomer as CardTokenizationCreateRequestCustomer
+from payconductor_sdk.models.card_tokenization_create_response import CardTokenizationCreateResponse as CardTokenizationCreateResponse
+from payconductor_sdk.models.card_tokenization_customer_by_id_data import CardTokenizationCustomerByIdData as CardTokenizationCustomerByIdData
+from payconductor_sdk.models.customer_address_response import CustomerAddressResponse as CustomerAddressResponse
+from payconductor_sdk.models.customer_create_request import CustomerCreateRequest as CustomerCreateRequest
+from payconductor_sdk.models.customer_list_pagination import CustomerListPagination as CustomerListPagination
+from payconductor_sdk.models.customer_list_response import CustomerListResponse as CustomerListResponse
+from payconductor_sdk.models.customer_read_response import CustomerReadResponse as CustomerReadResponse
+from payconductor_sdk.models.customer_update_request import CustomerUpdateRequest as CustomerUpdateRequest
 from payconductor_sdk.models.document_type import DocumentType as DocumentType
-from payconductor_sdk.models.draft import Draft as Draft
-from payconductor_sdk.models.draft_expiration_in_seconds import DraftExpirationInSeconds as DraftExpirationInSeconds
 from payconductor_sdk.models.event import Event as Event
 from payconductor_sdk.models.merchant_input import MerchantInput as MerchantInput
-from payconductor_sdk.models.nu_pay import NuPay as NuPay
-from payconductor_sdk.models.nu_pay_nu_pay import NuPayNuPay as NuPayNuPay
+from payconductor_sdk.models.order_bank_slip_info import OrderBankSlipInfo as OrderBankSlipInfo
+from payconductor_sdk.models.order_bank_slip_payment_request import OrderBankSlipPaymentRequest as OrderBankSlipPaymentRequest
+from payconductor_sdk.models.order_confirm_response import OrderConfirmResponse as OrderConfirmResponse
+from payconductor_sdk.models.order_create_request import OrderCreateRequest as OrderCreateRequest
+from payconductor_sdk.models.order_create_request_session import OrderCreateRequestSession as OrderCreateRequestSession
+from payconductor_sdk.models.order_create_response import OrderCreateResponse as OrderCreateResponse
+from payconductor_sdk.models.order_create_response_order_items_inner import OrderCreateResponseOrderItemsInner as OrderCreateResponseOrderItemsInner
+from payconductor_sdk.models.order_create_response_session import OrderCreateResponseSession as OrderCreateResponseSession
+from payconductor_sdk.models.order_credit_card_info import OrderCreditCardInfo as OrderCreditCardInfo
+from payconductor_sdk.models.order_credit_card_payment_request import OrderCreditCardPaymentRequest as OrderCreditCardPaymentRequest
+from payconductor_sdk.models.order_credit_card_payment_request_card import OrderCreditCardPaymentRequestCard as OrderCreditCardPaymentRequestCard
+from payconductor_sdk.models.order_draft_payment_request import OrderDraftPaymentRequest as OrderDraftPaymentRequest
+from payconductor_sdk.models.order_fraud_fingerprints import OrderFraudFingerprints as OrderFraudFingerprints
+from payconductor_sdk.models.order_item_data import OrderItemData as OrderItemData
+from payconductor_sdk.models.order_nu_pay_info import OrderNuPayInfo as OrderNuPayInfo
+from payconductor_sdk.models.order_nu_pay_payment_request import OrderNuPayPaymentRequest as OrderNuPayPaymentRequest
+from payconductor_sdk.models.order_nu_pay_payment_request_nu_pay import OrderNuPayPaymentRequestNuPay as OrderNuPayPaymentRequestNuPay
+from payconductor_sdk.models.order_pix_info import OrderPIXInfo as OrderPIXInfo
+from payconductor_sdk.models.order_pix_payment_request import OrderPIXPaymentRequest as OrderPIXPaymentRequest
+from payconductor_sdk.models.order_payment_request import OrderPaymentRequest as OrderPaymentRequest
+from payconductor_sdk.models.order_pic_pay_info import OrderPicPayInfo as OrderPicPayInfo
+from payconductor_sdk.models.order_pic_pay_payment_request import OrderPicPayPaymentRequest as OrderPicPayPaymentRequest
+from payconductor_sdk.models.order_tokenized_card_data import OrderTokenizedCardData as OrderTokenizedCardData
 from payconductor_sdk.models.payment_method import PaymentMethod as PaymentMethod
-from payconductor_sdk.models.pic_pay import PicPay as PicPay
-from payconductor_sdk.models.pix import Pix as Pix
-from payconductor_sdk.models.pix_expiration_in_seconds import PixExpirationInSeconds as PixExpirationInSeconds
 from payconductor_sdk.models.pix_type import PixType as PixType
-from payconductor_sdk.models.post_card_tokenization200_response import PostCardTokenization200Response as PostCardTokenization200Response
-from payconductor_sdk.models.post_card_tokenization_request import PostCardTokenizationRequest as PostCardTokenizationRequest
-from payconductor_sdk.models.post_card_tokenization_request_customer import PostCardTokenizationRequestCustomer as PostCardTokenizationRequestCustomer
-from payconductor_sdk.models.post_card_tokenization_request_customer_any_of import PostCardTokenizationRequestCustomerAnyOf as PostCardTokenizationRequestCustomerAnyOf
-from payconductor_sdk.models.post_orders200_response import PostOrders200Response as PostOrders200Response
-from payconductor_sdk.models.post_orders200_response_bank_slip import PostOrders200ResponseBankSlip as PostOrders200ResponseBankSlip
-from payconductor_sdk.models.post_orders200_response_credit_card import PostOrders200ResponseCreditCard as PostOrders200ResponseCreditCard
-from payconductor_sdk.models.post_orders200_response_nu_pay import PostOrders200ResponseNuPay as PostOrders200ResponseNuPay
-from payconductor_sdk.models.post_orders200_response_order_items_inner import PostOrders200ResponseOrderItemsInner as PostOrders200ResponseOrderItemsInner
-from payconductor_sdk.models.post_orders200_response_pic_pay import PostOrders200ResponsePicPay as PostOrders200ResponsePicPay
-from payconductor_sdk.models.post_orders200_response_pix import PostOrders200ResponsePix as PostOrders200ResponsePix
-from payconductor_sdk.models.post_orders200_response_session import PostOrders200ResponseSession as PostOrders200ResponseSession
-from payconductor_sdk.models.post_orders_by_id_confirm200_response import PostOrdersByIdConfirm200Response as PostOrdersByIdConfirm200Response
-from payconductor_sdk.models.post_orders_request import PostOrdersRequest as PostOrdersRequest
-from payconductor_sdk.models.post_orders_request_fingerprints import PostOrdersRequestFingerprints as PostOrdersRequestFingerprints
-from payconductor_sdk.models.post_orders_request_items_inner import PostOrdersRequestItemsInner as PostOrdersRequestItemsInner
-from payconductor_sdk.models.post_orders_request_payment import PostOrdersRequestPayment as PostOrdersRequestPayment
-from payconductor_sdk.models.post_orders_request_session import PostOrdersRequestSession as PostOrdersRequestSession
-from payconductor_sdk.models.post_withdraws200_response import PostWithdraws200Response as PostWithdraws200Response
-from payconductor_sdk.models.post_withdraws200_response_payed_at import PostWithdraws200ResponsePayedAt as PostWithdraws200ResponsePayedAt
-from payconductor_sdk.models.post_withdraws200_response_payout_account import PostWithdraws200ResponsePayoutAccount as PostWithdraws200ResponsePayoutAccount
-from payconductor_sdk.models.post_withdraws_request import PostWithdrawsRequest as PostWithdrawsRequest
-from payconductor_sdk.models.post_withdraws_request_payout_account import PostWithdrawsRequestPayoutAccount as PostWithdrawsRequestPayoutAccount
 from payconductor_sdk.models.status import Status as Status
-from payconductor_sdk.models.tokenized_card import TokenizedCard as TokenizedCard
+from payconductor_sdk.models.withdraw_create_request import WithdrawCreateRequest as WithdrawCreateRequest
+from payconductor_sdk.models.withdraw_create_response import WithdrawCreateResponse as WithdrawCreateResponse
+from payconductor_sdk.models.withdraw_create_response_payed_at import WithdrawCreateResponsePayedAt as WithdrawCreateResponsePayedAt
+from payconductor_sdk.models.withdraw_create_response_payout_account import WithdrawCreateResponsePayoutAccount as WithdrawCreateResponsePayoutAccount
+from payconductor_sdk.models.withdraw_payout_account_data import WithdrawPayoutAccountData as WithdrawPayoutAccountData
 

@@ -72,12 +72,12 @@ class CardTokenizationApiTest extends TestCase
     }
 
     /**
-     * Test case for postCardTokenization
+     * Test case for cardTokenize
      *
-     * Tokenize card.
+     * Tokenize Card.
      *
      */
-    public function testPostCardTokenization()
+    public function testCardTokenize()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

@@ -127,13 +127,13 @@ import 'package:openapi/openapi.dart';
 
 
 final api = Openapi().getCardTokenizationApi();
-final PostCardTokenizationRequest postCardTokenizationRequest = ; // PostCardTokenizationRequest | Data for creating a customer card
+final CardTokenizationCreateRequest cardTokenizationCreateRequest = ; // CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 try {
-    final response = await api.postCardTokenization(postCardTokenizationRequest);
+    final response = await api.cardTokenize(cardTokenizationCreateRequest);
     print(response);
 } on DioException catch (e) {
-    print("Exception when calling CardTokenizationApi->postCardTokenization: $e\n");
+    print("Exception when calling CardTokenizationApi->cardTokenize: $e\n");
 }
 
 ```
@@ -144,71 +144,71 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*CardTokenizationApi*](doc/CardTokenizationApi.md) | [**postCardTokenization**](doc/CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card
-[*CustomersApi*](doc/CustomersApi.md) | [**getCustomers**](doc/CustomersApi.md#getcustomers) | **GET** /customers/ | Get all customers
-[*CustomersApi*](doc/CustomersApi.md) | [**getCustomersById**](doc/CustomersApi.md#getcustomersbyid) | **GET** /customers/{id} | Get customer by ID
-[*CustomersApi*](doc/CustomersApi.md) | [**patchCustomersById**](doc/CustomersApi.md#patchcustomersbyid) | **PATCH** /customers/{id} | Update customer data
-[*CustomersApi*](doc/CustomersApi.md) | [**postCustomers**](doc/CustomersApi.md#postcustomers) | **POST** /customers/ | Create new customer
-[*OrdersApi*](doc/OrdersApi.md) | [**getOrders**](doc/OrdersApi.md#getorders) | **GET** /orders/ | List orders
-[*OrdersApi*](doc/OrdersApi.md) | [**getOrdersById**](doc/OrdersApi.md#getordersbyid) | **GET** /orders/{id} | Get order by ID
-[*OrdersApi*](doc/OrdersApi.md) | [**postOrders**](doc/OrdersApi.md#postorders) | **POST** /orders/ | Create order
-[*OrdersApi*](doc/OrdersApi.md) | [**postOrdersByIdConfirm**](doc/OrdersApi.md#postordersbyidconfirm) | **POST** /orders/{id}/confirm | Confirm order
-[*OrdersApi*](doc/OrdersApi.md) | [**postOrdersByIdRefund**](doc/OrdersApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Refund order
-[*TransfersApi*](doc/TransfersApi.md) | [**getWithdraws**](doc/TransfersApi.md#getwithdraws) | **GET** /withdraws/ | List withdrawals
-[*TransfersApi*](doc/TransfersApi.md) | [**getWithdrawsById**](doc/TransfersApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Get withdrawal by ID
-[*TransfersApi*](doc/TransfersApi.md) | [**postWithdraws**](doc/TransfersApi.md#postwithdraws) | **POST** /withdraws/ | Create withdrawal
+[*CardTokenizationApi*](doc/CardTokenizationApi.md) | [**cardTokenize**](doc/CardTokenizationApi.md#cardtokenize) | **POST** /card-tokenization/ | Tokenize Card
+[*CustomerApi*](doc/CustomerApi.md) | [**customerCreate**](doc/CustomerApi.md#customercreate) | **POST** /customers/ | Create New Customer
+[*CustomerApi*](doc/CustomerApi.md) | [**customerListCustom**](doc/CustomerApi.md#customerlistcustom) | **GET** /customers/ | Get All Customers
+[*CustomerApi*](doc/CustomerApi.md) | [**customerRead**](doc/CustomerApi.md#customerread) | **GET** /customers/{id} | Get Customer By ID
+[*CustomerApi*](doc/CustomerApi.md) | [**customerUpdate**](doc/CustomerApi.md#customerupdate) | **PATCH** /customers/{id} | Update Customer Data
+[*OrderApi*](doc/OrderApi.md) | [**orderConfirm**](doc/OrderApi.md#orderconfirm) | **POST** /orders/{id}/confirm | Confirm Order
+[*OrderApi*](doc/OrderApi.md) | [**orderCreate**](doc/OrderApi.md#ordercreate) | **POST** /orders/ | Create Order
+[*OrderApi*](doc/OrderApi.md) | [**orderList**](doc/OrderApi.md#orderlist) | **GET** /orders/ | List Orders
+[*OrderApi*](doc/OrderApi.md) | [**orderRead**](doc/OrderApi.md#orderread) | **GET** /orders/{id} | Get Order By ID
+[*OrderApi*](doc/OrderApi.md) | [**orderRefund**](doc/OrderApi.md#orderrefund) | **POST** /orders/{id}/refund | Refund Order
+[*WithdrawApi*](doc/WithdrawApi.md) | [**withdrawCreate**](doc/WithdrawApi.md#withdrawcreate) | **POST** /withdraws/ | Create Withdrawal
+[*WithdrawApi*](doc/WithdrawApi.md) | [**withdrawList**](doc/WithdrawApi.md#withdrawlist) | **GET** /withdraws/ | List Withdrawals
+[*WithdrawApi*](doc/WithdrawApi.md) | [**withdrawRead**](doc/WithdrawApi.md#withdrawread) | **GET** /withdraws/{id} | Get Withdrawal By ID
 
 
 ## Documentation For Models
 
+ - [AddressCreateRequest](doc/AddressCreateRequest.md)
  - [AvailablePaymentMethods](doc/AvailablePaymentMethods.md)
- - [BankSlip](doc/BankSlip.md)
- - [BankSlipExpirationInDays](doc/BankSlipExpirationInDays.md)
- - [CompleteCardData](doc/CompleteCardData.md)
- - [CompleteCardDataExpiration](doc/CompleteCardDataExpiration.md)
- - [CreditCard](doc/CreditCard.md)
- - [CreditCardCard](doc/CreditCardCard.md)
- - [CreditCardInstallments](doc/CreditCardInstallments.md)
- - [Customer](doc/Customer.md)
- - [Customer1](doc/Customer1.md)
- - [CustomerAddress](doc/CustomerAddress.md)
+ - [CardCreateRequest](doc/CardCreateRequest.md)
+ - [CardExpirationData](doc/CardExpirationData.md)
+ - [CardTokenizationCreateRequest](doc/CardTokenizationCreateRequest.md)
+ - [CardTokenizationCreateRequestCustomer](doc/CardTokenizationCreateRequestCustomer.md)
+ - [CardTokenizationCreateResponse](doc/CardTokenizationCreateResponse.md)
+ - [CardTokenizationCustomerByIdData](doc/CardTokenizationCustomerByIdData.md)
+ - [CustomerAddressResponse](doc/CustomerAddressResponse.md)
+ - [CustomerCreateRequest](doc/CustomerCreateRequest.md)
+ - [CustomerListPagination](doc/CustomerListPagination.md)
+ - [CustomerListResponse](doc/CustomerListResponse.md)
+ - [CustomerReadResponse](doc/CustomerReadResponse.md)
+ - [CustomerUpdateRequest](doc/CustomerUpdateRequest.md)
  - [DocumentType](doc/DocumentType.md)
- - [Draft](doc/Draft.md)
- - [DraftExpirationInSeconds](doc/DraftExpirationInSeconds.md)
  - [Event](doc/Event.md)
  - [MerchantInput](doc/MerchantInput.md)
- - [NuPay](doc/NuPay.md)
- - [NuPayNuPay](doc/NuPayNuPay.md)
+ - [OrderBankSlipInfo](doc/OrderBankSlipInfo.md)
+ - [OrderBankSlipPaymentRequest](doc/OrderBankSlipPaymentRequest.md)
+ - [OrderConfirmResponse](doc/OrderConfirmResponse.md)
+ - [OrderCreateRequest](doc/OrderCreateRequest.md)
+ - [OrderCreateRequestSession](doc/OrderCreateRequestSession.md)
+ - [OrderCreateResponse](doc/OrderCreateResponse.md)
+ - [OrderCreateResponseOrderItemsInner](doc/OrderCreateResponseOrderItemsInner.md)
+ - [OrderCreateResponseSession](doc/OrderCreateResponseSession.md)
+ - [OrderCreditCardInfo](doc/OrderCreditCardInfo.md)
+ - [OrderCreditCardPaymentRequest](doc/OrderCreditCardPaymentRequest.md)
+ - [OrderCreditCardPaymentRequestCard](doc/OrderCreditCardPaymentRequestCard.md)
+ - [OrderDraftPaymentRequest](doc/OrderDraftPaymentRequest.md)
+ - [OrderFraudFingerprints](doc/OrderFraudFingerprints.md)
+ - [OrderItemData](doc/OrderItemData.md)
+ - [OrderNuPayInfo](doc/OrderNuPayInfo.md)
+ - [OrderNuPayPaymentRequest](doc/OrderNuPayPaymentRequest.md)
+ - [OrderNuPayPaymentRequestNuPay](doc/OrderNuPayPaymentRequestNuPay.md)
+ - [OrderPIXInfo](doc/OrderPIXInfo.md)
+ - [OrderPIXPaymentRequest](doc/OrderPIXPaymentRequest.md)
+ - [OrderPaymentRequest](doc/OrderPaymentRequest.md)
+ - [OrderPicPayInfo](doc/OrderPicPayInfo.md)
+ - [OrderPicPayPaymentRequest](doc/OrderPicPayPaymentRequest.md)
+ - [OrderTokenizedCardData](doc/OrderTokenizedCardData.md)
  - [PaymentMethod](doc/PaymentMethod.md)
- - [PicPay](doc/PicPay.md)
- - [Pix](doc/Pix.md)
- - [PixExpirationInSeconds](doc/PixExpirationInSeconds.md)
  - [PixType](doc/PixType.md)
- - [PostCardTokenization200Response](doc/PostCardTokenization200Response.md)
- - [PostCardTokenizationRequest](doc/PostCardTokenizationRequest.md)
- - [PostCardTokenizationRequestCustomer](doc/PostCardTokenizationRequestCustomer.md)
- - [PostCardTokenizationRequestCustomerAnyOf](doc/PostCardTokenizationRequestCustomerAnyOf.md)
- - [PostOrders200Response](doc/PostOrders200Response.md)
- - [PostOrders200ResponseBankSlip](doc/PostOrders200ResponseBankSlip.md)
- - [PostOrders200ResponseCreditCard](doc/PostOrders200ResponseCreditCard.md)
- - [PostOrders200ResponseNuPay](doc/PostOrders200ResponseNuPay.md)
- - [PostOrders200ResponseOrderItemsInner](doc/PostOrders200ResponseOrderItemsInner.md)
- - [PostOrders200ResponsePicPay](doc/PostOrders200ResponsePicPay.md)
- - [PostOrders200ResponsePix](doc/PostOrders200ResponsePix.md)
- - [PostOrders200ResponseSession](doc/PostOrders200ResponseSession.md)
- - [PostOrdersByIdConfirm200Response](doc/PostOrdersByIdConfirm200Response.md)
- - [PostOrdersRequest](doc/PostOrdersRequest.md)
- - [PostOrdersRequestFingerprints](doc/PostOrdersRequestFingerprints.md)
- - [PostOrdersRequestItemsInner](doc/PostOrdersRequestItemsInner.md)
- - [PostOrdersRequestPayment](doc/PostOrdersRequestPayment.md)
- - [PostOrdersRequestSession](doc/PostOrdersRequestSession.md)
- - [PostWithdraws200Response](doc/PostWithdraws200Response.md)
- - [PostWithdraws200ResponsePayedAt](doc/PostWithdraws200ResponsePayedAt.md)
- - [PostWithdraws200ResponsePayoutAccount](doc/PostWithdraws200ResponsePayoutAccount.md)
- - [PostWithdrawsRequest](doc/PostWithdrawsRequest.md)
- - [PostWithdrawsRequestPayoutAccount](doc/PostWithdrawsRequestPayoutAccount.md)
  - [Status](doc/Status.md)
- - [TokenizedCard](doc/TokenizedCard.md)
+ - [WithdrawCreateRequest](doc/WithdrawCreateRequest.md)
+ - [WithdrawCreateResponse](doc/WithdrawCreateResponse.md)
+ - [WithdrawCreateResponsePayedAt](doc/WithdrawCreateResponsePayedAt.md)
+ - [WithdrawCreateResponsePayoutAccount](doc/WithdrawCreateResponsePayoutAccount.md)
+ - [WithdrawPayoutAccountData](doc/WithdrawPayoutAccountData.md)
 
 
 ## Documentation For Authorization

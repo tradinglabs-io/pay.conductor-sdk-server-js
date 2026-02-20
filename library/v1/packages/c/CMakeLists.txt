@@ -48,58 +48,58 @@ set(SRCS
     src/binary.c
     external/cJSON.c
     model/object.c
+    model/address_create_request.c
     model/available_payment_methods.c
-    model/bank_slip.c
-    model/bank_slip_expiration_in_days.c
-    model/complete_card_data.c
-    model/complete_card_data_expiration.c
-    model/credit_card.c
-    model/credit_card_card.c
-    model/credit_card_installments.c
-    model/customer.c
-    model/customer_1.c
-    model/customer_address.c
+    model/card_create_request.c
+    model/card_expiration_data.c
+    model/card_tokenization_create_request.c
+    model/card_tokenization_create_request_customer.c
+    model/card_tokenization_create_response.c
+    model/card_tokenization_customer_by_id_data.c
+    model/customer_address_response.c
+    model/customer_create_request.c
+    model/customer_list_pagination.c
+    model/customer_list_response.c
+    model/customer_read_response.c
+    model/customer_update_request.c
     model/document_type.c
-    model/draft.c
-    model/draft_expiration_in_seconds.c
     model/event.c
     model/merchant_input.c
-    model/nu_pay.c
-    model/nu_pay_nu_pay.c
+    model/order_bank_slip_info.c
+    model/order_bank_slip_payment_request.c
+    model/order_confirm_response.c
+    model/order_create_request.c
+    model/order_create_request_session.c
+    model/order_create_response.c
+    model/order_create_response_order_items_inner.c
+    model/order_create_response_session.c
+    model/order_credit_card_info.c
+    model/order_credit_card_payment_request.c
+    model/order_credit_card_payment_request_card.c
+    model/order_draft_payment_request.c
+    model/order_fraud_fingerprints.c
+    model/order_item_data.c
+    model/order_nu_pay_info.c
+    model/order_nu_pay_payment_request.c
+    model/order_nu_pay_payment_request_nu_pay.c
+    model/order_payment_request.c
+    model/order_pic_pay_info.c
+    model/order_pic_pay_payment_request.c
+    model/order_pix_info.c
+    model/order_pix_payment_request.c
+    model/order_tokenized_card_data.c
     model/payment_method.c
-    model/pic_pay.c
-    model/pix.c
-    model/pix_expiration_in_seconds.c
     model/pix_type.c
-    model/post_card_tokenization_200_response.c
-    model/post_card_tokenization_request.c
-    model/post_card_tokenization_request_customer.c
-    model/post_card_tokenization_request_customer_any_of.c
-    model/post_orders_200_response.c
-    model/post_orders_200_response_bank_slip.c
-    model/post_orders_200_response_credit_card.c
-    model/post_orders_200_response_nu_pay.c
-    model/post_orders_200_response_order_items_inner.c
-    model/post_orders_200_response_pic_pay.c
-    model/post_orders_200_response_pix.c
-    model/post_orders_200_response_session.c
-    model/post_orders_by_id_confirm_200_response.c
-    model/post_orders_request.c
-    model/post_orders_request_fingerprints.c
-    model/post_orders_request_items_inner.c
-    model/post_orders_request_payment.c
-    model/post_orders_request_session.c
-    model/post_withdraws_200_response.c
-    model/post_withdraws_200_response_payed_at.c
-    model/post_withdraws_200_response_payout_account.c
-    model/post_withdraws_request.c
-    model/post_withdraws_request_payout_account.c
     model/status.c
-    model/tokenized_card.c
+    model/withdraw_create_request.c
+    model/withdraw_create_response.c
+    model/withdraw_create_response_payed_at.c
+    model/withdraw_create_response_payout_account.c
+    model/withdraw_payout_account_data.c
     api/CardTokenizationAPI.c
-    api/CustomersAPI.c
-    api/OrdersAPI.c
-    api/TransfersAPI.c
+    api/CustomerAPI.c
+    api/OrderAPI.c
+    api/WithdrawAPI.c
 
 )
 
@@ -111,58 +111,58 @@ set(HDRS
     external/cJSON.h
     model/object.h
     model/any_type.h
+    model/address_create_request.h
     model/available_payment_methods.h
-    model/bank_slip.h
-    model/bank_slip_expiration_in_days.h
-    model/complete_card_data.h
-    model/complete_card_data_expiration.h
-    model/credit_card.h
-    model/credit_card_card.h
-    model/credit_card_installments.h
-    model/customer.h
-    model/customer_1.h
-    model/customer_address.h
+    model/card_create_request.h
+    model/card_expiration_data.h
+    model/card_tokenization_create_request.h
+    model/card_tokenization_create_request_customer.h
+    model/card_tokenization_create_response.h
+    model/card_tokenization_customer_by_id_data.h
+    model/customer_address_response.h
+    model/customer_create_request.h
+    model/customer_list_pagination.h
+    model/customer_list_response.h
+    model/customer_read_response.h
+    model/customer_update_request.h
     model/document_type.h
-    model/draft.h
-    model/draft_expiration_in_seconds.h
     model/event.h
     model/merchant_input.h
-    model/nu_pay.h
-    model/nu_pay_nu_pay.h
+    model/order_bank_slip_info.h
+    model/order_bank_slip_payment_request.h
+    model/order_confirm_response.h
+    model/order_create_request.h
+    model/order_create_request_session.h
+    model/order_create_response.h
+    model/order_create_response_order_items_inner.h
+    model/order_create_response_session.h
+    model/order_credit_card_info.h
+    model/order_credit_card_payment_request.h
+    model/order_credit_card_payment_request_card.h
+    model/order_draft_payment_request.h
+    model/order_fraud_fingerprints.h
+    model/order_item_data.h
+    model/order_nu_pay_info.h
+    model/order_nu_pay_payment_request.h
+    model/order_nu_pay_payment_request_nu_pay.h
+    model/order_payment_request.h
+    model/order_pic_pay_info.h
+    model/order_pic_pay_payment_request.h
+    model/order_pix_info.h
+    model/order_pix_payment_request.h
+    model/order_tokenized_card_data.h
     model/payment_method.h
-    model/pic_pay.h
-    model/pix.h
-    model/pix_expiration_in_seconds.h
     model/pix_type.h
-    model/post_card_tokenization_200_response.h
-    model/post_card_tokenization_request.h
-    model/post_card_tokenization_request_customer.h
-    model/post_card_tokenization_request_customer_any_of.h
-    model/post_orders_200_response.h
-    model/post_orders_200_response_bank_slip.h
-    model/post_orders_200_response_credit_card.h
-    model/post_orders_200_response_nu_pay.h
-    model/post_orders_200_response_order_items_inner.h
-    model/post_orders_200_response_pic_pay.h
-    model/post_orders_200_response_pix.h
-    model/post_orders_200_response_session.h
-    model/post_orders_by_id_confirm_200_response.h
-    model/post_orders_request.h
-    model/post_orders_request_fingerprints.h
-    model/post_orders_request_items_inner.h
-    model/post_orders_request_payment.h
-    model/post_orders_request_session.h
-    model/post_withdraws_200_response.h
-    model/post_withdraws_200_response_payed_at.h
-    model/post_withdraws_200_response_payout_account.h
-    model/post_withdraws_request.h
-    model/post_withdraws_request_payout_account.h
     model/status.h
-    model/tokenized_card.h
+    model/withdraw_create_request.h
+    model/withdraw_create_response.h
+    model/withdraw_create_response_payed_at.h
+    model/withdraw_create_response_payout_account.h
+    model/withdraw_payout_account_data.h
     api/CardTokenizationAPI.h
-    api/CustomersAPI.h
-    api/OrdersAPI.h
-    api/TransfersAPI.h
+    api/CustomerAPI.h
+    api/OrderAPI.h
+    api/WithdrawAPI.h
 
 )
 
@@ -249,9 +249,9 @@ set(HDRS "")
 ## set source files
 #set(SRCS
 #    unit-tests/manual-CardTokenizationAPI.c
-#    unit-tests/manual-CustomersAPI.c
-#    unit-tests/manual-OrdersAPI.c
-#    unit-tests/manual-TransfersAPI.c
+#    unit-tests/manual-CustomerAPI.c
+#    unit-tests/manual-OrderAPI.c
+#    unit-tests/manual-WithdrawAPI.c
 #)
 
 ##set header files

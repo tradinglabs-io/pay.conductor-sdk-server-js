@@ -26,10 +26,10 @@ class TestCardTokenizationApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_post_card_tokenization(self) -> None:
-        """Test case for post_card_tokenization
+    def test_card_tokenize(self) -> None:
+        """Test case for card_tokenize
 
-        Tokenize card
+        Tokenize Card
         """
         pass
 

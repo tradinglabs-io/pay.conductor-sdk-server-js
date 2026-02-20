@@ -9,12 +9,12 @@
 #define MAX_NUMBER_LENGTH_LONG 21
 
 
-// Tokenize card
+// Tokenize Card
 //
 // Tokenize credit cards for future charges.
 //
-post_card_tokenization_200_response_t*
-CardTokenizationAPI_postCardTokenization(apiClient_t *apiClient, post_card_tokenization_request_t *post_card_tokenization_request)
+card_tokenization_create_response_t*
+CardTokenizationAPI_cardTokenize(apiClient_t *apiClient, card_tokenization_create_request_t *card_tokenization_create_request)
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -35,12 +35,12 @@ CardTokenizationAPI_postCardTokenization(apiClient_t *apiClient, post_card_token
 
 
     // Body Param
-    cJSON *localVarSingleItemJSON_post_card_tokenization_request = NULL;
-    if (post_card_tokenization_request != NULL)
+    cJSON *localVarSingleItemJSON_card_tokenization_create_request = NULL;
+    if (card_tokenization_create_request != NULL)
     {
         //not string, not binary
-        localVarSingleItemJSON_post_card_tokenization_request = post_card_tokenization_request_convertToJSON(post_card_tokenization_request);
-        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_post_card_tokenization_request);
+        localVarSingleItemJSON_card_tokenization_create_request = card_tokenization_create_request_convertToJSON(card_tokenization_create_request);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_card_tokenization_create_request);
         localVarBodyLength = strlen(localVarBodyParameters);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -58,13 +58,13 @@ CardTokenizationAPI_postCardTokenization(apiClient_t *apiClient, post_card_token
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Response for status 200");
+    //    printf("%s\n","Response containing customer ID and card token");
     //}
     //nonprimitive not container
-    post_card_tokenization_200_response_t *elementToReturn = NULL;
+    card_tokenization_create_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *CardTokenizationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = post_card_tokenization_200_response_parseFromJSON(CardTokenizationAPIlocalVarJSON);
+        elementToReturn = card_tokenization_create_response_parseFromJSON(CardTokenizationAPIlocalVarJSON);
         cJSON_Delete(CardTokenizationAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -83,9 +83,9 @@ CardTokenizationAPI_postCardTokenization(apiClient_t *apiClient, post_card_token
     list_freeList(localVarHeaderType);
     list_freeList(localVarContentType);
     free(localVarPath);
-    if (localVarSingleItemJSON_post_card_tokenization_request) {
-        cJSON_Delete(localVarSingleItemJSON_post_card_tokenization_request);
-        localVarSingleItemJSON_post_card_tokenization_request = NULL;
+    if (localVarSingleItemJSON_card_tokenization_create_request) {
+        cJSON_Delete(localVarSingleItemJSON_card_tokenization_create_request);
+        localVarSingleItemJSON_card_tokenization_create_request = NULL;
     }
     free(localVarBodyParameters);
     return elementToReturn;

@@ -15,18 +15,18 @@ use crate::{apis::ResponseContent, models};
 use super::{Error, configuration, ContentType};
 
 
-/// struct for typed errors of method [`post_card_tokenization`]
+/// struct for typed errors of method [`card_tokenize`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum PostCardTokenizationError {
+pub enum CardTokenizeError {
     UnknownValue(serde_json::Value),
 }
 
 
 /// Tokenize credit cards for future charges.
-pub async fn post_card_tokenization(configuration: &configuration::Configuration, post_card_tokenization_request: models::PostCardTokenizationRequest) -> Result<models::PostCardTokenization200Response, Error<PostCardTokenizationError>> {
+pub async fn card_tokenize(configuration: &configuration::Configuration, card_tokenization_create_request: models::CardTokenizationCreateRequest) -> Result<models::CardTokenizationCreateResponse, Error<CardTokenizeError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_body_post_card_tokenization_request = post_card_tokenization_request;
+    let p_body_card_tokenization_create_request = card_tokenization_create_request;
 
     let uri_str = format!("{}/card-tokenization/", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -37,7 +37,7 @@ pub async fn post_card_tokenization(configuration: &configuration::Configuration
     if let Some(ref auth_conf) = configuration.basic_auth {
         req_builder = req_builder.basic_auth(auth_conf.0.to_owned(), auth_conf.1.to_owned());
     };
-    req_builder = req_builder.json(&p_body_post_card_tokenization_request);
+    req_builder = req_builder.json(&p_body_card_tokenization_create_request);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -54,12 +54,12 @@ pub async fn post_card_tokenization(configuration: &configuration::Configuration
         let content = resp.text().await?;
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::PostCardTokenization200Response`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::PostCardTokenization200Response`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::CardTokenizationCreateResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::CardTokenizationCreateResponse`")))),
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<PostCardTokenizationError> = serde_json::from_str(&content).ok();
+        let entity: Option<CardTokenizeError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

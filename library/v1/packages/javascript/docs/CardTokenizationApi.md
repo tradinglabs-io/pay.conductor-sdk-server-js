@@ -4,15 +4,15 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**postCardTokenization**](CardTokenizationApi.md#postCardTokenization) | **POST** /card-tokenization/ | Tokenize card
+[**cardTokenize**](CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
 
-## postCardTokenization
+## cardTokenize
 
-> PostCardTokenization200Response postCardTokenization(postCardTokenizationRequest)
+> CardTokenizationCreateResponse cardTokenize(cardTokenizationCreateRequest)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -27,8 +27,8 @@ basicAuth.username = 'YOUR USERNAME';
 basicAuth.password = 'YOUR PASSWORD';
 
 let apiInstance = new PayconductorSdk.CardTokenizationApi();
-let postCardTokenizationRequest = new PayconductorSdk.PostCardTokenizationRequest(); // PostCardTokenizationRequest | Data for creating a customer card
-apiInstance.postCardTokenization(postCardTokenizationRequest, (error, data, response) => {
+let cardTokenizationCreateRequest = new PayconductorSdk.CardTokenizationCreateRequest(); // CardTokenizationCreateRequest | Data for creating a customer card with customer information
+apiInstance.cardTokenize(cardTokenizationCreateRequest, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -42,11 +42,11 @@ apiInstance.postCardTokenization(postCardTokenizationRequest, (error, data, resp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | 
+ **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

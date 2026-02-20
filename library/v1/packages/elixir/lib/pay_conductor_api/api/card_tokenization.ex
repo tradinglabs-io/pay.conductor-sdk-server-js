@@ -10,33 +10,33 @@ defmodule PayConductorAPI.Api.CardTokenization do
   import PayConductorAPI.RequestBuilder
 
   @doc """
-  Tokenize card
+  Tokenize Card
   Tokenize credit cards for future charges.
 
   ### Parameters
 
   - `connection` (PayConductorAPI.Connection): Connection to server
-  - `post_card_tokenization_request` (PostCardTokenizationRequest): Data for creating a customer card
+  - `card_tokenization_create_request` (CardTokenizationCreateRequest): Data for creating a customer card with customer information
   - `opts` (keyword): Optional parameters
 
   ### Returns
 
-  - `{:ok, PayConductorAPI.Model.PostCardTokenization200Response.t}` on success
+  - `{:ok, PayConductorAPI.Model.CardTokenizationCreateResponse.t}` on success
   - `{:error, Tesla.Env.t}` on failure
   """
-  @spec post_card_tokenization(Tesla.Env.client, PayConductorAPI.Model.PostCardTokenizationRequest.t, keyword()) :: {:ok, PayConductorAPI.Model.PostCardTokenization200Response.t} | {:error, Tesla.Env.t}
-  def post_card_tokenization(connection, post_card_tokenization_request, _opts \\ []) do
+  @spec card_tokenize(Tesla.Env.client, PayConductorAPI.Model.CardTokenizationCreateRequest.t, keyword()) :: {:ok, PayConductorAPI.Model.CardTokenizationCreateResponse.t} | {:error, Tesla.Env.t}
+  def card_tokenize(connection, card_tokenization_create_request, _opts \\ []) do
     request =
       %{}
       |> method(:post)
       |> url("/card-tokenization/")
-      |> add_param(:body, :body, post_card_tokenization_request)
+      |> add_param(:body, :body, card_tokenization_create_request)
       |> Enum.into([])
 
     connection
     |> Connection.request(request)
     |> evaluate_response([
-      {200, PayConductorAPI.Model.PostCardTokenization200Response}
+      {200, PayConductorAPI.Model.CardTokenizationCreateResponse}
     ])
   end
 end

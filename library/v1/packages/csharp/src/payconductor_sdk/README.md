@@ -11,7 +11,7 @@ outputDir: out
 
 # https://openapi-generator.tech/docs/generators/csharp
 additionalProperties:
-  packageGuid: '{E0B9F078-99D9-41E0-B62F-A84775E533DE}'
+  packageGuid: '{DFF56032-BB34-4997-9630-3B441F9B3CF2}'
 
 # https://openapi-generator.tech/docs/integrations/#github-integration
 # gitHost:
@@ -55,8 +55,8 @@ namespace YourProject
         {
             var host = CreateHostBuilder(args).Build();
             var api = host.Services.GetRequiredService<ICardTokenizationApi>();
-            IPostCardTokenizationApiResponse apiResponse = await api.PostCardTokenizationAsync("todo");
-            PostCardTokenization200Response? model = apiResponse.Ok();
+            ICardTokenizeApiResponse apiResponse = await api.CardTokenizeAsync("todo");
+            CardTokenizationCreateResponse? model = apiResponse.Ok();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)

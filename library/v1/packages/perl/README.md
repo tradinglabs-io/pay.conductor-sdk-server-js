@@ -311,62 +311,62 @@ cpanm --quiet --no-interactive Class::Accessor Test::Exception Test::More Log::A
 To load the API packages:
 ```perl
 use WWW::OpenAPIClient::CardTokenizationApi;
-use WWW::OpenAPIClient::CustomersApi;
-use WWW::OpenAPIClient::OrdersApi;
-use WWW::OpenAPIClient::TransfersApi;
+use WWW::OpenAPIClient::CustomerApi;
+use WWW::OpenAPIClient::OrderApi;
+use WWW::OpenAPIClient::WithdrawApi;
 
 ```
 
 To load the models:
 ```perl
+use WWW::OpenAPIClient::Object::AddressCreateRequest;
 use WWW::OpenAPIClient::Object::AvailablePaymentMethods;
-use WWW::OpenAPIClient::Object::BankSlip;
-use WWW::OpenAPIClient::Object::BankSlipExpirationInDays;
-use WWW::OpenAPIClient::Object::CompleteCardData;
-use WWW::OpenAPIClient::Object::CompleteCardDataExpiration;
-use WWW::OpenAPIClient::Object::CreditCard;
-use WWW::OpenAPIClient::Object::CreditCardCard;
-use WWW::OpenAPIClient::Object::CreditCardInstallments;
-use WWW::OpenAPIClient::Object::Customer;
-use WWW::OpenAPIClient::Object::Customer1;
-use WWW::OpenAPIClient::Object::CustomerAddress;
+use WWW::OpenAPIClient::Object::CardCreateRequest;
+use WWW::OpenAPIClient::Object::CardExpirationData;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateRequest;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateRequestCustomer;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateResponse;
+use WWW::OpenAPIClient::Object::CardTokenizationCustomerByIdData;
+use WWW::OpenAPIClient::Object::CustomerAddressResponse;
+use WWW::OpenAPIClient::Object::CustomerCreateRequest;
+use WWW::OpenAPIClient::Object::CustomerListPagination;
+use WWW::OpenAPIClient::Object::CustomerListResponse;
+use WWW::OpenAPIClient::Object::CustomerReadResponse;
+use WWW::OpenAPIClient::Object::CustomerUpdateRequest;
 use WWW::OpenAPIClient::Object::DocumentType;
-use WWW::OpenAPIClient::Object::Draft;
-use WWW::OpenAPIClient::Object::DraftExpirationInSeconds;
 use WWW::OpenAPIClient::Object::Event;
 use WWW::OpenAPIClient::Object::MerchantInput;
-use WWW::OpenAPIClient::Object::NuPay;
-use WWW::OpenAPIClient::Object::NuPayNuPay;
+use WWW::OpenAPIClient::Object::OrderBankSlipInfo;
+use WWW::OpenAPIClient::Object::OrderBankSlipPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderConfirmResponse;
+use WWW::OpenAPIClient::Object::OrderCreateRequest;
+use WWW::OpenAPIClient::Object::OrderCreateRequestSession;
+use WWW::OpenAPIClient::Object::OrderCreateResponse;
+use WWW::OpenAPIClient::Object::OrderCreateResponseOrderItemsInner;
+use WWW::OpenAPIClient::Object::OrderCreateResponseSession;
+use WWW::OpenAPIClient::Object::OrderCreditCardInfo;
+use WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequestCard;
+use WWW::OpenAPIClient::Object::OrderDraftPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderFraudFingerprints;
+use WWW::OpenAPIClient::Object::OrderItemData;
+use WWW::OpenAPIClient::Object::OrderNuPayInfo;
+use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequestNuPay;
+use WWW::OpenAPIClient::Object::OrderPIXInfo;
+use WWW::OpenAPIClient::Object::OrderPIXPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderPicPayInfo;
+use WWW::OpenAPIClient::Object::OrderPicPayPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderTokenizedCardData;
 use WWW::OpenAPIClient::Object::PaymentMethod;
-use WWW::OpenAPIClient::Object::PicPay;
-use WWW::OpenAPIClient::Object::Pix;
-use WWW::OpenAPIClient::Object::PixExpirationInSeconds;
 use WWW::OpenAPIClient::Object::PixType;
-use WWW::OpenAPIClient::Object::PostCardTokenization200Response;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequest;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf;
-use WWW::OpenAPIClient::Object::PostOrders200Response;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseNuPay;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseOrderItemsInner;
-use WWW::OpenAPIClient::Object::PostOrders200ResponsePicPay;
-use WWW::OpenAPIClient::Object::PostOrders200ResponsePix;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseSession;
-use WWW::OpenAPIClient::Object::PostOrdersByIdConfirm200Response;
-use WWW::OpenAPIClient::Object::PostOrdersRequest;
-use WWW::OpenAPIClient::Object::PostOrdersRequestFingerprints;
-use WWW::OpenAPIClient::Object::PostOrdersRequestItemsInner;
-use WWW::OpenAPIClient::Object::PostOrdersRequestPayment;
-use WWW::OpenAPIClient::Object::PostOrdersRequestSession;
-use WWW::OpenAPIClient::Object::PostWithdraws200Response;
-use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayedAt;
-use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount;
-use WWW::OpenAPIClient::Object::PostWithdrawsRequest;
-use WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount;
 use WWW::OpenAPIClient::Object::Status;
-use WWW::OpenAPIClient::Object::TokenizedCard;
+use WWW::OpenAPIClient::Object::WithdrawCreateRequest;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponse;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponsePayedAt;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponsePayoutAccount;
+use WWW::OpenAPIClient::Object::WithdrawPayoutAccountData;
 
 ````
 
@@ -379,59 +379,59 @@ use strict;
 use warnings;
 # load the API package
 use WWW::OpenAPIClient::CardTokenizationApi;
-use WWW::OpenAPIClient::CustomersApi;
-use WWW::OpenAPIClient::OrdersApi;
-use WWW::OpenAPIClient::TransfersApi;
+use WWW::OpenAPIClient::CustomerApi;
+use WWW::OpenAPIClient::OrderApi;
+use WWW::OpenAPIClient::WithdrawApi;
 
 # load the models
+use WWW::OpenAPIClient::Object::AddressCreateRequest;
 use WWW::OpenAPIClient::Object::AvailablePaymentMethods;
-use WWW::OpenAPIClient::Object::BankSlip;
-use WWW::OpenAPIClient::Object::BankSlipExpirationInDays;
-use WWW::OpenAPIClient::Object::CompleteCardData;
-use WWW::OpenAPIClient::Object::CompleteCardDataExpiration;
-use WWW::OpenAPIClient::Object::CreditCard;
-use WWW::OpenAPIClient::Object::CreditCardCard;
-use WWW::OpenAPIClient::Object::CreditCardInstallments;
-use WWW::OpenAPIClient::Object::Customer;
-use WWW::OpenAPIClient::Object::Customer1;
-use WWW::OpenAPIClient::Object::CustomerAddress;
+use WWW::OpenAPIClient::Object::CardCreateRequest;
+use WWW::OpenAPIClient::Object::CardExpirationData;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateRequest;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateRequestCustomer;
+use WWW::OpenAPIClient::Object::CardTokenizationCreateResponse;
+use WWW::OpenAPIClient::Object::CardTokenizationCustomerByIdData;
+use WWW::OpenAPIClient::Object::CustomerAddressResponse;
+use WWW::OpenAPIClient::Object::CustomerCreateRequest;
+use WWW::OpenAPIClient::Object::CustomerListPagination;
+use WWW::OpenAPIClient::Object::CustomerListResponse;
+use WWW::OpenAPIClient::Object::CustomerReadResponse;
+use WWW::OpenAPIClient::Object::CustomerUpdateRequest;
 use WWW::OpenAPIClient::Object::DocumentType;
-use WWW::OpenAPIClient::Object::Draft;
-use WWW::OpenAPIClient::Object::DraftExpirationInSeconds;
 use WWW::OpenAPIClient::Object::Event;
 use WWW::OpenAPIClient::Object::MerchantInput;
-use WWW::OpenAPIClient::Object::NuPay;
-use WWW::OpenAPIClient::Object::NuPayNuPay;
+use WWW::OpenAPIClient::Object::OrderBankSlipInfo;
+use WWW::OpenAPIClient::Object::OrderBankSlipPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderConfirmResponse;
+use WWW::OpenAPIClient::Object::OrderCreateRequest;
+use WWW::OpenAPIClient::Object::OrderCreateRequestSession;
+use WWW::OpenAPIClient::Object::OrderCreateResponse;
+use WWW::OpenAPIClient::Object::OrderCreateResponseOrderItemsInner;
+use WWW::OpenAPIClient::Object::OrderCreateResponseSession;
+use WWW::OpenAPIClient::Object::OrderCreditCardInfo;
+use WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequestCard;
+use WWW::OpenAPIClient::Object::OrderDraftPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderFraudFingerprints;
+use WWW::OpenAPIClient::Object::OrderItemData;
+use WWW::OpenAPIClient::Object::OrderNuPayInfo;
+use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderNuPayPaymentRequestNuPay;
+use WWW::OpenAPIClient::Object::OrderPIXInfo;
+use WWW::OpenAPIClient::Object::OrderPIXPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderPicPayInfo;
+use WWW::OpenAPIClient::Object::OrderPicPayPaymentRequest;
+use WWW::OpenAPIClient::Object::OrderTokenizedCardData;
 use WWW::OpenAPIClient::Object::PaymentMethod;
-use WWW::OpenAPIClient::Object::PicPay;
-use WWW::OpenAPIClient::Object::Pix;
-use WWW::OpenAPIClient::Object::PixExpirationInSeconds;
 use WWW::OpenAPIClient::Object::PixType;
-use WWW::OpenAPIClient::Object::PostCardTokenization200Response;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequest;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer;
-use WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf;
-use WWW::OpenAPIClient::Object::PostOrders200Response;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseNuPay;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseOrderItemsInner;
-use WWW::OpenAPIClient::Object::PostOrders200ResponsePicPay;
-use WWW::OpenAPIClient::Object::PostOrders200ResponsePix;
-use WWW::OpenAPIClient::Object::PostOrders200ResponseSession;
-use WWW::OpenAPIClient::Object::PostOrdersByIdConfirm200Response;
-use WWW::OpenAPIClient::Object::PostOrdersRequest;
-use WWW::OpenAPIClient::Object::PostOrdersRequestFingerprints;
-use WWW::OpenAPIClient::Object::PostOrdersRequestItemsInner;
-use WWW::OpenAPIClient::Object::PostOrdersRequestPayment;
-use WWW::OpenAPIClient::Object::PostOrdersRequestSession;
-use WWW::OpenAPIClient::Object::PostWithdraws200Response;
-use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayedAt;
-use WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount;
-use WWW::OpenAPIClient::Object::PostWithdrawsRequest;
-use WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount;
 use WWW::OpenAPIClient::Object::Status;
-use WWW::OpenAPIClient::Object::TokenizedCard;
+use WWW::OpenAPIClient::Object::WithdrawCreateRequest;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponse;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponsePayedAt;
+use WWW::OpenAPIClient::Object::WithdrawCreateResponsePayoutAccount;
+use WWW::OpenAPIClient::Object::WithdrawPayoutAccountData;
 
 # for displaying the API response data
 use Data::Dumper;
@@ -443,14 +443,14 @@ my $api_instance = WWW::OpenAPIClient::CardTokenizationApi->new(
     password => 'YOUR_PASSWORD',
 );
 
-my $post_card_tokenization_request = WWW::OpenAPIClient::Object::PostCardTokenizationRequest->new(); # PostCardTokenizationRequest | Data for creating a customer card
+my $card_tokenization_create_request = WWW::OpenAPIClient::Object::CardTokenizationCreateRequest->new(); # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 eval {
-    my $result = $api_instance->post_card_tokenization(post_card_tokenization_request => $post_card_tokenization_request);
+    my $result = $api_instance->card_tokenize(card_tokenization_create_request => $card_tokenization_create_request);
     print Dumper($result);
 };
 if ($@) {
-    warn "Exception when calling CardTokenizationApi->post_card_tokenization: $@\n";
+    warn "Exception when calling CardTokenizationApi->card_tokenize: $@\n";
 }
 
 ```
@@ -461,70 +461,70 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*CardTokenizationApi* | [**post_card_tokenization**](docs/CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
-*CustomersApi* | [**get_customers**](docs/CustomersApi.md#get_customers) | **GET** /customers/ | Get all customers
-*CustomersApi* | [**get_customers_by_id**](docs/CustomersApi.md#get_customers_by_id) | **GET** /customers/{id} | Get customer by ID
-*CustomersApi* | [**patch_customers_by_id**](docs/CustomersApi.md#patch_customers_by_id) | **PATCH** /customers/{id} | Update customer data
-*CustomersApi* | [**post_customers**](docs/CustomersApi.md#post_customers) | **POST** /customers/ | Create new customer
-*OrdersApi* | [**get_orders**](docs/OrdersApi.md#get_orders) | **GET** /orders/ | List orders
-*OrdersApi* | [**get_orders_by_id**](docs/OrdersApi.md#get_orders_by_id) | **GET** /orders/{id} | Get order by ID
-*OrdersApi* | [**post_orders**](docs/OrdersApi.md#post_orders) | **POST** /orders/ | Create order
-*OrdersApi* | [**post_orders_by_id_confirm**](docs/OrdersApi.md#post_orders_by_id_confirm) | **POST** /orders/{id}/confirm | Confirm order
-*OrdersApi* | [**post_orders_by_id_refund**](docs/OrdersApi.md#post_orders_by_id_refund) | **POST** /orders/{id}/refund | Refund order
-*TransfersApi* | [**get_withdraws**](docs/TransfersApi.md#get_withdraws) | **GET** /withdraws/ | List withdrawals
-*TransfersApi* | [**get_withdraws_by_id**](docs/TransfersApi.md#get_withdraws_by_id) | **GET** /withdraws/{id} | Get withdrawal by ID
-*TransfersApi* | [**post_withdraws**](docs/TransfersApi.md#post_withdraws) | **POST** /withdraws/ | Create withdrawal
+*CardTokenizationApi* | [**card_tokenize**](docs/CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card
+*CustomerApi* | [**customer_create**](docs/CustomerApi.md#customer_create) | **POST** /customers/ | Create New Customer
+*CustomerApi* | [**customer_list_custom**](docs/CustomerApi.md#customer_list_custom) | **GET** /customers/ | Get All Customers
+*CustomerApi* | [**customer_read**](docs/CustomerApi.md#customer_read) | **GET** /customers/{id} | Get Customer By ID
+*CustomerApi* | [**customer_update**](docs/CustomerApi.md#customer_update) | **PATCH** /customers/{id} | Update Customer Data
+*OrderApi* | [**order_confirm**](docs/OrderApi.md#order_confirm) | **POST** /orders/{id}/confirm | Confirm Order
+*OrderApi* | [**order_create**](docs/OrderApi.md#order_create) | **POST** /orders/ | Create Order
+*OrderApi* | [**order_list**](docs/OrderApi.md#order_list) | **GET** /orders/ | List Orders
+*OrderApi* | [**order_read**](docs/OrderApi.md#order_read) | **GET** /orders/{id} | Get Order By ID
+*OrderApi* | [**order_refund**](docs/OrderApi.md#order_refund) | **POST** /orders/{id}/refund | Refund Order
+*WithdrawApi* | [**withdraw_create**](docs/WithdrawApi.md#withdraw_create) | **POST** /withdraws/ | Create Withdrawal
+*WithdrawApi* | [**withdraw_list**](docs/WithdrawApi.md#withdraw_list) | **GET** /withdraws/ | List Withdrawals
+*WithdrawApi* | [**withdraw_read**](docs/WithdrawApi.md#withdraw_read) | **GET** /withdraws/{id} | Get Withdrawal By ID
 
 
 # DOCUMENTATION FOR MODELS
+ - [WWW::OpenAPIClient::Object::AddressCreateRequest](docs/AddressCreateRequest.md)
  - [WWW::OpenAPIClient::Object::AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
- - [WWW::OpenAPIClient::Object::BankSlip](docs/BankSlip.md)
- - [WWW::OpenAPIClient::Object::BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
- - [WWW::OpenAPIClient::Object::CompleteCardData](docs/CompleteCardData.md)
- - [WWW::OpenAPIClient::Object::CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
- - [WWW::OpenAPIClient::Object::CreditCard](docs/CreditCard.md)
- - [WWW::OpenAPIClient::Object::CreditCardCard](docs/CreditCardCard.md)
- - [WWW::OpenAPIClient::Object::CreditCardInstallments](docs/CreditCardInstallments.md)
- - [WWW::OpenAPIClient::Object::Customer](docs/Customer.md)
- - [WWW::OpenAPIClient::Object::Customer1](docs/Customer1.md)
- - [WWW::OpenAPIClient::Object::CustomerAddress](docs/CustomerAddress.md)
+ - [WWW::OpenAPIClient::Object::CardCreateRequest](docs/CardCreateRequest.md)
+ - [WWW::OpenAPIClient::Object::CardExpirationData](docs/CardExpirationData.md)
+ - [WWW::OpenAPIClient::Object::CardTokenizationCreateRequest](docs/CardTokenizationCreateRequest.md)
+ - [WWW::OpenAPIClient::Object::CardTokenizationCreateRequestCustomer](docs/CardTokenizationCreateRequestCustomer.md)
+ - [WWW::OpenAPIClient::Object::CardTokenizationCreateResponse](docs/CardTokenizationCreateResponse.md)
+ - [WWW::OpenAPIClient::Object::CardTokenizationCustomerByIdData](docs/CardTokenizationCustomerByIdData.md)
+ - [WWW::OpenAPIClient::Object::CustomerAddressResponse](docs/CustomerAddressResponse.md)
+ - [WWW::OpenAPIClient::Object::CustomerCreateRequest](docs/CustomerCreateRequest.md)
+ - [WWW::OpenAPIClient::Object::CustomerListPagination](docs/CustomerListPagination.md)
+ - [WWW::OpenAPIClient::Object::CustomerListResponse](docs/CustomerListResponse.md)
+ - [WWW::OpenAPIClient::Object::CustomerReadResponse](docs/CustomerReadResponse.md)
+ - [WWW::OpenAPIClient::Object::CustomerUpdateRequest](docs/CustomerUpdateRequest.md)
  - [WWW::OpenAPIClient::Object::DocumentType](docs/DocumentType.md)
- - [WWW::OpenAPIClient::Object::Draft](docs/Draft.md)
- - [WWW::OpenAPIClient::Object::DraftExpirationInSeconds](docs/DraftExpirationInSeconds.md)
  - [WWW::OpenAPIClient::Object::Event](docs/Event.md)
  - [WWW::OpenAPIClient::Object::MerchantInput](docs/MerchantInput.md)
- - [WWW::OpenAPIClient::Object::NuPay](docs/NuPay.md)
- - [WWW::OpenAPIClient::Object::NuPayNuPay](docs/NuPayNuPay.md)
+ - [WWW::OpenAPIClient::Object::OrderBankSlipInfo](docs/OrderBankSlipInfo.md)
+ - [WWW::OpenAPIClient::Object::OrderBankSlipPaymentRequest](docs/OrderBankSlipPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderConfirmResponse](docs/OrderConfirmResponse.md)
+ - [WWW::OpenAPIClient::Object::OrderCreateRequest](docs/OrderCreateRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderCreateRequestSession](docs/OrderCreateRequestSession.md)
+ - [WWW::OpenAPIClient::Object::OrderCreateResponse](docs/OrderCreateResponse.md)
+ - [WWW::OpenAPIClient::Object::OrderCreateResponseOrderItemsInner](docs/OrderCreateResponseOrderItemsInner.md)
+ - [WWW::OpenAPIClient::Object::OrderCreateResponseSession](docs/OrderCreateResponseSession.md)
+ - [WWW::OpenAPIClient::Object::OrderCreditCardInfo](docs/OrderCreditCardInfo.md)
+ - [WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequest](docs/OrderCreditCardPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderCreditCardPaymentRequestCard](docs/OrderCreditCardPaymentRequestCard.md)
+ - [WWW::OpenAPIClient::Object::OrderDraftPaymentRequest](docs/OrderDraftPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderFraudFingerprints](docs/OrderFraudFingerprints.md)
+ - [WWW::OpenAPIClient::Object::OrderItemData](docs/OrderItemData.md)
+ - [WWW::OpenAPIClient::Object::OrderNuPayInfo](docs/OrderNuPayInfo.md)
+ - [WWW::OpenAPIClient::Object::OrderNuPayPaymentRequest](docs/OrderNuPayPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderNuPayPaymentRequestNuPay](docs/OrderNuPayPaymentRequestNuPay.md)
+ - [WWW::OpenAPIClient::Object::OrderPIXInfo](docs/OrderPIXInfo.md)
+ - [WWW::OpenAPIClient::Object::OrderPIXPaymentRequest](docs/OrderPIXPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderPaymentRequest](docs/OrderPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderPicPayInfo](docs/OrderPicPayInfo.md)
+ - [WWW::OpenAPIClient::Object::OrderPicPayPaymentRequest](docs/OrderPicPayPaymentRequest.md)
+ - [WWW::OpenAPIClient::Object::OrderTokenizedCardData](docs/OrderTokenizedCardData.md)
  - [WWW::OpenAPIClient::Object::PaymentMethod](docs/PaymentMethod.md)
- - [WWW::OpenAPIClient::Object::PicPay](docs/PicPay.md)
- - [WWW::OpenAPIClient::Object::Pix](docs/Pix.md)
- - [WWW::OpenAPIClient::Object::PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
  - [WWW::OpenAPIClient::Object::PixType](docs/PixType.md)
- - [WWW::OpenAPIClient::Object::PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
- - [WWW::OpenAPIClient::Object::PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
- - [WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
- - [WWW::OpenAPIClient::Object::PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
- - [WWW::OpenAPIClient::Object::PostOrders200Response](docs/PostOrders200Response.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponseNuPay](docs/PostOrders200ResponseNuPay.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponseOrderItemsInner](docs/PostOrders200ResponseOrderItemsInner.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponsePicPay](docs/PostOrders200ResponsePicPay.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponsePix](docs/PostOrders200ResponsePix.md)
- - [WWW::OpenAPIClient::Object::PostOrders200ResponseSession](docs/PostOrders200ResponseSession.md)
- - [WWW::OpenAPIClient::Object::PostOrdersByIdConfirm200Response](docs/PostOrdersByIdConfirm200Response.md)
- - [WWW::OpenAPIClient::Object::PostOrdersRequest](docs/PostOrdersRequest.md)
- - [WWW::OpenAPIClient::Object::PostOrdersRequestFingerprints](docs/PostOrdersRequestFingerprints.md)
- - [WWW::OpenAPIClient::Object::PostOrdersRequestItemsInner](docs/PostOrdersRequestItemsInner.md)
- - [WWW::OpenAPIClient::Object::PostOrdersRequestPayment](docs/PostOrdersRequestPayment.md)
- - [WWW::OpenAPIClient::Object::PostOrdersRequestSession](docs/PostOrdersRequestSession.md)
- - [WWW::OpenAPIClient::Object::PostWithdraws200Response](docs/PostWithdraws200Response.md)
- - [WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayedAt](docs/PostWithdraws200ResponsePayedAt.md)
- - [WWW::OpenAPIClient::Object::PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
- - [WWW::OpenAPIClient::Object::PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
- - [WWW::OpenAPIClient::Object::PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
  - [WWW::OpenAPIClient::Object::Status](docs/Status.md)
- - [WWW::OpenAPIClient::Object::TokenizedCard](docs/TokenizedCard.md)
+ - [WWW::OpenAPIClient::Object::WithdrawCreateRequest](docs/WithdrawCreateRequest.md)
+ - [WWW::OpenAPIClient::Object::WithdrawCreateResponse](docs/WithdrawCreateResponse.md)
+ - [WWW::OpenAPIClient::Object::WithdrawCreateResponsePayedAt](docs/WithdrawCreateResponsePayedAt.md)
+ - [WWW::OpenAPIClient::Object::WithdrawCreateResponsePayoutAccount](docs/WithdrawCreateResponsePayoutAccount.md)
+ - [WWW::OpenAPIClient::Object::WithdrawPayoutAccountData](docs/WithdrawPayoutAccountData.md)
 
 
 # DOCUMENTATION FOR AUTHORIZATION

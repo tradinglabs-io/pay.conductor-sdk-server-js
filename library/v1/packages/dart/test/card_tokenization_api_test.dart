@@ -7,12 +7,12 @@ void main() {
   final instance = Openapi().getCardTokenizationApi();
 
   group(CardTokenizationApi, () {
-    // Tokenize card
+    // Tokenize Card
     //
     // Tokenize credit cards for future charges.
     //
-    //Future<PostCardTokenization200Response> postCardTokenization(PostCardTokenizationRequest postCardTokenizationRequest) async
-    test('test postCardTokenization', () async {
+    //Future<CardTokenizationCreateResponse> cardTokenize(CardTokenizationCreateRequest cardTokenizationCreateRequest) async
+    test('test cardTokenize', () async {
       // TODO
     });
 

@@ -112,8 +112,8 @@ impl From<&str> for ContentType {
 }
 
 pub mod card_tokenization_api;
-pub mod customers_api;
-pub mod orders_api;
-pub mod transfers_api;
+pub mod customer_api;
+pub mod order_api;
+pub mod withdraw_api;
 
 pub mod configuration;

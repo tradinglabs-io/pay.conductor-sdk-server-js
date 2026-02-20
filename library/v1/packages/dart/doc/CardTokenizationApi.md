@@ -9,13 +9,13 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**postCardTokenization**](CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card
+[**cardTokenize**](CardTokenizationApi.md#cardtokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
-# **postCardTokenization**
-> PostCardTokenization200Response postCardTokenization(postCardTokenizationRequest)
+# **cardTokenize**
+> CardTokenizationCreateResponse cardTokenize(cardTokenizationCreateRequest)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -27,13 +27,13 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<HttpBasicAuth>('basicAuth').password = 'YOUR_PASSWORD';
 
 final api = Openapi().getCardTokenizationApi();
-final PostCardTokenizationRequest postCardTokenizationRequest = ; // PostCardTokenizationRequest | Data for creating a customer card
+final CardTokenizationCreateRequest cardTokenizationCreateRequest = ; // CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 try {
-    final response = api.postCardTokenization(postCardTokenizationRequest);
+    final response = api.cardTokenize(cardTokenizationCreateRequest);
     print(response);
 } on DioException catch (e) {
-    print('Exception when calling CardTokenizationApi->postCardTokenization: $e\n');
+    print('Exception when calling CardTokenizationApi->cardTokenize: $e\n');
 }
 ```
 
@@ -41,11 +41,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | 
+ **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

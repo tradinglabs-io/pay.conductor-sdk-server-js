@@ -4,10 +4,10 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 |Method | HTTP request | Description|
 |------------- | ------------- | -------------|
-|[**postCardTokenization**](#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card|
+|[**cardTokenize**](#cardtokenize) | **POST** /card-tokenization/ | Tokenize Card|
 
-# **postCardTokenization**
-> CreateCustomerCardResponse postCardTokenization(createCustomerCard)
+# **cardTokenize**
+> CardTokenizationCreateResponse cardTokenize(cardTokenizationCreateRequest)
 
 Tokenize credit cards for future charges.
 
@@ -17,16 +17,16 @@ Tokenize credit cards for future charges.
 import {
     CardTokenizationApi,
     Configuration,
-    CreateCustomerCard
+    CardTokenizationCreateRequest
 } from 'payconductor-sdk';
 
 const configuration = new Configuration();
 const apiInstance = new CardTokenizationApi(configuration);
 
-let createCustomerCard: CreateCustomerCard; //Data for creating a customer card with customer information
+let cardTokenizationCreateRequest: CardTokenizationCreateRequest; //Data for creating a customer card with customer information
 
-const { status, data } = await apiInstance.postCardTokenization(
-    createCustomerCard
+const { status, data } = await apiInstance.cardTokenize(
+    cardTokenizationCreateRequest
 );
 ```
 
@@ -34,12 +34,12 @@ const { status, data } = await apiInstance.postCardTokenization(
 
 |Name | Type | Description  | Notes|
 |------------- | ------------- | ------------- | -------------|
-| **createCustomerCard** | **CreateCustomerCard**| Data for creating a customer card with customer information | |
+| **cardTokenizationCreateRequest** | **CardTokenizationCreateRequest**| Data for creating a customer card with customer information | |
 
 
 ### Return type
 
-**CreateCustomerCardResponse**
+**CardTokenizationCreateResponse**
 
 ### Authorization
 

@@ -23,193 +23,10 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
-
-export const AvailablePaymentMethods = {
-    Pix: 'Pix',
-    CreditCard: 'CreditCard',
-    DebitCard: 'DebitCard',
-    BankSlip: 'BankSlip',
-    Crypto: 'Crypto',
-    ApplePay: 'ApplePay',
-    NuPay: 'NuPay',
-    PicPay: 'PicPay',
-    AmazonPay: 'AmazonPay',
-    SepaDebit: 'SepaDebit',
-    GooglePay: 'GooglePay',
-    Draft: 'Draft'
-} as const;
-
-export type AvailablePaymentMethods = typeof AvailablePaymentMethods[keyof typeof AvailablePaymentMethods];
-
-
-/**
- * Bank slip payment data
- */
-export interface BankSlipInfo {
-    /**
-     * Bank slip bar code
-     */
-    'barCode': string;
-    /**
-     * Bank slip digitable line
-     */
-    'digitableLine': string;
-    /**
-     * Bank slip PDF URL
-     */
-    'pdfUrl'?: string;
-}
-export interface BankSlipPayment {
-    'paymentMethod': PaymentMethod;
-    /**
-     * Days until bank slip expires
-     */
-    'expirationInDays'?: number;
-}
-
-
-/**
- * Card expiration date
- */
-export interface CardExpiration {
-    /**
-     * Card expiration month
-     */
-    'month': number;
-    /**
-     * Card expiration year
-     */
-    'year': number;
-}
-/**
- * Complete card data for payment processing
- */
-export interface CreateCardData {
-    /**
-     * Card security code (CVV)
-     */
-    'cvv': string;
-    'expiration': CardExpiration;
-    /**
-     * Card holder name
-     */
-    'holderName': string;
-    /**
-     * Credit card number
-     */
-    'number': string;
-}
-/**
- * Data for creating a customer card with customer information
- */
-export interface CreateCustomerCard {
-    'card': CreateCardData;
-    /**
-     * Indicates if the card should be saved for future use
-     */
-    'saveCard': boolean;
-    'customer': CreateCustomerCardCustomer;
-}
-/**
- * @type CreateCustomerCardCustomer
- */
-export type CreateCustomerCardCustomer = Customer | CustomerByID;
-
-/**
- * Response containing customer ID and card token
- */
-export interface CreateCustomerCardResponse {
-    /**
-     * ID of the customer associated with the created card
-     */
-    'customerId': string;
-    /**
-     * Token of the created card for future transactions
-     */
-    'token': string;
-}
-/**
- * Credit card payment data
- */
-export interface CreditCardInfo {
-    /**
-     * Transaction authorization code
-     */
-    'authorizationCode'?: string;
-}
-export interface CreditCardPayment {
-    'paymentMethod': PaymentMethod;
-    'card': CreditCardPaymentCard;
-    /**
-     * Number of installments
-     */
-    'installments': number;
-    /**
-     * Text that will appear on the card statement (soft descriptor)
-     */
-    'softDescriptor'?: string;
-}
-
-
-/**
- * @type CreditCardPaymentCard
- */
-export type CreditCardPaymentCard = CreateCardData | TokenizedCard;
-
-/**
- * Schema for creating a new customer
- */
-export interface Customer {
-    'address'?: CustomerAddress;
-    /**
-     * Customer CPF or CNPJ without formatting
-     */
-    'documentNumber': string;
-    'documentType': DocumentType;
-    /**
-     * Customer email
-     */
-    'email': string;
-    /**
-     * Customer full name
-     */
-    'name': string;
-    /**
-     * Customer phone number in +55 DD 9XXXXXXXX format
-     */
-    'phoneNumber'?: string;
-}
-
-
-/**
- * Schema for creating a new customer
- */
-export interface Customer1 {
-    'address'?: CustomerAddress;
-    /**
-     * Customer CPF or CNPJ without formatting
-     */
-    'documentNumber': string;
-    'documentType': DocumentType;
-    /**
-     * Customer email
-     */
-    'email': string;
-    /**
-     * Customer full name
-     */
-    'name': string;
-    /**
-     * Customer phone number in +55 DD 9XXXXXXXX format
-     */
-    'phoneNumber'?: string;
-}
-
-
 /**
  * Schema for creating a new address
  */
-export interface CustomerAddress {
+export interface AddressCreateRequest {
     /**
      * City name
      */
@@ -239,10 +56,98 @@ export interface CustomerAddress {
      */
     'zipCode': string;
 }
+
+export const AvailablePaymentMethods = {
+    Pix: 'Pix',
+    CreditCard: 'CreditCard',
+    DebitCard: 'DebitCard',
+    BankSlip: 'BankSlip',
+    Crypto: 'Crypto',
+    ApplePay: 'ApplePay',
+    NuPay: 'NuPay',
+    PicPay: 'PicPay',
+    AmazonPay: 'AmazonPay',
+    SepaDebit: 'SepaDebit',
+    GooglePay: 'GooglePay',
+    Draft: 'Draft'
+} as const;
+
+export type AvailablePaymentMethods = typeof AvailablePaymentMethods[keyof typeof AvailablePaymentMethods];
+
+
+/**
+ * Complete card data for payment processing
+ */
+export interface CardCreateRequest {
+    /**
+     * Card security code (CVV)
+     */
+    'cvv': string;
+    'expiration': CardExpirationData;
+    /**
+     * Card holder name
+     */
+    'holderName': string;
+    /**
+     * Credit card number
+     */
+    'number': string;
+}
+/**
+ * Card expiration date
+ */
+export interface CardExpirationData {
+    /**
+     * Card expiration month
+     */
+    'month': number;
+    /**
+     * Card expiration year
+     */
+    'year': number;
+}
+/**
+ * Data for creating a customer card with customer information
+ */
+export interface CardTokenizationCreateRequest {
+    'card': CardCreateRequest;
+    /**
+     * Indicates if the card should be saved for future use
+     */
+    'saveCard': boolean;
+    'customer': CardTokenizationCreateRequestCustomer;
+}
+/**
+ * @type CardTokenizationCreateRequestCustomer
+ */
+export type CardTokenizationCreateRequestCustomer = CardTokenizationCustomerByIdData | CustomerCreateRequest;
+
+/**
+ * Response containing customer ID and card token
+ */
+export interface CardTokenizationCreateResponse {
+    /**
+     * ID of the customer associated with the created card
+     */
+    'customerId': string;
+    /**
+     * Token of the created card for future transactions
+     */
+    'token': string;
+}
+/**
+ * Reference to an existing customer by ID
+ */
+export interface CardTokenizationCustomerByIdData {
+    /**
+     * ID of an existing customer
+     */
+    'id': string;
+}
 /**
  * Customer address information
  */
-export interface CustomerAddress1 {
+export interface CustomerAddressResponse {
     /**
      * Unique address identifier
      */
@@ -277,28 +182,34 @@ export interface CustomerAddress1 {
     'country': string;
 }
 /**
- * Reference to an existing customer by ID
+ * Schema for creating a new customer
  */
-export interface CustomerByID {
+export interface CustomerCreateRequest {
+    'address'?: AddressCreateRequest;
     /**
-     * ID of an existing customer
+     * Customer CPF or CNPJ without formatting
      */
-    'id': string;
-}
-/**
- * Paginated list of customers
- */
-export interface CustomerListResponse {
+    'documentNumber': string;
+    'documentType': DocumentType;
     /**
-     * List of customers
+     * Customer email
      */
-    'data': Array<CustomerResponse>;
-    'pagination': CustomerPagination;
+    'email': string;
+    /**
+     * Customer full name
+     */
+    'name': string;
+    /**
+     * Customer phone number in +55 DD 9XXXXXXXX format
+     */
+    'phoneNumber'?: string;
 }
+
+
 /**
  * Pagination information for customer list
  */
-export interface CustomerPagination {
+export interface CustomerListPagination {
     /**
      * Current page number
      */
@@ -317,9 +228,19 @@ export interface CustomerPagination {
     'totalPages': number;
 }
 /**
+ * Paginated list of customers
+ */
+export interface CustomerListResponse {
+    /**
+     * List of customers
+     */
+    'data': Array<CustomerReadResponse>;
+    'pagination': CustomerListPagination;
+}
+/**
  * Customer response with complete information
  */
-export interface CustomerResponse {
+export interface CustomerReadResponse {
     /**
      * Unique customer identifier
      */
@@ -341,7 +262,7 @@ export interface CustomerResponse {
      * Customer phone number in +55 DD 9XXXXXXXX format
      */
     'phoneNumber': string | null;
-    'address': CustomerAddress1 | null;
+    'address': CustomerAddressResponse | null;
     /**
      * Date and time when the customer was created (ISO 8601 format)
      */
@@ -353,6 +274,31 @@ export interface CustomerResponse {
 }
 
 
+/**
+ * Schema for updating customer information
+ */
+export interface CustomerUpdateRequest {
+    'address'?: AddressCreateRequest;
+    /**
+     * Customer CPF or CNPJ without formatting
+     */
+    'documentNumber'?: string;
+    'documentType'?: DocumentType;
+    /**
+     * Customer email
+     */
+    'email'?: string;
+    /**
+     * Customer full name
+     */
+    'name'?: string;
+    /**
+     * Customer phone number in +55 DD 9XXXXXXXX format
+     */
+    'phoneNumber'?: string;
+}
+
+
 
 export const DocumentType = {
     Cpf: 'Cpf',
@@ -360,22 +306,6 @@ export const DocumentType = {
 } as const;
 
 export type DocumentType = typeof DocumentType[keyof typeof DocumentType];
-
-
-/**
- * Used to create an order without generating a real payment. Use to create orders that will be paid later
- */
-export interface DraftPayment {
-    'paymentMethod': PaymentMethod;
-    /**
-     * Order expiration time in seconds
-     */
-    'expirationInSeconds'?: number;
-    /**
-     * Available payment methods for this order
-     */
-    'availablePaymentMethods'?: Array<AvailablePaymentMethods>;
-}
 
 
 
@@ -396,15 +326,6 @@ export type Event = typeof Event[keyof typeof Event];
 
 
 /**
- * Fraud analysis fingerprint data
- */
-export interface FraudFingerprints {
-    /**
-     * ThreatMetrix fingerprint ID for fraud analysis
-     */
-    'threatMetrixFingerprintId'?: string;
-}
-/**
  * Merchant data for order or withdrawal
  */
 export interface MerchantInput {
@@ -422,45 +343,76 @@ export interface MerchantInput {
     'name': string;
 }
 /**
- * NuPay payment data
+ * Bank slip payment data
  */
-export interface NuPayInfo {
+export interface OrderBankSlipInfo {
     /**
-     * NuPay payment URL
+     * Bank slip bar code
      */
-    'paymentUrl': string;
+    'barCode': string;
+    /**
+     * Bank slip digitable line
+     */
+    'digitableLine': string;
+    /**
+     * Bank slip PDF URL
+     */
+    'pdfUrl'?: string;
 }
-export interface NuPayPayment {
+export interface OrderBankSlipPaymentRequest {
     'paymentMethod': PaymentMethod;
-    'nuPay': NuPayPaymentNuPay;
+    /**
+     * Days until bank slip expires
+     */
+    'expirationInDays'?: number;
 }
 
 
 /**
- * Specific data for NuPay payment
+ * Response after confirming a draft order
  */
-export interface NuPayPaymentNuPay {
+export interface OrderConfirmResponse {
     /**
-     * Payment cancellation URL
+     * Order ID in the system
      */
-    'cancelUrl': string;
+    'id': string;
     /**
-     * Merchant name
+     * External order ID (provided by your integration)
      */
-    'merchantName': string;
+    'externalId': string | null;
     /**
-     * Return URL after payment completion
+     * Total order amount
      */
-    'returnUrl': string;
+    'amount': number;
     /**
-     * Store name
+     * Cost fee applied to the order
      */
-    'storeName'?: string;
+    'costFee': number;
+    'pix'?: OrderPIXInfo;
+    'bankSlip'?: OrderBankSlipInfo;
+    'nuPay'?: OrderNuPayInfo;
+    'picPay'?: OrderPicPayInfo;
+    'status': Status;
+    'paymentMethod': PaymentMethod;
+    /**
+     * Date and time when the order was paid (ISO 8601)
+     */
+    'payedAt': string | null;
+    /**
+     * Error code, if any
+     */
+    'errorCode': string | null;
+    /**
+     * Error message, if any
+     */
+    'errorMessage': string | null;
 }
+
+
 /**
  * Order data for payment processing
  */
-export interface Order {
+export interface OrderCreateRequest {
     /**
      * Total amount to be charged on the order in floating point value
      */
@@ -469,7 +421,7 @@ export interface Order {
      * Client IP address
      */
     'clientIp': string;
-    'customer': Customer1;
+    'customer': CustomerCreateRequest;
     /**
      * Discount amount
      */
@@ -478,18 +430,18 @@ export interface Order {
      * Order ID in your system
      */
     'externalId': string;
-    'fingerprints'?: FraudFingerprints;
+    'fingerprints'?: OrderFraudFingerprints;
     /**
      * List of products or services in the order
      */
-    'items'?: Array<OrderItem>;
+    'items'?: Array<OrderItemData>;
     'merchant'?: MerchantInput;
-    'payment': PaymentData;
+    'payment': OrderPaymentRequest;
     /**
      * Total split amount to be paid to the merchant (Used only for reporting purposes, does not generate actual split)
      */
     'splitAmountTotal'?: number;
-    'session'?: OrderSession;
+    'session'?: OrderCreateRequestSession;
     /**
      * Shipping fee
      */
@@ -504,34 +456,9 @@ export interface Order {
     'metadata'?: object;
 }
 /**
- * Product or service item in the order
- */
-export interface OrderItem {
-    /**
-     * Product or service ID in your system
-     */
-    'id': string;
-    /**
-     * Defines if the item is a physical product or a service
-     */
-    'isPhysical': boolean;
-    /**
-     * Product or service name
-     */
-    'name': string;
-    /**
-     * Quantity of the product or service
-     */
-    'qty': number;
-    /**
-     * Unit price
-     */
-    'unitPrice': number;
-}
-/**
  * If externalSessionId or sessionId is provided and an existing session exists, it will be updated with the new data. Otherwise, a new session will be created.
  */
-export interface OrderSession {
+export interface OrderCreateRequestSession {
     /**
      * Time in minutes for checkout session expiration
      */
@@ -550,107 +477,9 @@ export interface OrderSession {
     'externalSessionId'?: string;
 }
 /**
- * PIX payment data and QR code information
+ * Response after creating an order
  */
-export interface PIXInfo {
-    /**
-     * PIX copy and paste code
-     */
-    'copyAndPasteCode': string;
-    /**
-     * PIX QR Code image URL
-     */
-    'qrCodeUrl': string;
-    /**
-     * PIX E2E ID
-     */
-    'endToEndId': string | null;
-}
-export interface PIXPayment {
-    'paymentMethod': PaymentMethod;
-    /**
-     * PIX expiration time in seconds
-     */
-    'expirationInSeconds'?: number;
-}
-
-
-/**
- * @type PaymentData
- * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
- */
-export type PaymentData = { paymentMethod: 'BankSlipPayment' } & BankSlipPayment | { paymentMethod: 'CreditCardPayment' } & CreditCardPayment | { paymentMethod: 'DraftPayment' } & DraftPayment | { paymentMethod: 'NuPayPayment' } & NuPayPayment | { paymentMethod: 'PIXPayment' } & PIXPayment | { paymentMethod: 'PicPayPayment' } & PicPayPayment;
-
-
-export const PaymentMethod = {
-    Pix: 'Pix',
-    CreditCard: 'CreditCard',
-    DebitCard: 'DebitCard',
-    BankSlip: 'BankSlip',
-    Crypto: 'Crypto',
-    ApplePay: 'ApplePay',
-    NuPay: 'NuPay',
-    PicPay: 'PicPay',
-    AmazonPay: 'AmazonPay',
-    SepaDebit: 'SepaDebit',
-    GooglePay: 'GooglePay',
-    Draft: 'Draft'
-} as const;
-
-export type PaymentMethod = typeof PaymentMethod[keyof typeof PaymentMethod];
-
-
-/**
- * Bank account information for withdrawal
- */
-export interface PayoutAccount {
-    /**
-     * Account holder document (CPF or CNPJ)
-     */
-    'ownerDocument': string;
-    /**
-     * Account holder name
-     */
-    'ownerName': string;
-    /**
-     * PIX key for withdrawal
-     */
-    'pixKey': string;
-    'pixType': PixType;
-}
-
-
-/**
- * PicPay payment data
- */
-export interface PicPayInfo {
-    /**
-     * PicPay copy and paste code
-     */
-    'copyAndPasteCode': string;
-    /**
-     * PicPay QR Code image URL
-     */
-    'qrCodeUrl': string;
-}
-export interface PicPayPayment {
-    'paymentMethod': PaymentMethod;
-}
-
-
-
-export const PixType = {
-    Cpf: 'Cpf',
-    Cnpj: 'Cnpj',
-    Email: 'Email',
-    Phone: 'Phone',
-    Random: 'Random'
-} as const;
-
-export type PixType = typeof PixType[keyof typeof PixType];
-
-
-export interface PostOrders200Response {
+export interface OrderCreateResponse {
     /**
      * Order ID in the system
      */
@@ -675,11 +504,11 @@ export interface PostOrders200Response {
      * Cost fee applied to the order
      */
     'costFee': number;
-    'pix'?: PIXInfo;
-    'bankSlip'?: BankSlipInfo;
-    'nuPay'?: NuPayInfo;
-    'picPay'?: PicPayInfo;
-    'creditCard'?: CreditCardInfo;
+    'pix'?: OrderPIXInfo;
+    'bankSlip'?: OrderBankSlipInfo;
+    'nuPay'?: OrderNuPayInfo;
+    'picPay'?: OrderPicPayInfo;
+    'creditCard'?: OrderCreditCardInfo;
     'status': Status;
     'paymentMethod': PaymentMethod;
     /**
@@ -694,12 +523,12 @@ export interface PostOrders200Response {
      * Error message, if any
      */
     'errorMessage': string | null;
-    'orderItems': Array<PostOrders200ResponseOrderItemsInner>;
-    'session'?: PostOrders200ResponseSession | null;
+    'orderItems': Array<OrderCreateResponseOrderItemsInner>;
+    'session'?: OrderCreateResponseSession | null;
 }
 
 
-export interface PostOrders200ResponseOrderItemsInner {
+export interface OrderCreateResponseOrderItemsInner {
     /**
      * External item ID
      */
@@ -729,51 +558,253 @@ export interface PostOrders200ResponseOrderItemsInner {
      */
     'unityPrice': number;
 }
-export interface PostOrders200ResponseSession {
+export interface OrderCreateResponseSession {
     /**
      * ID of the checkout session associated with the order
      */
     'sessionId': string;
 }
-export interface PostOrdersByIdConfirm200Response {
+/**
+ * Credit card payment data
+ */
+export interface OrderCreditCardInfo {
     /**
-     * Order ID in the system
+     * Transaction authorization code
      */
-    'id': string;
-    /**
-     * External order ID (provided by your integration)
-     */
-    'externalId': string | null;
-    /**
-     * Total order amount
-     */
-    'amount': number;
-    /**
-     * Cost fee applied to the order
-     */
-    'costFee': number;
-    'pix'?: PIXInfo;
-    'bankSlip'?: BankSlipInfo;
-    'nuPay'?: NuPayInfo;
-    'picPay'?: PicPayInfo;
-    'status': Status;
+    'authorizationCode'?: string;
+}
+export interface OrderCreditCardPaymentRequest {
     'paymentMethod': PaymentMethod;
+    'card': OrderCreditCardPaymentRequestCard;
     /**
-     * Date and time when the order was paid (ISO 8601)
+     * Number of installments
      */
-    'payedAt': string | null;
+    'installments': number;
     /**
-     * Error code, if any
+     * Text that will appear on the card statement (soft descriptor)
      */
-    'errorCode': string | null;
-    /**
-     * Error message, if any
-     */
-    'errorMessage': string | null;
+    'softDescriptor'?: string;
 }
 
 
-export interface PostWithdraws200Response {
+/**
+ * @type OrderCreditCardPaymentRequestCard
+ */
+export type OrderCreditCardPaymentRequestCard = CardCreateRequest | OrderTokenizedCardData;
+
+/**
+ * Used to create an order without generating a real payment. Use to create orders that will be paid later
+ */
+export interface OrderDraftPaymentRequest {
+    'paymentMethod': PaymentMethod;
+    /**
+     * Order expiration time in seconds
+     */
+    'expirationInSeconds'?: number;
+    /**
+     * Available payment methods for this order
+     */
+    'availablePaymentMethods'?: Array<AvailablePaymentMethods>;
+}
+
+
+/**
+ * Fraud analysis fingerprint data
+ */
+export interface OrderFraudFingerprints {
+    /**
+     * ThreatMetrix fingerprint ID for fraud analysis
+     */
+    'threatMetrixFingerprintId'?: string;
+}
+/**
+ * Product or service item in the order
+ */
+export interface OrderItemData {
+    /**
+     * Product or service ID in your system
+     */
+    'id': string;
+    /**
+     * Defines if the item is a physical product or a service
+     */
+    'isPhysical': boolean;
+    /**
+     * Product or service name
+     */
+    'name': string;
+    /**
+     * Quantity of the product or service
+     */
+    'qty': number;
+    /**
+     * Unit price
+     */
+    'unitPrice': number;
+}
+/**
+ * NuPay payment data
+ */
+export interface OrderNuPayInfo {
+    /**
+     * NuPay payment URL
+     */
+    'paymentUrl': string;
+}
+export interface OrderNuPayPaymentRequest {
+    'paymentMethod': PaymentMethod;
+    'nuPay': OrderNuPayPaymentRequestNuPay;
+}
+
+
+/**
+ * Specific data for NuPay payment
+ */
+export interface OrderNuPayPaymentRequestNuPay {
+    /**
+     * Payment cancellation URL
+     */
+    'cancelUrl': string;
+    /**
+     * Merchant name
+     */
+    'merchantName': string;
+    /**
+     * Return URL after payment completion
+     */
+    'returnUrl': string;
+    /**
+     * Store name
+     */
+    'storeName'?: string;
+}
+/**
+ * PIX payment data and QR code information
+ */
+export interface OrderPIXInfo {
+    /**
+     * PIX copy and paste code
+     */
+    'copyAndPasteCode': string;
+    /**
+     * PIX QR Code image URL
+     */
+    'qrCodeUrl': string;
+    /**
+     * PIX E2E ID
+     */
+    'endToEndId': string | null;
+}
+export interface OrderPIXPaymentRequest {
+    'paymentMethod': PaymentMethod;
+    /**
+     * PIX expiration time in seconds
+     */
+    'expirationInSeconds'?: number;
+}
+
+
+/**
+ * @type OrderPaymentRequest
+ * Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+ */
+export type OrderPaymentRequest = { paymentMethod: 'OrderBankSlipPaymentRequest' } & OrderBankSlipPaymentRequest | { paymentMethod: 'OrderCreditCardPaymentRequest' } & OrderCreditCardPaymentRequest | { paymentMethod: 'OrderDraftPaymentRequest' } & OrderDraftPaymentRequest | { paymentMethod: 'OrderNuPayPaymentRequest' } & OrderNuPayPaymentRequest | { paymentMethod: 'OrderPIXPaymentRequest' } & OrderPIXPaymentRequest | { paymentMethod: 'OrderPicPayPaymentRequest' } & OrderPicPayPaymentRequest;
+
+/**
+ * PicPay payment data
+ */
+export interface OrderPicPayInfo {
+    /**
+     * PicPay copy and paste code
+     */
+    'copyAndPasteCode': string;
+    /**
+     * PicPay QR Code image URL
+     */
+    'qrCodeUrl': string;
+}
+export interface OrderPicPayPaymentRequest {
+    'paymentMethod': PaymentMethod;
+}
+
+
+export interface OrderTokenizedCardData {
+    /**
+     * First 6 digits of the credit card
+     */
+    'firstSixCardNumber'?: string;
+    /**
+     * Previously generated credit card token
+     */
+    'token': string;
+}
+
+export const PaymentMethod = {
+    Pix: 'Pix',
+    CreditCard: 'CreditCard',
+    DebitCard: 'DebitCard',
+    BankSlip: 'BankSlip',
+    Crypto: 'Crypto',
+    ApplePay: 'ApplePay',
+    NuPay: 'NuPay',
+    PicPay: 'PicPay',
+    AmazonPay: 'AmazonPay',
+    SepaDebit: 'SepaDebit',
+    GooglePay: 'GooglePay',
+    Draft: 'Draft'
+} as const;
+
+export type PaymentMethod = typeof PaymentMethod[keyof typeof PaymentMethod];
+
+
+
+export const PixType = {
+    Cpf: 'Cpf',
+    Cnpj: 'Cnpj',
+    Email: 'Email',
+    Phone: 'Phone',
+    Random: 'Random'
+} as const;
+
+export type PixType = typeof PixType[keyof typeof PixType];
+
+
+
+export const Status = {
+    Generating: 'Generating',
+    Pending: 'Pending',
+    Completed: 'Completed',
+    Failed: 'Failed',
+    Canceled: 'Canceled',
+    Refunding: 'Refunding',
+    Refunded: 'Refunded',
+    InDispute: 'InDispute',
+    Chargeback: 'Chargeback',
+    Transferring: 'Transferring'
+} as const;
+
+export type Status = typeof Status[keyof typeof Status];
+
+
+/**
+ * Withdrawal or transfer request data
+ */
+export interface WithdrawCreateRequest {
+    /**
+     * Withdrawal amount in cents
+     */
+    'amount': number;
+    /**
+     * Withdrawal ID in your system
+     */
+    'externalId'?: string;
+    'merchant'?: MerchantInput;
+    'payoutAccount': WithdrawPayoutAccountData;
+}
+/**
+ * Response after creating a withdrawal or transfer
+ */
+export interface WithdrawCreateResponse {
     /**
      * Unique withdrawal identifier
      */
@@ -803,17 +834,17 @@ export interface PostWithdraws200Response {
      * Descriptive error message, if any
      */
     'errorMessage': string | null;
-    'payedAt': PostWithdraws200ResponsePayedAt | null;
-    'payoutAccount': PostWithdraws200ResponsePayoutAccount;
+    'payedAt': WithdrawCreateResponsePayedAt | null;
+    'payoutAccount': WithdrawCreateResponsePayoutAccount;
 }
 
 
 /**
  * Date and time when the withdrawal was paid (ISO 8601 format)
  */
-export interface PostWithdraws200ResponsePayedAt {
+export interface WithdrawCreateResponsePayedAt {
 }
-export interface PostWithdraws200ResponsePayoutAccount {
+export interface WithdrawCreateResponsePayoutAccount {
     /**
      * Unique payment account identifier
      */
@@ -834,73 +865,26 @@ export interface PostWithdraws200ResponsePayoutAccount {
 }
 
 
-
-export const Status = {
-    Generating: 'Generating',
-    Pending: 'Pending',
-    Completed: 'Completed',
-    Failed: 'Failed',
-    Canceled: 'Canceled',
-    Refunding: 'Refunding',
-    Refunded: 'Refunded',
-    InDispute: 'InDispute',
-    Chargeback: 'Chargeback',
-    Transferring: 'Transferring'
-} as const;
-
-export type Status = typeof Status[keyof typeof Status];
-
-
-export interface TokenizedCard {
-    /**
-     * First 6 digits of the credit card
-     */
-    'firstSixCardNumber'?: string;
-    /**
-     * Previously generated credit card token
-     */
-    'token': string;
-}
 /**
- * Schema for updating customer information
+ * Bank account information for withdrawal
  */
-export interface UpdateCustomer {
-    'address'?: CustomerAddress;
+export interface WithdrawPayoutAccountData {
     /**
-     * Customer CPF or CNPJ without formatting
+     * Account holder document (CPF or CNPJ)
      */
-    'documentNumber'?: string;
-    'documentType'?: DocumentType;
+    'ownerDocument': string;
     /**
-     * Customer email
+     * Account holder name
      */
-    'email'?: string;
+    'ownerName': string;
     /**
-     * Customer full name
+     * PIX key for withdrawal
      */
-    'name'?: string;
-    /**
-     * Customer phone number in +55 DD 9XXXXXXXX format
-     */
-    'phoneNumber'?: string;
+    'pixKey': string;
+    'pixType': PixType;
 }
 
 
-/**
- * Withdrawal or transfer request data
- */
-export interface Withdraw {
-    /**
-     * Withdrawal amount in cents
-     */
-    'amount': number;
-    /**
-     * Withdrawal ID in your system
-     */
-    'externalId'?: string;
-    'merchant'?: MerchantInput;
-    'payoutAccount': PayoutAccount;
-}
 
 /**
  * CardTokenizationApi - axios parameter creator
@@ -909,14 +893,14 @@ export const CardTokenizationApiAxiosParamCreator = function (configuration?: Co
     return {
         /**
          * Tokenize credit cards for future charges.
-         * @summary Tokenize card
-         * @param {CreateCustomerCard} createCustomerCard Data for creating a customer card with customer information
+         * @summary Tokenize Card
+         * @param {CardTokenizationCreateRequest} cardTokenizationCreateRequest Data for creating a customer card with customer information
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCardTokenization: async (createCustomerCard: CreateCustomerCard, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'createCustomerCard' is not null or undefined
-            assertParamExists('postCardTokenization', 'createCustomerCard', createCustomerCard)
+        cardTokenize: async (cardTokenizationCreateRequest: CardTokenizationCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'cardTokenizationCreateRequest' is not null or undefined
+            assertParamExists('cardTokenize', 'cardTokenizationCreateRequest', cardTokenizationCreateRequest)
             const localVarPath = `/card-tokenization/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -939,7 +923,7 @@ export const CardTokenizationApiAxiosParamCreator = function (configuration?: Co
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(createCustomerCard, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(cardTokenizationCreateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -957,15 +941,15 @@ export const CardTokenizationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * Tokenize credit cards for future charges.
-         * @summary Tokenize card
-         * @param {CreateCustomerCard} createCustomerCard Data for creating a customer card with customer information
+         * @summary Tokenize Card
+         * @param {CardTokenizationCreateRequest} cardTokenizationCreateRequest Data for creating a customer card with customer information
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postCardTokenization(createCustomerCard: CreateCustomerCard, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CreateCustomerCardResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postCardTokenization(createCustomerCard, options);
+        async cardTokenize(cardTokenizationCreateRequest: CardTokenizationCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CardTokenizationCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.cardTokenize(cardTokenizationCreateRequest, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CardTokenizationApi.postCardTokenization']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['CardTokenizationApi.cardTokenize']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
@@ -979,13 +963,13 @@ export const CardTokenizationApiFactory = function (configuration?: Configuratio
     return {
         /**
          * Tokenize credit cards for future charges.
-         * @summary Tokenize card
-         * @param {CreateCustomerCard} createCustomerCard Data for creating a customer card with customer information
+         * @summary Tokenize Card
+         * @param {CardTokenizationCreateRequest} cardTokenizationCreateRequest Data for creating a customer card with customer information
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCardTokenization(createCustomerCard: CreateCustomerCard, options?: RawAxiosRequestConfig): AxiosPromise<CreateCustomerCardResponse> {
-            return localVarFp.postCardTokenization(createCustomerCard, options).then((request) => request(axios, basePath));
+        cardTokenize(cardTokenizationCreateRequest: CardTokenizationCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<CardTokenizationCreateResponse> {
+            return localVarFp.cardTokenize(cardTokenizationCreateRequest, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -996,26 +980,65 @@ export const CardTokenizationApiFactory = function (configuration?: Configuratio
 export class CardTokenizationApi extends BaseAPI {
     /**
      * Tokenize credit cards for future charges.
-     * @summary Tokenize card
-     * @param {CreateCustomerCard} createCustomerCard Data for creating a customer card with customer information
+     * @summary Tokenize Card
+     * @param {CardTokenizationCreateRequest} cardTokenizationCreateRequest Data for creating a customer card with customer information
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public postCardTokenization(createCustomerCard: CreateCustomerCard, options?: RawAxiosRequestConfig) {
-        return CardTokenizationApiFp(this.configuration).postCardTokenization(createCustomerCard, options).then((request) => request(this.axios, this.basePath));
+    public cardTokenize(cardTokenizationCreateRequest: CardTokenizationCreateRequest, options?: RawAxiosRequestConfig) {
+        return CardTokenizationApiFp(this.configuration).cardTokenize(cardTokenizationCreateRequest, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
 
 
 /**
- * CustomersApi - axios parameter creator
+ * CustomerApi - axios parameter creator
  */
-export const CustomersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const CustomerApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Create a new customer by providing the required data in the request body.
+         * @summary Create New Customer
+         * @param {CustomerCreateRequest} customerCreateRequest Schema for creating a new customer
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerCreate: async (customerCreateRequest: CustomerCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'customerCreateRequest' is not null or undefined
+            assertParamExists('customerCreate', 'customerCreateRequest', customerCreateRequest)
+            const localVarPath = `/customers/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(customerCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
-         * @summary Get all customers
+         * @summary Get All Customers
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [email] 
@@ -1025,11 +1048,11 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomers: async (page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        customerListCustom: async (page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'page' is not null or undefined
-            assertParamExists('getCustomers', 'page', page)
+            assertParamExists('customerListCustom', 'page', page)
             // verify required parameter 'pageSize' is not null or undefined
-            assertParamExists('getCustomers', 'pageSize', pageSize)
+            assertParamExists('customerListCustom', 'pageSize', pageSize)
             const localVarPath = `/customers/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1087,14 +1110,14 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Retrieve the complete details of a specific customer using their unique ID.
-         * @summary Get customer by ID
+         * @summary Get Customer By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getCustomersById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        customerRead: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getCustomersById', 'id', id)
+            assertParamExists('customerRead', 'id', id)
             const localVarPath = `/customers/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1125,17 +1148,17 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Update the information of an existing customer by providing the new data in the request body.
-         * @summary Update customer data
+         * @summary Update Customer Data
          * @param {string} id 
-         * @param {UpdateCustomer} updateCustomer Schema for updating customer information
+         * @param {CustomerUpdateRequest} customerUpdateRequest Schema for updating customer information
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        patchCustomersById: async (id: string, updateCustomer: UpdateCustomer, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        customerUpdate: async (id: string, customerUpdateRequest: CustomerUpdateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('patchCustomersById', 'id', id)
-            // verify required parameter 'updateCustomer' is not null or undefined
-            assertParamExists('patchCustomersById', 'updateCustomer', updateCustomer)
+            assertParamExists('customerUpdate', 'id', id)
+            // verify required parameter 'customerUpdateRequest' is not null or undefined
+            assertParamExists('customerUpdate', 'customerUpdateRequest', customerUpdateRequest)
             const localVarPath = `/customers/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1159,24 +1182,215 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(updateCustomer, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(customerUpdateRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
             };
         },
+    }
+};
+
+/**
+ * CustomerApi - functional programming interface
+ */
+export const CustomerApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = CustomerApiAxiosParamCreator(configuration)
+    return {
         /**
          * Create a new customer by providing the required data in the request body.
-         * @summary Create new customer
-         * @param {Customer1} customer1 Schema for creating a new customer
+         * @summary Create New Customer
+         * @param {CustomerCreateRequest} customerCreateRequest Schema for creating a new customer
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postCustomers: async (customer1: Customer1, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'customer1' is not null or undefined
-            assertParamExists('postCustomers', 'customer1', customer1)
-            const localVarPath = `/customers/`;
+        async customerCreate(customerCreateRequest: CustomerCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerReadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerCreate(customerCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomerApi.customerCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
+         * @summary Get All Customers
+         * @param {number} page 
+         * @param {number} pageSize 
+         * @param {string} [email] 
+         * @param {string} [name] 
+         * @param {string} [endDate] 
+         * @param {string} [startDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerListCustom(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerListResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerListCustom(page, pageSize, email, name, endDate, startDate, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomerApi.customerListCustom']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Retrieve the complete details of a specific customer using their unique ID.
+         * @summary Get Customer By ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerRead(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerReadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerRead(id, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomerApi.customerRead']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Update the information of an existing customer by providing the new data in the request body.
+         * @summary Update Customer Data
+         * @param {string} id 
+         * @param {CustomerUpdateRequest} customerUpdateRequest Schema for updating customer information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async customerUpdate(id: string, customerUpdateRequest: CustomerUpdateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerReadResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.customerUpdate(id, customerUpdateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['CustomerApi.customerUpdate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+    }
+};
+
+/**
+ * CustomerApi - factory interface
+ */
+export const CustomerApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = CustomerApiFp(configuration)
+    return {
+        /**
+         * Create a new customer by providing the required data in the request body.
+         * @summary Create New Customer
+         * @param {CustomerCreateRequest} customerCreateRequest Schema for creating a new customer
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerCreate(customerCreateRequest: CustomerCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<CustomerReadResponse> {
+            return localVarFp.customerCreate(customerCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
+         * @summary Get All Customers
+         * @param {number} page 
+         * @param {number} pageSize 
+         * @param {string} [email] 
+         * @param {string} [name] 
+         * @param {string} [endDate] 
+         * @param {string} [startDate] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerListCustom(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerListResponse> {
+            return localVarFp.customerListCustom(page, pageSize, email, name, endDate, startDate, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Retrieve the complete details of a specific customer using their unique ID.
+         * @summary Get Customer By ID
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerRead(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerReadResponse> {
+            return localVarFp.customerRead(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Update the information of an existing customer by providing the new data in the request body.
+         * @summary Update Customer Data
+         * @param {string} id 
+         * @param {CustomerUpdateRequest} customerUpdateRequest Schema for updating customer information
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        customerUpdate(id: string, customerUpdateRequest: CustomerUpdateRequest, options?: RawAxiosRequestConfig): AxiosPromise<CustomerReadResponse> {
+            return localVarFp.customerUpdate(id, customerUpdateRequest, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * CustomerApi - object-oriented interface
+ */
+export class CustomerApi extends BaseAPI {
+    /**
+     * Create a new customer by providing the required data in the request body.
+     * @summary Create New Customer
+     * @param {CustomerCreateRequest} customerCreateRequest Schema for creating a new customer
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public customerCreate(customerCreateRequest: CustomerCreateRequest, options?: RawAxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerCreate(customerCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
+     * @summary Get All Customers
+     * @param {number} page 
+     * @param {number} pageSize 
+     * @param {string} [email] 
+     * @param {string} [name] 
+     * @param {string} [endDate] 
+     * @param {string} [startDate] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public customerListCustom(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerListCustom(page, pageSize, email, name, endDate, startDate, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Retrieve the complete details of a specific customer using their unique ID.
+     * @summary Get Customer By ID
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public customerRead(id: string, options?: RawAxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerRead(id, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Update the information of an existing customer by providing the new data in the request body.
+     * @summary Update Customer Data
+     * @param {string} id 
+     * @param {CustomerUpdateRequest} customerUpdateRequest Schema for updating customer information
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public customerUpdate(id: string, customerUpdateRequest: CustomerUpdateRequest, options?: RawAxiosRequestConfig) {
+        return CustomerApiFp(this.configuration).customerUpdate(id, customerUpdateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+}
+
+
+
+/**
+ * OrderApi - axios parameter creator
+ */
+export const OrderApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
+         * @summary Confirm Order
+         * @param {string} id 
+         * @param {OrderPaymentRequest} orderPaymentRequest Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orderConfirm: async (id: string, orderPaymentRequest: OrderPaymentRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            assertParamExists('orderConfirm', 'id', id)
+            // verify required parameter 'orderPaymentRequest' is not null or undefined
+            assertParamExists('orderConfirm', 'orderPaymentRequest', orderPaymentRequest)
+            const localVarPath = `/orders/{id}/confirm`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1198,217 +1412,69 @@ export const CustomersApiAxiosParamCreator = function (configuration?: Configura
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(customer1, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(orderPaymentRequest, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
                 options: localVarRequestOptions,
             };
         },
-    }
-};
-
-/**
- * CustomersApi - functional programming interface
- */
-export const CustomersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = CustomersApiAxiosParamCreator(configuration)
-    return {
         /**
-         * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
-         * @summary Get all customers
-         * @param {number} page 
-         * @param {number} pageSize 
-         * @param {string} [email] 
-         * @param {string} [name] 
-         * @param {string} [endDate] 
-         * @param {string} [startDate] 
+         * Create a new order for payment using the provided data
+         * @summary Create Order
+         * @param {OrderCreateRequest} orderCreateRequest Order data for payment processing
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getCustomers(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerListResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomers(page, pageSize, email, name, endDate, startDate, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getCustomers']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Retrieve the complete details of a specific customer using their unique ID.
-         * @summary Get customer by ID
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getCustomersById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getCustomersById(id, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.getCustomersById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Update the information of an existing customer by providing the new data in the request body.
-         * @summary Update customer data
-         * @param {string} id 
-         * @param {UpdateCustomer} updateCustomer Schema for updating customer information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async patchCustomersById(id: string, updateCustomer: UpdateCustomer, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.patchCustomersById(id, updateCustomer, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.patchCustomersById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Create a new customer by providing the required data in the request body.
-         * @summary Create new customer
-         * @param {Customer1} customer1 Schema for creating a new customer
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postCustomers(customer1: Customer1, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<CustomerResponse>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postCustomers(customer1, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['CustomersApi.postCustomers']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-    }
-};
+        orderCreate: async (orderCreateRequest: OrderCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'orderCreateRequest' is not null or undefined
+            assertParamExists('orderCreate', 'orderCreateRequest', orderCreateRequest)
+            const localVarPath = `/orders/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
 
-/**
- * CustomersApi - factory interface
- */
-export const CustomersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = CustomersApiFp(configuration)
-    return {
-        /**
-         * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
-         * @summary Get all customers
-         * @param {number} page 
-         * @param {number} pageSize 
-         * @param {string} [email] 
-         * @param {string} [name] 
-         * @param {string} [endDate] 
-         * @param {string} [startDate] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCustomers(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerListResponse> {
-            return localVarFp.getCustomers(page, pageSize, email, name, endDate, startDate, options).then((request) => request(axios, basePath));
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(orderCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
         },
-        /**
-         * Retrieve the complete details of a specific customer using their unique ID.
-         * @summary Get customer by ID
-         * @param {string} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getCustomersById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<CustomerResponse> {
-            return localVarFp.getCustomersById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Update the information of an existing customer by providing the new data in the request body.
-         * @summary Update customer data
-         * @param {string} id 
-         * @param {UpdateCustomer} updateCustomer Schema for updating customer information
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        patchCustomersById(id: string, updateCustomer: UpdateCustomer, options?: RawAxiosRequestConfig): AxiosPromise<CustomerResponse> {
-            return localVarFp.patchCustomersById(id, updateCustomer, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a new customer by providing the required data in the request body.
-         * @summary Create new customer
-         * @param {Customer1} customer1 Schema for creating a new customer
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postCustomers(customer1: Customer1, options?: RawAxiosRequestConfig): AxiosPromise<CustomerResponse> {
-            return localVarFp.postCustomers(customer1, options).then((request) => request(axios, basePath));
-        },
-    };
-};
-
-/**
- * CustomersApi - object-oriented interface
- */
-export class CustomersApi extends BaseAPI {
-    /**
-     * Retrieve a list of all customers associated with the organization, with support for filters and pagination.
-     * @summary Get all customers
-     * @param {number} page 
-     * @param {number} pageSize 
-     * @param {string} [email] 
-     * @param {string} [name] 
-     * @param {string} [endDate] 
-     * @param {string} [startDate] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public getCustomers(page: number, pageSize: number, email?: string, name?: string, endDate?: string, startDate?: string, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).getCustomers(page, pageSize, email, name, endDate, startDate, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Retrieve the complete details of a specific customer using their unique ID.
-     * @summary Get customer by ID
-     * @param {string} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public getCustomersById(id: string, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).getCustomersById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Update the information of an existing customer by providing the new data in the request body.
-     * @summary Update customer data
-     * @param {string} id 
-     * @param {UpdateCustomer} updateCustomer Schema for updating customer information
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public patchCustomersById(id: string, updateCustomer: UpdateCustomer, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).patchCustomersById(id, updateCustomer, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a new customer by providing the required data in the request body.
-     * @summary Create new customer
-     * @param {Customer1} customer1 Schema for creating a new customer
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public postCustomers(customer1: Customer1, options?: RawAxiosRequestConfig) {
-        return CustomersApiFp(this.configuration).postCustomers(customer1, options).then((request) => request(this.axios, this.basePath));
-    }
-}
-
-
-
-/**
- * OrdersApi - axios parameter creator
- */
-export const OrdersApiAxiosParamCreator = function (configuration?: Configuration) {
-    return {
         /**
          * Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.
-         * @summary List orders
+         * @summary List Orders
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
          * @param {string} [startDate] 
          * @param {string} [id] 
-         * @param {GetOrdersStatusEnum} [status] 
+         * @param {OrderListStatusEnum} [status] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrders: async (page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: GetOrdersStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        orderList: async (page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: OrderListStatusEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'page' is not null or undefined
-            assertParamExists('getOrders', 'page', page)
+            assertParamExists('orderList', 'page', page)
             // verify required parameter 'pageSize' is not null or undefined
-            assertParamExists('getOrders', 'pageSize', pageSize)
+            assertParamExists('orderList', 'pageSize', pageSize)
             const localVarPath = `/orders/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1465,14 +1531,14 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * Retrieve the complete data of an order by our ID
-         * @summary Get order by ID
+         * @summary Get Order By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrdersById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        orderRead: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getOrdersById', 'id', id)
+            assertParamExists('orderRead', 'id', id)
             const localVarPath = `/orders/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1501,97 +1567,15 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
             };
         },
         /**
-         * Create a new order for payment using the provided data
-         * @summary Create order
-         * @param {Order} order Order data for payment processing
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postOrders: async (order: Order, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'order' is not null or undefined
-            assertParamExists('postOrders', 'order', order)
-            const localVarPath = `/orders/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(order, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
-         * @summary Confirm order
-         * @param {string} id 
-         * @param {PaymentData} paymentData Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postOrdersByIdConfirm: async (id: string, paymentData: PaymentData, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            assertParamExists('postOrdersByIdConfirm', 'id', id)
-            // verify required parameter 'paymentData' is not null or undefined
-            assertParamExists('postOrdersByIdConfirm', 'paymentData', paymentData)
-            const localVarPath = `/orders/{id}/confirm`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(paymentData, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Initiate a refund for the order specified by ID.
-         * @summary Refund order
+         * @summary Refund Order
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postOrdersByIdRefund: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        orderRefund: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('postOrdersByIdRefund', 'id', id)
+            assertParamExists('orderRefund', 'id', id)
             const localVarPath = `/orders/{id}/refund`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1623,217 +1607,217 @@ export const OrdersApiAxiosParamCreator = function (configuration?: Configuratio
 };
 
 /**
- * OrdersApi - functional programming interface
+ * OrderApi - functional programming interface
  */
-export const OrdersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = OrdersApiAxiosParamCreator(configuration)
+export const OrderApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = OrderApiAxiosParamCreator(configuration)
     return {
         /**
+         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
+         * @summary Confirm Order
+         * @param {string} id 
+         * @param {OrderPaymentRequest} orderPaymentRequest Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async orderConfirm(id: string, orderPaymentRequest: OrderPaymentRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderConfirmResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orderConfirm(id, orderPaymentRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrderApi.orderConfirm']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * Create a new order for payment using the provided data
+         * @summary Create Order
+         * @param {OrderCreateRequest} orderCreateRequest Order data for payment processing
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async orderCreate(orderCreateRequest: OrderCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<OrderCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orderCreate(orderCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['OrderApi.orderCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.
-         * @summary List orders
+         * @summary List Orders
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
          * @param {string} [startDate] 
          * @param {string} [id] 
-         * @param {GetOrdersStatusEnum} [status] 
+         * @param {OrderListStatusEnum} [status] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrders(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: GetOrdersStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrders(page, pageSize, endDate, startDate, id, status, options);
+        async orderList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: OrderListStatusEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orderList(page, pageSize, endDate, startDate, id, status, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrders']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrderApi.orderList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Retrieve the complete data of an order by our ID
-         * @summary Get order by ID
+         * @summary Get Order By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getOrdersById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getOrdersById(id, options);
+        async orderRead(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orderRead(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.getOrdersById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Create a new order for payment using the provided data
-         * @summary Create order
-         * @param {Order} order Order data for payment processing
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postOrders(order: Order, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostOrders200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postOrders(order, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.postOrders']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
-         * @summary Confirm order
-         * @param {string} id 
-         * @param {PaymentData} paymentData Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postOrdersByIdConfirm(id: string, paymentData: PaymentData, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostOrdersByIdConfirm200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postOrdersByIdConfirm(id, paymentData, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.postOrdersByIdConfirm']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrderApi.orderRead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Initiate a refund for the order specified by ID.
-         * @summary Refund order
+         * @summary Refund Order
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postOrdersByIdRefund(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postOrdersByIdRefund(id, options);
+        async orderRefund(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.orderRefund(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['OrdersApi.postOrdersByIdRefund']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['OrderApi.orderRefund']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * OrdersApi - factory interface
+ * OrderApi - factory interface
  */
-export const OrdersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = OrdersApiFp(configuration)
+export const OrderApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = OrderApiFp(configuration)
     return {
         /**
+         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
+         * @summary Confirm Order
+         * @param {string} id 
+         * @param {OrderPaymentRequest} orderPaymentRequest Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orderConfirm(id: string, orderPaymentRequest: OrderPaymentRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrderConfirmResponse> {
+            return localVarFp.orderConfirm(id, orderPaymentRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Create a new order for payment using the provided data
+         * @summary Create Order
+         * @param {OrderCreateRequest} orderCreateRequest Order data for payment processing
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        orderCreate(orderCreateRequest: OrderCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<OrderCreateResponse> {
+            return localVarFp.orderCreate(orderCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.
-         * @summary List orders
+         * @summary List Orders
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
          * @param {string} [startDate] 
          * @param {string} [id] 
-         * @param {GetOrdersStatusEnum} [status] 
+         * @param {OrderListStatusEnum} [status] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrders(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: GetOrdersStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.getOrders(page, pageSize, endDate, startDate, id, status, options).then((request) => request(axios, basePath));
+        orderList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: OrderListStatusEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.orderList(page, pageSize, endDate, startDate, id, status, options).then((request) => request(axios, basePath));
         },
         /**
          * Retrieve the complete data of an order by our ID
-         * @summary Get order by ID
+         * @summary Get Order By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getOrdersById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.getOrdersById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a new order for payment using the provided data
-         * @summary Create order
-         * @param {Order} order Order data for payment processing
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postOrders(order: Order, options?: RawAxiosRequestConfig): AxiosPromise<PostOrders200Response> {
-            return localVarFp.postOrders(order, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
-         * @summary Confirm order
-         * @param {string} id 
-         * @param {PaymentData} paymentData Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postOrdersByIdConfirm(id: string, paymentData: PaymentData, options?: RawAxiosRequestConfig): AxiosPromise<PostOrdersByIdConfirm200Response> {
-            return localVarFp.postOrdersByIdConfirm(id, paymentData, options).then((request) => request(axios, basePath));
+        orderRead(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.orderRead(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Initiate a refund for the order specified by ID.
-         * @summary Refund order
+         * @summary Refund Order
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postOrdersByIdRefund(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.postOrdersByIdRefund(id, options).then((request) => request(axios, basePath));
+        orderRefund(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.orderRefund(id, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * OrdersApi - object-oriented interface
+ * OrderApi - object-oriented interface
  */
-export class OrdersApi extends BaseAPI {
+export class OrderApi extends BaseAPI {
+    /**
+     * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
+     * @summary Confirm Order
+     * @param {string} id 
+     * @param {OrderPaymentRequest} orderPaymentRequest Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public orderConfirm(id: string, orderPaymentRequest: OrderPaymentRequest, options?: RawAxiosRequestConfig) {
+        return OrderApiFp(this.configuration).orderConfirm(id, orderPaymentRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * Create a new order for payment using the provided data
+     * @summary Create Order
+     * @param {OrderCreateRequest} orderCreateRequest Order data for payment processing
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public orderCreate(orderCreateRequest: OrderCreateRequest, options?: RawAxiosRequestConfig) {
+        return OrderApiFp(this.configuration).orderCreate(orderCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Retrieve a list of orders. Use date filter and pagination parameters to refine results as needed.
-     * @summary List orders
+     * @summary List Orders
      * @param {number} page 
      * @param {number} pageSize 
      * @param {string} [endDate] 
      * @param {string} [startDate] 
      * @param {string} [id] 
-     * @param {GetOrdersStatusEnum} [status] 
+     * @param {OrderListStatusEnum} [status] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getOrders(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: GetOrdersStatusEnum, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).getOrders(page, pageSize, endDate, startDate, id, status, options).then((request) => request(this.axios, this.basePath));
+    public orderList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, status?: OrderListStatusEnum, options?: RawAxiosRequestConfig) {
+        return OrderApiFp(this.configuration).orderList(page, pageSize, endDate, startDate, id, status, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Retrieve the complete data of an order by our ID
-     * @summary Get order by ID
+     * @summary Get Order By ID
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getOrdersById(id: string, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).getOrdersById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a new order for payment using the provided data
-     * @summary Create order
-     * @param {Order} order Order data for payment processing
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public postOrders(order: Order, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).postOrders(order, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Confirms a Draft order, setting the payment method and processing the charges associated with the order.
-     * @summary Confirm order
-     * @param {string} id 
-     * @param {PaymentData} paymentData Payment data for the order (Pix, Credit Card, Bank Slip, NuPay, etc...)
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public postOrdersByIdConfirm(id: string, paymentData: PaymentData, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).postOrdersByIdConfirm(id, paymentData, options).then((request) => request(this.axios, this.basePath));
+    public orderRead(id: string, options?: RawAxiosRequestConfig) {
+        return OrderApiFp(this.configuration).orderRead(id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Initiate a refund for the order specified by ID.
-     * @summary Refund order
+     * @summary Refund Order
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public postOrdersByIdRefund(id: string, options?: RawAxiosRequestConfig) {
-        return OrdersApiFp(this.configuration).postOrdersByIdRefund(id, options).then((request) => request(this.axios, this.basePath));
+    public orderRefund(id: string, options?: RawAxiosRequestConfig) {
+        return OrderApiFp(this.configuration).orderRefund(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
-export const GetOrdersStatusEnum = {
+export const OrderListStatusEnum = {
     Generating: 'Generating',
     Pending: 'Pending',
     Completed: 'Completed',
@@ -1844,17 +1828,56 @@ export const GetOrdersStatusEnum = {
     InDispute: 'InDispute',
     Chargeback: 'Chargeback'
 } as const;
-export type GetOrdersStatusEnum = typeof GetOrdersStatusEnum[keyof typeof GetOrdersStatusEnum];
+export type OrderListStatusEnum = typeof OrderListStatusEnum[keyof typeof OrderListStatusEnum];
 
 
 /**
- * TransfersApi - axios parameter creator
+ * WithdrawApi - axios parameter creator
  */
-export const TransfersApiAxiosParamCreator = function (configuration?: Configuration) {
+export const WithdrawApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Create a new withdrawal or transfer to the provided payment account
+         * @summary Create Withdrawal
+         * @param {WithdrawCreateRequest} withdrawCreateRequest Withdrawal or transfer request data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        withdrawCreate: async (withdrawCreateRequest: WithdrawCreateRequest, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'withdrawCreateRequest' is not null or undefined
+            assertParamExists('withdrawCreate', 'withdrawCreateRequest', withdrawCreateRequest)
+            const localVarPath = `/withdraws/`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication basicAuth required
+            // http basic authentication required
+            setBasicAuthToObject(localVarRequestOptions, configuration)
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+            localVarHeaderParameter['Accept'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(withdrawCreateRequest, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)
-         * @summary List withdrawals
+         * @summary List Withdrawals
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
@@ -1863,11 +1886,11 @@ export const TransfersApiAxiosParamCreator = function (configuration?: Configura
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWithdraws: async (page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        withdrawList: async (page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'page' is not null or undefined
-            assertParamExists('getWithdraws', 'page', page)
+            assertParamExists('withdrawList', 'page', page)
             // verify required parameter 'pageSize' is not null or undefined
-            assertParamExists('getWithdraws', 'pageSize', pageSize)
+            assertParamExists('withdrawList', 'pageSize', pageSize)
             const localVarPath = `/withdraws/`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -1920,14 +1943,14 @@ export const TransfersApiAxiosParamCreator = function (configuration?: Configura
         },
         /**
          * Returns the details of a specific withdrawal or transfer using its ID
-         * @summary Get withdrawal by ID
+         * @summary Get Withdrawal By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWithdrawsById: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        withdrawRead: async (id: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('getWithdrawsById', 'id', id)
+            assertParamExists('withdrawRead', 'id', id)
             const localVarPath = `/withdraws/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1955,57 +1978,31 @@ export const TransfersApiAxiosParamCreator = function (configuration?: Configura
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * Create a new withdrawal or transfer to the provided payment account
-         * @summary Create withdrawal
-         * @param {Withdraw} withdraw Withdrawal or transfer request data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postWithdraws: async (withdraw: Withdraw, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'withdraw' is not null or undefined
-            assertParamExists('postWithdraws', 'withdraw', withdraw)
-            const localVarPath = `/withdraws/`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication basicAuth required
-            // http basic authentication required
-            setBasicAuthToObject(localVarRequestOptions, configuration)
-
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-            localVarHeaderParameter['Accept'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(withdraw, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
 /**
- * TransfersApi - functional programming interface
+ * WithdrawApi - functional programming interface
  */
-export const TransfersApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = TransfersApiAxiosParamCreator(configuration)
+export const WithdrawApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = WithdrawApiAxiosParamCreator(configuration)
     return {
         /**
+         * Create a new withdrawal or transfer to the provided payment account
+         * @summary Create Withdrawal
+         * @param {WithdrawCreateRequest} withdrawCreateRequest Withdrawal or transfer request data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async withdrawCreate(withdrawCreateRequest: WithdrawCreateRequest, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<WithdrawCreateResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.withdrawCreate(withdrawCreateRequest, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['WithdrawApi.withdrawCreate']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
          * Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)
-         * @summary List withdrawals
+         * @summary List Withdrawals
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
@@ -2014,50 +2011,47 @@ export const TransfersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWithdraws(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWithdraws(page, pageSize, endDate, startDate, id, options);
+        async withdrawList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.withdrawList(page, pageSize, endDate, startDate, id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TransfersApi.getWithdraws']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WithdrawApi.withdrawList']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
          * Returns the details of a specific withdrawal or transfer using its ID
-         * @summary Get withdrawal by ID
+         * @summary Get Withdrawal By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getWithdrawsById(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.getWithdrawsById(id, options);
+        async withdrawRead(id: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.withdrawRead(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TransfersApi.getWithdrawsById']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * Create a new withdrawal or transfer to the provided payment account
-         * @summary Create withdrawal
-         * @param {Withdraw} withdraw Withdrawal or transfer request data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async postWithdraws(withdraw: Withdraw, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PostWithdraws200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.postWithdraws(withdraw, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TransfersApi.postWithdraws']?.[localVarOperationServerIndex]?.url;
+            const localVarOperationServerBasePath = operationServerMap['WithdrawApi.withdrawRead']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
     }
 };
 
 /**
- * TransfersApi - factory interface
+ * WithdrawApi - factory interface
  */
-export const TransfersApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = TransfersApiFp(configuration)
+export const WithdrawApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = WithdrawApiFp(configuration)
     return {
         /**
+         * Create a new withdrawal or transfer to the provided payment account
+         * @summary Create Withdrawal
+         * @param {WithdrawCreateRequest} withdrawCreateRequest Withdrawal or transfer request data
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        withdrawCreate(withdrawCreateRequest: WithdrawCreateRequest, options?: RawAxiosRequestConfig): AxiosPromise<WithdrawCreateResponse> {
+            return localVarFp.withdrawCreate(withdrawCreateRequest, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)
-         * @summary List withdrawals
+         * @summary List Withdrawals
          * @param {number} page 
          * @param {number} pageSize 
          * @param {string} [endDate] 
@@ -2066,39 +2060,40 @@ export const TransfersApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWithdraws(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.getWithdraws(page, pageSize, endDate, startDate, id, options).then((request) => request(axios, basePath));
+        withdrawList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.withdrawList(page, pageSize, endDate, startDate, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Returns the details of a specific withdrawal or transfer using its ID
-         * @summary Get withdrawal by ID
+         * @summary Get Withdrawal By ID
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getWithdrawsById(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.getWithdrawsById(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * Create a new withdrawal or transfer to the provided payment account
-         * @summary Create withdrawal
-         * @param {Withdraw} withdraw Withdrawal or transfer request data
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        postWithdraws(withdraw: Withdraw, options?: RawAxiosRequestConfig): AxiosPromise<PostWithdraws200Response> {
-            return localVarFp.postWithdraws(withdraw, options).then((request) => request(axios, basePath));
+        withdrawRead(id: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.withdrawRead(id, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * TransfersApi - object-oriented interface
+ * WithdrawApi - object-oriented interface
  */
-export class TransfersApi extends BaseAPI {
+export class WithdrawApi extends BaseAPI {
+    /**
+     * Create a new withdrawal or transfer to the provided payment account
+     * @summary Create Withdrawal
+     * @param {WithdrawCreateRequest} withdrawCreateRequest Withdrawal or transfer request data
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    public withdrawCreate(withdrawCreateRequest: WithdrawCreateRequest, options?: RawAxiosRequestConfig) {
+        return WithdrawApiFp(this.configuration).withdrawCreate(withdrawCreateRequest, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * Returns a paginated list of withdrawals and transfers. Filter by creation date or search by ID (withdrawal ID, external ID, acquirer ID, or End2EndID)
-     * @summary List withdrawals
+     * @summary List Withdrawals
      * @param {number} page 
      * @param {number} pageSize 
      * @param {string} [endDate] 
@@ -2107,30 +2102,19 @@ export class TransfersApi extends BaseAPI {
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getWithdraws(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig) {
-        return TransfersApiFp(this.configuration).getWithdraws(page, pageSize, endDate, startDate, id, options).then((request) => request(this.axios, this.basePath));
+    public withdrawList(page: number, pageSize: number, endDate?: string, startDate?: string, id?: string, options?: RawAxiosRequestConfig) {
+        return WithdrawApiFp(this.configuration).withdrawList(page, pageSize, endDate, startDate, id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * Returns the details of a specific withdrawal or transfer using its ID
-     * @summary Get withdrawal by ID
+     * @summary Get Withdrawal By ID
      * @param {string} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    public getWithdrawsById(id: string, options?: RawAxiosRequestConfig) {
-        return TransfersApiFp(this.configuration).getWithdrawsById(id, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * Create a new withdrawal or transfer to the provided payment account
-     * @summary Create withdrawal
-     * @param {Withdraw} withdraw Withdrawal or transfer request data
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     */
-    public postWithdraws(withdraw: Withdraw, options?: RawAxiosRequestConfig) {
-        return TransfersApiFp(this.configuration).postWithdraws(withdraw, options).then((request) => request(this.axios, this.basePath));
+    public withdrawRead(id: string, options?: RawAxiosRequestConfig) {
+        return WithdrawApiFp(this.configuration).withdrawRead(id, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

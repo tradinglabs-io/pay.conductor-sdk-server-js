@@ -4,14 +4,14 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**post_card_tokenization**](CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
+[**card_tokenize**](CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
 
-## post_card_tokenization
+## card_tokenize
 
-> models::PostCardTokenization200Response post_card_tokenization(post_card_tokenization_request)
-Tokenize card
+> models::CardTokenizationCreateResponse card_tokenize(card_tokenization_create_request)
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -20,11 +20,11 @@ Tokenize credit cards for future charges.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**post_card_tokenization_request** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md) | Data for creating a customer card | [required] |
+**card_tokenization_create_request** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md) | Data for creating a customer card with customer information | [required] |
 
 ### Return type
 
-[**models::PostCardTokenization200Response**](postCard_tokenization_200_response.md)
+[**models::CardTokenizationCreateResponse**](Card_Tokenization_Create_Response.md)
 
 ### Authorization
 

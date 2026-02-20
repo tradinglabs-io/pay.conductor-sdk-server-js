@@ -1,0 +1,177 @@
+#' Create a new OrderCreateResponseSession
+#'
+#' @description
+#' OrderCreateResponseSession Class
+#'
+#' @docType class
+#' @title OrderCreateResponseSession
+#' @description OrderCreateResponseSession Class
+#' @format An \code{R6Class} generator object
+#' @field sessionId ID of the checkout session associated with the order character
+#' @importFrom R6 R6Class
+#' @importFrom jsonlite fromJSON toJSON
+#' @export
+OrderCreateResponseSession <- R6::R6Class(
+  "OrderCreateResponseSession",
+  public = list(
+    `sessionId` = NULL,
+
+    #' @description
+    #' Initialize a new OrderCreateResponseSession class.
+    #'
+    #' @param sessionId ID of the checkout session associated with the order
+    #' @param ... Other optional arguments.
+    initialize = function(`sessionId`, ...) {
+      if (!missing(`sessionId`)) {
+        if (!(is.character(`sessionId`) && length(`sessionId`) == 1)) {
+          stop(paste("Error! Invalid data for `sessionId`. Must be a string:", `sessionId`))
+        }
+        self$`sessionId` <- `sessionId`
+      }
+    },
+
+    #' @description
+    #' Convert to an R object. This method is deprecated. Use `toSimpleType()` instead.
+    toJSON = function() {
+      .Deprecated(new = "toSimpleType", msg = "Use the '$toSimpleType()' method instead since that is more clearly named. Use '$toJSONString()' to get a JSON string")
+      return(self$toSimpleType())
+    },
+
+    #' @description
+    #' Convert to a List
+    #'
+    #' Convert the R6 object to a list to work more easily with other tooling.
+    #'
+    #' @return OrderCreateResponseSession as a base R list.
+    #' @examples
+    #' # convert array of OrderCreateResponseSession (x) to a data frame
+    #' \dontrun{
+    #' library(purrr)
+    #' library(tibble)
+    #' df <- x |> map(\(y)y$toList()) |> map(as_tibble) |> list_rbind()
+    #' df
+    #' }
+    toList = function() {
+      return(self$toSimpleType())
+    },
+
+    #' @description
+    #' Convert OrderCreateResponseSession to a base R type
+    #'
+    #' @return A base R type, e.g. a list or numeric/character array.
+    toSimpleType = function() {
+      OrderCreateResponseSessionObject <- list()
+      if (!is.null(self$`sessionId`)) {
+        OrderCreateResponseSessionObject[["sessionId"]] <-
+          self$`sessionId`
+      }
+      return(OrderCreateResponseSessionObject)
+    },
+
+    #' @description
+    #' Deserialize JSON string into an instance of OrderCreateResponseSession
+    #'
+    #' @param input_json the JSON input
+    #' @return the instance of OrderCreateResponseSession
+    fromJSON = function(input_json) {
+      this_object <- jsonlite::fromJSON(input_json)
+      if (!is.null(this_object$`sessionId`)) {
+        self$`sessionId` <- this_object$`sessionId`
+      }
+      self
+    },
+
+    #' @description
+    #' To JSON String
+    #' 
+    #' @param ... Parameters passed to `jsonlite::toJSON`
+    #' @return OrderCreateResponseSession in JSON format
+    toJSONString = function(...) {
+      simple <- self$toSimpleType()
+      json <- jsonlite::toJSON(simple, auto_unbox = TRUE, digits = NA, ...)
+      return(as.character(jsonlite::minify(json)))
+    },
+
+    #' @description
+    #' Deserialize JSON string into an instance of OrderCreateResponseSession
+    #'
+    #' @param input_json the JSON input
+    #' @return the instance of OrderCreateResponseSession
+    fromJSONString = function(input_json) {
+      this_object <- jsonlite::fromJSON(input_json)
+      self$`sessionId` <- this_object$`sessionId`
+      self
+    },
+
+    #' @description
+    #' Validate JSON input with respect to OrderCreateResponseSession and throw an exception if invalid
+    #'
+    #' @param input the JSON input
+    validateJSON = function(input) {
+      input_json <- jsonlite::fromJSON(input)
+      # check the required field `sessionId`
+      if (!is.null(input_json$`sessionId`)) {
+        if (!(is.character(input_json$`sessionId`) && length(input_json$`sessionId`) == 1)) {
+          stop(paste("Error! Invalid data for `sessionId`. Must be a string:", input_json$`sessionId`))
+        }
+      } else {
+        stop(paste("The JSON input `", input, "` is invalid for OrderCreateResponseSession: the required field `sessionId` is missing."))
+      }
+    },
+
+    #' @description
+    #' To string (JSON format)
+    #'
+    #' @return String representation of OrderCreateResponseSession
+    toString = function() {
+      self$toJSONString()
+    },
+
+    #' @description
+    #' Return true if the values in all fields are valid.
+    #'
+    #' @return true if the values in all fields are valid.
+    isValid = function() {
+      # check if the required `sessionId` is null
+      if (is.null(self$`sessionId`)) {
+        return(FALSE)
+      }
+
+      TRUE
+    },
+
+    #' @description
+    #' Return a list of invalid fields (if any).
+    #'
+    #' @return A list of invalid fields (if any).
+    getInvalidFields = function() {
+      invalid_fields <- list()
+      # check if the required `sessionId` is null
+      if (is.null(self$`sessionId`)) {
+        invalid_fields["sessionId"] <- "Non-nullable required field `sessionId` cannot be null."
+      }
+
+      invalid_fields
+    },
+
+    #' @description
+    #' Print the object
+    print = function() {
+      print(jsonlite::prettify(self$toJSONString()))
+      invisible(self)
+    }
+  ),
+  # Lock the class to prevent modifications to the method or field
+  lock_class = TRUE
+)
+## Uncomment below to unlock the class to allow modifications of the method or field
+# OrderCreateResponseSession$unlock()
+#
+## Below is an example to define the print function
+# OrderCreateResponseSession$set("public", "print", function(...) {
+#   print(jsonlite::prettify(self$toJSONString()))
+#   invisible(self)
+# })
+## Uncomment below to lock the class to prevent modifications to the method or field
+# OrderCreateResponseSession$lock()
+

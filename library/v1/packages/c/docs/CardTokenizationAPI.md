@@ -4,27 +4,27 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CardTokenizationAPI_postCardTokenization**](CardTokenizationAPI.md#CardTokenizationAPI_postCardTokenization) | **POST** /card-tokenization/ | Tokenize card
+[**CardTokenizationAPI_cardTokenize**](CardTokenizationAPI.md#CardTokenizationAPI_cardTokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
-# **CardTokenizationAPI_postCardTokenization**
+# **CardTokenizationAPI_cardTokenize**
 ```c
-// Tokenize card
+// Tokenize Card
 //
 // Tokenize credit cards for future charges.
 //
-post_card_tokenization_200_response_t* CardTokenizationAPI_postCardTokenization(apiClient_t *apiClient, post_card_tokenization_request_t *post_card_tokenization_request);
+card_tokenization_create_response_t* CardTokenizationAPI_cardTokenize(apiClient_t *apiClient, card_tokenization_create_request_t *card_tokenization_create_request);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**post_card_tokenization_request** | **[post_card_tokenization_request_t](post_card_tokenization_request.md) \*** | Data for creating a customer card | 
+**card_tokenization_create_request** | **[card_tokenization_create_request_t](card_tokenization_create_request.md) \*** | Data for creating a customer card with customer information | 
 
 ### Return type
 
-[post_card_tokenization_200_response_t](post_card_tokenization_200_response.md) *
+[card_tokenization_create_response_t](card_tokenization_create_response.md) *
 
 
 ### Authorization

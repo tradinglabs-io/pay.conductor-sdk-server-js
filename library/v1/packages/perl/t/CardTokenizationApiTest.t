@@ -30,11 +30,11 @@ my $api = WWW::OpenAPIClient::CardTokenizationApi->new();
 isa_ok($api, 'WWW::OpenAPIClient::CardTokenizationApi');
 
 #
-# post_card_tokenization test
+# card_tokenize test
 #
 # uncomment below and update the test
-#my $post_card_tokenization_post_card_tokenization_request = undef; # replace NULL with a proper value
-#my $post_card_tokenization_result = $api->post_card_tokenization(post_card_tokenization_request => $post_card_tokenization_post_card_tokenization_request);
+#my $card_tokenize_card_tokenization_create_request = undef; # replace NULL with a proper value
+#my $card_tokenize_result = $api->card_tokenize(card_tokenization_create_request => $card_tokenize_card_tokenization_create_request);
 
 
 done_testing();

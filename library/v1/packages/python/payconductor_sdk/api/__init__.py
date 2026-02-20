@@ -2,7 +2,7 @@
 
 # import apis into api package
 from payconductor_sdk.api.card_tokenization_api import CardTokenizationApi
-from payconductor_sdk.api.customers_api import CustomersApi
-from payconductor_sdk.api.orders_api import OrdersApi
-from payconductor_sdk.api.transfers_api import TransfersApi
+from payconductor_sdk.api.customer_api import CustomerApi
+from payconductor_sdk.api.order_api import OrderApi
+from payconductor_sdk.api.withdraw_api import WithdrawApi
 

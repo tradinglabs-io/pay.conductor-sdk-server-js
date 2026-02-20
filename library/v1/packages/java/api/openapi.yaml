@@ -89,11 +89,11 @@ security:
 - basicAuth: []
 tags:
 - description: "Manage charges, check order status, and handle refunds."
-  name: Orders
+  name: Order
 - description: Initiate and monitor withdrawals and transfers to your external accounts.
-  name: Transfers
+  name: Transfer
 - description: "Manage customers, create, update, delete and list customers."
-  name: Customers
+  name: Customer
 - description: Tokenize credit cards for future charges.
   name: Card Tokenization
 paths:
@@ -101,7 +101,7 @@ paths:
     get:
       description: Retrieve a list of orders. Use date filter and pagination parameters
         to refine results as needed.
-      operationId: getOrders
+      operationId: orderList
       parameters:
       - explode: true
         in: query
@@ -169,37 +169,38 @@ paths:
           - Chargeback
           type: string
         style: form
-      summary: List orders
+      summary: List Orders
       tags:
-      - Orders
+      - Order
       x-accepts:
       - application/json
     post:
       description: Create a new order for payment using the provided data
-      operationId: postOrders
+      operationId: orderCreate
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/postOrders_request"
+              $ref: "#/components/schemas/Order_Create_Request"
+        description: Order data for payment processing
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/postOrders_200_response"
-          description: Response for status 200
-      summary: Create order
+                $ref: "#/components/schemas/Order_Create_Response"
+          description: Response after creating an order
+      summary: Create Order
       tags:
-      - Orders
+      - Order
       x-content-type: application/json
       x-accepts:
       - application/json
   /orders/{id}:
     get:
       description: Retrieve the complete data of an order by our ID
-      operationId: getOrdersById
+      operationId: orderRead
       parameters:
       - explode: false
         in: path
@@ -208,16 +209,16 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Get order by ID
+      summary: Get Order By ID
       tags:
-      - Orders
+      - Order
       x-accepts:
       - application/json
   /orders/{id}/confirm:
     post:
       description: "Confirms a Draft order, setting the payment method and processing\
         \ the charges associated with the order."
-      operationId: postOrdersByIdConfirm
+      operationId: orderConfirm
       parameters:
       - explode: false
         in: path
@@ -230,7 +231,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/postOrders_request_payment"
+              $ref: "#/components/schemas/Order_Payment_Request"
         description: "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay,\
           \ etc...)"
         required: true
@@ -239,18 +240,18 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/postOrdersByIdConfirm_200_response"
-          description: Response for status 200
-      summary: Confirm order
+                $ref: "#/components/schemas/Order_Confirm_Response"
+          description: Response after confirming a draft order
+      summary: Confirm Order
       tags:
-      - Orders
+      - Order
       x-content-type: application/json
       x-accepts:
       - application/json
   /orders/{id}/refund:
     post:
       description: Initiate a refund for the order specified by ID.
-      operationId: postOrdersByIdRefund
+      operationId: orderRefund
       parameters:
       - explode: false
         in: path
@@ -259,9 +260,9 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Refund order
+      summary: Refund Order
       tags:
-      - Orders
+      - Order
       x-accepts:
       - application/json
   /withdraws/:
@@ -269,7 +270,7 @@ paths:
       description: "Returns a paginated list of withdrawals and transfers. Filter\
         \ by creation date or search by ID (withdrawal ID, external ID, acquirer ID,\
         \ or End2EndID)"
-      operationId: getWithdraws
+      operationId: withdrawList
       parameters:
       - explode: true
         in: query
@@ -321,30 +322,31 @@ paths:
             \ ID, or End2EndID)"
           type: string
         style: form
-      summary: List withdrawals
+      summary: List Withdrawals
       tags:
-      - Transfers
+      - Withdraw
       x-accepts:
       - application/json
     post:
       description: Create a new withdrawal or transfer to the provided payment account
-      operationId: postWithdraws
+      operationId: withdrawCreate
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/postWithdraws_request"
+              $ref: "#/components/schemas/Withdraw_Create_Request"
+        description: Withdrawal or transfer request data
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/postWithdraws_200_response"
-          description: Response for status 200
-      summary: Create withdrawal
+                $ref: "#/components/schemas/Withdraw_Create_Response"
+          description: Response after creating a withdrawal or transfer
+      summary: Create Withdrawal
       tags:
-      - Transfers
+      - Withdraw
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -352,7 +354,7 @@ paths:
     get:
       description: Returns the details of a specific withdrawal or transfer using
         its ID
-      operationId: getWithdrawsById
+      operationId: withdrawRead
       parameters:
       - explode: false
         in: path
@@ -361,22 +363,23 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Get withdrawal by ID
+      summary: Get Withdrawal By ID
       tags:
-      - Transfers
+      - Withdraw
       x-accepts:
       - application/json
   /customers/:
     get:
       description: "Retrieve a list of all customers associated with the organization,\
         \ with support for filters and pagination."
-      operationId: getCustomers
+      operationId: customerListCustom
       parameters:
       - explode: true
         in: query
         name: email
         required: false
         schema:
+          description: Filter by customer email
           format: email
           type: string
         style: form
@@ -385,6 +388,7 @@ paths:
         name: name
         required: false
         schema:
+          description: Filter by customer name
           maxLength: 255
           minLength: 1
           type: string
@@ -430,25 +434,39 @@ paths:
           format: date-time
           type: string
         style: form
-      summary: Get all customers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer_List_Response"
+          description: Paginated list of customers
+      summary: Get All Customers
       tags:
-      - Customers
+      - Customer
       x-accepts:
       - application/json
     post:
       description: Create a new customer by providing the required data in the request
         body.
-      operationId: postCustomers
+      operationId: customerCreate
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Customer"
+              $ref: "#/components/schemas/Customer_Create_Request"
         description: Schema for creating a new customer
         required: true
-      summary: Create new customer
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer_Read_Response"
+          description: Customer response with complete information
+      summary: Create New Customer
       tags:
-      - Customers
+      - Customer
       x-content-type: application/json
       x-accepts:
       - application/json
@@ -456,7 +474,7 @@ paths:
     get:
       description: Retrieve the complete details of a specific customer using their
         unique ID.
-      operationId: getCustomersById
+      operationId: customerRead
       parameters:
       - explode: false
         in: path
@@ -465,15 +483,22 @@ paths:
         schema:
           type: string
         style: simple
-      summary: Get customer by ID
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer_Read_Response"
+          description: Customer response with complete information
+      summary: Get Customer By ID
       tags:
-      - Customers
+      - Customer
       x-accepts:
       - application/json
     patch:
       description: Update the information of an existing customer by providing the
         new data in the request body.
-      operationId: patchCustomersById
+      operationId: customerUpdate
       parameters:
       - explode: false
         in: path
@@ -486,34 +511,41 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Customer_1"
-        description: Schema for creating a new customer
-        required: true
-      summary: Update customer data
-      tags:
-      - Customers
-      x-content-type: application/json
-      x-accepts:
-      - application/json
-  /card-tokenization/:
-    post:
-      description: Tokenize credit cards for future charges.
-      operationId: postCard-tokenization
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/postCard_tokenization_request"
-        description: Data for creating a customer card
+              $ref: "#/components/schemas/Customer_Update_Request"
+        description: Schema for updating customer information
         required: true
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/postCard_tokenization_200_response"
-          description: Response for status 200
-      summary: Tokenize card
+                $ref: "#/components/schemas/Customer_Read_Response"
+          description: Customer response with complete information
+      summary: Update Customer Data
+      tags:
+      - Customer
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /card-tokenization/:
+    post:
+      description: Tokenize credit cards for future charges.
+      operationId: cardTokenize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Card_Tokenization_Create_Request"
+        description: Data for creating a customer card with customer information
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Card_Tokenization_Create_Response"
+          description: Response containing customer ID and card token
+      summary: Tokenize Card
       tags:
       - Card Tokenization
       x-content-type: application/json
@@ -647,24 +679,68 @@ components:
       - SepaDebit
       - GooglePay
       - Draft
-    Pix:
+    OrderTokenizedCardData:
+      properties:
+        firstSixCardNumber:
+          description: First 6 digits of the credit card
+          type: string
+        token:
+          description: Previously generated credit card token
+          type: string
+      required:
+      - token
+      title: Order Tokenized Card Data
+      type: object
+    CardCreateRequest:
+      description: Complete card data for payment processing
+      properties:
+        cvv:
+          description: Card security code (CVV)
+          maxLength: 4
+          minLength: 3
+          type: string
+        expiration:
+          $ref: "#/components/schemas/Card_Expiration_Data"
+        holderName:
+          description: Card holder name
+          type: string
+        number:
+          description: Credit card number
+          type: string
+      required:
+      - cvv
+      - expiration
+      - holderName
+      - number
+      title: Card Create Request
+      type: object
+    OrderPIXPaymentRequest:
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
         expirationInSeconds:
-          $ref: "#/components/schemas/Pix_expirationInSeconds"
+          default: 3600
+          description: PIX expiration time in seconds
+          minimum: 3600
+          multipleOf: 1
+          type: number
       required:
       - paymentMethod
-      title: Pix
+      title: Order PIX Payment Request
       type: object
-    CreditCard:
+    OrderCreditCardPaymentRequest:
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
         card:
-          $ref: "#/components/schemas/CreditCard_card"
+          $ref: "#/components/schemas/OrderCreditCardPaymentRequest_card"
         installments:
-          $ref: "#/components/schemas/CreditCard_installments"
+          default: 1
+          description: Number of installments
+          maximum: 12
+          minimum: 1
+          multipleOf: 1
+          type: number
         softDescriptor:
           description: Text that will appear on the card statement (soft descriptor)
           maxLength: 22
@@ -674,45 +750,52 @@ components:
       - card
       - installments
       - paymentMethod
-      title: Credit Card
+      title: Order Credit Card Payment Request
       type: object
-    BankSlip:
+    OrderBankSlipPaymentRequest:
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
         expirationInDays:
-          $ref: "#/components/schemas/BankSlip_expirationInDays"
+          default: 7
+          description: Days until bank slip expires
+          minimum: 1
+          multipleOf: 1
+          type: number
       required:
       - paymentMethod
-      title: Bank Slip
+      title: Order Bank Slip Payment Request
       type: object
-    NuPay:
+    OrderNuPayPaymentRequest:
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
         nuPay:
-          $ref: "#/components/schemas/NuPay_nuPay"
+          $ref: "#/components/schemas/OrderNuPayPaymentRequest_nuPay"
       required:
       - nuPay
       - paymentMethod
-      title: NuPay
+      title: Order NuPay Payment Request
       type: object
-    PicPay:
+    OrderPicPayPaymentRequest:
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
       required:
       - paymentMethod
-      title: PicPay
+      title: Order PicPay Payment Request
       type: object
-    Draft:
+    OrderDraftPaymentRequest:
       description: Used to create an order without generating a real payment. Use
         to create orders that will be paid later
       properties:
         paymentMethod:
           $ref: "#/components/schemas/PaymentMethod"
         expirationInSeconds:
-          $ref: "#/components/schemas/Draft_expirationInSeconds"
+          default: 3600
+          description: Order expiration time in seconds
+          multipleOf: 1
+          type: number
         availablePaymentMethods:
           description: Available payment methods for this order
           items:
@@ -720,9 +803,62 @@ components:
           type: array
       required:
       - paymentMethod
-      title: Draft
+      title: Order Draft Payment Request
       type: object
-    Customer_address:
+    CustomerCreateRequest:
+      description: Schema for creating a new customer
+      example:
+        address:
+          country: BR
+          number: number
+          zipCode: zipCode
+          city: city
+          street: street
+          neighborhood: neighborhood
+          state: state
+        phoneNumber: phoneNumber
+        documentType: Cpf
+        documentNumber: documentNumber
+        name: name
+        email: email
+      properties:
+        address:
+          $ref: "#/components/schemas/Address_Create_Request"
+        documentNumber:
+          description: Customer CPF or CNPJ without formatting
+          pattern: "^\\d{11}$|^\\d{14}$"
+          type: string
+        documentType:
+          $ref: "#/components/schemas/DocumentType"
+        email:
+          description: Customer email
+          format: email
+          type: string
+        name:
+          description: Customer full name
+          type: string
+        phoneNumber:
+          description: Customer phone number in +55 DD 9XXXXXXXX format
+          pattern: "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$"
+          type: string
+      required:
+      - documentNumber
+      - documentType
+      - email
+      - name
+      title: Customer Create Request
+      type: object
+    CardTokenizationCustomerByIdData:
+      description: Reference to an existing customer by ID
+      properties:
+        id:
+          description: ID of an existing customer
+          type: string
+      required:
+      - id
+      title: Card Tokenization Customer By Id Data
+      type: object
+    Address_Create_Request:
       description: Schema for creating a new address
       example:
         country: BR
@@ -767,27 +903,13 @@ components:
       - state
       - street
       - zipCode
-      title: Customer address
+      title: Address Create Request
       type: object
-    Customer:
+    Customer_Create_Request:
       description: Schema for creating a new customer
-      example:
-        address:
-          country: BR
-          number: number
-          zipCode: zipCode
-          city: city
-          street: street
-          neighborhood: neighborhood
-          state: state
-        phoneNumber: phoneNumber
-        documentType: Cpf
-        documentNumber: documentNumber
-        name: name
-        email: email
       properties:
         address:
-          $ref: "#/components/schemas/Customer_address"
+          $ref: "#/components/schemas/Address_Create_Request"
         documentNumber:
           description: Customer CPF or CNPJ without formatting
           pattern: "^\\d{11}$|^\\d{14}$"
@@ -810,15 +932,18 @@ components:
       - documentType
       - email
       - name
-      title: Customer
+      title: Customer Create Request
       type: object
-    postOrders_request_fingerprints:
+    Order_Fraud_Fingerprints:
+      description: Fraud analysis fingerprint data
       properties:
         threatMetrixFingerprintId:
           description: ThreatMetrix fingerprint ID for fraud analysis
           type: string
+      title: Order Fraud Fingerprints
       type: object
-    postOrders_request_items_inner:
+    Order_Item_Data:
+      description: Product or service item in the order
       properties:
         id:
           description: Product or service ID in your system
@@ -842,6 +967,7 @@ components:
       - name
       - qty
       - unitPrice
+      title: Order Item Data
       type: object
     MerchantInput:
       description: Merchant data for order or withdrawal
@@ -865,26 +991,27 @@ components:
       - name
       title: MerchantInput
       type: object
-    postOrders_request_payment:
+    Order_Payment_Request:
       description: "Payment data for the order (Pix, Credit Card, Bank Slip, NuPay,\
         \ etc...)"
       discriminator:
         mapping:
-          Pix: "#/components/schemas/Pix"
-          CreditCard: "#/components/schemas/CreditCard"
-          BankSlip: "#/components/schemas/BankSlip"
-          NuPay: "#/components/schemas/NuPay"
-          PicPay: "#/components/schemas/PicPay"
-          Draft: "#/components/schemas/Draft"
+          OrderPIXPaymentRequest: "#/components/schemas/OrderPIXPaymentRequest"
+          OrderCreditCardPaymentRequest: "#/components/schemas/OrderCreditCardPaymentRequest"
+          OrderBankSlipPaymentRequest: "#/components/schemas/OrderBankSlipPaymentRequest"
+          OrderNuPayPaymentRequest: "#/components/schemas/OrderNuPayPaymentRequest"
+          OrderPicPayPaymentRequest: "#/components/schemas/OrderPicPayPaymentRequest"
+          OrderDraftPaymentRequest: "#/components/schemas/OrderDraftPaymentRequest"
         propertyName: paymentMethod
       oneOf:
-      - $ref: "#/components/schemas/Pix"
-      - $ref: "#/components/schemas/CreditCard"
-      - $ref: "#/components/schemas/BankSlip"
-      - $ref: "#/components/schemas/NuPay"
-      - $ref: "#/components/schemas/PicPay"
-      - $ref: "#/components/schemas/Draft"
-    postOrders_request_session:
+      - $ref: "#/components/schemas/OrderPIXPaymentRequest"
+      - $ref: "#/components/schemas/OrderCreditCardPaymentRequest"
+      - $ref: "#/components/schemas/OrderBankSlipPaymentRequest"
+      - $ref: "#/components/schemas/OrderNuPayPaymentRequest"
+      - $ref: "#/components/schemas/OrderPicPayPaymentRequest"
+      - $ref: "#/components/schemas/OrderDraftPaymentRequest"
+      title: Order Payment Request
+    Order_Create_Request_session:
       description: "If externalSessionId or sessionId is provided and an existing\
         \ session exists, it will be updated with the new data. Otherwise, a new session\
         \ will be created."
@@ -906,8 +1033,9 @@ components:
           minLength: 16
           type: string
       type: object
-    postOrders_request:
+    Order_Create_Request:
       additionalProperties: false
+      description: Order data for payment processing
       properties:
         chargeAmount:
           description: Total amount to be charged on the order in floating point value
@@ -916,7 +1044,7 @@ components:
           description: Client IP address
           type: string
         customer:
-          $ref: "#/components/schemas/Customer"
+          $ref: "#/components/schemas/Customer_Create_Request"
         discountAmount:
           default: 0
           description: Discount amount
@@ -925,24 +1053,24 @@ components:
           description: Order ID in your system
           type: string
         fingerprints:
-          $ref: "#/components/schemas/postOrders_request_fingerprints"
+          $ref: "#/components/schemas/Order_Fraud_Fingerprints"
         items:
           description: List of products or services in the order
           items:
-            $ref: "#/components/schemas/postOrders_request_items_inner"
+            $ref: "#/components/schemas/Order_Item_Data"
           maxItems: 20
           type: array
         merchant:
           $ref: "#/components/schemas/MerchantInput"
         payment:
-          $ref: "#/components/schemas/postOrders_request_payment"
+          $ref: "#/components/schemas/Order_Payment_Request"
         splitAmountTotal:
           description: "Total split amount to be paid to the merchant (Used only for\
             \ reporting purposes, does not generate actual split)"
           minimum: 0
           type: number
         session:
-          $ref: "#/components/schemas/postOrders_request_session"
+          $ref: "#/components/schemas/Order_Create_Request_session"
         shippingFee:
           default: 0
           description: Shipping fee
@@ -954,6 +1082,7 @@ components:
         metadata:
           description: Additional metadata for the order as key-value pairs. Keys
             should not contain spaces or special characters
+          title: Order Metadata
           type: object
       required:
       - chargeAmount
@@ -964,9 +1093,10 @@ components:
       - payment
       - shippingFee
       - taxFee
+      title: Order Create Request
       type: object
-    postOrders_200_response_pix:
-      description: PIX data
+    Order_PIX_Info:
+      description: PIX payment data and QR code information
       example:
         qrCodeUrl: qrCodeUrl
         copyAndPasteCode: copyAndPasteCode
@@ -986,8 +1116,10 @@ components:
       - copyAndPasteCode
       - endToEndId
       - qrCodeUrl
+      title: Order PIX Info
       type: object
-    postOrders_200_response_bankSlip:
+    Order_Bank_Slip_Info:
+      description: Bank slip payment data
       example:
         pdfUrl: pdfUrl
         barCode: barCode
@@ -1005,8 +1137,10 @@ components:
       required:
       - barCode
       - digitableLine
+      title: Order Bank Slip Info
       type: object
-    postOrders_200_response_nuPay:
+    Order_NuPay_Info:
+      description: NuPay payment data
       example:
         paymentUrl: paymentUrl
       properties:
@@ -1015,8 +1149,10 @@ components:
           type: string
       required:
       - paymentUrl
+      title: Order NuPay Info
       type: object
-    postOrders_200_response_picPay:
+    Order_PicPay_Info:
+      description: PicPay payment data
       example:
         qrCodeUrl: qrCodeUrl
         copyAndPasteCode: copyAndPasteCode
@@ -1030,16 +1166,19 @@ components:
       required:
       - copyAndPasteCode
       - qrCodeUrl
+      title: Order PicPay Info
       type: object
-    postOrders_200_response_creditCard:
+    Order_Credit_Card_Info:
+      description: Credit card payment data
       example:
         authorizationCode: authorizationCode
       properties:
         authorizationCode:
           description: Transaction authorization code
           type: string
+      title: Order Credit Card Info
       type: object
-    postOrders_200_response_orderItems_inner:
+    Order_Create_Response_orderItems_inner:
       example:
         totalAmount: 5.962133916683182
         totalNetAmount: 5.637376656633329
@@ -1080,7 +1219,7 @@ components:
       - totalNetAmount
       - unityPrice
       type: object
-    postOrders_200_response_session:
+    Order_Create_Response_session:
       example:
         sessionId: sessionId
       nullable: true
@@ -1091,8 +1230,9 @@ components:
       required:
       - sessionId
       type: object
-    postOrders_200_response:
+    Order_Create_Response:
       additionalProperties: false
+      description: Response after creating an order
       example:
         amount: 0.8008281904610115
         payedAt: payedAt
@@ -1159,15 +1299,15 @@ components:
           description: Cost fee applied to the order
           type: number
         pix:
-          $ref: "#/components/schemas/postOrders_200_response_pix"
+          $ref: "#/components/schemas/Order_PIX_Info"
         bankSlip:
-          $ref: "#/components/schemas/postOrders_200_response_bankSlip"
+          $ref: "#/components/schemas/Order_Bank_Slip_Info"
         nuPay:
-          $ref: "#/components/schemas/postOrders_200_response_nuPay"
+          $ref: "#/components/schemas/Order_NuPay_Info"
         picPay:
-          $ref: "#/components/schemas/postOrders_200_response_picPay"
+          $ref: "#/components/schemas/Order_PicPay_Info"
         creditCard:
-          $ref: "#/components/schemas/postOrders_200_response_creditCard"
+          $ref: "#/components/schemas/Order_Credit_Card_Info"
         status:
           $ref: "#/components/schemas/Status"
         paymentMethod:
@@ -1186,10 +1326,10 @@ components:
           type: string
         orderItems:
           items:
-            $ref: "#/components/schemas/postOrders_200_response_orderItems_inner"
+            $ref: "#/components/schemas/Order_Create_Response_orderItems_inner"
           type: array
         session:
-          $ref: "#/components/schemas/postOrders_200_response_session"
+          $ref: "#/components/schemas/Order_Create_Response_session"
       required:
       - amount
       - costFee
@@ -1203,8 +1343,10 @@ components:
       - payedAt
       - paymentMethod
       - status
+      title: Order Create Response
       type: object
-    postOrdersByIdConfirm_200_response:
+    Order_Confirm_Response:
+      description: Response after confirming a draft order
       example:
         amount: 0.8008281904610115
         payedAt: payedAt
@@ -1243,13 +1385,13 @@ components:
           description: Cost fee applied to the order
           type: number
         pix:
-          $ref: "#/components/schemas/postOrders_200_response_pix"
+          $ref: "#/components/schemas/Order_PIX_Info"
         bankSlip:
-          $ref: "#/components/schemas/postOrders_200_response_bankSlip"
+          $ref: "#/components/schemas/Order_Bank_Slip_Info"
         nuPay:
-          $ref: "#/components/schemas/postOrders_200_response_nuPay"
+          $ref: "#/components/schemas/Order_NuPay_Info"
         picPay:
-          $ref: "#/components/schemas/postOrders_200_response_picPay"
+          $ref: "#/components/schemas/Order_PicPay_Info"
         status:
           $ref: "#/components/schemas/Status"
         paymentMethod:
@@ -1276,8 +1418,10 @@ components:
       - payedAt
       - paymentMethod
       - status
+      title: Order Confirm Response
       type: object
-    postWithdraws_request_payoutAccount:
+    Withdraw_Payout_Account_Data:
+      description: Bank account information for withdrawal
       properties:
         ownerDocument:
           description: Account holder document (CPF or CNPJ)
@@ -1295,9 +1439,10 @@ components:
       - ownerName
       - pixKey
       - pixType
+      title: Withdraw Payout Account Data
       type: object
-    postWithdraws_request:
-      additionalProperties: false
+    Withdraw_Create_Request:
+      description: Withdrawal or transfer request data
       properties:
         amount:
           description: Withdrawal amount in cents
@@ -1309,12 +1454,13 @@ components:
         merchant:
           $ref: "#/components/schemas/MerchantInput"
         payoutAccount:
-          $ref: "#/components/schemas/postWithdraws_request_payoutAccount"
+          $ref: "#/components/schemas/Withdraw_Payout_Account_Data"
       required:
       - amount
       - payoutAccount
+      title: Withdraw Create Request
       type: object
-    postWithdraws_200_response_payedAt:
+    Withdraw_Create_Response_payedAt:
       anyOf:
       - description: Date and time when the withdrawal was paid (ISO 8601 format)
         type: Date
@@ -1325,7 +1471,7 @@ components:
       - type: number
       description: Date and time when the withdrawal was paid (ISO 8601 format)
       nullable: true
-    postWithdraws_200_response_payoutAccount:
+    Withdraw_Create_Response_payoutAccount:
       example:
         pixType: Cpf
         ownerName: ownerName
@@ -1355,8 +1501,8 @@ components:
       - pixKey
       - pixType
       type: object
-    postWithdraws_200_response:
-      additionalProperties: false
+    Withdraw_Create_Response:
+      description: Response after creating a withdrawal or transfer
       example:
         payedAt: ""
         costFee: 0.8008281904610115
@@ -1402,9 +1548,9 @@ components:
           nullable: true
           type: string
         payedAt:
-          $ref: "#/components/schemas/postWithdraws_200_response_payedAt"
+          $ref: "#/components/schemas/Withdraw_Create_Response_payedAt"
         payoutAccount:
-          $ref: "#/components/schemas/postWithdraws_200_response_payoutAccount"
+          $ref: "#/components/schemas/Withdraw_Create_Response_payoutAccount"
       required:
       - costFee
       - errorCode
@@ -1416,12 +1562,206 @@ components:
       - payedAt
       - payoutAccount
       - status
+      title: Withdraw Create Response
       type: object
-    Customer_1:
-      description: Schema for creating a new customer
+    Customer_Address_Response:
+      description: Customer address information
+      example:
+        number: number
+        zipCode: zipCode
+        country: country
+        city: city
+        street: street
+        id: id
+        neighborhood: neighborhood
+        state: state
+      nullable: true
+      properties:
+        id:
+          description: Unique address identifier
+          type: string
+        street:
+          description: Street name
+          type: string
+        number:
+          description: Address number
+          type: string
+        neighborhood:
+          description: Neighborhood name
+          type: string
+        city:
+          description: City name
+          type: string
+        state:
+          description: State code in ISO 3166-2 format
+          type: string
+        zipCode:
+          description: ZIP code without formatting
+          type: string
+        country:
+          description: Country code in ISO 3166-1 alpha-2 format
+          type: string
+      required:
+      - city
+      - country
+      - id
+      - neighborhood
+      - number
+      - state
+      - street
+      - zipCode
+      title: Customer Address Response
+      type: object
+    Customer_Read_Response:
+      description: Customer response with complete information
+      example:
+        createdAt: createdAt
+        phoneNumber: phoneNumber
+        address:
+          number: number
+          zipCode: zipCode
+          country: country
+          city: city
+          street: street
+          id: id
+          neighborhood: neighborhood
+          state: state
+        documentType: Cpf
+        documentNumber: documentNumber
+        name: name
+        id: id
+        email: email
+        updatedAt: updatedAt
+      properties:
+        id:
+          description: Unique customer identifier
+          type: string
+        name:
+          description: Customer full name
+          type: string
+        email:
+          description: Customer email
+          format: email
+          type: string
+        documentType:
+          $ref: "#/components/schemas/DocumentType"
+        documentNumber:
+          description: Customer CPF or CNPJ without formatting
+          nullable: true
+          type: string
+        phoneNumber:
+          description: Customer phone number in +55 DD 9XXXXXXXX format
+          nullable: true
+          type: string
+        address:
+          $ref: "#/components/schemas/Customer_Address_Response"
+        createdAt:
+          description: Date and time when the customer was created (ISO 8601 format)
+          type: string
+        updatedAt:
+          description: Date and time when the customer was last updated (ISO 8601
+            format)
+          type: string
+      required:
+      - address
+      - createdAt
+      - documentNumber
+      - documentType
+      - email
+      - id
+      - name
+      - phoneNumber
+      - updatedAt
+      title: Customer Read Response
+      type: object
+    Customer_List_Pagination:
+      description: Pagination information for customer list
+      example:
+        totalItems: 1.4658129805029452
+        totalPages: 5.962133916683182
+        pageSize: 6.027456183070403
+        currentPage: 0.8008281904610115
+      properties:
+        currentPage:
+          description: Current page number
+          type: number
+        pageSize:
+          description: Number of items per page
+          type: number
+        totalItems:
+          description: Total number of customers
+          type: number
+        totalPages:
+          description: Total number of pages
+          type: number
+      required:
+      - currentPage
+      - pageSize
+      - totalItems
+      - totalPages
+      title: Customer List Pagination
+      type: object
+    Customer_List_Response:
+      description: Paginated list of customers
+      example:
+        pagination:
+          totalItems: 1.4658129805029452
+          totalPages: 5.962133916683182
+          pageSize: 6.027456183070403
+          currentPage: 0.8008281904610115
+        data:
+        - createdAt: createdAt
+          phoneNumber: phoneNumber
+          address:
+            number: number
+            zipCode: zipCode
+            country: country
+            city: city
+            street: street
+            id: id
+            neighborhood: neighborhood
+            state: state
+          documentType: Cpf
+          documentNumber: documentNumber
+          name: name
+          id: id
+          email: email
+          updatedAt: updatedAt
+        - createdAt: createdAt
+          phoneNumber: phoneNumber
+          address:
+            number: number
+            zipCode: zipCode
+            country: country
+            city: city
+            street: street
+            id: id
+            neighborhood: neighborhood
+            state: state
+          documentType: Cpf
+          documentNumber: documentNumber
+          name: name
+          id: id
+          email: email
+          updatedAt: updatedAt
+      properties:
+        data:
+          description: List of customers
+          items:
+            $ref: "#/components/schemas/Customer_Read_Response"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Customer_List_Pagination"
+      required:
+      - data
+      - pagination
+      title: Customer List Response
+      type: object
+    Customer_Update_Request:
+      description: Schema for updating customer information
       properties:
         address:
-          $ref: "#/components/schemas/Customer_address"
+          $ref: "#/components/schemas/Address_Create_Request"
         documentNumber:
           description: Customer CPF or CNPJ without formatting
           pattern: "^\\d{11}$|^\\d{14}$"
@@ -1439,9 +1779,10 @@ components:
           description: Customer phone number in +55 DD 9XXXXXXXX format
           pattern: "^\\+(\\d{1,2}) (\\d{2}) (\\d{8,9})$"
           type: string
-      title: Customer
+      title: Customer Update Request
       type: object
-    Complete_card_data_expiration:
+    Card_Expiration_Data:
+      description: Card expiration date
       properties:
         month:
           description: Card expiration month
@@ -1456,8 +1797,10 @@ components:
       required:
       - month
       - year
+      title: Card Expiration Data
       type: object
-    Complete_card_data:
+    Card_Create_Request:
+      description: Complete card data for payment processing
       properties:
         cvv:
           description: Card security code (CVV)
@@ -1465,7 +1808,7 @@ components:
           minLength: 3
           type: string
         expiration:
-          $ref: "#/components/schemas/Complete_card_data_expiration"
+          $ref: "#/components/schemas/Card_Expiration_Data"
         holderName:
           description: Card holder name
           type: string
@@ -1477,38 +1820,30 @@ components:
       - expiration
       - holderName
       - number
-      title: Complete card data
+      title: Card Create Request
       type: object
-    postCard_tokenization_request_customer_anyOf:
-      properties:
-        id:
-          description: ID do cliente existente
-          type: string
-      required:
-      - id
-      type: object
-    postCard_tokenization_request_customer:
-      anyOf:
-      - $ref: "#/components/schemas/Customer"
-      - $ref: "#/components/schemas/postCard_tokenization_request_customer_anyOf"
-    postCard_tokenization_request:
-      additionalProperties: false
-      description: Data for creating a customer card
+    Card_Tokenization_Create_Request_customer:
+      oneOf:
+      - $ref: "#/components/schemas/CustomerCreateRequest"
+      - $ref: "#/components/schemas/CardTokenizationCustomerByIdData"
+    Card_Tokenization_Create_Request:
+      description: Data for creating a customer card with customer information
       properties:
         card:
-          $ref: "#/components/schemas/Complete_card_data"
+          $ref: "#/components/schemas/Card_Create_Request"
         saveCard:
           description: Indicates if the card should be saved for future use
           type: boolean
         customer:
-          $ref: "#/components/schemas/postCard_tokenization_request_customer"
+          $ref: "#/components/schemas/Card_Tokenization_Create_Request_customer"
       required:
       - card
       - customer
       - saveCard
+      title: Card Tokenization Create Request
       type: object
-    postCard_tokenization_200_response:
-      additionalProperties: false
+    Card_Tokenization_Create_Response:
+      description: Response containing customer ID and card token
       example:
         customerId: customerId
         token: token
@@ -1522,62 +1857,13 @@ components:
       required:
       - customerId
       - token
+      title: Card Tokenization Create Response
       type: object
-    Pix_expirationInSeconds:
-      anyOf:
-      - default: "0"
-        format: integer
-        type: string
-      - default: 3600
-        description: PIX expiration time in seconds
-        minimum: 3600
-        type: integer
-      default: 3600
-      description: PIX expiration time in seconds
-      minimum: 3600
-    Tokenized_card:
-      properties:
-        firstSixCardNumber:
-          description: First 6 digits of the credit card
-          type: string
-        token:
-          description: Previously generated credit card token
-          type: string
-      required:
-      - token
-      title: Tokenized card
-      type: object
-    CreditCard_card:
-      anyOf:
-      - $ref: "#/components/schemas/Tokenized_card"
-      - $ref: "#/components/schemas/Complete_card_data"
-    CreditCard_installments:
-      anyOf:
-      - default: "0"
-        format: integer
-        type: string
-      - default: 1
-        description: Number of installments
-        maximum: 12
-        minimum: 1
-        type: integer
-      default: 1
-      description: Number of installments
-      maximum: 12
-      minimum: 1
-    BankSlip_expirationInDays:
-      anyOf:
-      - default: "0"
-        format: integer
-        type: string
-      - default: 7
-        description: Days until bank slip expires
-        minimum: 1
-        type: integer
-      default: 7
-      description: Days until bank slip expires
-      minimum: 1
-    NuPay_nuPay:
+    OrderCreditCardPaymentRequest_card:
+      oneOf:
+      - $ref: "#/components/schemas/OrderTokenizedCardData"
+      - $ref: "#/components/schemas/CardCreateRequest"
+    OrderNuPayPaymentRequest_nuPay:
       description: Specific data for NuPay payment
       properties:
         cancelUrl:
@@ -1597,16 +1883,6 @@ components:
       - merchantName
       - returnUrl
       type: object
-    Draft_expirationInSeconds:
-      anyOf:
-      - default: "0"
-        format: integer
-        type: string
-      - default: 3600
-        description: Order expiration time in seconds
-        type: integer
-      default: 3600
-      description: Order expiration time in seconds
   securitySchemes:
     basicAuth:
       description: "Use the format Authorization: Basic base64('client_id:client_secret')"

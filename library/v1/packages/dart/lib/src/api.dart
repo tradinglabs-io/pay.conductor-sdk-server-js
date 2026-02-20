@@ -10,9 +10,9 @@ import 'package:openapi/src/auth/basic_auth.dart';
 import 'package:openapi/src/auth/bearer_auth.dart';
 import 'package:openapi/src/auth/oauth.dart';
 import 'package:openapi/src/api/card_tokenization_api.dart';
-import 'package:openapi/src/api/customers_api.dart';
-import 'package:openapi/src/api/orders_api.dart';
-import 'package:openapi/src/api/transfers_api.dart';
+import 'package:openapi/src/api/customer_api.dart';
+import 'package:openapi/src/api/order_api.dart';
+import 'package:openapi/src/api/withdraw_api.dart';
 
 class Openapi {
   static const String basePath = r'https://app.payconductor.ai/api/v1';
@@ -74,21 +74,21 @@ class Openapi {
     return CardTokenizationApi(dio, serializers);
   }
 
-  /// Get CustomersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get CustomerApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  CustomersApi getCustomersApi() {
-    return CustomersApi(dio, serializers);
+  CustomerApi getCustomerApi() {
+    return CustomerApi(dio, serializers);
   }
 
-  /// Get OrdersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get OrderApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  OrdersApi getOrdersApi() {
-    return OrdersApi(dio, serializers);
+  OrderApi getOrderApi() {
+    return OrderApi(dio, serializers);
   }
 
-  /// Get TransfersApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get WithdrawApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  TransfersApi getTransfersApi() {
-    return TransfersApi(dio, serializers);
+  WithdrawApi getWithdrawApi() {
+    return WithdrawApi(dio, serializers);
   }
 }

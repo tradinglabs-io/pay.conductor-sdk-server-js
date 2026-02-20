@@ -6,8 +6,8 @@ Paginated list of customers
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**data** | [**Array&lt;CustomerResponse&gt;**](CustomerResponse.md) | List of customers | [default to undefined]
-**pagination** | [**CustomerPagination**](CustomerPagination.md) |  | [default to undefined]
+**data** | [**Array&lt;CustomerReadResponse&gt;**](CustomerReadResponse.md) | List of customers | [default to undefined]
+**pagination** | [**CustomerListPagination**](CustomerListPagination.md) |  | [default to undefined]
 
 ## Example
 

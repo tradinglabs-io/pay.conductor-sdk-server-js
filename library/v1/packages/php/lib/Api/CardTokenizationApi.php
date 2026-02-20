@@ -74,7 +74,7 @@ class CardTokenizationApi
 
     /** @var string[] $contentTypes **/
     public const contentTypes = [
-        'postCardTokenization' => [
+        'cardTokenize' => [
             'application/json',
         ],
     ];
@@ -126,38 +126,38 @@ class CardTokenizationApi
     }
 
     /**
-     * Operation postCardTokenization
+     * Operation cardTokenize
      *
-     * Tokenize card
+     * Tokenize Card
      *
-     * @param  \OpenAPI\Client\Model\PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postCardTokenization'] to see the possible values for this operation
+     * @param  \OpenAPI\Client\Model\CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cardTokenize'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\PostCardTokenization200Response
+     * @return \OpenAPI\Client\Model\CardTokenizationCreateResponse
      */
-    public function postCardTokenization($post_card_tokenization_request, string $contentType = self::contentTypes['postCardTokenization'][0])
+    public function cardTokenize($card_tokenization_create_request, string $contentType = self::contentTypes['cardTokenize'][0])
     {
-        list($response) = $this->postCardTokenizationWithHttpInfo($post_card_tokenization_request, $contentType);
+        list($response) = $this->cardTokenizeWithHttpInfo($card_tokenization_create_request, $contentType);
         return $response;
     }
 
     /**
-     * Operation postCardTokenizationWithHttpInfo
+     * Operation cardTokenizeWithHttpInfo
      *
-     * Tokenize card
+     * Tokenize Card
      *
-     * @param  \OpenAPI\Client\Model\PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postCardTokenization'] to see the possible values for this operation
+     * @param  \OpenAPI\Client\Model\CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cardTokenize'] to see the possible values for this operation
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\PostCardTokenization200Response, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\CardTokenizationCreateResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function postCardTokenizationWithHttpInfo($post_card_tokenization_request, string $contentType = self::contentTypes['postCardTokenization'][0])
+    public function cardTokenizeWithHttpInfo($card_tokenization_create_request, string $contentType = self::contentTypes['cardTokenize'][0])
     {
-        $request = $this->postCardTokenizationRequest($post_card_tokenization_request, $contentType);
+        $request = $this->cardTokenizeRequest($card_tokenization_create_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -185,7 +185,7 @@ class CardTokenizationApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\OpenAPI\Client\Model\PostCardTokenization200Response',
+                        '\OpenAPI\Client\Model\CardTokenizationCreateResponse',
                         $request,
                         $response,
                     );
@@ -207,7 +207,7 @@ class CardTokenizationApi
             }
 
             return $this->handleResponseWithDataType(
-                '\OpenAPI\Client\Model\PostCardTokenization200Response',
+                '\OpenAPI\Client\Model\CardTokenizationCreateResponse',
                 $request,
                 $response,
             );
@@ -216,7 +216,7 @@ class CardTokenizationApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\PostCardTokenization200Response',
+                        '\OpenAPI\Client\Model\CardTokenizationCreateResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -229,19 +229,19 @@ class CardTokenizationApi
     }
 
     /**
-     * Operation postCardTokenizationAsync
+     * Operation cardTokenizeAsync
      *
-     * Tokenize card
+     * Tokenize Card
      *
-     * @param  \OpenAPI\Client\Model\PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postCardTokenization'] to see the possible values for this operation
+     * @param  \OpenAPI\Client\Model\CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cardTokenize'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function postCardTokenizationAsync($post_card_tokenization_request, string $contentType = self::contentTypes['postCardTokenization'][0])
+    public function cardTokenizeAsync($card_tokenization_create_request, string $contentType = self::contentTypes['cardTokenize'][0])
     {
-        return $this->postCardTokenizationAsyncWithHttpInfo($post_card_tokenization_request, $contentType)
+        return $this->cardTokenizeAsyncWithHttpInfo($card_tokenization_create_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -250,20 +250,20 @@ class CardTokenizationApi
     }
 
     /**
-     * Operation postCardTokenizationAsyncWithHttpInfo
+     * Operation cardTokenizeAsyncWithHttpInfo
      *
-     * Tokenize card
+     * Tokenize Card
      *
-     * @param  \OpenAPI\Client\Model\PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postCardTokenization'] to see the possible values for this operation
+     * @param  \OpenAPI\Client\Model\CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cardTokenize'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function postCardTokenizationAsyncWithHttpInfo($post_card_tokenization_request, string $contentType = self::contentTypes['postCardTokenization'][0])
+    public function cardTokenizeAsyncWithHttpInfo($card_tokenization_create_request, string $contentType = self::contentTypes['cardTokenize'][0])
     {
-        $returnType = '\OpenAPI\Client\Model\PostCardTokenization200Response';
-        $request = $this->postCardTokenizationRequest($post_card_tokenization_request, $contentType);
+        $returnType = '\OpenAPI\Client\Model\CardTokenizationCreateResponse';
+        $request = $this->cardTokenizeRequest($card_tokenization_create_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -302,21 +302,21 @@ class CardTokenizationApi
     }
 
     /**
-     * Create request for operation 'postCardTokenization'
+     * Create request for operation 'cardTokenize'
      *
-     * @param  \OpenAPI\Client\Model\PostCardTokenizationRequest $post_card_tokenization_request Data for creating a customer card (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['postCardTokenization'] to see the possible values for this operation
+     * @param  \OpenAPI\Client\Model\CardTokenizationCreateRequest $card_tokenization_create_request Data for creating a customer card with customer information (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['cardTokenize'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function postCardTokenizationRequest($post_card_tokenization_request, string $contentType = self::contentTypes['postCardTokenization'][0])
+    public function cardTokenizeRequest($card_tokenization_create_request, string $contentType = self::contentTypes['cardTokenize'][0])
     {
 
-        // verify the required parameter 'post_card_tokenization_request' is set
-        if ($post_card_tokenization_request === null || (is_array($post_card_tokenization_request) && count($post_card_tokenization_request) === 0)) {
+        // verify the required parameter 'card_tokenization_create_request' is set
+        if ($card_tokenization_create_request === null || (is_array($card_tokenization_create_request) && count($card_tokenization_create_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $post_card_tokenization_request when calling postCardTokenization'
+                'Missing the required parameter $card_tokenization_create_request when calling cardTokenize'
             );
         }
 
@@ -339,12 +339,12 @@ class CardTokenizationApi
         );
 
         // for model (json/xml)
-        if (isset($post_card_tokenization_request)) {
+        if (isset($card_tokenization_create_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($post_card_tokenization_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($card_tokenization_create_request));
             } else {
-                $httpBody = $post_card_tokenization_request;
+                $httpBody = $card_tokenization_create_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

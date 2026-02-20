@@ -4,13 +4,13 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PostCardTokenization**](CardTokenizationApi.md#PostCardTokenization) | **POST** /card-tokenization/ | Tokenize card
+[**CardTokenize**](CardTokenizationApi.md#CardTokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
-# **PostCardTokenization**
-> PostCardTokenization200Response PostCardTokenization(post_card_tokenization_request)
+# **CardTokenize**
+> CardTokenizationCreateResponse CardTokenize(card_tokenization_create_request)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -18,18 +18,18 @@ Tokenize credit cards for future charges.
 ```R
 library(payconductor_sdk)
 
-# Tokenize card
+# Tokenize Card
 #
 # prepare function argument(s)
-var_post_card_tokenization_request <- postCard_tokenization_request$new(Complete_card_data$new("cvv_example", Complete_card_data_expiration$new(123, 123), "holderName_example", "number_example"), "saveCard_example", postCard_tokenization_request_customer$new("documentNumber_example", DocumentType$new(), "email_example", "name_example", "id_example", Customer_address$new("city_example", "country_example", "neighborhood_example", "number_example", "state_example", "street_example", "zipCode_example"), "phoneNumber_example")) # PostCardTokenizationRequest | Data for creating a customer card
+var_card_tokenization_create_request <- Card_Tokenization_Create_Request$new(Card_Create_Request$new("cvv_example", Card_Expiration_Data$new(123, 123), "holderName_example", "number_example"), "saveCard_example", Card_Tokenization_Create_Request_customer$new("documentNumber_example", DocumentType$new(), "email_example", "name_example", "id_example", Address_Create_Request$new("city_example", "country_example", "neighborhood_example", "number_example", "state_example", "street_example", "zipCode_example"), "phoneNumber_example")) # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 api_instance <- CardTokenizationApi$new()
 # Configure HTTP basic authorization: basicAuth
 api_instance$api_client$username <- Sys.getenv("USERNAME")
 api_instance$api_client$password <- Sys.getenv("PASSWORD")
 # to save the result into a file, simply add the optional `data_file` parameter, e.g.
-# result <- api_instance$PostCardTokenization(var_post_card_tokenization_requestdata_file = "result.txt")
-result <- api_instance$PostCardTokenization(var_post_card_tokenization_request)
+# result <- api_instance$CardTokenize(var_card_tokenization_create_requestdata_file = "result.txt")
+result <- api_instance$CardTokenize(var_card_tokenization_create_request)
 dput(result)
 ```
 
@@ -37,11 +37,11 @@ dput(result)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_card_tokenization_request** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | 
+ **card_tokenization_create_request** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](postCard_tokenization_200_response.md)
+[**CardTokenizationCreateResponse**](Card_Tokenization_Create_Response.md)
 
 ### Authorization
 
@@ -55,5 +55,5 @@ Name | Type | Description  | Notes
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Response for status 200 |  -  |
+| **200** | Response containing customer ID and card token |  -  |
 

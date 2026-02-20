@@ -13,58 +13,58 @@
 
 
 import ApiClient from './ApiClient';
+import AddressCreateRequest from './model/AddressCreateRequest';
 import AvailablePaymentMethods from './model/AvailablePaymentMethods';
-import BankSlip from './model/BankSlip';
-import BankSlipExpirationInDays from './model/BankSlipExpirationInDays';
-import CompleteCardData from './model/CompleteCardData';
-import CompleteCardDataExpiration from './model/CompleteCardDataExpiration';
-import CreditCard from './model/CreditCard';
-import CreditCardCard from './model/CreditCardCard';
-import CreditCardInstallments from './model/CreditCardInstallments';
-import Customer from './model/Customer';
-import Customer1 from './model/Customer1';
-import CustomerAddress from './model/CustomerAddress';
+import CardCreateRequest from './model/CardCreateRequest';
+import CardExpirationData from './model/CardExpirationData';
+import CardTokenizationCreateRequest from './model/CardTokenizationCreateRequest';
+import CardTokenizationCreateRequestCustomer from './model/CardTokenizationCreateRequestCustomer';
+import CardTokenizationCreateResponse from './model/CardTokenizationCreateResponse';
+import CardTokenizationCustomerByIdData from './model/CardTokenizationCustomerByIdData';
+import CustomerAddressResponse from './model/CustomerAddressResponse';
+import CustomerCreateRequest from './model/CustomerCreateRequest';
+import CustomerListPagination from './model/CustomerListPagination';
+import CustomerListResponse from './model/CustomerListResponse';
+import CustomerReadResponse from './model/CustomerReadResponse';
+import CustomerUpdateRequest from './model/CustomerUpdateRequest';
 import DocumentType from './model/DocumentType';
-import Draft from './model/Draft';
-import DraftExpirationInSeconds from './model/DraftExpirationInSeconds';
 import Event from './model/Event';
 import MerchantInput from './model/MerchantInput';
-import NuPay from './model/NuPay';
-import NuPayNuPay from './model/NuPayNuPay';
+import OrderBankSlipInfo from './model/OrderBankSlipInfo';
+import OrderBankSlipPaymentRequest from './model/OrderBankSlipPaymentRequest';
+import OrderConfirmResponse from './model/OrderConfirmResponse';
+import OrderCreateRequest from './model/OrderCreateRequest';
+import OrderCreateRequestSession from './model/OrderCreateRequestSession';
+import OrderCreateResponse from './model/OrderCreateResponse';
+import OrderCreateResponseOrderItemsInner from './model/OrderCreateResponseOrderItemsInner';
+import OrderCreateResponseSession from './model/OrderCreateResponseSession';
+import OrderCreditCardInfo from './model/OrderCreditCardInfo';
+import OrderCreditCardPaymentRequest from './model/OrderCreditCardPaymentRequest';
+import OrderCreditCardPaymentRequestCard from './model/OrderCreditCardPaymentRequestCard';
+import OrderDraftPaymentRequest from './model/OrderDraftPaymentRequest';
+import OrderFraudFingerprints from './model/OrderFraudFingerprints';
+import OrderItemData from './model/OrderItemData';
+import OrderNuPayInfo from './model/OrderNuPayInfo';
+import OrderNuPayPaymentRequest from './model/OrderNuPayPaymentRequest';
+import OrderNuPayPaymentRequestNuPay from './model/OrderNuPayPaymentRequestNuPay';
+import OrderPIXInfo from './model/OrderPIXInfo';
+import OrderPIXPaymentRequest from './model/OrderPIXPaymentRequest';
+import OrderPaymentRequest from './model/OrderPaymentRequest';
+import OrderPicPayInfo from './model/OrderPicPayInfo';
+import OrderPicPayPaymentRequest from './model/OrderPicPayPaymentRequest';
+import OrderTokenizedCardData from './model/OrderTokenizedCardData';
 import PaymentMethod from './model/PaymentMethod';
-import PicPay from './model/PicPay';
-import Pix from './model/Pix';
-import PixExpirationInSeconds from './model/PixExpirationInSeconds';
 import PixType from './model/PixType';
-import PostCardTokenization200Response from './model/PostCardTokenization200Response';
-import PostCardTokenizationRequest from './model/PostCardTokenizationRequest';
-import PostCardTokenizationRequestCustomer from './model/PostCardTokenizationRequestCustomer';
-import PostCardTokenizationRequestCustomerAnyOf from './model/PostCardTokenizationRequestCustomerAnyOf';
-import PostOrders200Response from './model/PostOrders200Response';
-import PostOrders200ResponseBankSlip from './model/PostOrders200ResponseBankSlip';
-import PostOrders200ResponseCreditCard from './model/PostOrders200ResponseCreditCard';
-import PostOrders200ResponseNuPay from './model/PostOrders200ResponseNuPay';
-import PostOrders200ResponseOrderItemsInner from './model/PostOrders200ResponseOrderItemsInner';
-import PostOrders200ResponsePicPay from './model/PostOrders200ResponsePicPay';
-import PostOrders200ResponsePix from './model/PostOrders200ResponsePix';
-import PostOrders200ResponseSession from './model/PostOrders200ResponseSession';
-import PostOrdersByIdConfirm200Response from './model/PostOrdersByIdConfirm200Response';
-import PostOrdersRequest from './model/PostOrdersRequest';
-import PostOrdersRequestFingerprints from './model/PostOrdersRequestFingerprints';
-import PostOrdersRequestItemsInner from './model/PostOrdersRequestItemsInner';
-import PostOrdersRequestPayment from './model/PostOrdersRequestPayment';
-import PostOrdersRequestSession from './model/PostOrdersRequestSession';
-import PostWithdraws200Response from './model/PostWithdraws200Response';
-import PostWithdraws200ResponsePayedAt from './model/PostWithdraws200ResponsePayedAt';
-import PostWithdraws200ResponsePayoutAccount from './model/PostWithdraws200ResponsePayoutAccount';
-import PostWithdrawsRequest from './model/PostWithdrawsRequest';
-import PostWithdrawsRequestPayoutAccount from './model/PostWithdrawsRequestPayoutAccount';
 import Status from './model/Status';
-import TokenizedCard from './model/TokenizedCard';
+import WithdrawCreateRequest from './model/WithdrawCreateRequest';
+import WithdrawCreateResponse from './model/WithdrawCreateResponse';
+import WithdrawCreateResponsePayedAt from './model/WithdrawCreateResponsePayedAt';
+import WithdrawCreateResponsePayoutAccount from './model/WithdrawCreateResponsePayoutAccount';
+import WithdrawPayoutAccountData from './model/WithdrawPayoutAccountData';
 import CardTokenizationApi from './api/CardTokenizationApi';
-import CustomersApi from './api/CustomersApi';
-import OrdersApi from './api/OrdersApi';
-import TransfersApi from './api/TransfersApi';
+import CustomerApi from './api/CustomerApi';
+import OrderApi from './api/OrderApi';
+import WithdrawApi from './api/WithdrawApi';
 
 
 /**
@@ -106,88 +106,94 @@ export {
     ApiClient,
 
     /**
+     * The AddressCreateRequest model constructor.
+     * @property {module:model/AddressCreateRequest}
+     */
+    AddressCreateRequest,
+
+    /**
      * The AvailablePaymentMethods model constructor.
      * @property {module:model/AvailablePaymentMethods}
      */
     AvailablePaymentMethods,
 
     /**
-     * The BankSlip model constructor.
-     * @property {module:model/BankSlip}
+     * The CardCreateRequest model constructor.
+     * @property {module:model/CardCreateRequest}
      */
-    BankSlip,
+    CardCreateRequest,
 
     /**
-     * The BankSlipExpirationInDays model constructor.
-     * @property {module:model/BankSlipExpirationInDays}
+     * The CardExpirationData model constructor.
+     * @property {module:model/CardExpirationData}
      */
-    BankSlipExpirationInDays,
+    CardExpirationData,
 
     /**
-     * The CompleteCardData model constructor.
-     * @property {module:model/CompleteCardData}
+     * The CardTokenizationCreateRequest model constructor.
+     * @property {module:model/CardTokenizationCreateRequest}
      */
-    CompleteCardData,
+    CardTokenizationCreateRequest,
 
     /**
-     * The CompleteCardDataExpiration model constructor.
-     * @property {module:model/CompleteCardDataExpiration}
+     * The CardTokenizationCreateRequestCustomer model constructor.
+     * @property {module:model/CardTokenizationCreateRequestCustomer}
      */
-    CompleteCardDataExpiration,
+    CardTokenizationCreateRequestCustomer,
 
     /**
-     * The CreditCard model constructor.
-     * @property {module:model/CreditCard}
+     * The CardTokenizationCreateResponse model constructor.
+     * @property {module:model/CardTokenizationCreateResponse}
      */
-    CreditCard,
+    CardTokenizationCreateResponse,
 
     /**
-     * The CreditCardCard model constructor.
-     * @property {module:model/CreditCardCard}
+     * The CardTokenizationCustomerByIdData model constructor.
+     * @property {module:model/CardTokenizationCustomerByIdData}
      */
-    CreditCardCard,
+    CardTokenizationCustomerByIdData,
 
     /**
-     * The CreditCardInstallments model constructor.
-     * @property {module:model/CreditCardInstallments}
+     * The CustomerAddressResponse model constructor.
+     * @property {module:model/CustomerAddressResponse}
      */
-    CreditCardInstallments,
+    CustomerAddressResponse,
 
     /**
-     * The Customer model constructor.
-     * @property {module:model/Customer}
+     * The CustomerCreateRequest model constructor.
+     * @property {module:model/CustomerCreateRequest}
      */
-    Customer,
+    CustomerCreateRequest,
 
     /**
-     * The Customer1 model constructor.
-     * @property {module:model/Customer1}
+     * The CustomerListPagination model constructor.
+     * @property {module:model/CustomerListPagination}
      */
-    Customer1,
+    CustomerListPagination,
 
     /**
-     * The CustomerAddress model constructor.
-     * @property {module:model/CustomerAddress}
+     * The CustomerListResponse model constructor.
+     * @property {module:model/CustomerListResponse}
      */
-    CustomerAddress,
+    CustomerListResponse,
+
+    /**
+     * The CustomerReadResponse model constructor.
+     * @property {module:model/CustomerReadResponse}
+     */
+    CustomerReadResponse,
+
+    /**
+     * The CustomerUpdateRequest model constructor.
+     * @property {module:model/CustomerUpdateRequest}
+     */
+    CustomerUpdateRequest,
 
     /**
      * The DocumentType model constructor.
      * @property {module:model/DocumentType}
      */
     DocumentType,
-
-    /**
-     * The Draft model constructor.
-     * @property {module:model/Draft}
-     */
-    Draft,
-
-    /**
-     * The DraftExpirationInSeconds model constructor.
-     * @property {module:model/DraftExpirationInSeconds}
-     */
-    DraftExpirationInSeconds,
 
     /**
      * The Event model constructor.
@@ -202,16 +208,142 @@ export {
     MerchantInput,
 
     /**
-     * The NuPay model constructor.
-     * @property {module:model/NuPay}
+     * The OrderBankSlipInfo model constructor.
+     * @property {module:model/OrderBankSlipInfo}
      */
-    NuPay,
+    OrderBankSlipInfo,
 
     /**
-     * The NuPayNuPay model constructor.
-     * @property {module:model/NuPayNuPay}
+     * The OrderBankSlipPaymentRequest model constructor.
+     * @property {module:model/OrderBankSlipPaymentRequest}
      */
-    NuPayNuPay,
+    OrderBankSlipPaymentRequest,
+
+    /**
+     * The OrderConfirmResponse model constructor.
+     * @property {module:model/OrderConfirmResponse}
+     */
+    OrderConfirmResponse,
+
+    /**
+     * The OrderCreateRequest model constructor.
+     * @property {module:model/OrderCreateRequest}
+     */
+    OrderCreateRequest,
+
+    /**
+     * The OrderCreateRequestSession model constructor.
+     * @property {module:model/OrderCreateRequestSession}
+     */
+    OrderCreateRequestSession,
+
+    /**
+     * The OrderCreateResponse model constructor.
+     * @property {module:model/OrderCreateResponse}
+     */
+    OrderCreateResponse,
+
+    /**
+     * The OrderCreateResponseOrderItemsInner model constructor.
+     * @property {module:model/OrderCreateResponseOrderItemsInner}
+     */
+    OrderCreateResponseOrderItemsInner,
+
+    /**
+     * The OrderCreateResponseSession model constructor.
+     * @property {module:model/OrderCreateResponseSession}
+     */
+    OrderCreateResponseSession,
+
+    /**
+     * The OrderCreditCardInfo model constructor.
+     * @property {module:model/OrderCreditCardInfo}
+     */
+    OrderCreditCardInfo,
+
+    /**
+     * The OrderCreditCardPaymentRequest model constructor.
+     * @property {module:model/OrderCreditCardPaymentRequest}
+     */
+    OrderCreditCardPaymentRequest,
+
+    /**
+     * The OrderCreditCardPaymentRequestCard model constructor.
+     * @property {module:model/OrderCreditCardPaymentRequestCard}
+     */
+    OrderCreditCardPaymentRequestCard,
+
+    /**
+     * The OrderDraftPaymentRequest model constructor.
+     * @property {module:model/OrderDraftPaymentRequest}
+     */
+    OrderDraftPaymentRequest,
+
+    /**
+     * The OrderFraudFingerprints model constructor.
+     * @property {module:model/OrderFraudFingerprints}
+     */
+    OrderFraudFingerprints,
+
+    /**
+     * The OrderItemData model constructor.
+     * @property {module:model/OrderItemData}
+     */
+    OrderItemData,
+
+    /**
+     * The OrderNuPayInfo model constructor.
+     * @property {module:model/OrderNuPayInfo}
+     */
+    OrderNuPayInfo,
+
+    /**
+     * The OrderNuPayPaymentRequest model constructor.
+     * @property {module:model/OrderNuPayPaymentRequest}
+     */
+    OrderNuPayPaymentRequest,
+
+    /**
+     * The OrderNuPayPaymentRequestNuPay model constructor.
+     * @property {module:model/OrderNuPayPaymentRequestNuPay}
+     */
+    OrderNuPayPaymentRequestNuPay,
+
+    /**
+     * The OrderPIXInfo model constructor.
+     * @property {module:model/OrderPIXInfo}
+     */
+    OrderPIXInfo,
+
+    /**
+     * The OrderPIXPaymentRequest model constructor.
+     * @property {module:model/OrderPIXPaymentRequest}
+     */
+    OrderPIXPaymentRequest,
+
+    /**
+     * The OrderPaymentRequest model constructor.
+     * @property {module:model/OrderPaymentRequest}
+     */
+    OrderPaymentRequest,
+
+    /**
+     * The OrderPicPayInfo model constructor.
+     * @property {module:model/OrderPicPayInfo}
+     */
+    OrderPicPayInfo,
+
+    /**
+     * The OrderPicPayPaymentRequest model constructor.
+     * @property {module:model/OrderPicPayPaymentRequest}
+     */
+    OrderPicPayPaymentRequest,
+
+    /**
+     * The OrderTokenizedCardData model constructor.
+     * @property {module:model/OrderTokenizedCardData}
+     */
+    OrderTokenizedCardData,
 
     /**
      * The PaymentMethod model constructor.
@@ -220,166 +352,10 @@ export {
     PaymentMethod,
 
     /**
-     * The PicPay model constructor.
-     * @property {module:model/PicPay}
-     */
-    PicPay,
-
-    /**
-     * The Pix model constructor.
-     * @property {module:model/Pix}
-     */
-    Pix,
-
-    /**
-     * The PixExpirationInSeconds model constructor.
-     * @property {module:model/PixExpirationInSeconds}
-     */
-    PixExpirationInSeconds,
-
-    /**
      * The PixType model constructor.
      * @property {module:model/PixType}
      */
     PixType,
-
-    /**
-     * The PostCardTokenization200Response model constructor.
-     * @property {module:model/PostCardTokenization200Response}
-     */
-    PostCardTokenization200Response,
-
-    /**
-     * The PostCardTokenizationRequest model constructor.
-     * @property {module:model/PostCardTokenizationRequest}
-     */
-    PostCardTokenizationRequest,
-
-    /**
-     * The PostCardTokenizationRequestCustomer model constructor.
-     * @property {module:model/PostCardTokenizationRequestCustomer}
-     */
-    PostCardTokenizationRequestCustomer,
-
-    /**
-     * The PostCardTokenizationRequestCustomerAnyOf model constructor.
-     * @property {module:model/PostCardTokenizationRequestCustomerAnyOf}
-     */
-    PostCardTokenizationRequestCustomerAnyOf,
-
-    /**
-     * The PostOrders200Response model constructor.
-     * @property {module:model/PostOrders200Response}
-     */
-    PostOrders200Response,
-
-    /**
-     * The PostOrders200ResponseBankSlip model constructor.
-     * @property {module:model/PostOrders200ResponseBankSlip}
-     */
-    PostOrders200ResponseBankSlip,
-
-    /**
-     * The PostOrders200ResponseCreditCard model constructor.
-     * @property {module:model/PostOrders200ResponseCreditCard}
-     */
-    PostOrders200ResponseCreditCard,
-
-    /**
-     * The PostOrders200ResponseNuPay model constructor.
-     * @property {module:model/PostOrders200ResponseNuPay}
-     */
-    PostOrders200ResponseNuPay,
-
-    /**
-     * The PostOrders200ResponseOrderItemsInner model constructor.
-     * @property {module:model/PostOrders200ResponseOrderItemsInner}
-     */
-    PostOrders200ResponseOrderItemsInner,
-
-    /**
-     * The PostOrders200ResponsePicPay model constructor.
-     * @property {module:model/PostOrders200ResponsePicPay}
-     */
-    PostOrders200ResponsePicPay,
-
-    /**
-     * The PostOrders200ResponsePix model constructor.
-     * @property {module:model/PostOrders200ResponsePix}
-     */
-    PostOrders200ResponsePix,
-
-    /**
-     * The PostOrders200ResponseSession model constructor.
-     * @property {module:model/PostOrders200ResponseSession}
-     */
-    PostOrders200ResponseSession,
-
-    /**
-     * The PostOrdersByIdConfirm200Response model constructor.
-     * @property {module:model/PostOrdersByIdConfirm200Response}
-     */
-    PostOrdersByIdConfirm200Response,
-
-    /**
-     * The PostOrdersRequest model constructor.
-     * @property {module:model/PostOrdersRequest}
-     */
-    PostOrdersRequest,
-
-    /**
-     * The PostOrdersRequestFingerprints model constructor.
-     * @property {module:model/PostOrdersRequestFingerprints}
-     */
-    PostOrdersRequestFingerprints,
-
-    /**
-     * The PostOrdersRequestItemsInner model constructor.
-     * @property {module:model/PostOrdersRequestItemsInner}
-     */
-    PostOrdersRequestItemsInner,
-
-    /**
-     * The PostOrdersRequestPayment model constructor.
-     * @property {module:model/PostOrdersRequestPayment}
-     */
-    PostOrdersRequestPayment,
-
-    /**
-     * The PostOrdersRequestSession model constructor.
-     * @property {module:model/PostOrdersRequestSession}
-     */
-    PostOrdersRequestSession,
-
-    /**
-     * The PostWithdraws200Response model constructor.
-     * @property {module:model/PostWithdraws200Response}
-     */
-    PostWithdraws200Response,
-
-    /**
-     * The PostWithdraws200ResponsePayedAt model constructor.
-     * @property {module:model/PostWithdraws200ResponsePayedAt}
-     */
-    PostWithdraws200ResponsePayedAt,
-
-    /**
-     * The PostWithdraws200ResponsePayoutAccount model constructor.
-     * @property {module:model/PostWithdraws200ResponsePayoutAccount}
-     */
-    PostWithdraws200ResponsePayoutAccount,
-
-    /**
-     * The PostWithdrawsRequest model constructor.
-     * @property {module:model/PostWithdrawsRequest}
-     */
-    PostWithdrawsRequest,
-
-    /**
-     * The PostWithdrawsRequestPayoutAccount model constructor.
-     * @property {module:model/PostWithdrawsRequestPayoutAccount}
-     */
-    PostWithdrawsRequestPayoutAccount,
 
     /**
      * The Status model constructor.
@@ -388,10 +364,34 @@ export {
     Status,
 
     /**
-     * The TokenizedCard model constructor.
-     * @property {module:model/TokenizedCard}
+     * The WithdrawCreateRequest model constructor.
+     * @property {module:model/WithdrawCreateRequest}
      */
-    TokenizedCard,
+    WithdrawCreateRequest,
+
+    /**
+     * The WithdrawCreateResponse model constructor.
+     * @property {module:model/WithdrawCreateResponse}
+     */
+    WithdrawCreateResponse,
+
+    /**
+     * The WithdrawCreateResponsePayedAt model constructor.
+     * @property {module:model/WithdrawCreateResponsePayedAt}
+     */
+    WithdrawCreateResponsePayedAt,
+
+    /**
+     * The WithdrawCreateResponsePayoutAccount model constructor.
+     * @property {module:model/WithdrawCreateResponsePayoutAccount}
+     */
+    WithdrawCreateResponsePayoutAccount,
+
+    /**
+     * The WithdrawPayoutAccountData model constructor.
+     * @property {module:model/WithdrawPayoutAccountData}
+     */
+    WithdrawPayoutAccountData,
 
     /**
     * The CardTokenizationApi service constructor.
@@ -400,20 +400,20 @@ export {
     CardTokenizationApi,
 
     /**
-    * The CustomersApi service constructor.
-    * @property {module:api/CustomersApi}
+    * The CustomerApi service constructor.
+    * @property {module:api/CustomerApi}
     */
-    CustomersApi,
+    CustomerApi,
 
     /**
-    * The OrdersApi service constructor.
-    * @property {module:api/OrdersApi}
+    * The OrderApi service constructor.
+    * @property {module:api/OrderApi}
     */
-    OrdersApi,
+    OrderApi,
 
     /**
-    * The TransfersApi service constructor.
-    * @property {module:api/TransfersApi}
+    * The WithdrawApi service constructor.
+    * @property {module:api/WithdrawApi}
     */
-    TransfersApi
+    WithdrawApi
 };

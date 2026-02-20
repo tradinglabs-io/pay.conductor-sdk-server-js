@@ -4,14 +4,14 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**postCardTokenization**](CardTokenizationApi.md#postCardTokenization) | **POST** /card-tokenization/ | Tokenize card |
+| [**cardTokenize**](CardTokenizationApi.md#cardTokenize) | **POST** /card-tokenization/ | Tokenize Card |
 
 
-<a id="postCardTokenization"></a>
-# **postCardTokenization**
-> PostCardTokenization200Response postCardTokenization(postCardTokenizationRequest)
+<a id="cardTokenize"></a>
+# **cardTokenize**
+> CardTokenizationCreateResponse cardTokenize(cardTokenizationCreateRequest)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -36,12 +36,12 @@ public class Example {
     basicAuth.setPassword("YOUR PASSWORD");
 
     CardTokenizationApi apiInstance = new CardTokenizationApi(defaultClient);
-    PostCardTokenizationRequest postCardTokenizationRequest = new PostCardTokenizationRequest(); // PostCardTokenizationRequest | Data for creating a customer card
+    CardTokenizationCreateRequest cardTokenizationCreateRequest = new CardTokenizationCreateRequest(); // CardTokenizationCreateRequest | Data for creating a customer card with customer information
     try {
-      PostCardTokenization200Response result = apiInstance.postCardTokenization(postCardTokenizationRequest);
+      CardTokenizationCreateResponse result = apiInstance.cardTokenize(cardTokenizationCreateRequest);
       System.out.println(result);
     } catch (ApiException e) {
-      System.err.println("Exception when calling CardTokenizationApi#postCardTokenization");
+      System.err.println("Exception when calling CardTokenizationApi#cardTokenize");
       System.err.println("Status code: " + e.getCode());
       System.err.println("Reason: " + e.getResponseBody());
       System.err.println("Response headers: " + e.getResponseHeaders());
@@ -55,11 +55,11 @@ public class Example {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | |
+| **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | |
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 
@@ -73,5 +73,5 @@ public class Example {
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Response for status 200 |  -  |
+| **200** | Response containing customer ID and card token |  -  |
 

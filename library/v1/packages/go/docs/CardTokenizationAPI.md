@@ -4,15 +4,15 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**PostCardTokenization**](CardTokenizationAPI.md#PostCardTokenization) | **Post** /card-tokenization/ | Tokenize card
+[**CardTokenize**](CardTokenizationAPI.md#CardTokenize) | **Post** /card-tokenization/ | Tokenize Card
 
 
 
-## PostCardTokenization
+## CardTokenize
 
-> PostCardTokenization200Response PostCardTokenization(ctx).PostCardTokenizationRequest(postCardTokenizationRequest).Execute()
+> CardTokenizationCreateResponse CardTokenize(ctx).CardTokenizationCreateRequest(cardTokenizationCreateRequest).Execute()
 
-Tokenize card
+Tokenize Card
 
 
 
@@ -29,17 +29,17 @@ import (
 )
 
 func main() {
-	postCardTokenizationRequest := *openapiclient.NewPostCardTokenizationRequest(*openapiclient.NewCompleteCardData("Cvv_example", *openapiclient.NewCompleteCardDataExpiration(float32(123), float32(123)), "HolderName_example", "Number_example"), false, *openapiclient.NewPostCardTokenizationRequestCustomer("DocumentNumber_example", openapiclient.DocumentType("Cpf"), "Email_example", "Name_example", "Id_example")) // PostCardTokenizationRequest | Data for creating a customer card
+	cardTokenizationCreateRequest := *openapiclient.NewCardTokenizationCreateRequest(*openapiclient.NewCardCreateRequest("Cvv_example", *openapiclient.NewCardExpirationData(float32(123), float32(123)), "HolderName_example", "Number_example"), false, openapiclient.Card_Tokenization_Create_Request_customer{CardTokenizationCustomerByIdData: openapiclient.NewCardTokenizationCustomerByIdData("Id_example")}) // CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.CardTokenizationAPI.PostCardTokenization(context.Background()).PostCardTokenizationRequest(postCardTokenizationRequest).Execute()
+	resp, r, err := apiClient.CardTokenizationAPI.CardTokenize(context.Background()).CardTokenizationCreateRequest(cardTokenizationCreateRequest).Execute()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `CardTokenizationAPI.PostCardTokenization``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Error when calling `CardTokenizationAPI.CardTokenize``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `PostCardTokenization`: PostCardTokenization200Response
-	fmt.Fprintf(os.Stdout, "Response from `CardTokenizationAPI.PostCardTokenization`: %v\n", resp)
+	// response from `CardTokenize`: CardTokenizationCreateResponse
+	fmt.Fprintf(os.Stdout, "Response from `CardTokenizationAPI.CardTokenize`: %v\n", resp)
 }
 ```
 
@@ -49,16 +49,16 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiPostCardTokenizationRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCardTokenizeRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md) | Data for creating a customer card | 
+ **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md) | Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 

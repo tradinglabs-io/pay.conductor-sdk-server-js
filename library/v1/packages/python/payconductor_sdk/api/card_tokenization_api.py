@@ -17,8 +17,8 @@ from typing_extensions import Annotated
 
 from pydantic import Field
 from typing_extensions import Annotated
-from payconductor_sdk.models.post_card_tokenization200_response import PostCardTokenization200Response
-from payconductor_sdk.models.post_card_tokenization_request import PostCardTokenizationRequest
+from payconductor_sdk.models.card_tokenization_create_request import CardTokenizationCreateRequest
+from payconductor_sdk.models.card_tokenization_create_response import CardTokenizationCreateResponse
 
 from payconductor_sdk.api_client import ApiClient, RequestSerialized
 from payconductor_sdk.api_response import ApiResponse
@@ -39,9 +39,9 @@ class CardTokenizationApi:
 
 
     @validate_call
-    def post_card_tokenization(
+    def card_tokenize(
         self,
-        post_card_tokenization_request: Annotated[PostCardTokenizationRequest, Field(description="Data for creating a customer card")],
+        card_tokenization_create_request: Annotated[CardTokenizationCreateRequest, Field(description="Data for creating a customer card with customer information")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -54,13 +54,13 @@ class CardTokenizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> PostCardTokenization200Response:
-        """Tokenize card
+    ) -> CardTokenizationCreateResponse:
+        """Tokenize Card
 
         Tokenize credit cards for future charges.
 
-        :param post_card_tokenization_request: Data for creating a customer card (required)
-        :type post_card_tokenization_request: PostCardTokenizationRequest
+        :param card_tokenization_create_request: Data for creating a customer card with customer information (required)
+        :type card_tokenization_create_request: CardTokenizationCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -83,8 +83,8 @@ class CardTokenizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_card_tokenization_serialize(
-            post_card_tokenization_request=post_card_tokenization_request,
+        _param = self._card_tokenize_serialize(
+            card_tokenization_create_request=card_tokenization_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -92,7 +92,7 @@ class CardTokenizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PostCardTokenization200Response",
+            '200': "CardTokenizationCreateResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -106,9 +106,9 @@ class CardTokenizationApi:
 
 
     @validate_call
-    def post_card_tokenization_with_http_info(
+    def card_tokenize_with_http_info(
         self,
-        post_card_tokenization_request: Annotated[PostCardTokenizationRequest, Field(description="Data for creating a customer card")],
+        card_tokenization_create_request: Annotated[CardTokenizationCreateRequest, Field(description="Data for creating a customer card with customer information")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -121,13 +121,13 @@ class CardTokenizationApi:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[PostCardTokenization200Response]:
-        """Tokenize card
+    ) -> ApiResponse[CardTokenizationCreateResponse]:
+        """Tokenize Card
 
         Tokenize credit cards for future charges.
 
-        :param post_card_tokenization_request: Data for creating a customer card (required)
-        :type post_card_tokenization_request: PostCardTokenizationRequest
+        :param card_tokenization_create_request: Data for creating a customer card with customer information (required)
+        :type card_tokenization_create_request: CardTokenizationCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -150,8 +150,8 @@ class CardTokenizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_card_tokenization_serialize(
-            post_card_tokenization_request=post_card_tokenization_request,
+        _param = self._card_tokenize_serialize(
+            card_tokenization_create_request=card_tokenization_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -159,7 +159,7 @@ class CardTokenizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PostCardTokenization200Response",
+            '200': "CardTokenizationCreateResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -173,9 +173,9 @@ class CardTokenizationApi:
 
 
     @validate_call
-    def post_card_tokenization_without_preload_content(
+    def card_tokenize_without_preload_content(
         self,
-        post_card_tokenization_request: Annotated[PostCardTokenizationRequest, Field(description="Data for creating a customer card")],
+        card_tokenization_create_request: Annotated[CardTokenizationCreateRequest, Field(description="Data for creating a customer card with customer information")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,12 +189,12 @@ class CardTokenizationApi:
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Tokenize card
+        """Tokenize Card
 
         Tokenize credit cards for future charges.
 
-        :param post_card_tokenization_request: Data for creating a customer card (required)
-        :type post_card_tokenization_request: PostCardTokenizationRequest
+        :param card_tokenization_create_request: Data for creating a customer card with customer information (required)
+        :type card_tokenization_create_request: CardTokenizationCreateRequest
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -217,8 +217,8 @@ class CardTokenizationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._post_card_tokenization_serialize(
-            post_card_tokenization_request=post_card_tokenization_request,
+        _param = self._card_tokenize_serialize(
+            card_tokenization_create_request=card_tokenization_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -226,7 +226,7 @@ class CardTokenizationApi:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "PostCardTokenization200Response",
+            '200': "CardTokenizationCreateResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -235,9 +235,9 @@ class CardTokenizationApi:
         return response_data.response
 
 
-    def _post_card_tokenization_serialize(
+    def _card_tokenize_serialize(
         self,
-        post_card_tokenization_request,
+        card_tokenization_create_request,
         _request_auth,
         _content_type,
         _headers,
@@ -263,8 +263,8 @@ class CardTokenizationApi:
         # process the header parameters
         # process the form parameters
         # process the body parameter
-        if post_card_tokenization_request is not None:
-            _body_params = post_card_tokenization_request
+        if card_tokenization_create_request is not None:
+            _body_params = card_tokenization_create_request
 
 
         # set the HTTP header `Accept`

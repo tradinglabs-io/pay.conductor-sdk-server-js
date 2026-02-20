@@ -4,13 +4,13 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**PostCardTokenization**](CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card |
+| [**CardTokenize**](CardTokenizationApi.md#cardtokenize) | **POST** /card-tokenization/ | Tokenize Card |
 
-<a id="postcardtokenization"></a>
-# **PostCardTokenization**
-> PostCardTokenization200Response PostCardTokenization (PostCardTokenizationRequest postCardTokenizationRequest)
+<a id="cardtokenize"></a>
+# **CardTokenize**
+> CardTokenizationCreateResponse CardTokenize (CardTokenizationCreateRequest cardTokenizationCreateRequest)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -19,11 +19,11 @@ Tokenize credit cards for future charges.
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **postCardTokenizationRequest** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md) | Data for creating a customer card |  |
+| **cardTokenizationCreateRequest** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md) | Data for creating a customer card with customer information |  |
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 
@@ -38,7 +38,7 @@ Tokenize credit cards for future charges.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Response for status 200 |  -  |
+| **200** | Response containing customer ID and card token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

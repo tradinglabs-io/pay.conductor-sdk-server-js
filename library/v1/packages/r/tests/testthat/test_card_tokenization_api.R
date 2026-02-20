@@ -5,13 +5,13 @@ context("Test CardTokenizationApi")
 
 api_instance <- CardTokenizationApi$new()
 
-test_that("PostCardTokenization", {
-  # tests for PostCardTokenization
+test_that("CardTokenize", {
+  # tests for CardTokenize
   # base path: https://app.payconductor.ai/api/v1
-  # Tokenize card
+  # Tokenize Card
   # Tokenize credit cards for future charges.
-  # @param post_card_tokenization_request PostCardTokenizationRequest Data for creating a customer card
-  # @return [PostCardTokenization200Response]
+  # @param card_tokenization_create_request CardTokenizationCreateRequest Data for creating a customer card with customer information
+  # @return [CardTokenizationCreateResponse]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")

@@ -4,13 +4,13 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**post_card_tokenization**](CardTokenizationApi.md#post_card_tokenization) | **POST** /card-tokenization/ | Tokenize card
+[**card_tokenize**](CardTokenizationApi.md#card_tokenize) | **POST** /card-tokenization/ | Tokenize Card
 
 
-# **post_card_tokenization**
-> PostCardTokenization200Response post_card_tokenization(post_card_tokenization_request)
+# **card_tokenize**
+> CardTokenizationCreateResponse card_tokenize(card_tokenization_create_request)
 
-Tokenize card
+Tokenize Card
 
 Tokenize credit cards for future charges.
 
@@ -20,8 +20,8 @@ Tokenize credit cards for future charges.
 
 ```python
 import payconductor_sdk
-from payconductor_sdk.models.post_card_tokenization200_response import PostCardTokenization200Response
-from payconductor_sdk.models.post_card_tokenization_request import PostCardTokenizationRequest
+from payconductor_sdk.models.card_tokenization_create_request import CardTokenizationCreateRequest
+from payconductor_sdk.models.card_tokenization_create_response import CardTokenizationCreateResponse
 from payconductor_sdk.rest import ApiException
 from pprint import pprint
 
@@ -46,15 +46,15 @@ configuration = payconductor_sdk.Configuration(
 with payconductor_sdk.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payconductor_sdk.CardTokenizationApi(api_client)
-    post_card_tokenization_request = payconductor_sdk.PostCardTokenizationRequest() # PostCardTokenizationRequest | Data for creating a customer card
+    card_tokenization_create_request = payconductor_sdk.CardTokenizationCreateRequest() # CardTokenizationCreateRequest | Data for creating a customer card with customer information
 
     try:
-        # Tokenize card
-        api_response = api_instance.post_card_tokenization(post_card_tokenization_request)
-        print("The response of CardTokenizationApi->post_card_tokenization:\n")
+        # Tokenize Card
+        api_response = api_instance.card_tokenize(card_tokenization_create_request)
+        print("The response of CardTokenizationApi->card_tokenize:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling CardTokenizationApi->post_card_tokenization: %s\n" % e)
+        print("Exception when calling CardTokenizationApi->card_tokenize: %s\n" % e)
 ```
 
 
@@ -64,11 +64,11 @@ with payconductor_sdk.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **post_card_tokenization_request** | [**PostCardTokenizationRequest**](PostCardTokenizationRequest.md)| Data for creating a customer card | 
+ **card_tokenization_create_request** | [**CardTokenizationCreateRequest**](CardTokenizationCreateRequest.md)| Data for creating a customer card with customer information | 
 
 ### Return type
 
-[**PostCardTokenization200Response**](PostCardTokenization200Response.md)
+[**CardTokenizationCreateResponse**](CardTokenizationCreateResponse.md)
 
 ### Authorization
 
@@ -83,7 +83,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Response for status 200 |  -  |
+**200** | Response containing customer ID and card token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

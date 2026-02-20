@@ -15,8 +15,8 @@ Please update as you see appropriate
 ]]
 describe("card_tokenization_api", function()
   local payconductor_sdk_card_tokenization_api = require "payconductor_sdk.api.card_tokenization_api"
-  -- unit tests for post_card_tokenization
-  describe("post_card_tokenization test", function()
+  -- unit tests for card_tokenize
+  describe("card_tokenize test", function()
     it("should work", function()
       -- TODO assertion here: http://olivinelabs.com/busted/#asserts
     end)

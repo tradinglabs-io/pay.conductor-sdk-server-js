@@ -19,28 +19,28 @@ module OpenapiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Tokenize card
+    # Tokenize Card
     # Tokenize credit cards for future charges.
-    # @param post_card_tokenization_request [PostCardTokenizationRequest] Data for creating a customer card
+    # @param card_tokenization_create_request [CardTokenizationCreateRequest] Data for creating a customer card with customer information
     # @param [Hash] opts the optional parameters
-    # @return [PostCardTokenization200Response]
-    def post_card_tokenization(post_card_tokenization_request, opts = {})
-      data, _status_code, _headers = post_card_tokenization_with_http_info(post_card_tokenization_request, opts)
+    # @return [CardTokenizationCreateResponse]
+    def card_tokenize(card_tokenization_create_request, opts = {})
+      data, _status_code, _headers = card_tokenize_with_http_info(card_tokenization_create_request, opts)
       data
     end
 
-    # Tokenize card
+    # Tokenize Card
     # Tokenize credit cards for future charges.
-    # @param post_card_tokenization_request [PostCardTokenizationRequest] Data for creating a customer card
+    # @param card_tokenization_create_request [CardTokenizationCreateRequest] Data for creating a customer card with customer information
     # @param [Hash] opts the optional parameters
-    # @return [Array<(PostCardTokenization200Response, Integer, Hash)>] PostCardTokenization200Response data, response status code and response headers
-    def post_card_tokenization_with_http_info(post_card_tokenization_request, opts = {})
+    # @return [Array<(CardTokenizationCreateResponse, Integer, Hash)>] CardTokenizationCreateResponse data, response status code and response headers
+    def card_tokenize_with_http_info(card_tokenization_create_request, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: CardTokenizationApi.post_card_tokenization ...'
+        @api_client.config.logger.debug 'Calling API: CardTokenizationApi.card_tokenize ...'
       end
-      # verify the required parameter 'post_card_tokenization_request' is set
-      if @api_client.config.client_side_validation && post_card_tokenization_request.nil?
-        fail ArgumentError, "Missing the required parameter 'post_card_tokenization_request' when calling CardTokenizationApi.post_card_tokenization"
+      # verify the required parameter 'card_tokenization_create_request' is set
+      if @api_client.config.client_side_validation && card_tokenization_create_request.nil?
+        fail ArgumentError, "Missing the required parameter 'card_tokenization_create_request' when calling CardTokenizationApi.card_tokenize"
       end
       # resource path
       local_var_path = '/card-tokenization/'
@@ -62,16 +62,16 @@ module OpenapiClient
       form_params = opts[:form_params] || {}
 
       # http body (model)
-      post_body = opts[:debug_body] || @api_client.object_to_http_body(post_card_tokenization_request)
+      post_body = opts[:debug_body] || @api_client.object_to_http_body(card_tokenization_create_request)
 
       # return_type
-      return_type = opts[:debug_return_type] || 'PostCardTokenization200Response'
+      return_type = opts[:debug_return_type] || 'CardTokenizationCreateResponse'
 
       # auth_names
       auth_names = opts[:debug_auth_names] || ['basicAuth']
 
       new_options = opts.merge(
-        :operation => :"CardTokenizationApi.post_card_tokenization",
+        :operation => :"CardTokenizationApi.card_tokenize",
         :header_params => header_params,
         :query_params => query_params,
         :form_params => form_params,
@@ -82,7 +82,7 @@ module OpenapiClient
 
       data, status_code, headers = @api_client.call_api(:POST, local_var_path, new_options)
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: CardTokenizationApi#post_card_tokenization\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: CardTokenizationApi#card_tokenize\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

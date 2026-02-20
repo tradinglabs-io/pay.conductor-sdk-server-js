@@ -124,72 +124,72 @@ All URIs are relative to *https://app.payconductor.ai/api/v1*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
-| *CardTokenizationApi* | [**postCardTokenization**](docs/CardTokenizationApi.md#postcardtokenization) | **POST** /card-tokenization/ | Tokenize card |
-| *CustomersApi* | [**getCustomers**](docs/CustomersApi.md#getcustomers) | **GET** /customers/ | Get all customers |
-| *CustomersApi* | [**getCustomersById**](docs/CustomersApi.md#getcustomersbyid) | **GET** /customers/{id} | Get customer by ID |
-| *CustomersApi* | [**patchCustomersById**](docs/CustomersApi.md#patchcustomersbyid) | **PATCH** /customers/{id} | Update customer data |
-| *CustomersApi* | [**postCustomers**](docs/CustomersApi.md#postcustomers) | **POST** /customers/ | Create new customer |
-| *OrdersApi* | [**getOrders**](docs/OrdersApi.md#getorders) | **GET** /orders/ | List orders |
-| *OrdersApi* | [**getOrdersById**](docs/OrdersApi.md#getordersbyid) | **GET** /orders/{id} | Get order by ID |
-| *OrdersApi* | [**postOrders**](docs/OrdersApi.md#postorders) | **POST** /orders/ | Create order |
-| *OrdersApi* | [**postOrdersByIdConfirm**](docs/OrdersApi.md#postordersbyidconfirm) | **POST** /orders/{id}/confirm | Confirm order |
-| *OrdersApi* | [**postOrdersByIdRefund**](docs/OrdersApi.md#postordersbyidrefund) | **POST** /orders/{id}/refund | Refund order |
-| *TransfersApi* | [**getWithdraws**](docs/TransfersApi.md#getwithdraws) | **GET** /withdraws/ | List withdrawals |
-| *TransfersApi* | [**getWithdrawsById**](docs/TransfersApi.md#getwithdrawsbyid) | **GET** /withdraws/{id} | Get withdrawal by ID |
-| *TransfersApi* | [**postWithdraws**](docs/TransfersApi.md#postwithdraws) | **POST** /withdraws/ | Create withdrawal |
+| *CardTokenizationApi* | [**cardTokenize**](docs/CardTokenizationApi.md#cardtokenize) | **POST** /card-tokenization/ | Tokenize Card |
+| *CustomerApi* | [**customerCreate**](docs/CustomerApi.md#customercreate) | **POST** /customers/ | Create New Customer |
+| *CustomerApi* | [**customerListCustom**](docs/CustomerApi.md#customerlistcustom) | **GET** /customers/ | Get All Customers |
+| *CustomerApi* | [**customerRead**](docs/CustomerApi.md#customerread) | **GET** /customers/{id} | Get Customer By ID |
+| *CustomerApi* | [**customerUpdate**](docs/CustomerApi.md#customerupdate) | **PATCH** /customers/{id} | Update Customer Data |
+| *OrderApi* | [**orderConfirm**](docs/OrderApi.md#orderconfirm) | **POST** /orders/{id}/confirm | Confirm Order |
+| *OrderApi* | [**orderCreate**](docs/OrderApi.md#ordercreate) | **POST** /orders/ | Create Order |
+| *OrderApi* | [**orderList**](docs/OrderApi.md#orderlist) | **GET** /orders/ | List Orders |
+| *OrderApi* | [**orderRead**](docs/OrderApi.md#orderread) | **GET** /orders/{id} | Get Order By ID |
+| *OrderApi* | [**orderRefund**](docs/OrderApi.md#orderrefund) | **POST** /orders/{id}/refund | Refund Order |
+| *WithdrawApi* | [**withdrawCreate**](docs/WithdrawApi.md#withdrawcreate) | **POST** /withdraws/ | Create Withdrawal |
+| *WithdrawApi* | [**withdrawList**](docs/WithdrawApi.md#withdrawlist) | **GET** /withdraws/ | List Withdrawals |
+| *WithdrawApi* | [**withdrawRead**](docs/WithdrawApi.md#withdrawread) | **GET** /withdraws/{id} | Get Withdrawal By ID |
 
 
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [payconductor_sdk.models.AddressCreateRequest](docs/AddressCreateRequest.md)
  - [payconductor_sdk.models.AvailablePaymentMethods](docs/AvailablePaymentMethods.md)
- - [payconductor_sdk.models.BankSlip](docs/BankSlip.md)
- - [payconductor_sdk.models.BankSlipExpirationInDays](docs/BankSlipExpirationInDays.md)
- - [payconductor_sdk.models.CompleteCardData](docs/CompleteCardData.md)
- - [payconductor_sdk.models.CompleteCardDataExpiration](docs/CompleteCardDataExpiration.md)
- - [payconductor_sdk.models.CreditCard](docs/CreditCard.md)
- - [payconductor_sdk.models.CreditCardCard](docs/CreditCardCard.md)
- - [payconductor_sdk.models.CreditCardInstallments](docs/CreditCardInstallments.md)
- - [payconductor_sdk.models.Customer](docs/Customer.md)
- - [payconductor_sdk.models.Customer1](docs/Customer1.md)
- - [payconductor_sdk.models.CustomerAddress](docs/CustomerAddress.md)
+ - [payconductor_sdk.models.CardCreateRequest](docs/CardCreateRequest.md)
+ - [payconductor_sdk.models.CardExpirationData](docs/CardExpirationData.md)
+ - [payconductor_sdk.models.CardTokenizationCreateRequest](docs/CardTokenizationCreateRequest.md)
+ - [payconductor_sdk.models.CardTokenizationCreateRequestCustomer](docs/CardTokenizationCreateRequestCustomer.md)
+ - [payconductor_sdk.models.CardTokenizationCreateResponse](docs/CardTokenizationCreateResponse.md)
+ - [payconductor_sdk.models.CardTokenizationCustomerByIdData](docs/CardTokenizationCustomerByIdData.md)
+ - [payconductor_sdk.models.CustomerAddressResponse](docs/CustomerAddressResponse.md)
+ - [payconductor_sdk.models.CustomerCreateRequest](docs/CustomerCreateRequest.md)
+ - [payconductor_sdk.models.CustomerListPagination](docs/CustomerListPagination.md)
+ - [payconductor_sdk.models.CustomerListResponse](docs/CustomerListResponse.md)
+ - [payconductor_sdk.models.CustomerReadResponse](docs/CustomerReadResponse.md)
+ - [payconductor_sdk.models.CustomerUpdateRequest](docs/CustomerUpdateRequest.md)
  - [payconductor_sdk.models.DocumentType](docs/DocumentType.md)
- - [payconductor_sdk.models.Draft](docs/Draft.md)
- - [payconductor_sdk.models.DraftExpirationInSeconds](docs/DraftExpirationInSeconds.md)
  - [payconductor_sdk.models.Event](docs/Event.md)
  - [payconductor_sdk.models.MerchantInput](docs/MerchantInput.md)
- - [payconductor_sdk.models.NuPay](docs/NuPay.md)
- - [payconductor_sdk.models.NuPayNuPay](docs/NuPayNuPay.md)
+ - [payconductor_sdk.models.OrderBankSlipInfo](docs/OrderBankSlipInfo.md)
+ - [payconductor_sdk.models.OrderBankSlipPaymentRequest](docs/OrderBankSlipPaymentRequest.md)
+ - [payconductor_sdk.models.OrderConfirmResponse](docs/OrderConfirmResponse.md)
+ - [payconductor_sdk.models.OrderCreateRequest](docs/OrderCreateRequest.md)
+ - [payconductor_sdk.models.OrderCreateRequestSession](docs/OrderCreateRequestSession.md)
+ - [payconductor_sdk.models.OrderCreateResponse](docs/OrderCreateResponse.md)
+ - [payconductor_sdk.models.OrderCreateResponseOrderItemsInner](docs/OrderCreateResponseOrderItemsInner.md)
+ - [payconductor_sdk.models.OrderCreateResponseSession](docs/OrderCreateResponseSession.md)
+ - [payconductor_sdk.models.OrderCreditCardInfo](docs/OrderCreditCardInfo.md)
+ - [payconductor_sdk.models.OrderCreditCardPaymentRequest](docs/OrderCreditCardPaymentRequest.md)
+ - [payconductor_sdk.models.OrderCreditCardPaymentRequestCard](docs/OrderCreditCardPaymentRequestCard.md)
+ - [payconductor_sdk.models.OrderDraftPaymentRequest](docs/OrderDraftPaymentRequest.md)
+ - [payconductor_sdk.models.OrderFraudFingerprints](docs/OrderFraudFingerprints.md)
+ - [payconductor_sdk.models.OrderItemData](docs/OrderItemData.md)
+ - [payconductor_sdk.models.OrderNuPayInfo](docs/OrderNuPayInfo.md)
+ - [payconductor_sdk.models.OrderNuPayPaymentRequest](docs/OrderNuPayPaymentRequest.md)
+ - [payconductor_sdk.models.OrderNuPayPaymentRequestNuPay](docs/OrderNuPayPaymentRequestNuPay.md)
+ - [payconductor_sdk.models.OrderPIXInfo](docs/OrderPIXInfo.md)
+ - [payconductor_sdk.models.OrderPIXPaymentRequest](docs/OrderPIXPaymentRequest.md)
+ - [payconductor_sdk.models.OrderPaymentRequest](docs/OrderPaymentRequest.md)
+ - [payconductor_sdk.models.OrderPicPayInfo](docs/OrderPicPayInfo.md)
+ - [payconductor_sdk.models.OrderPicPayPaymentRequest](docs/OrderPicPayPaymentRequest.md)
+ - [payconductor_sdk.models.OrderTokenizedCardData](docs/OrderTokenizedCardData.md)
  - [payconductor_sdk.models.PaymentMethod](docs/PaymentMethod.md)
- - [payconductor_sdk.models.PicPay](docs/PicPay.md)
- - [payconductor_sdk.models.Pix](docs/Pix.md)
- - [payconductor_sdk.models.PixExpirationInSeconds](docs/PixExpirationInSeconds.md)
  - [payconductor_sdk.models.PixType](docs/PixType.md)
- - [payconductor_sdk.models.PostCardTokenization200Response](docs/PostCardTokenization200Response.md)
- - [payconductor_sdk.models.PostCardTokenizationRequest](docs/PostCardTokenizationRequest.md)
- - [payconductor_sdk.models.PostCardTokenizationRequestCustomer](docs/PostCardTokenizationRequestCustomer.md)
- - [payconductor_sdk.models.PostCardTokenizationRequestCustomerAnyOf](docs/PostCardTokenizationRequestCustomerAnyOf.md)
- - [payconductor_sdk.models.PostOrders200Response](docs/PostOrders200Response.md)
- - [payconductor_sdk.models.PostOrders200ResponseBankSlip](docs/PostOrders200ResponseBankSlip.md)
- - [payconductor_sdk.models.PostOrders200ResponseCreditCard](docs/PostOrders200ResponseCreditCard.md)
- - [payconductor_sdk.models.PostOrders200ResponseNuPay](docs/PostOrders200ResponseNuPay.md)
- - [payconductor_sdk.models.PostOrders200ResponseOrderItemsInner](docs/PostOrders200ResponseOrderItemsInner.md)
- - [payconductor_sdk.models.PostOrders200ResponsePicPay](docs/PostOrders200ResponsePicPay.md)
- - [payconductor_sdk.models.PostOrders200ResponsePix](docs/PostOrders200ResponsePix.md)
- - [payconductor_sdk.models.PostOrders200ResponseSession](docs/PostOrders200ResponseSession.md)
- - [payconductor_sdk.models.PostOrdersByIdConfirm200Response](docs/PostOrdersByIdConfirm200Response.md)
- - [payconductor_sdk.models.PostOrdersRequest](docs/PostOrdersRequest.md)
- - [payconductor_sdk.models.PostOrdersRequestFingerprints](docs/PostOrdersRequestFingerprints.md)
- - [payconductor_sdk.models.PostOrdersRequestItemsInner](docs/PostOrdersRequestItemsInner.md)
- - [payconductor_sdk.models.PostOrdersRequestPayment](docs/PostOrdersRequestPayment.md)
- - [payconductor_sdk.models.PostOrdersRequestSession](docs/PostOrdersRequestSession.md)
- - [payconductor_sdk.models.PostWithdraws200Response](docs/PostWithdraws200Response.md)
- - [payconductor_sdk.models.PostWithdraws200ResponsePayedAt](docs/PostWithdraws200ResponsePayedAt.md)
- - [payconductor_sdk.models.PostWithdraws200ResponsePayoutAccount](docs/PostWithdraws200ResponsePayoutAccount.md)
- - [payconductor_sdk.models.PostWithdrawsRequest](docs/PostWithdrawsRequest.md)
- - [payconductor_sdk.models.PostWithdrawsRequestPayoutAccount](docs/PostWithdrawsRequestPayoutAccount.md)
  - [payconductor_sdk.models.Status](docs/Status.md)
- - [payconductor_sdk.models.TokenizedCard](docs/TokenizedCard.md)
+ - [payconductor_sdk.models.WithdrawCreateRequest](docs/WithdrawCreateRequest.md)
+ - [payconductor_sdk.models.WithdrawCreateResponse](docs/WithdrawCreateResponse.md)
+ - [payconductor_sdk.models.WithdrawCreateResponsePayedAt](docs/WithdrawCreateResponsePayedAt.md)
+ - [payconductor_sdk.models.WithdrawCreateResponsePayoutAccount](docs/WithdrawCreateResponsePayoutAccount.md)
+ - [payconductor_sdk.models.WithdrawPayoutAccountData](docs/WithdrawPayoutAccountData.md)
 
 
 <a id="documentation-for-authorization"></a>

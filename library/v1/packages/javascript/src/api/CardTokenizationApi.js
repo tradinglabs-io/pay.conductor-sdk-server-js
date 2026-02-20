@@ -13,8 +13,8 @@
 
 
 import ApiClient from "../ApiClient";
-import PostCardTokenization200Response from '../model/PostCardTokenization200Response';
-import PostCardTokenizationRequest from '../model/PostCardTokenizationRequest';
+import CardTokenizationCreateRequest from '../model/CardTokenizationCreateRequest';
+import CardTokenizationCreateResponse from '../model/CardTokenizationCreateResponse';
 
 /**
 * CardTokenization service.
@@ -36,25 +36,25 @@ export default class CardTokenizationApi {
 
 
     /**
-     * Callback function to receive the result of the postCardTokenization operation.
-     * @callback module:api/CardTokenizationApi~postCardTokenizationCallback
+     * Callback function to receive the result of the cardTokenize operation.
+     * @callback module:api/CardTokenizationApi~cardTokenizeCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/PostCardTokenization200Response} data The data returned by the service call.
+     * @param {module:model/CardTokenizationCreateResponse} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Tokenize card
+     * Tokenize Card
      * Tokenize credit cards for future charges.
-     * @param {module:model/PostCardTokenizationRequest} postCardTokenizationRequest Data for creating a customer card
-     * @param {module:api/CardTokenizationApi~postCardTokenizationCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/PostCardTokenization200Response}
+     * @param {module:model/CardTokenizationCreateRequest} cardTokenizationCreateRequest Data for creating a customer card with customer information
+     * @param {module:api/CardTokenizationApi~cardTokenizeCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/CardTokenizationCreateResponse}
      */
-    postCardTokenization(postCardTokenizationRequest, callback) {
-      let postBody = postCardTokenizationRequest;
-      // verify the required parameter 'postCardTokenizationRequest' is set
-      if (postCardTokenizationRequest === undefined || postCardTokenizationRequest === null) {
-        throw new Error("Missing the required parameter 'postCardTokenizationRequest' when calling postCardTokenization");
+    cardTokenize(cardTokenizationCreateRequest, callback) {
+      let postBody = cardTokenizationCreateRequest;
+      // verify the required parameter 'cardTokenizationCreateRequest' is set
+      if (cardTokenizationCreateRequest === undefined || cardTokenizationCreateRequest === null) {
+        throw new Error("Missing the required parameter 'cardTokenizationCreateRequest' when calling cardTokenize");
       }
 
       let pathParams = {
@@ -69,7 +69,7 @@ export default class CardTokenizationApi {
       let authNames = ['basicAuth'];
       let contentTypes = ['application/json'];
       let accepts = ['application/json'];
-      let returnType = PostCardTokenization200Response;
+      let returnType = CardTokenizationCreateResponse;
       return this.apiClient.callApi(
         '/card-tokenization/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
